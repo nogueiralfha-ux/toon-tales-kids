@@ -1,4 +1,4 @@
-﻿/**
+/**
  * AI Production Service - Toon Tales Kids
  * Motor de Produção Automatizada de Conteúdo Bíblico (Texto, Áudio Cinematográfico e Imagens 3D/LineArt)
  * Otimizado para Qualidade Máxima e Custo Mínimo (OpenAI TTS, ElevenLabs, GPT-4o-mini, Pollinations/Flux)
@@ -96,7 +96,7 @@ class AiProductionService {
 
   // -------------------------------------------------------------
   // 1. SÍNTESE DE ÁUDIO CINEMATOGRÁFICO DE BAIXO CUSTO (OPENAI TTS)
-  // Custo: ,015 por 1.000 caracteres (~R$ 0,10 por áudio de 5 min)
+  // Custo: $0,015 por 1.000 caracteres (~R$ 0,10 por áudio de 5 min)
   // -------------------------------------------------------------
   public async synthesizeSpeechOpenAi(
     text: string,
@@ -108,7 +108,7 @@ class AiProductionService {
       throw new Error('Chave da OpenAI não configurada. Adicione sua chave no Painel Admin.');
     }
 
-    const cacheKey = openai___;
+    const cacheKey = `openai_${voice}_${speed}_${text.substring(0, 50)}`;
     if (this.audioCache.has(cacheKey)) {
       return this.audioCache.get(cacheKey)!;
     }
@@ -116,11 +116,11 @@ class AiProductionService {
     const response = await fetch('https://api.openai.com/v1/audio/speech', {
       method: 'POST',
       headers: {
-        'Authorization': Bearer ,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'tts-1', // tts-1 para máxima velocidade e menor custo (.015/1k)
+        model: 'tts-1', // tts-1 para máxima velocidade e menor custo ($0.015/1k)
         input: text,
         voice: voice,
         speed: speed,
@@ -141,7 +141,7 @@ class AiProductionService {
 
   // -------------------------------------------------------------
   // 2. SÍNTESE DE ÁUDIO ELEVENLABS (MÁXIMA EMOÇÃO)
-  // Custo: ~,10 por 1.000 caracteres
+  // Custo: ~$0,10 por 1.000 caracteres
   // -------------------------------------------------------------
   public async synthesizeSpeechElevenLabs(
     text: string,
@@ -152,12 +152,12 @@ class AiProductionService {
       throw new Error('Chave da ElevenLabs não configurada. Adicione sua chave no Painel Admin.');
     }
 
-    const cacheKey = eleven__;
+    const cacheKey = `eleven_${voiceId}_${text.substring(0, 50)}`;
     if (this.audioCache.has(cacheKey)) {
       return this.audioCache.get(cacheKey)!;
     }
 
-    const response = await fetch(https://api.elevenlabs.io/v1/text-to-speech/, {
+    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
       method: 'POST',
       headers: {
         'xi-api-key': apiKey,
@@ -188,7 +188,7 @@ class AiProductionService {
 
   // -------------------------------------------------------------
   // 3. GERAÇÃO DE ROTEIROS BÍBLICOS COM IA (GPT-4o-mini)
-  // Custo: ,15 / 1M tokens in, ,60 / 1M tokens out (~R$ 0,005 por livro!)
+  // Custo: $0,15 / 1M tokens in, $0,60 / 1M tokens out (~R$ 0,005 por livro!)
   // -------------------------------------------------------------
   public async generateBibleStoryScript(params: {
     theme: string;
@@ -213,50 +213,50 @@ class AiProductionService {
       throw new Error('Chave da OpenAI não configurada para geração de histórias.');
     }
 
-    const prompt = 
+    const prompt = `
 Atue como o Diretor Geral de Produção Infantil do Toon Tales Kids (audiolivros bíblicos 3D de alta qualidade para crianças).
-Gere uma aventura bíblica infantil completa sobre o tema:  .
-Criança homenageada / ouvinte: .
-Lição moral: .
-Idade recomendada: .
-Idioma: .
+Gere uma aventura bíblica infantil completa sobre o tema: "${params.theme}".
+Criança homenageada / ouvinte: "${params.childName || 'Amiguinho'}".
+Lição moral: "${params.moralLesson}".
+Idade recomendada: "${params.targetAge || '6 a 12 anos'}".
+Idioma: "${params.language || 'pt'}".
 
-Retorne EXATAMENTE um objeto JSON válido (sem tags markdown de código fora do JSON) com a estrutura:
+Retorne EXATAMENTE um objeto JSON válido com a estrutura:
 {
-  title: Título Nobre e Curto,
-  subtitle: Subtítulo Emocionante,
-  biblicalVerse: Livro Capítulo:Versículo,
-  moralLesson: Lição de fé explicada de forma carinhosa para a criança,
-  scenes: [
+  "title": "Título da História",
+  "subtitle": "Subtítulo da História",
+  "biblicalVerse": "Livro Cap:Versículo",
+  "moralLesson": "Lição de fé explicada com carinho",
+  "scenes": [
     {
-      title: Cena 1: Introdução da Aventura,
-      narration: Texto envolvente da narradora,
-      dialogues: [
-        { character: god, line: Fala solene e cheia de amor de Deus },
-        { character: david, line: Fala cheia de fé do herói bíblico }
+      "title": "Cena 1",
+      "narration": "Texto da narradora",
+      "dialogues": [
+        { "character": "god", "line": "Fala solene de Deus" },
+        { "character": "david", "line": "Fala do herói" }
       ]
     }
   ],
-  quiz: [
+  "quiz": [
     {
-      question: Pergunta divertida sobre a história,
-      options: [Opção A, Opção B, Opção C],
-      answer: 0
+      "question": "Pergunta sobre a história",
+      "options": ["Opção A", "Opção B", "Opção C"],
+      "answer": 0
     }
   ]
 }
-;
+`;
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': Bearer ,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: 'Você é o motor criativo oficial do Toon Tales Kids. Gere apenas JSON puro e estruturado.' },
+          { role: 'system', content: 'Você é o motor criativo oficial do Toon Tales Kids. Gere apenas JSON puro.' },
           { role: 'user', content: prompt },
         ],
         response_format: { type: 'json_object' },
@@ -276,15 +276,15 @@ Retorne EXATAMENTE um objeto JSON válido (sem tags markdown de código fora do 
 
   // -------------------------------------------------------------
   // 4. GERAÇÃO DE IMAGENS 3D PIXAR & LINE ART PARA COLORIR
-  // Custo:  com Pollinations AI / FLUX.1
+  // Custo: $0 com Pollinations AI / FLUX.1
   // -------------------------------------------------------------
   public getGeneratedImageUrl(prompt: string, type: '3d_pixar' | 'line_art' = '3d_pixar'): string {
     const fullPrompt = type === '3d_pixar'
-      ? 3D Pixar Disney style animated cute biblical scene, , vibrant rich colors, cinematic lighting, 8k render, masterpiece
-      : Coloring book page for kids, black and white line art, clear thick outlines, flat vector style, white background, no shading, ;
+      ? `3D Pixar Disney style animated cute biblical scene, ${prompt}, vibrant rich colors, cinematic lighting, 8k render, masterpiece`
+      : `Coloring book page for kids, black and white line art, clear thick outlines, flat vector style, white background, no shading, ${prompt}`;
 
     const encodedPrompt = encodeURIComponent(fullPrompt);
-    return https://image.pollinations.ai/prompt/?width=800&height=800&nologo=true&seed=;
+    return `https://image.pollinations.ai/prompt/${encodedPrompt}?width=800&height=800&nologo=true&seed=${Math.floor(Math.random() * 100000)}`;
   }
 }
 
