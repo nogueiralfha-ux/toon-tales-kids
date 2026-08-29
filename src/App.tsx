@@ -883,9 +883,9 @@ export default function App() {
       <BedtimeModeModal
         isOpen={isBedtimeOpen}
         onClose={() => setIsBedtimeOpen(false)}
-        minutesLeft={bedtimeMinutesLeft}
-        onSetTimer={handleSetBedtimeTimer}
-        onCancelTimer={handleCancelBedtimeTimer}
+        onTimerSet={(minutes) => setBedtimeMinutesLeft(minutes)}
+        activeMinutesLeft={bedtimeMinutesLeft}
+        onCancelTimer={() => setBedtimeMinutesLeft(null)}
       />
 
       <ColoringStudioModal
