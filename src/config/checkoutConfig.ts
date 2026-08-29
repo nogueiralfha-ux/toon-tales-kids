@@ -55,7 +55,7 @@ export const CHECKOUT_PLANS_CONFIG: Record<string, PlanConfig> = {
         installmentPrice: '€ 8.90/mois',
       },
     },
-    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=pflzun2m',
+    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=bi2vx944',
     stripeCheckoutUrl: '',
     asaasPaymentLink: '',
     features: [
@@ -94,7 +94,7 @@ export const CHECKOUT_PLANS_CONFIG: Record<string, PlanConfig> = {
         installmentPrice: '€ 55.00/an',
       },
     },
-    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=pflzun2m',
+    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=0wee11gn',
     stripeCheckoutUrl: '',
     asaasPaymentLink: '',
     features: [
@@ -134,7 +134,7 @@ export const CHECKOUT_PLANS_CONFIG: Record<string, PlanConfig> = {
         installmentPrice: '€ 17.90/mois',
       },
     },
-    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=0wee11gn',
+    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=j8cnv1bc',
     stripeCheckoutUrl: '',
     asaasPaymentLink: '',
     features: [
@@ -173,7 +173,7 @@ export const CHECKOUT_PLANS_CONFIG: Record<string, PlanConfig> = {
         installmentPrice: '€ 185.00/an',
       },
     },
-    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=0wee11gn',
+    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=h6td6b5r',
     stripeCheckoutUrl: '',
     asaasPaymentLink: '',
     features: [
@@ -214,7 +214,7 @@ export const CHECKOUT_PLANS_CONFIG: Record<string, PlanConfig> = {
         installmentPrice: '€ 369.00',
       },
     },
-    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=e3cw731a',
+    hotmartCheckoutUrl: 'https://pay.hotmart.com/T107380286O?off=pflzun2m',
     stripeCheckoutUrl: '',
     asaasPaymentLink: '',
     features: [
