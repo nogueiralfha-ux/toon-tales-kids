@@ -42,6 +42,8 @@ import { FavoritesView } from './components/FavoritesView';
 import { ProfileView } from './components/ProfileView';
 import { ParentsPortal } from './components/ParentsPortal';
 import { SalesLandingPage } from './components/SalesLandingPage';
+import { ThankYouPageView } from './components/ThankYouPageView';
+import { ColoringStudioModal } from './components/ColoringStudioModal';
 import { EpisodeModal } from './components/EpisodeModal';
 import { CharacterModal } from './components/CharacterModal';
 import { SeasonModal } from './components/SeasonModal';
@@ -106,6 +108,25 @@ export default function App() {
   // Navigation: Default to Sales Landing Page on initial arrival
   const [activeTab, setActiveTab] = useState<NavTab>('landing');
 
+  // URL route detection for /obrigado or Hotmart redirect
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (
+        path.includes('obrigado') ||
+        path.includes('thank-you') ||
+        search.includes('status=approved') ||
+        search.includes('obrigado') ||
+        search.includes('sucesso') ||
+        hash.includes('obrigado')
+      ) {
+        setActiveTab('thankyou');
+      }
+    }
+  }, []);
+
   // Currently loaded audio episode
   const [currentEpisodeId, setCurrentEpisodeId] = useState<string>('t2e5');
   const selectedEpisodeData = EPISODE_REGISTRY[currentEpisodeId] || EPISODE_REGISTRY['t2e5'];
@@ -125,6 +146,7 @@ export default function App() {
   const [isMixerOpen, setIsMixerOpen] = useState<boolean>(false);
   const [isBedtimeOpen, setIsBedtimeOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isColoringModalOpen, setIsColoringModalOpen] = useState<boolean>(false);
   const [selectedEpisodeModal, setSelectedEpisodeModal] = useState<Episode | null>(null);
   const [selectedCharacterModal, setSelectedCharacterModal] = useState<BiblicalCharacter | null>(null);
   const [selectedSeasonModal, setSelectedSeasonModal] = useState<Season | null>(null);
@@ -541,6 +563,14 @@ export default function App() {
           />
         )}
 
+        {/* 9.1 PÁGINA DE OBRIGADO (ACESSO IMEDIATO PÓS-COMPRA HOTMART) */}
+        {activeTab === 'thankyou' && (
+          <ThankYouPageView
+            onEnterApp={() => setActiveTab('dashboard')}
+            onOpenColoringStudio={() => setIsColoringModalOpen(true)}
+          />
+        )}
+
         {/* 10. PLAYER CINEMATOGRÁFICO DE ÁUDIO (ESTÚDIO DEDICADO) */}
         {activeTab === 'player' && (
           <div className="space-y-6 animate-fade-in">
@@ -833,9 +863,14 @@ export default function App() {
       <BedtimeModeModal
         isOpen={isBedtimeOpen}
         onClose={() => setIsBedtimeOpen(false)}
-        onTimerSet={(minutes) => setBedtimeMinutesLeft(minutes)}
-        activeMinutesLeft={bedtimeMinutesLeft}
-        onCancelTimer={() => setBedtimeMinutesLeft(null)}
+        minutesLeft={bedtimeMinutesLeft}
+        onSetTimer={handleSetBedtimeTimer}
+        onCancelTimer={handleCancelBedtimeTimer}
+      />
+
+      <ColoringStudioModal
+        isOpen={isColoringModalOpen}
+        onClose={() => setIsColoringModalOpen(false)}
       />
 
       {/* Loading Transition Overlay */}

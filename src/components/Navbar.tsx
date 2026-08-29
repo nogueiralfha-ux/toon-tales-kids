@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Sparkles, Search, Bell, Heart, Moon, Sliders, Shield, BookOpen, Users, Trophy, Home, Layers, Star, Award, ChevronDown, Check, DollarSign, Rocket, Headphones, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-export type NavTab = 'dashboard' | 'catalog' | 'seasons' | 'characters' | 'heroes' | 'favorites' | 'profile' | 'parents' | 'landing' | 'player' | 'script' | 'soundboard' | 'quiz';
+export type NavTab = 'dashboard' | 'catalog' | 'seasons' | 'characters' | 'heroes' | 'favorites' | 'profile' | 'parents' | 'landing' | 'player' | 'script' | 'soundboard' | 'quiz' | 'thankyou';
 
 interface NavbarProps {
   activeTab: NavTab;
