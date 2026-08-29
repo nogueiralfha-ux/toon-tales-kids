@@ -13,9 +13,16 @@ import {
   Heart,
   Crown,
   FileDown,
+  BookOpen,
+  FileText,
+  Check,
+  Layers,
+  HelpCircle,
+  PenTool,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { audioEngine } from '../services/audioEngine';
+import { PRINTABLE_ACTIVITIES_100, PrintableActivity } from '../data/printableActivitiesData';
 
 interface ColoringStudioModalProps {
   isOpen: boolean;
@@ -132,15 +139,24 @@ const COLOR_PALETTE = [
 ];
 
 export const ColoringStudioModal: React.FC<ColoringStudioModalProps> = ({ isOpen, onClose }) => {
+  const [activeTabMode, setActiveTabMode] = useState<'printable_100' | 'online_coloring'>('printable_100');
   const [selectedTemplateIndex, setSelectedTemplateIndex] = useState<number>(0);
   const [selectedColor, setSelectedColor] = useState<string>('#F59E0B');
   const [coloredPaths, setColoredPaths] = useState<Record<string, string>>({});
   const [isSavedToast, setIsSavedToast] = useState<string | null>(null);
+  const [printableFilter, setPrintableFilter] = useState<'all' | 'coloring' | 'maze_wordsearch' | 'quiz_challenge' | 'handwriting'>('all');
+  const [selectedActivityIndex, setSelectedActivityIndex] = useState<number>(0);
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   if (!isOpen) return null;
 
   const currentTemplate = TEMPLATES[selectedTemplateIndex];
+
+  const filteredActivities = printableFilter === 'all'
+    ? PRINTABLE_ACTIVITIES_100
+    : PRINTABLE_ACTIVITIES_100.filter((a) => a.type === printableFilter);
+
+  const currentActivity = filteredActivities[selectedActivityIndex] || filteredActivities[0] || PRINTABLE_ACTIVITIES_100[0];
 
   const handleColorPath = (pathId: string) => {
     audioEngine.triggerSoundEffect('star_chimes');
@@ -250,31 +266,23 @@ export const ColoringStudioModal: React.FC<ColoringStudioModalProps> = ({ isOpen
                   Liberado em Todos os Planos
                 </span>
                 <h3 className="text-base sm:text-xl font-black font-brand">
-                  Estúdio de Pintura Bíblica 3D & Caderno P&B
+                  Estúdio de Arte & Kit 100 Atividades Bíblicas
                 </h3>
               </div>
               <p className="text-xs text-amber-100 hidden sm:block">
-                Pinte online no celular/tablet ou baixe em Preto e Branco (P&B) para imprimir e colorir em casa!
+                Tire seu filho das telas com 100 páginas de desenhos para colorir, labirintos, quizzes e caligrafia em A4!
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <button
-              onClick={handleDownloadBlackAndWhite}
-              className="px-3.5 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-black font-brand uppercase tracking-wider transition-all flex items-center gap-1.5 border border-white/30"
-              title="Baixar em Preto e Branco para Imprimir"
-            >
-              <FileDown className="w-4 h-4" />
-              <span className="hidden md:inline">Baixar P&B (Imprimir)</span>
-            </button>
-            <button
               onClick={handlePrintTemplate}
-              className="px-3.5 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-black font-brand uppercase tracking-wider transition-all flex items-center gap-1.5"
-              title="Imprimir Direto"
+              className="px-3.5 py-2 rounded-xl bg-white hover:bg-amber-100 text-slate-950 text-xs font-black font-brand uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-sm"
+              title="Imprimir Direto em A4"
             >
-              <Printer className="w-4 h-4" />
-              <span className="hidden md:inline">Imprimir</span>
+              <Printer className="w-4 h-4 text-orange-600" />
+              <span>Imprimir em A4</span>
             </button>
             <button
               onClick={onClose}
@@ -285,150 +293,388 @@ export const ColoringStudioModal: React.FC<ColoringStudioModalProps> = ({ isOpen
           </div>
         </div>
 
-        {/* Content Area */}
-        <div className="p-4 sm:p-6 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          {/* Left Column: Template Picker & Drawing Canvas */}
-          <div className="lg:col-span-8 space-y-4">
-            {/* Template Selector Tabs */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-1">
-              {TEMPLATES.map((t, idx) => (
+        {/* Mode Switcher Tabs */}
+        <div className="bg-slate-100 p-2 sm:px-6 border-b border-slate-200 flex items-center justify-between gap-2 overflow-x-auto">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setActiveTabMode('printable_100')}
+              className={`px-4 py-2 rounded-xl font-brand font-black text-xs uppercase tracking-wider flex items-center gap-2 transition-all ${
+                activeTabMode === 'printable_100'
+                  ? 'bg-orange-500 text-white shadow-md shadow-orange-300'
+                  : 'bg-white text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>📚 Kit 100 Atividades Bíblicas (Para Imprimir A4)</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTabMode('online_coloring')}
+              className={`px-4 py-2 rounded-xl font-brand font-black text-xs uppercase tracking-wider flex items-center gap-2 transition-all ${
+                activeTabMode === 'online_coloring'
+                  ? 'bg-orange-500 text-white shadow-md shadow-orange-300'
+                  : 'bg-white text-slate-700 hover:bg-slate-200'
+              }`}
+            >
+              <Palette className="w-4 h-4" />
+              <span>🎨 Estúdio de Pintura Online</span>
+            </button>
+          </div>
+
+          <span className="hidden md:inline-flex px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">
+            ✨ Formato A4 Pronto para Impressoras Caseiras
+          </span>
+        </div>
+
+        {/* 1. ABA DO KIT DE 100 ATIVIDADES PARA IMPRIMIR */}
+        {activeTabMode === 'printable_100' && (
+          <div className="p-4 sm:p-6 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div className="lg:col-span-5 space-y-4">
+              <div className="flex flex-wrap gap-1.5">
                 <button
-                  key={t.id}
                   onClick={() => {
-                    setSelectedTemplateIndex(idx);
-                    setColoredPaths({});
+                    setPrintableFilter('all');
+                    setSelectedActivityIndex(0);
                   }}
-                  className={`px-4 py-2 rounded-2xl text-xs font-black font-brand transition-all shrink-0 flex items-center gap-2 ${
-                    selectedTemplateIndex === idx
-                      ? 'bg-orange-500 text-white shadow-md shadow-orange-300 scale-105'
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold font-brand transition-all ${
+                    printableFilter === 'all'
+                      ? 'bg-slate-900 text-white shadow-xs'
                       : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>{t.title}</span>
+                  Todas (100)
                 </button>
-              ))}
-            </div>
-
-            {/* Interactive SVG Coloring Canvas */}
-            <div className="relative aspect-square w-full max-w-[500px] mx-auto rounded-3xl overflow-hidden bg-slate-50 border-4 border-amber-300 shadow-inner p-2 flex items-center justify-center">
-              <svg
-                ref={svgRef}
-                viewBox="0 0 400 400"
-                className="w-full h-full cursor-pointer select-none"
-              >
-                {currentTemplate.paths.map((p) => {
-                  const fillColor = coloredPaths[p.id] || p.defaultColor;
-                  return (
-                    <path
-                      key={p.id}
-                      d={p.d}
-                      fill={fillColor}
-                      stroke="#1E293B"
-                      strokeWidth="3.5"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                      onClick={() => handleColorPath(p.id)}
-                      className="transition-colors duration-200 hover:opacity-90 hover:stroke-orange-500 hover:stroke-[4.5]"
-                    >
-                      <title>{p.name}</title>
-                    </path>
-                  );
-                })}
-              </svg>
-
-              {/* Reset button inside canvas */}
-              <button
-                onClick={handleResetColors}
-                className="absolute top-4 right-4 px-3 py-1.5 rounded-xl bg-white/90 backdrop-blur-md border border-slate-200 text-slate-700 hover:text-orange-600 text-xs font-bold font-brand shadow-sm flex items-center gap-1 transition-colors"
-                title="Reiniciar Cores"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-                <span>Limpar</span>
-              </button>
-            </div>
-
-            {/* Template Info & Verse */}
-            <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-center space-y-1">
-              <div className="flex items-center justify-center gap-2">
-                <span className="px-2 py-0.5 rounded-full bg-amber-200 text-amber-900 text-[10px] font-black uppercase font-brand">
-                  {currentTemplate.seasonTag}
-                </span>
-                <h4 className="text-sm font-black text-slate-900 font-brand">{currentTemplate.title}</h4>
-              </div>
-              <p className="text-xs text-slate-600 italic">"{currentTemplate.verse}"</p>
-            </div>
-          </div>
-
-          {/* Right Column: Palette & Action Buttons */}
-          <div className="lg:col-span-4 space-y-5 flex flex-col justify-between">
-            {/* Color Palette Grid */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-black uppercase tracking-wider font-brand text-slate-700 flex items-center gap-1.5">
-                  <PaintBucket className="w-4 h-4 text-orange-500" />
-                  Paleta de Cores Bíblicas
-                </label>
-                <span className="text-[11px] text-slate-400 font-bold">Toque para escolher</span>
+                <button
+                  onClick={() => {
+                    setPrintableFilter('coloring');
+                    setSelectedActivityIndex(0);
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold font-brand transition-all ${
+                    printableFilter === 'coloring'
+                      ? 'bg-orange-500 text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  }`}
+                >
+                  🎨 30 Desenhos
+                </button>
+                <button
+                  onClick={() => {
+                    setPrintableFilter('maze_wordsearch');
+                    setSelectedActivityIndex(0);
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold font-brand transition-all ${
+                    printableFilter === 'maze_wordsearch'
+                      ? 'bg-sky-600 text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  }`}
+                >
+                  🧩 30 Labirintos
+                </button>
+                <button
+                  onClick={() => {
+                    setPrintableFilter('quiz_challenge');
+                    setSelectedActivityIndex(0);
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold font-brand transition-all ${
+                    printableFilter === 'quiz_challenge'
+                      ? 'bg-amber-600 text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  }`}
+                >
+                  ❓ 20 Quizzes
+                </button>
+                <button
+                  onClick={() => {
+                    setPrintableFilter('handwriting');
+                    setSelectedActivityIndex(0);
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold font-brand transition-all ${
+                    printableFilter === 'handwriting'
+                      ? 'bg-emerald-600 text-white shadow-xs'
+                      : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                  }`}
+                >
+                  ✍️ 20 Caligrafias
+                </button>
               </div>
 
-              <div className="grid grid-cols-4 gap-2.5">
-                {COLOR_PALETTE.map((color) => (
+              <div className="space-y-2 max-h-[460px] overflow-y-auto pr-1">
+                {filteredActivities.map((act, idx) => (
                   <button
-                    key={color.hex}
-                    onClick={() => setSelectedColor(color.hex)}
-                    className={`aspect-square rounded-2xl border-2 transition-all flex flex-col items-center justify-center shadow-xs relative ${
-                      selectedColor === color.hex
-                        ? 'border-orange-600 scale-110 ring-4 ring-orange-200 z-10'
-                        : 'border-slate-200 hover:scale-105'
+                    key={act.id}
+                    onClick={() => setSelectedActivityIndex(idx)}
+                    className={`w-full p-3 rounded-2xl border text-left transition-all flex items-start gap-3 ${
+                      selectedActivityIndex === idx
+                        ? 'bg-orange-50 border-orange-500 ring-2 ring-orange-200 shadow-sm'
+                        : 'bg-white border-slate-200 hover:bg-slate-50'
                     }`}
-                    style={{ backgroundColor: color.hex }}
-                    title={color.name}
                   >
-                    {selectedColor === color.hex && (
-                      <CheckCircle2
-                        className={`w-5 h-5 drop-shadow-md ${
-                          ['#FFFFFF', '#FDE047', '#FCD34D'].includes(color.hex)
-                            ? 'text-slate-900'
-                            : 'text-white'
-                        }`}
-                      />
-                    )}
+                    <div className="w-8 h-8 rounded-xl bg-orange-100 text-orange-700 font-brand font-black text-xs flex items-center justify-center shrink-0">
+                      #{act.pageNumber}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-1">
+                        <span className="text-[10px] font-bold text-slate-500 uppercase">{act.categoryLabel}</span>
+                        <span className="text-[10px] font-black text-amber-700">{act.verseRef}</span>
+                      </div>
+                      <h4 className="text-xs font-black text-slate-900 font-brand truncate">{act.title}</h4>
+                      <p className="text-[11px] text-slate-500 truncate">{act.subtitle}</p>
+                    </div>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Action Buttons: Download Colored + Download Black & White */}
-            <div className="space-y-2.5 pt-2">
-              <button
-                onClick={handleDownloadColored}
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm font-brand uppercase tracking-wider shadow-lg shadow-orange-500/30 flex items-center justify-center gap-2 transition-all active:scale-95"
-              >
-                <Download className="w-4 h-4" />
-                <span>Salvar Desenho Colorido (PNG)</span>
-              </button>
+            <div className="lg:col-span-7 space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-500">
+                  Folha A4 (Página {currentActivity.pageNumber} de 100)
+                </span>
+                <div className="flex items-center gap-1.5">
+                  <button
+                    disabled={selectedActivityIndex === 0}
+                    onClick={() => setSelectedActivityIndex((p) => Math.max(0, p - 1))}
+                    className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-30 text-slate-700"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                  </button>
+                  <button
+                    disabled={selectedActivityIndex === filteredActivities.length - 1}
+                    onClick={() => setSelectedActivityIndex((p) => Math.min(filteredActivities.length - 1, p + 1))}
+                    className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-30 text-slate-700"
+                  >
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="bg-white border-2 border-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5 text-slate-900 font-sans print:border-none print:shadow-none min-h-[500px] flex flex-col justify-between">
+                <div className="border-b-2 border-slate-900 pb-3 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-black font-brand uppercase tracking-wider text-slate-900">
+                      TOON TALES KIDS • CADERNO DE ATIVIDADES BÍBLICAS
+                    </span>
+                  </div>
+                  <span className="text-xs font-black font-brand px-2 py-0.5 rounded-md bg-slate-100 border border-slate-300">
+                    PÁGINA {currentActivity.pageNumber}
+                  </span>
+                </div>
+
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-black uppercase text-slate-600 tracking-wider">
+                      {currentActivity.categoryLabel}
+                    </span>
+                    <span className="text-xs font-black text-slate-800">{currentActivity.verseRef}</span>
+                  </div>
+                  <h2 className="text-xl sm:text-2xl font-black font-brand text-slate-950">
+                    {currentActivity.title}
+                  </h2>
+                  <p className="text-xs text-slate-700 italic">
+                    {currentActivity.instruction}
+                  </p>
+                </div>
+
+                <div className="border-2 border-dashed border-slate-400 rounded-2xl p-4 flex-1 flex flex-col items-center justify-center min-h-[260px] bg-slate-50/50">
+                  {currentActivity.type === 'coloring' && (
+                    <div className="text-center space-y-3">
+                      <div className="w-48 h-48 sm:w-56 sm:h-56 mx-auto border-2 border-slate-900 rounded-2xl flex items-center justify-center bg-white p-4">
+                        <Palette className="w-20 h-20 text-slate-800 stroke-[1.5]" />
+                      </div>
+                      <p className="text-xs font-bold text-slate-600 font-brand">
+                        [Área de Desenho em Contorno Preto e Branco para Colorir]
+                      </p>
+                    </div>
+                  )}
+
+                  {currentActivity.type === 'maze_wordsearch' && currentActivity.content.wordsToFind && (
+                    <div className="space-y-3 w-full max-w-sm">
+                      <div className="p-3 bg-white border border-slate-300 rounded-xl">
+                        <p className="text-[11px] font-black uppercase tracking-wider text-slate-700 mb-1">
+                          Palavras para Encontrar:
+                        </p>
+                        <p className="text-xs font-mono font-bold text-slate-900">
+                          {currentActivity.content.wordsToFind.join(' • ')}
+                        </p>
+                      </div>
+                      {currentActivity.content.gridData && (
+                        <div className="grid grid-cols-10 gap-1 text-center font-mono font-black text-xs">
+                          {currentActivity.content.gridData.flat().map((letter, i) => (
+                            <span key={i} className="w-6 h-6 border border-slate-300 rounded bg-white flex items-center justify-center">
+                              {letter}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {currentActivity.type === 'quiz_challenge' && currentActivity.content.questions && (
+                    <div className="space-y-3 w-full text-left">
+                      {currentActivity.content.questions.map((q, qIdx) => (
+                        <div key={qIdx} className="space-y-1.5 text-xs">
+                          <p className="font-black text-slate-900">{q.question}</p>
+                          <div className="space-y-1 pl-2">
+                            {q.options.map((opt, optIdx) => (
+                              <div key={optIdx} className="flex items-center gap-2">
+                                <span className="w-4 h-4 rounded-full border-2 border-slate-900 inline-block" />
+                                <span className="text-slate-800 font-medium">{opt}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {currentActivity.type === 'handwriting' && currentActivity.content.calligraphyLines && (
+                    <div className="space-y-4 w-full text-left">
+                      {currentActivity.content.calligraphyLines.map((line, lIdx) => (
+                        <div key={lIdx} className="space-y-1">
+                          <p className="font-mono text-sm tracking-widest text-slate-400 font-bold border-b border-dashed border-slate-400 pb-0.5">
+                            {line}
+                          </p>
+                          <div className="h-6 border-b-2 border-slate-800" />
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <div className="border-t-2 border-slate-900 pt-3 text-center space-y-0.5">
+                  <p className="text-xs font-black text-slate-900 font-brand">
+                    "{currentActivity.verseText}"
+                  </p>
+                  <p className="text-[10px] text-slate-500 font-bold uppercase">
+                    {currentActivity.verseRef} • Guarde no Coração!
+                  </p>
+                </div>
+              </div>
 
               <button
-                onClick={handleDownloadBlackAndWhite}
-                className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-amber-300 border-2 border-amber-400/50 font-black text-xs font-brand uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition-all active:scale-95"
+                onClick={handlePrintTemplate}
+                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs font-brand uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all"
               >
-                <FileDown className="w-4 h-4 text-amber-400" />
-                <span>Baixar em Preto e Branco (P&B)</span>
+                <Printer className="w-4 h-4" />
+                <span>Imprimir Página #{currentActivity.pageNumber} em Folha A4</span>
               </button>
-            </div>
-
-            {/* How to use */}
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5 text-xs text-slate-600">
-              <p className="font-bold text-slate-800 flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-amber-500" /> Liberado em Todos os Planos:
-              </p>
-              <p className="text-[11px] leading-relaxed">
-                Você pode pintar diretamente no celular/tablet OU baixar o arquivo em preto e branco para imprimir quantas vezes quiser!
-              </p>
             </div>
           </div>
-        </div>
+        )}
+
+        {/* 2. ABA DO ESTÚDIO DE PINTURA ONLINE */}
+        {activeTabMode === 'online_coloring' && (
+          <div className="p-4 sm:p-6 overflow-y-auto flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="flex items-center gap-2 overflow-x-auto pb-1">
+                {TEMPLATES.map((t, idx) => (
+                  <button
+                    key={t.id}
+                    onClick={() => {
+                      setSelectedTemplateIndex(idx);
+                      setColoredPaths({});
+                    }}
+                    className={`px-4 py-2 rounded-2xl text-xs font-black font-brand transition-all shrink-0 flex items-center gap-2 ${
+                      selectedTemplateIndex === idx
+                        ? 'bg-orange-500 text-white shadow-md shadow-orange-300 scale-105'
+                        : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                    }`}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>{t.title}</span>
+                  </button>
+                ))}
+              </div>
+
+              <div className="bg-slate-900 rounded-[28px] p-4 sm:p-6 flex items-center justify-center shadow-inner border-2 border-slate-800">
+                <svg
+                  ref={svgRef}
+                  viewBox="0 0 400 400"
+                  className="w-full max-w-[420px] aspect-square rounded-2xl bg-white shadow-2xl cursor-pointer select-none"
+                >
+                  {currentTemplate.paths.map((p) => {
+                    const fillColor = coloredPaths[p.id] || p.defaultColor;
+                    return (
+                      <path
+                        key={p.id}
+                        id={p.id}
+                        d={p.d}
+                        fill={fillColor}
+                        stroke="#0F172A"
+                        strokeWidth="3.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        onClick={() => handleColorPath(p.id)}
+                        className="transition-colors duration-200 hover:opacity-85 hover:stroke-orange-500"
+                      />
+                    );
+                  })}
+                </svg>
+              </div>
+
+              <div className="flex items-center justify-between text-xs text-slate-600 bg-amber-50 border border-amber-200 p-3 rounded-2xl">
+                <span className="font-bold text-amber-900">{currentTemplate.verse}</span>
+                <button
+                  onClick={handleResetColors}
+                  className="px-3 py-1 rounded-xl bg-white hover:bg-amber-100 text-slate-700 font-bold transition-colors flex items-center gap-1 border border-amber-300"
+                >
+                  <RotateCcw className="w-3.5 h-3.5 text-amber-600" />
+                  <span>Limpar Cores</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-4 space-y-4">
+              <div className="bg-white border-2 border-slate-200 rounded-3xl p-5 shadow-sm space-y-3">
+                <h4 className="text-xs font-black uppercase font-brand text-slate-900 flex items-center gap-2">
+                  <Brush className="w-4 h-4 text-orange-500" /> Paleta de Cores
+                </h4>
+                <div className="grid grid-cols-4 gap-2.5">
+                  {COLOR_PALETTE.map((color) => (
+                    <button
+                      key={color.hex}
+                      onClick={() => setSelectedColor(color.hex)}
+                      className={`aspect-square rounded-2xl border-2 transition-all flex flex-col items-center justify-center shadow-xs relative ${
+                        selectedColor === color.hex
+                          ? 'border-orange-600 scale-110 ring-4 ring-orange-200 z-10'
+                          : 'border-slate-200 hover:scale-105'
+                      }`}
+                      style={{ backgroundColor: color.hex }}
+                      title={color.name}
+                    >
+                      {selectedColor === color.hex && (
+                        <CheckCircle2
+                          className={`w-5 h-5 drop-shadow-md ${
+                            ['#FFFFFF', '#FDE047', '#FCD34D'].includes(color.hex)
+                              ? 'text-slate-900'
+                              : 'text-white'
+                          }`}
+                        />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2.5 pt-2">
+                <button
+                  onClick={handleDownloadColored}
+                  className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs font-brand uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all active:scale-95"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Salvar Desenho Colorido (PNG)</span>
+                </button>
+                <button
+                  onClick={handleDownloadBlackAndWhite}
+                  className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-amber-300 border-2 border-amber-400/50 font-black text-xs font-brand uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition-all active:scale-95"
+                >
+                  <FileDown className="w-4 h-4 text-amber-400" />
+                  <span>Baixar em Preto e Branco (P&B)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Toast feedback */}
         {isSavedToast && (
