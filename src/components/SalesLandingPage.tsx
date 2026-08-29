@@ -5,6 +5,7 @@ import { ToonTalesArtwork } from './ToonTalesArtwork';
 import { PlatformVideoTour } from './PlatformVideoTour';
 import { ColoringStudioModal } from './ColoringStudioModal';
 import { CheckoutLeadModal } from './CheckoutLeadModal';
+import { AmbassadorModal } from './AmbassadorModal';
 import { audioEngine } from '../services/audioEngine';
 import { SupportedCurrency, CHECKOUT_PLANS_CONFIG } from '../config/checkoutConfig';
 import {
@@ -72,6 +73,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
   const [checkoutSuccess, setCheckoutSuccess] = useState<boolean>(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
   const [isColoringModalOpen, setIsColoringModalOpen] = useState<boolean>(false);
+  const [isAmbassadorModalOpen, setIsAmbassadorModalOpen] = useState<boolean>(false);
   const [videoModalTab, setVideoModalTab] = useState<'video' | 'tour'>('video');
   const [selectedDemoLang, setSelectedDemoLang] = useState<LangType>('pt');
   const [showStickyCta, setShowStickyCta] = useState<boolean>(() => {
@@ -372,16 +374,27 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
     <div className="space-y-12 sm:space-y-16 select-none antialiased text-slate-800 pb-24">
       
       {/* 1. TOP ANNOUNCEMENT & COUNTDOWN BAR */}
-      <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white py-2.5 px-4 text-center text-xs sm:text-sm font-black font-brand uppercase tracking-wider shadow-md flex flex-wrap items-center justify-center gap-3 rounded-2xl">
-        <div className="flex items-center gap-1.5">
+      <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white py-2.5 px-4 text-center text-xs sm:text-sm font-black font-brand uppercase tracking-wider shadow-md flex flex-wrap items-center justify-between gap-3 rounded-2xl">
+        <div className="flex items-center gap-1.5 mx-auto sm:mx-0">
           <Sparkles className="w-4 h-4 animate-spin shrink-0" />
           <span>🎉 LANÇAMENTO TRILÍNGUE • 50% OFF NO PLANO VITALÍCIO</span>
         </div>
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/40 border border-white/30 text-amber-200 text-xs font-black font-mono">
-          <Timer className="w-3.5 h-3.5 text-amber-300 animate-pulse shrink-0" />
-          <span>
-            {String(timeLeft.hours).padStart(2, '0')}h : {String(timeLeft.minutes).padStart(2, '0')}m : {String(timeLeft.seconds).padStart(2, '0')}s
-          </span>
+        
+        <div className="flex items-center gap-3 mx-auto sm:mx-0">
+          <button
+            onClick={() => setIsAmbassadorModalOpen(true)}
+            className="px-3 py-1 rounded-full bg-slate-950/50 hover:bg-slate-950 text-amber-300 text-xs font-black font-brand flex items-center gap-1.5 transition-all border border-amber-300/40 hover:scale-105"
+          >
+            <Crown className="w-3.5 h-3.5 text-amber-400" />
+            <span>Seja um Embaixador (40% a 50% Comis.)</span>
+          </button>
+
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/40 border border-white/30 text-amber-200 text-xs font-black font-mono">
+            <Timer className="w-3.5 h-3.5 text-amber-300 animate-pulse shrink-0" />
+            <span>
+              {String(timeLeft.hours).padStart(2, '0')}h : {String(timeLeft.minutes).padStart(2, '0')}m : {String(timeLeft.seconds).padStart(2, '0')}s
+            </span>
+          </div>
         </div>
       </div>
 
@@ -1703,7 +1716,33 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
         </div>
       </section>
 
-      {/* 16. FLOATING STICKY CTA BOTTOM BAR (COM BOTÃO WHATSAPP INTEGRADO EXATAMENTE NO MEIO) */}
+      {/* 16. AMBASSADOR / AFILIADOS RECRUITMENT BANNER */}
+      <section className="rounded-[36px] bg-slate-900 border-4 border-amber-400 p-6 sm:p-10 shadow-2xl text-white flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="space-y-2 text-center md:text-left max-w-xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 text-xs font-black uppercase font-brand">
+            <Crown className="w-3.5 h-3.5 text-amber-400" />
+            <span>Programa Oficial de Embaixadores</span>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-black font-brand text-slate-100">
+            Ganhe de <span className="text-amber-400">40% a 50% de Comissão</span> por Indicação!
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Seja um parceiro oficial do Toon Tales Kids! Receba comissões automáticas diretamente na sua conta da Hotmart indicando o melhor áudio bíblico 3D para famílias, igrejas e escolas.
+          </p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full md:w-auto">
+          <button
+            onClick={() => setIsAmbassadorModalOpen(true)}
+            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm font-brand uppercase tracking-wider shadow-xl shadow-orange-500/40 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2"
+          >
+            <Crown className="w-4 h-4" />
+            <span>Conhecer o Programa & Ganhos</span>
+          </button>
+        </div>
+      </section>
+
+      {/* 17. FLOATING STICKY CTA BOTTOM BAR (COM BOTÃO WHATSAPP INTEGRADO EXATAMENTE NO MEIO) */}
       <AnimatePresence>
         {showStickyCta && (
           <motion.div
@@ -1894,6 +1933,12 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
           setIsCheckoutModalOpen(false);
           if (onEnterPlatform) onEnterPlatform();
         }}
+      />
+
+      {/* 21. AMBASSADOR MODAL (PROGRAMA DE AFILIADOS 40% A 50% COMISSÃO) */}
+      <AmbassadorModal
+        isOpen={isAmbassadorModalOpen}
+        onClose={() => setIsAmbassadorModalOpen(false)}
       />
     </div>
   );
