@@ -1515,6 +1515,59 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
           </div>
 
         </div>
+
+        {/* SPECIAL ORDER BUMP / STANDALONE OFFER: KIT 100 ATIVIDADES BÍBLICAS */}
+        <div className="mt-8 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 rounded-[32px] p-6 sm:p-8 text-white shadow-xl border-4 border-amber-300 max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="w-full md:w-1/3 max-w-[240px] shrink-0 mx-auto">
+            <img
+              src="/activities-kit-mockup.jpg"
+              alt="Kit 100 Atividades Bíblicas para Imprimir"
+              className="w-full h-auto rounded-2xl shadow-2xl border-2 border-white/80 rotate-1 hover:rotate-0 transition-transform duration-300"
+            />
+          </div>
+
+          <div className="flex-1 space-y-3 text-center md:text-left">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white font-brand font-black text-xs uppercase tracking-wider">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Material Físico / Digital para Imprimir</span>
+            </div>
+
+            <h3 className="text-xl sm:text-2xl font-black font-brand leading-tight">
+              Kit 100 Aventuras Bíblicas para Imprimir
+            </h3>
+
+            <p className="text-xs sm:text-sm text-amber-100 leading-relaxed">
+              Tire seu filho das telas com <strong>100 páginas de atividades em folha A4</strong>: 30 desenhos para colorir em line art (economia de tinta), 30 labirintos e caça-palavras, 20 quizzes e 20 versículos para treino de caligrafia!
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 pt-1 text-[11px] font-bold text-slate-900">
+              <span className="px-3 py-1 rounded-xl bg-white/90 shadow-xs">🎨 30 Desenhos</span>
+              <span className="px-3 py-1 rounded-xl bg-white/90 shadow-xs">🧩 30 Labirintos</span>
+              <span className="px-3 py-1 rounded-xl bg-white/90 shadow-xs">❓ 20 Quizzes</span>
+              <span className="px-3 py-1 rounded-xl bg-white/90 shadow-xs">✍️ 20 Caligrafias</span>
+            </div>
+          </div>
+
+          <div className="w-full md:w-auto shrink-0 text-center space-y-2">
+            <div>
+              <span className="text-xs line-through text-amber-200">De R$ 67,00 por</span>
+              <div className="text-3xl sm:text-4xl font-black font-brand text-white">
+                R$ 27,90
+              </div>
+              <span className="text-[10px] text-amber-100 font-bold uppercase">Pagamento Único • Download Imediato</span>
+            </div>
+
+            <a
+              href="https://pay.hotmart.com/W107385181M?off=n1vhx6nj"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-full md:w-auto px-6 py-3.5 rounded-2xl bg-slate-950 hover:bg-slate-900 text-amber-400 font-brand font-black text-xs uppercase tracking-wider shadow-lg border-2 border-amber-300 items-center justify-center gap-2 transition-all hover:scale-105 active:scale-95"
+            >
+              <span>Comprar Caderno A4 (R$ 27,90)</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* 12. TABELA COMPARATIVA LADO A LADO DE RECURSOS */}

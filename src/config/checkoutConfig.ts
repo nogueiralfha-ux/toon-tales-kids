@@ -228,6 +228,46 @@ export const CHECKOUT_PLANS_CONFIG: Record<string, PlanConfig> = {
       'Certificados de Conclusão Personalizados e Grupo VIP de Famílias',
     ],
   },
+  kit_atividades_100: {
+    id: 'kit_atividades_100',
+    name: 'Kit 100 Aventuras Bíblicas para Imprimir (Caderno A4)',
+    badge: '🔥 OFERTA ESPECIAL • R$ 27,90',
+    billingType: 'vitalicio_taxa_unica',
+    prices: {
+      BRL: {
+        currency: 'BRL',
+        symbol: 'R$',
+        priceDisplay: 'R$ 27,90 (Taxa Única)',
+        cashPrice: 27.9,
+        installmentPrice: 'R$ 27,90',
+      },
+      USD: {
+        currency: 'USD',
+        symbol: '$',
+        priceDisplay: '$ 5.90 (One-time)',
+        cashPrice: 5.9,
+        installmentPrice: '$ 5.90',
+      },
+      EUR: {
+        currency: 'EUR',
+        symbol: '€',
+        priceDisplay: '€ 4.90',
+        cashPrice: 4.9,
+        installmentPrice: '€ 4.90',
+      },
+    },
+    hotmartCheckoutUrl: 'https://pay.hotmart.com/W107385181M?off=n1vhx6nj',
+    stripeCheckoutUrl: '',
+    asaasPaymentLink: '',
+    features: [
+      '100 Páginas de Atividades em Formato A4 Pronto para Imprimir',
+      '30 Desenhos para Colorir em Line Art (Economia de Tinta)',
+      '30 Labirintos & Caça-Palavras Bíblicos dos Heróis da Fé',
+      '20 Quizzes & Desafios da Verdade Bíblica',
+      '20 Páginas de Caligrafia e Memorização de Versículos',
+      'Acesso Imediato ao Arquivo Digital em Alta Resolução (PDF)',
+    ],
+  },
 };
 
 export interface CapturedLead {

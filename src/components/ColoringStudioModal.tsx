@@ -551,13 +551,25 @@ export const ColoringStudioModal: React.FC<ColoringStudioModalProps> = ({ isOpen
                 </div>
               </div>
 
-              <button
-                onClick={handlePrintTemplate}
-                className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs font-brand uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all"
-              >
-                <Printer className="w-4 h-4" />
-                <span>Imprimir Página #{currentActivity.pageNumber} em Folha A4</span>
-              </button>
+              <div className="flex flex-col sm:flex-row items-center gap-2 pt-1">
+                <button
+                  onClick={handlePrintTemplate}
+                  className="w-full sm:w-1/2 py-3.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs font-brand uppercase tracking-wider shadow-md flex items-center justify-center gap-2 active:scale-95 transition-all"
+                >
+                  <Printer className="w-4 h-4 text-orange-400" />
+                  <span>Imprimir Página #{currentActivity.pageNumber}</span>
+                </button>
+
+                <a
+                  href="https://pay.hotmart.com/W107385181M?off=n1vhx6nj"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-1/2 py-3.5 rounded-2xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-xs font-brand uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all"
+                >
+                  <Sparkles className="w-4 h-4 text-yellow-200" />
+                  <span>Comprar Kit Completo (R$ 27,90)</span>
+                </a>
+              </div>
             </div>
           </div>
         )}
