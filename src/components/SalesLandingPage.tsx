@@ -398,22 +398,22 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
       </div>
 
       {/* 2. HIGH-CONVERTING HERO HEADLINE BLOCK */}
-      <div className="text-center space-y-4 max-w-4xl mx-auto pt-2">
+      <div className="text-center space-y-4 max-w-5xl mx-auto pt-2">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-100 via-orange-100 to-amber-100 border-2 border-amber-300 text-orange-800 text-xs sm:text-sm font-black uppercase font-brand tracking-wider shadow-xs">
           <Globe className="w-4 h-4 text-orange-600 shrink-0" />
           <span>A 1ª Plataforma Bíblica Infantil Trilíngue em Áudio 3D do Brasil</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-brand tracking-tight text-slate-900 leading-[1.15] drop-shadow-xs">
-          Troque os Vídeos Vazios da Internet por{' '}
+          A Única Plataforma de Aventuras Bíblicas que{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-500 to-orange-500">
-            Histórias Bíblicas 3D
+            Ensina, Protege e Transforma
           </span>{' '}
-          em Português, Inglês e Espanhol!
+          a Mente do Seu Filho.
         </h1>
 
         <p className="text-sm sm:text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
-          Uma superprodução cinematográfica com <strong>4 temporadas completas prontas para ouvir</strong>, personagens 3D apaixonantes, experiência multilíngue para alfabetização bilíngue e lições eternas de fé e coragem.
+          Troque os vídeos vazios da internet por superproduções cinematográficas em áudio 3D, personagens marcantes, histórias bíblicas inesquecíveis e valores eternos de fé e coragem.
         </p>
 
         {/* Trust Highlights */}
