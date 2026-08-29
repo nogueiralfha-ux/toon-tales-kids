@@ -121,6 +121,18 @@ export const CheckoutLeadModal: React.FC<CheckoutLeadModalProps> = ({
       lastStep: 'redirecionado_gateway',
     });
 
+    // Trigger Meta Pixel InitiateCheckout Event
+    try {
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'InitiateCheckout', {
+          content_name: plan.name,
+          content_category: 'Bible Audio Course',
+          value: currentPricing.cashPrice,
+          currency: activeCurrency,
+        });
+      }
+    } catch {}
+
     // Check for Hotmart Global Checkout Link
     if (plan.hotmartCheckoutUrl && plan.hotmartCheckoutUrl.startsWith('http')) {
       window.location.href = plan.hotmartCheckoutUrl;

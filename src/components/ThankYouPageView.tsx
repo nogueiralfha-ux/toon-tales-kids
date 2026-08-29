@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   CheckCircle2,
   Sparkles,
@@ -28,6 +28,19 @@ export const ThankYouPageView: React.FC<ThankYouPageViewProps> = ({
   onEnterApp,
   onOpenColoringStudio,
 }) => {
+  // Fire Meta Pixel Purchase conversion event
+  useEffect(() => {
+    try {
+      if (typeof window !== 'undefined' && (window as any).fbq) {
+        (window as any).fbq('track', 'Purchase', {
+          value: 485.00,
+          currency: 'BRL',
+          content_name: 'Toon Tales Kids - A Bíblia em Áudio 3D',
+          content_type: 'product',
+        });
+      }
+    } catch {}
+  }, []);
   return (
     <div className="max-w-4xl mx-auto space-y-8 animate-fade-in text-slate-800 pb-20 select-none">
       
