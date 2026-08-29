@@ -451,54 +451,11 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
           </div>
 
           <div className="relative z-10 max-w-3xl space-y-4">
-            {/* Top Badges & Language Selector Buttons */}
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="px-3.5 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-slate-950 font-black text-xs uppercase tracking-wider font-brand shadow-md">
+            {/* Top Badges */}
+            <div className="flex items-center gap-2">
+              <span className="px-3.5 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/40 text-xs font-black uppercase font-brand tracking-wider">
                 {currentHero.tag}
               </span>
-              <span className="px-3 py-1 rounded-full bg-black/40 backdrop-blur-md text-amber-300 border border-amber-400/40 text-xs font-bold font-brand">
-                {currentHero.verse}
-              </span>
-
-              {/* Language Switcher Badge */}
-              <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/60 backdrop-blur-md border border-amber-400/50">
-                <button
-                  onClick={() => {
-                    setSelectedDemoLang('pt');
-                    if (isPlayingDemo) audioEngine.stopEpisode();
-                    setIsPlayingDemo(false);
-                  }}
-                  className={`px-2 py-0.5 rounded-full text-[11px] font-black font-brand transition-all flex items-center gap-1 ${
-                    selectedDemoLang === 'pt' ? 'bg-amber-400 text-slate-950' : 'text-slate-300 hover:text-white'
-                  }`}
-                >
-                  🇧🇷 PT
-                </button>
-                <button
-                  onClick={() => {
-                    setSelectedDemoLang('en');
-                    if (isPlayingDemo) audioEngine.stopEpisode();
-                    setIsPlayingDemo(false);
-                  }}
-                  className={`px-2 py-0.5 rounded-full text-[11px] font-black font-brand transition-all flex items-center gap-1 ${
-                    selectedDemoLang === 'en' ? 'bg-amber-400 text-slate-950' : 'text-slate-300 hover:text-white'
-                  }`}
-                >
-                  🇺🇸 EN
-                </button>
-                <button
-                  onClick={() => {
-                    setSelectedDemoLang('es');
-                    if (isPlayingDemo) audioEngine.stopEpisode();
-                    setIsPlayingDemo(false);
-                  }}
-                  className={`px-2 py-0.5 rounded-full text-[11px] font-black font-brand transition-all flex items-center gap-1 ${
-                    selectedDemoLang === 'es' ? 'bg-amber-400 text-slate-950' : 'text-slate-300 hover:text-white'
-                  }`}
-                >
-                  🇪🇸 ES
-                </button>
-              </div>
             </div>
 
             <div className="space-y-1">
@@ -532,12 +489,12 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 {isPlayingDemo ? (
                   <>
                     <Pause className="w-5 h-5 fill-current" />
-                    <span>Pausar Áudio ({selectedDemoLang.toUpperCase()})</span>
+                    <span>Pausar Áudio (Português)</span>
                   </>
                 ) : (
                   <>
                     <Play className="w-5 h-5 fill-current ml-0.5" />
-                    <span>Ouvir em {selectedDemoLang === 'en' ? 'Inglês (30s)' : selectedDemoLang === 'es' ? 'Espanhol (30s)' : 'Português (30s)'}</span>
+                    <span>Ouvir em Português (30s)</span>
                   </>
                 )}
               </button>
