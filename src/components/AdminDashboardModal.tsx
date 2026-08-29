@@ -103,9 +103,9 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   };
 
   const totalRevenueEst = users.reduce((acc, u) => {
-    if (u.plan === 'vitalicio') return acc + 485;
-    if (u.plan === 'familiar') return acc + 297;
-    if (u.plan === 'pessoal') return acc + 119;
+    if (u.plan === 'vitalicio') return acc + 1987;
+    if (u.plan === 'familiar') return acc + 997;
+    if (u.plan === 'pessoal') return acc + 299;
     return acc;
   }, 0);
 

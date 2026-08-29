@@ -1349,13 +1349,16 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
 
               <ul className="space-y-2.5 text-xs text-slate-600 font-medium pt-4 border-t border-slate-100">
                 <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-500" /> <strong>1 Perfil Individual</strong>
+                  <Check className="w-4 h-4 text-emerald-500" /> <strong>1 Perfil Individual (1 Filho)</strong>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-500" /> 4 Temporadas em <strong>Português</strong> (34 eps)
+                  <Check className="w-4 h-4 text-emerald-500" /> 4 Temporadas em Áudio 3D (34 Histórias Ilimitadas)
+                </li>
+                <li className="flex items-center gap-2 text-indigo-700 font-bold">
+                  <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" /> Histórias Personalizadas por IA (Créditos de Criação)
                 </li>
                 <li className="flex items-center gap-2 text-emerald-700 font-bold">
-                  <Palette className="w-4 h-4 text-emerald-600 shrink-0" /> Estúdio de Pintura 3D + PDF P&B
+                  <Palette className="w-4 h-4 text-emerald-600 shrink-0" /> Estúdio de Pintura 3D + Caderno P&B para Imprimir
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-500" /> Quizzes Bíblicos Interativos
@@ -1370,7 +1373,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
               onClick={() => handleCheckout(billingCycle === 'annual' ? 'pessoal_anual' : 'pessoal_mensal')}
               className="w-full py-3.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-black text-xs font-brand uppercase tracking-wider transition-colors shadow-2xs"
             >
-              {billingCycle === 'annual' ? 'Assinar Pessoal Anual' : 'Assinar Pessoal Mensal'}
+              {billingCycle === 'annual' ? 'Assinar Pessoal Anual (R$ 299)' : 'Assinar Pessoal Mensal (R$ 49)'}
             </button>
           </div>
 
@@ -1383,7 +1386,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 </span>
                 {billingCycle === 'annual' && (
                   <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase font-brand">
-                    50% OFF
+                    ⭐ MAIS POPULAR
                   </span>
                 )}
               </div>
@@ -1393,7 +1396,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 {billingCycle === 'annual' ? (
                   <div className="mt-2 space-y-0.5">
                     <span className="text-xs text-slate-400 font-medium">
-                      {selectedCurrency === 'BRL' ? 'De R$ 598,80 por apenas' : '50% OFF Annual Family'}
+                      {selectedCurrency === 'BRL' ? 'De R$ 1.164,00 por apenas' : 'Annual Family Discount'}
                     </span>
                     <div className="flex items-baseline gap-1">
                       <span className="text-3xl sm:text-4xl font-black text-slate-900 font-brand">
@@ -1409,30 +1412,33 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                         {CHECKOUT_PLANS_CONFIG.familiar_mensal.prices[selectedCurrency].priceDisplay}
                       </span>
                     </div>
-                    <span className="text-xs text-slate-400">Sem contrato de fidelidade</span>
+                    <span className="text-xs text-slate-400">Sem fidelidade, cancele quando quiser</span>
                   </div>
                 )}
               </div>
 
               <p className="text-xs text-slate-500 leading-relaxed">
-                Perfeito para famílias com 2 ou 3 crianças ouvirem ao mesmo tempo em Português nativo.
+                Perfeito para famílias com 2 ou 3 crianças ouvirem ao mesmo tempo com controle parental.
               </p>
 
               <ul className="space-y-2.5 text-xs text-slate-600 font-medium pt-4 border-t border-slate-100">
                 <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-500" /> <strong>Até 3 Perfis Simultâneos</strong>
+                  <Check className="w-4 h-4 text-emerald-500" /> <strong>Até 3 Perfis Individuais para os Filhos</strong>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-500" /> 4 Temporadas em <strong>Português</strong> (34 eps)
+                  <Check className="w-4 h-4 text-emerald-500" /> 4 Temporadas em Áudio 3D (34 Histórias Ilimitadas)
+                </li>
+                <li className="flex items-center gap-2 text-indigo-700 font-bold">
+                  <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" /> Criação Ampliada de Histórias com IA
                 </li>
                 <li className="flex items-center gap-2 text-emerald-700 font-bold">
-                  <Palette className="w-4 h-4 text-emerald-600 shrink-0" /> Estúdio de Pintura 3D + PDF P&B
+                  <Palette className="w-4 h-4 text-emerald-600 shrink-0" /> Estúdio de Pintura 3D + Caderno P&B para Imprimir
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-500" /> Quizzes Bíblicos Interativos
                 </li>
                 <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-500" /> Painel dos Pais com PIN + Livro 3D
+                  <Check className="w-4 h-4 text-emerald-500" /> Painel dos Pais com Trava por PIN
                 </li>
               </ul>
             </div>
@@ -1441,14 +1447,14 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
               onClick={() => handleCheckout(billingCycle === 'annual' ? 'familiar_anual' : 'familiar_mensal')}
               className="w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-black text-xs font-brand uppercase tracking-wider transition-colors shadow-md shadow-amber-200"
             >
-              {billingCycle === 'annual' ? 'Assinar Familiar Anual' : 'Assinar Familiar Mensal'}
+              {billingCycle === 'annual' ? 'Assinar Familiar Anual (R$ 997)' : 'Assinar Familiar Mensal (R$ 97)'}
             </button>
           </div>
 
           {/* Card 3: Plano Vitalício Família (⭐ CAMPEÃO DE VENDAS COM TEMPORADA 5 + MÓDULO TRILÍNGUE + 5 SUPER BÔNUS) */}
           <div className="relative bg-gradient-to-b from-slate-950 via-amber-950 to-slate-950 text-white border-4 border-amber-400 rounded-[36px] p-8 shadow-2xl flex flex-col justify-between space-y-6 transform lg:-translate-y-4">
-            <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 text-xs font-black uppercase tracking-wider font-brand shadow-lg border border-white">
-              👑 MELHOR ESCOLHA • 50% OFF DE LANÇAMENTO
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-red-600 via-amber-500 to-red-600 text-white text-xs font-black uppercase tracking-wider font-brand shadow-lg border-2 border-amber-300 animate-pulse">
+              🔥 LOTE ESPECIAL: APENAS 50 VAGAS
             </div>
 
             <div className="space-y-4 pt-2">
@@ -1458,14 +1464,14 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
 
               <div>
                 <span className="text-xs line-through text-slate-400">
-                  {selectedCurrency === 'BRL' ? 'De R$ 970,00 por apenas' : 'Regular $ 197.00'}
+                  {selectedCurrency === 'BRL' ? 'De R$ 3.974,00 por apenas' : 'Regular $ 797.00'}
                 </span>
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl sm:text-5xl font-black font-brand text-amber-400">
                     {CHECKOUT_PLANS_CONFIG.vitalicio.prices[selectedCurrency].priceDisplay}
                   </span>
                 </div>
-                <span className="text-xs text-amber-200 font-bold">Taxa Única • Sem Mensalidades</span>
+                <span className="text-xs text-amber-200 font-bold">Taxa Única • Sem Nenhuma Mensalidade</span>
               </div>
 
               <p className="text-xs text-amber-100 leading-relaxed">
@@ -1476,20 +1482,26 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-amber-400" /> <strong>Acesso Vitalício Eterno (Sem Mensalidades)</strong>
                 </li>
-                <li className="flex items-center gap-2 text-amber-300">
-                  <Crown className="w-4 h-4 text-amber-400 shrink-0" /> <strong>BÔNUS 1: Temporada 5 (Heróis da Fé) Inclusa!</strong>
+                <li className="flex items-center gap-2 text-rose-300 font-bold">
+                  <Flame className="w-4 h-4 text-rose-400 shrink-0" /> <strong>Garantia de 1 das 50 Vagas do Lote</strong>
                 </li>
-                <li className="flex items-center gap-2 text-sky-300">
-                  <Globe className="w-4 h-4 text-sky-400 shrink-0" /> <strong>BÔNUS 2: Módulo Trilíngue Completo (PT • EN • ES)!</strong>
+                <li className="flex items-center gap-2 text-amber-300 font-bold">
+                  <Crown className="w-4 h-4 text-amber-400 shrink-0" /> <strong>Todas as 5 Temporadas + Futuros Lançamentos</strong>
                 </li>
-                <li className="flex items-center gap-2 text-emerald-300">
-                  <Palette className="w-4 h-4 text-emerald-400 shrink-0" /> <strong>BÔNUS 3: Estúdio de Pintura (Online + PDF P&B)!</strong>
+                <li className="flex items-center gap-2 text-sky-300 font-bold">
+                  <Globe className="w-4 h-4 text-sky-400 shrink-0" /> <strong>Módulo Trilíngue Completo (PT • EN • ES)</strong>
+                </li>
+                <li className="flex items-center gap-2 text-indigo-300 font-bold">
+                  <Sparkles className="w-4 h-4 text-indigo-400 shrink-0" /> <strong>Criação de Histórias com IA sem Expiração</strong>
+                </li>
+                <li className="flex items-center gap-2 text-emerald-300 font-bold">
+                  <Palette className="w-4 h-4 text-emerald-400 shrink-0" /> <strong>Estúdio de Pintura 3D + Cadernos P&B para Imprimir</strong>
                 </li>
                 <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-amber-400" /> Até 3 Filhos / Perfis Simultâneos
+                  <Check className="w-4 h-4 text-amber-400" /> Perfis Familiares Ilimitados para a Casa
                 </li>
                 <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-amber-400" /> Todas as Futuras Atualizações Garantidas
+                  <Check className="w-4 h-4 text-amber-400" /> Download dos Áudios em MP3 para Ouvir Offline
                 </li>
               </ul>
             </div>
@@ -1498,7 +1510,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
               onClick={() => handleCheckout('vitalicio')}
               className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-sm font-brand uppercase tracking-wider shadow-xl shadow-orange-500/40 hover:scale-105 active:scale-95 transition-all ring-2 ring-white/50"
             >
-              Comprar Vitalício com 50% OFF
+              Garantir Acesso Vitalício (50 Vagas)
             </button>
           </div>
 
