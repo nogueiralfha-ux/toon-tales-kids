@@ -780,7 +780,14 @@ export default function App() {
               <ArrowLeft className="w-4 h-4" />
               <span>Voltar ao Episódio</span>
             </button>
-            <CreationQuiz quizData={currentQuiz} />
+            <CreationQuiz
+              quizData={currentQuiz}
+              episodeTitle={currentEpisode?.title || currentMeta?.title}
+              episodeSubtitle={currentEpisode?.subtitle || currentMeta?.subtitle}
+              episodeNumber={currentEpisode?.episodeNumber || currentMeta?.episodeNumber}
+              seasonNumber={currentEpisode?.seasonNumber || currentMeta?.seasonNumber}
+              biblicalVerse={currentMeta?.biblicalText}
+            />
           </div>
         )}
       </main>

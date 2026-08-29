@@ -6,19 +6,30 @@ import { Award, CheckCircle2, XCircle, RotateCcw, Sparkles, ArrowRight, ShieldCh
 
 interface CreationQuizProps {
   quizData: QuizQuestion[];
+  episodeTitle?: string;
+  episodeSubtitle?: string;
+  episodeNumber?: number;
+  seasonNumber?: number;
+  biblicalVerse?: string;
 }
 
-export const CreationQuiz: React.FC<CreationQuizProps> = ({ quizData }) => {
+export const CreationQuiz: React.FC<CreationQuizProps> = ({
+  quizData,
+  episodeTitle = 'A Bíblia em Áudio',
+  episodeSubtitle = 'Aventuras Bíblicas',
+  episodeNumber,
+  biblicalVerse,
+}) => {
   const [currentIdx, setCurrentIdx] = useState<number>(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [isAnswered, setIsAnswered] = useState<boolean>(false);
   const [score, setScore] = useState<number>(0);
   const [isFinished, setIsFinished] = useState<boolean>(false);
 
-  const question = quizData[currentIdx];
+  const question = quizData[currentIdx] || quizData[0];
 
   const handleSelectOption = (idx: number) => {
-    if (isAnswered) return;
+    if (isAnswered || !question) return;
     setSelectedAnswer(idx);
     setIsAnswered(true);
 
@@ -55,6 +66,16 @@ export const CreationQuiz: React.FC<CreationQuizProps> = ({ quizData }) => {
     setIsFinished(false);
   };
 
+  if (!quizData || quizData.length === 0) {
+    return (
+      <div className="w-full bg-white border-2 border-slate-100 rounded-3xl p-8 text-center space-y-4">
+        <Award className="w-12 h-12 text-orange-500 mx-auto" />
+        <h3 className="text-xl font-black text-slate-900 font-brand">Quiz em Preparação</h3>
+        <p className="text-xs text-slate-500">Este quiz estará disponível no próximo capítulo!</p>
+      </div>
+    );
+  }
+
   return (
     <div id="creation-quiz" className="w-full bg-white border-2 border-slate-100 rounded-3xl p-5 sm:p-7 shadow-md">
       {/* Header */}
@@ -62,10 +83,10 @@ export const CreationQuiz: React.FC<CreationQuizProps> = ({ quizData }) => {
         <div>
           <h3 className="text-xl font-black text-slate-900 flex items-center gap-2 font-brand">
             <Award className="w-5 h-5 text-orange-500" />
-            Quiz dos 7 Dias da Criação
+            Quiz Bíblico • {episodeTitle}
           </h3>
           <p className="text-xs text-slate-500 font-semibold mt-0.5">
-            Descubra o quanto você aprendeu com o Episódio 01 de Toon Tales Kids!
+            {episodeSubtitle ? `Descubra o quanto você aprendeu sobre: ${episodeSubtitle}` : `Teste seus conhecimentos sobre o Episódio ${episodeNumber || ''}!`}
           </p>
         </div>
         <span className="text-xs font-black px-3.5 py-1.5 rounded-full bg-orange-100 text-orange-700 border border-orange-200 shadow-sm">
@@ -79,12 +100,14 @@ export const CreationQuiz: React.FC<CreationQuizProps> = ({ quizData }) => {
           <div className="bg-slate-50 p-5 sm:p-6 rounded-3xl border-2 border-slate-100 shadow-sm">
             <div className="flex items-center justify-between mb-3">
               <span className="px-3.5 py-1 rounded-full text-xs font-black bg-orange-500 text-white font-brand shadow-sm">
-                {question.dayLabel} • Pergunta {currentIdx + 1} de {quizData.length}
+                {question.dayLabel || `Pergunta ${currentIdx + 1}`} • Pergunta {currentIdx + 1} de {quizData.length}
               </span>
-              <span className="text-xs text-slate-600 font-mono font-bold flex items-center gap-1">
-                <BookOpen className="w-3.5 h-3.5 text-orange-500" />
-                {question.biblicalVerse}
-              </span>
+              {question.biblicalVerse && (
+                <span className="text-xs text-slate-600 font-mono font-bold flex items-center gap-1">
+                  <BookOpen className="w-3.5 h-3.5 text-orange-500" />
+                  {question.biblicalVerse}
+                </span>
+              )}
             </div>
             <h4 className="text-base sm:text-lg font-black text-slate-900 leading-relaxed font-brand">
               {question.question}
@@ -164,15 +187,15 @@ export const CreationQuiz: React.FC<CreationQuizProps> = ({ quizData }) => {
             </span>
 
             <h4 className="text-2xl sm:text-3xl font-black text-slate-900 mt-1 mb-2 font-brand">
-              Guardião da Criação
+              Guardião de {episodeTitle}
             </h4>
 
             <p className="text-xs text-slate-600 max-w-sm mx-auto leading-relaxed mb-6 font-medium">
-              Você completou com sucesso a jornada por esta aventura com uma pontuação de <strong>{score} de {quizData.length}</strong>!
+              Você completou com sucesso a jornada pelo episódio <strong>{episodeTitle}</strong> com uma pontuação de <strong>{score} de {quizData.length}</strong>!
             </p>
 
             <div className="bg-white p-3.5 rounded-2xl border-2 border-orange-200 text-xs text-orange-950 font-bold shadow-sm">
-              "Deus viu tudo o que havia feito, e era muito bom!" • Gênesis 1:31
+              {biblicalVerse ? `Palavra de Deus: ${biblicalVerse}` : '"Toda a Escritura é inspirada por Deus!" • 2 Timóteo 3:16'}
             </div>
           </div>
 
