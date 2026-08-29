@@ -19,6 +19,12 @@ import {
   Sliders,
   Send,
   Sparkles,
+  Calculator,
+  Zap,
+  Layers,
+  Database,
+  Cloud,
+  Check,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { authService, UserAccount, PlanType } from '../services/authService';
@@ -37,10 +43,18 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   onClose,
   onLogoutAdmin,
 }) => {
-  const [activeTab, setActiveTab] = useState<'metrics' | 'users' | 'leads' | 'webhooks' | 'catalog'>('metrics');
+  const [activeTab, setActiveTab] = useState<'metrics' | 'users' | 'leads' | 'webhooks' | 'finance' | 'catalog'>('metrics');
   const [users, setUsers] = useState<UserAccount[]>([]);
   const [leads, setLeads] = useState<CapturedLead[]>([]);
   const [webhookLogs, setWebhookLogs] = useState<WebhookLogItem[]>([]);
+
+  // Financial Calculator & API Simulator state
+  const [calcPages, setCalcPages] = useState<number>(16);
+  const [calcAudio, setCalcAudio] = useState<boolean>(true);
+  const [calcChars, setCalcChars] = useState<number>(2500);
+  const [calcExchangeRate, setCalcExchangeRate] = useState<number>(6.00);
+  const [calcSalePrice, setCalcSalePrice] = useState<number>(119);
+  const [calcMonthlySales, setCalcMonthlySales] = useState<number>(100);
 
   // Simulation form state
   const [simName, setSimName] = useState<string>('Carlos Eduardo');
@@ -185,6 +199,17 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
           >
             <Sliders className="w-3.5 h-3.5" />
             <span>APIs & Webhook Hotmart</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('finance')}
+            className={`px-4 py-2 rounded-xl font-black text-xs font-brand uppercase tracking-wider transition-all flex items-center gap-2 ${
+              activeTab === 'finance'
+                ? 'bg-amber-400 text-slate-950 shadow-sm'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+            }`}
+          >
+            <Calculator className="w-3.5 h-3.5" />
+            <span>Calculadora & APIs</span>
           </button>
           <button
             onClick={() => setActiveTab('catalog')}
@@ -544,7 +569,267 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
             </div>
           )}
 
-          {/* TAB 5: CATALOG */}
+          {/* TAB 5: FINANCE & API CALCULATOR */}
+          {activeTab === 'finance' && (
+            <div className="space-y-6">
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-emerald-950/60 to-slate-950 p-5 rounded-2xl border border-emerald-500/30">
+                <div>
+                  <h3 className="font-brand font-black text-lg text-emerald-300 flex items-center gap-2">
+                    <Calculator className="w-5 h-5 text-emerald-400" />
+                    Calculadora de Custos de APIs & Simulador de Margem
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-1">
+                    Simule o custo exato de produção por história e projete o seu faturamento com mais de 95% de margem líquida.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 bg-emerald-900/40 px-3 py-1.5 rounded-xl border border-emerald-400/30 shrink-0">
+                  <Sparkles className="w-4 h-4 text-amber-300" />
+                  <span className="text-xs font-bold text-amber-200 font-brand">Margem Média: 96%</span>
+                </div>
+              </div>
+
+              {/* Official API Rates Reference Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="p-4 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-sky-400 uppercase tracking-wider">Roteiro / Texto</span>
+                    <span className="px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 text-[10px] font-bold">OpenAI</span>
+                  </div>
+                  <h4 className="font-black text-sm text-white font-brand">GPT-4o-mini</h4>
+                  <p className="text-xs font-bold text-emerald-400">$ 0,15 / $ 0,60 <span className="text-[10px] text-slate-400 font-normal">por 1M tokens</span></p>
+                  <p className="text-[11px] text-slate-400 leading-tight">~R$ 0,01 por roteiro de 16 cenas completas.</p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider">Imagens 3D</span>
+                    <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-bold">Google Cloud</span>
+                  </div>
+                  <h4 className="font-black text-sm text-white font-brand">Imagen 3</h4>
+                  <p className="text-xs font-bold text-emerald-400">$ 0,03 <span className="text-[10px] text-slate-400 font-normal">por imagem gerada</span></p>
+                  <p className="text-[11px] text-slate-400 leading-tight">16 imagens = $ 0,48 (~R$ 2,88 por livro).</p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-purple-400 uppercase tracking-wider">Voz & Efeitos</span>
+                    <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold">ElevenLabs</span>
+                  </div>
+                  <h4 className="font-black text-sm text-white font-brand">Multilingual v2</h4>
+                  <p className="text-xs font-bold text-emerald-400">$ 0,10 <span className="text-[10px] text-slate-400 font-normal">por 1.000 caracteres</span></p>
+                  <p className="text-[11px] text-slate-400 leading-tight">~R$ 1,50 por narração infantil expressiva.</p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-slate-800/80 border border-slate-700 space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-bold text-orange-400 uppercase tracking-wider">Storage Áudios</span>
+                    <span className="px-2 py-0.5 rounded-full bg-orange-500/20 text-orange-300 text-[10px] font-bold">Cloudflare</span>
+                  </div>
+                  <h4 className="font-black text-sm text-white font-brand">Cloudflare R2</h4>
+                  <p className="text-xs font-bold text-emerald-400">$ 0,015 / GB <span className="text-[10px] text-emerald-300 font-normal">(Zero Egress)</span></p>
+                  <p className="text-[11px] text-slate-400 leading-tight">Tráfego de download 100% grátis e ilimitado.</p>
+                </div>
+              </div>
+
+              {/* Interactive Simulator Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-950/80 p-5 sm:p-6 rounded-3xl border border-slate-800">
+                {/* Inputs Left Column */}
+                <div className="lg:col-span-6 space-y-4">
+                  <h4 className="font-brand font-black text-sm text-amber-300 uppercase tracking-wider flex items-center gap-2">
+                    <Sliders className="w-4 h-4" />
+                    1. Parâmetros de Produção & Venda
+                  </h4>
+
+                  <div className="space-y-3">
+                    <div>
+                      <div className="flex justify-between text-xs font-bold mb-1">
+                        <label className="text-slate-300">Número de Cenas / Imagens no Livro:</label>
+                        <span className="text-amber-400 font-brand">{calcPages} páginas</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="8"
+                        max="32"
+                        step="2"
+                        value={calcPages}
+                        onChange={(e) => setCalcPages(Number(e.target.value))}
+                        className="w-full accent-amber-400 cursor-pointer"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between p-3 rounded-xl bg-slate-800/60 border border-slate-700">
+                      <div>
+                        <p className="text-xs font-bold text-white">Incluir Narração em Áudio 3D?</p>
+                        <p className="text-[10px] text-slate-400">Locução profissional ElevenLabs Multilingual</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setCalcAudio(!calcAudio)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold font-brand transition-all ${
+                          calcAudio
+                            ? 'bg-emerald-500 text-slate-950 shadow-sm'
+                            : 'bg-slate-700 text-slate-400'
+                        }`}
+                      >
+                        {calcAudio ? 'SIM (Ativado)' : 'NÃO (Apenas Texto)'}
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-400 mb-1">
+                          Câmbio Dólar (USD / BRL)
+                        </label>
+                        <div className="relative">
+                          <span className="absolute left-3 top-2 text-xs text-slate-400 font-bold">R$</span>
+                          <input
+                            type="number"
+                            step="0.10"
+                            value={calcExchangeRate}
+                            onChange={(e) => setCalcExchangeRate(Number(e.target.value))}
+                            className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-white focus:outline-none focus:border-amber-400"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-bold text-slate-400 mb-1">
+                          Preço de Venda do Livro / Plano
+                        </label>
+                        <div className="relative">
+                          <span className="absolute left-3 top-2 text-xs text-slate-400 font-bold">R$</span>
+                          <input
+                            type="number"
+                            step="5"
+                            value={calcSalePrice}
+                            onChange={(e) => setCalcSalePrice(Number(e.target.value))}
+                            className="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-800 border border-slate-700 text-xs font-bold text-white focus:outline-none focus:border-amber-400"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-xs font-bold mb-1">
+                        <label className="text-slate-300">Volume de Vendas / Assinaturas por Mês:</label>
+                        <span className="text-emerald-400 font-brand">{calcMonthlySales} vendas/mês</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="10"
+                        max="1000"
+                        step="10"
+                        value={calcMonthlySales}
+                        onChange={(e) => setCalcMonthlySales(Number(e.target.value))}
+                        className="w-full accent-emerald-400 cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Outputs Right Column */}
+                <div className="lg:col-span-6 space-y-4 bg-slate-900/90 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                  <div>
+                    <h4 className="font-brand font-black text-sm text-emerald-300 uppercase tracking-wider mb-3">
+                      2. Resultado Financeiro & Margens
+                    </h4>
+
+                    {/* Cost Breakdown */}
+                    <div className="space-y-2 text-xs border-b border-slate-800 pb-3">
+                      <div className="flex justify-between text-slate-400">
+                        <span>Texto GPT-4o-mini:</span>
+                        <span className="text-white font-mono">$ {(((calcPages * 200) / 1000000) * 0.60).toFixed(4)} USD</span>
+                      </div>
+                      <div className="flex justify-between text-slate-400">
+                        <span>Imagens Imagen 3 ({calcPages}x $0.03):</span>
+                        <span className="text-white font-mono">$ {(calcPages * 0.03).toFixed(2)} USD</span>
+                      </div>
+                      {calcAudio && (
+                        <div className="flex justify-between text-slate-400">
+                          <span>Locução ElevenLabs (~{calcChars} chars):</span>
+                          <span className="text-white font-mono">$ {((calcChars / 1000) * 0.10).toFixed(2)} USD</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between text-slate-400">
+                        <span>Storage Cloudflare R2 + Buffer (8%):</span>
+                        <span className="text-white font-mono">$ {(0.015 + (calcPages * 0.03 + (calcAudio ? 0.25 : 0)) * 0.08).toFixed(2)} USD</span>
+                      </div>
+                    </div>
+
+                    {/* Totals Box */}
+                    <div className="mt-3 grid grid-cols-2 gap-2">
+                      <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700">
+                        <span className="text-[10px] text-slate-400 font-bold uppercase">Custo de Produção</span>
+                        <p className="text-base font-black text-rose-400 font-brand">
+                          R$ {((((calcPages * 200) / 1000000) * 0.60 + calcPages * 0.03 + (calcAudio ? 0.25 : 0) + 0.015 + (calcPages * 0.03 + (calcAudio ? 0.25 : 0)) * 0.08) * calcExchangeRate).toFixed(2)}
+                        </p>
+                        <span className="text-[9px] text-slate-400">
+                          ($ {(((calcPages * 200) / 1000000) * 0.60 + calcPages * 0.03 + (calcAudio ? 0.25 : 0) + 0.015 + (calcPages * 0.03 + (calcAudio ? 0.25 : 0)) * 0.08).toFixed(2)} USD)
+                        </span>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-emerald-950/60 border border-emerald-500/40">
+                        <span className="text-[10px] text-emerald-300 font-bold uppercase">Lucro Líquido / Unidade</span>
+                        <p className="text-base font-black text-emerald-300 font-brand">
+                          R$ {(calcSalePrice - (((calcPages * 200) / 1000000) * 0.60 + calcPages * 0.03 + (calcAudio ? 0.25 : 0) + 0.015 + (calcPages * 0.03 + (calcAudio ? 0.25 : 0)) * 0.08) * calcExchangeRate).toFixed(2)}
+                        </p>
+                        <span className="text-[9px] text-emerald-400 font-bold">
+                          {calcSalePrice > 0 ? (((calcSalePrice - (((calcPages * 200) / 1000000) * 0.60 + calcPages * 0.03 + (calcAudio ? 0.25 : 0) + 0.015 + (calcPages * 0.03 + (calcAudio ? 0.25 : 0)) * 0.08) * calcExchangeRate)) / calcSalePrice * 100).toFixed(1) : 0}% de margem
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Monthly Projection */}
+                  <div className="mt-3 p-3.5 rounded-xl bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/30 flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] text-amber-300 font-black uppercase tracking-wider">
+                        Projeção Mensal ({calcMonthlySales} vendas)
+                      </span>
+                      <p className="text-lg font-black text-amber-300 font-brand">
+                        R$ {((calcSalePrice - (((calcPages * 200) / 1000000) * 0.60 + calcPages * 0.03 + (calcAudio ? 0.25 : 0) + 0.015 + (calcPages * 0.03 + (calcAudio ? 0.25 : 0)) * 0.08) * calcExchangeRate) * calcMonthlySales).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      </p>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-full bg-amber-400 text-slate-950 text-xs font-black font-brand">
+                      Lucro Líquido
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Where to Store Audio Recordings Guide */}
+              <div className="p-5 rounded-2xl bg-slate-800/60 border border-slate-700 space-y-3">
+                <h4 className="font-brand font-black text-sm text-sky-300 flex items-center gap-2">
+                  <Cloud className="w-4 h-4" />
+                  Onde Guardar os Minutos de Áudio? (Cloudflare R2 vs AWS S3)
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                  <div className="p-3.5 rounded-xl bg-slate-900 border border-emerald-500/30 space-y-1.5">
+                    <div className="flex items-center gap-2 text-emerald-400 font-bold">
+                      <Check className="w-4 h-4" />
+                      <span>Opção Recomendada: Cloudflare R2</span>
+                    </div>
+                    <p className="text-slate-300 text-[11px] leading-relaxed">
+                      <strong>Taxa de saída ZERO ($0 Egress):</strong> Mesmo com 100.000 crianças escutando áudios todo dia, você não paga nada por tráfego de download. Custa apenas $0,015 por GB armazenado (1 GB guarda ~30 horas de áudio MP3).
+                    </p>
+                  </div>
+
+                  <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-700 space-y-1.5">
+                    <div className="flex items-center gap-2 text-slate-300 font-bold">
+                      <Database className="w-4 h-4" />
+                      <span>Fase Atual: Local / Servidor Vercel CDN</span>
+                    </div>
+                    <p className="text-slate-400 text-[11px] leading-relaxed">
+                      Para as 34 histórias do catálogo atual, o motor Web Audio já carrega os episódios instantaneamente em memória no navegador da criança, com custo de servidor igual a zero.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 6: CATALOG */}
           {activeTab === 'catalog' && (
             <div className="space-y-4">
               <h3 className="font-brand font-black text-lg text-slate-100">
