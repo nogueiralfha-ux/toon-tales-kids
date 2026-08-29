@@ -44,6 +44,9 @@ import { ParentsPortal } from './components/ParentsPortal';
 import { SalesLandingPage } from './components/SalesLandingPage';
 import { ThankYouPageView } from './components/ThankYouPageView';
 import { ColoringStudioModal } from './components/ColoringStudioModal';
+import { AuthModal } from './components/AuthModal';
+import { AdminDashboardModal } from './components/AdminDashboardModal';
+import { authService, UserAccount } from './services/authService';
 import { EpisodeModal } from './components/EpisodeModal';
 import { CharacterModal } from './components/CharacterModal';
 import { SeasonModal } from './components/SeasonModal';
@@ -147,6 +150,10 @@ export default function App() {
   const [isBedtimeOpen, setIsBedtimeOpen] = useState<boolean>(false);
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isColoringModalOpen, setIsColoringModalOpen] = useState<boolean>(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [authModalMode, setAuthModalMode] = useState<'login' | 'register'>('login');
+  const [isAdminModalOpen, setIsAdminModalOpen] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<UserAccount | null>(() => authService.getCurrentUser());
   const [selectedEpisodeModal, setSelectedEpisodeModal] = useState<Episode | null>(null);
   const [selectedCharacterModal, setSelectedCharacterModal] = useState<BiblicalCharacter | null>(null);
   const [selectedSeasonModal, setSelectedSeasonModal] = useState<Season | null>(null);
@@ -393,6 +400,17 @@ export default function App() {
         onOpenSearch={() => setIsSearchOpen(true)}
         onOpenMixer={() => setIsMixerOpen(true)}
         onOpenBedtime={() => setIsBedtimeOpen(true)}
+        onOpenAuth={(mode = 'login') => {
+          setAuthModalMode(mode);
+          setIsAuthModalOpen(true);
+        }}
+        onOpenAdmin={() => setIsAdminModalOpen(true)}
+        onOpenColoring={() => setIsColoringModalOpen(true)}
+        onLogout={() => {
+          authService.logout();
+          setCurrentUser(null);
+        }}
+        currentUser={currentUser}
         bedtimeActive={bedtimeMinutesLeft !== null}
         favoritesCount={favorites.length}
         userXp={850 + favorites.length * 40}
@@ -871,6 +889,30 @@ export default function App() {
       <ColoringStudioModal
         isOpen={isColoringModalOpen}
         onClose={() => setIsColoringModalOpen(false)}
+      />
+
+      {/* Auth Modal (Login / Registro) */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        initialMode={authModalMode}
+        onClose={() => setIsAuthModalOpen(false)}
+        onSuccessAuth={(user) => {
+          setCurrentUser(user);
+          if (user.role === 'admin' || user.email.toLowerCase() === 'nogueiralfha@gmail.com') {
+            setIsAdminModalOpen(true);
+          }
+        }}
+      />
+
+      {/* Admin Dashboard Modal (Master Admin) */}
+      <AdminDashboardModal
+        isOpen={isAdminModalOpen}
+        onClose={() => setIsAdminModalOpen(false)}
+        onLogoutAdmin={() => {
+          authService.logout();
+          setCurrentUser(null);
+          setIsAdminModalOpen(false);
+        }}
       />
 
       {/* Loading Transition Overlay */}

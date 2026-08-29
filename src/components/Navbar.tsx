@@ -1,6 +1,33 @@
 import React, { useState } from 'react';
-import { Sparkles, Search, Bell, Heart, Moon, Sliders, Shield, BookOpen, Users, Trophy, Home, Layers, Star, Award, ChevronDown, Check, DollarSign, Rocket, Headphones, ArrowRight } from 'lucide-react';
+import {
+  Sparkles,
+  Search,
+  Bell,
+  Heart,
+  Moon,
+  Sliders,
+  Shield,
+  BookOpen,
+  Users,
+  Trophy,
+  Home,
+  Layers,
+  Star,
+  Award,
+  ChevronDown,
+  Check,
+  DollarSign,
+  Rocket,
+  Headphones,
+  ArrowRight,
+  LogIn,
+  LogOut,
+  Crown,
+  Palette,
+  UserCheck,
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { UserAccount } from '../services/authService';
 
 export type NavTab = 'dashboard' | 'catalog' | 'seasons' | 'characters' | 'heroes' | 'favorites' | 'profile' | 'parents' | 'landing' | 'player' | 'script' | 'soundboard' | 'quiz' | 'thankyou';
 
@@ -10,6 +37,11 @@ interface NavbarProps {
   onOpenSearch: () => void;
   onOpenMixer: () => void;
   onOpenBedtime: () => void;
+  onOpenAuth: (mode?: 'login' | 'register') => void;
+  onOpenAdmin: () => void;
+  onOpenColoring: () => void;
+  onLogout: () => void;
+  currentUser: UserAccount | null;
   bedtimeActive: boolean;
   favoritesCount: number;
   userXp: number;
@@ -21,12 +53,19 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenSearch,
   onOpenMixer,
   onOpenBedtime,
+  onOpenAuth,
+  onOpenAdmin,
+  onOpenColoring,
+  onLogout,
+  currentUser,
   bedtimeActive,
   favoritesCount,
   userXp,
 }) => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState<boolean>(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState<boolean>(false);
+
+  const isAdmin = currentUser?.role === 'admin' || currentUser?.email?.toLowerCase() === 'nogueiralfha@gmail.com';
 
   const notifications = [
     { id: '1', title: '⭐ Nova História Disponível!', desc: 'Episódio 31 de Enoque foi liberado na Temporada 5.', time: 'Hoje' },
@@ -85,8 +124,34 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           </nav>
 
-          {/* Sales Action (Only QUERO ASSINAR) */}
-          <div className="flex items-center gap-3">
+          {/* Sales Action (Login & Assinar) */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {isAdmin ? (
+              <button
+                onClick={onOpenAdmin}
+                className="px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-brand font-black text-xs uppercase tracking-wider shadow-md border-2 border-amber-400 flex items-center gap-1.5 active:scale-95"
+              >
+                <Crown className="w-4 h-4 text-amber-400" />
+                <span>Painel Admin</span>
+              </button>
+            ) : currentUser ? (
+              <button
+                onClick={() => onSelectTab('dashboard')}
+                className="px-4 py-2.5 rounded-2xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 font-brand font-black text-xs uppercase tracking-wider border border-emerald-300 flex items-center gap-1.5 active:scale-95"
+              >
+                <UserCheck className="w-4 h-4 text-emerald-700" />
+                <span>Entrar no App</span>
+              </button>
+            ) : (
+              <button
+                onClick={() => onOpenAuth('login')}
+                className="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-orange-50 text-slate-800 hover:text-orange-600 font-brand font-black text-xs uppercase tracking-wider border border-slate-200 flex items-center gap-1.5 active:scale-95"
+              >
+                <LogIn className="w-4 h-4 text-orange-500" />
+                <span>Entrar (Login)</span>
+              </button>
+            )}
+
             <a
               href="#planos"
               className="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-brand font-black text-xs uppercase tracking-wider shadow-md shadow-orange-300 hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 ring-2 ring-amber-300"
@@ -221,6 +286,26 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
+            onClick={onOpenColoring}
+            className="px-3 py-1.5 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 text-purple-700 hover:bg-purple-50 border border-purple-200"
+            title="Estúdio de Pintura 3D e Desenhos P&B"
+          >
+            <Palette className="w-3.5 h-3.5 text-purple-600" />
+            <span>Pintura 3D</span>
+          </button>
+
+          {isAdmin && (
+            <button
+              onClick={onOpenAdmin}
+              className="px-3 py-1.5 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-amber-400 border border-amber-400 shadow-sm"
+              title="Painel do Administrador Master"
+            >
+              <Crown className="w-3.5 h-3.5 text-amber-400" />
+              <span>Admin</span>
+            </button>
+          )}
+
+          <button
             onClick={() => onSelectTab('landing')}
             className="px-3 py-1.5 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 text-emerald-700 hover:bg-emerald-50 border border-emerald-200"
             title="Ver Página de Vendas e Ofertas"
@@ -274,52 +359,34 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Moon className={`w-4 h-4 ${bedtimeActive ? 'text-white' : 'text-indigo-500'}`} />
           </button>
 
-          {/* Notifications Trigger */}
-          <div className="relative">
-            <button
-              onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-              title="Notificações"
-              className="p-2.5 rounded-2xl bg-slate-100 hover:bg-amber-50 text-slate-700 hover:text-amber-600 border border-slate-200 transition-colors shadow-sm relative"
-            >
-              <Bell className="w-4 h-4" />
-              <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 rounded-full bg-orange-500 border-2 border-white ring-1 ring-orange-300" />
-            </button>
-
-            {isNotificationsOpen && (
-              <div className="absolute right-0 mt-3 w-80 rounded-3xl bg-white border-2 border-amber-200 p-4 shadow-2xl z-50 space-y-3">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
-                  <h4 className="font-brand font-black text-sm text-slate-900 flex items-center gap-1.5">
-                    <Bell className="w-4 h-4 text-orange-500" /> Notificações
-                  </h4>
-                  <span className="text-[10px] font-bold text-orange-600">2 novas</span>
-                </div>
-                <div className="space-y-2">
-                  {notifications.map((n) => (
-                    <div key={n.id} className="p-2.5 rounded-xl bg-amber-50/60 border border-amber-100 text-xs space-y-0.5">
-                      <p className="font-black text-slate-900 font-brand">{n.title}</p>
-                      <p className="text-slate-600 text-[11px]">{n.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-
           {/* Profile Switcher & Avatar Button */}
           <div className="relative">
             <button
               onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
               className="flex items-center gap-2 p-1.5 pl-2.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-brand font-black text-xs shadow-md shadow-orange-300 transition-all active:scale-95"
             >
-              <span>Clara</span>
+              <span>{currentUser?.name?.split(' ')[0] || 'Clara'}</span>
               <div className="w-7 h-7 rounded-xl bg-white/20 flex items-center justify-center font-bold text-xs">
-                👧
+                {isAdmin ? '👑' : '👧'}
               </div>
               <ChevronDown className="w-3.5 h-3.5 opacity-80" />
             </button>
 
             {isProfileMenuOpen && (
-              <div className="absolute right-0 mt-3 w-56 rounded-3xl bg-white border-2 border-orange-200 p-3 shadow-2xl z-50 space-y-2">
+              <div className="absolute right-0 mt-3 w-64 rounded-3xl bg-white border-2 border-orange-200 p-3 shadow-2xl z-50 space-y-2">
+                {isAdmin && (
+                  <button
+                    onClick={() => {
+                      onOpenAdmin();
+                      setIsProfileMenuOpen(false);
+                    }}
+                    className="w-full text-left p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-black text-amber-300 flex items-center gap-2"
+                  >
+                    <Crown className="w-4 h-4 text-amber-400" />
+                    <span>Painel Admin Master</span>
+                  </button>
+                )}
+
                 <button
                   onClick={() => {
                     onSelectTab('profile');
@@ -330,6 +397,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <Trophy className="w-4 h-4 text-amber-500" />
                   <span>Meu Perfil & Conquistas</span>
                 </button>
+
+                <button
+                  onClick={() => {
+                    onOpenColoring();
+                    setIsProfileMenuOpen(false);
+                  }}
+                  className="w-full text-left p-2.5 rounded-xl hover:bg-purple-50 text-xs font-bold text-purple-800 flex items-center gap-2"
+                >
+                  <Palette className="w-4 h-4 text-purple-600" />
+                  <span>Estúdio de Pintura 3D</span>
+                </button>
+
                 <button
                   onClick={() => {
                     onSelectTab('favorites');
@@ -340,6 +419,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <Heart className="w-4 h-4 text-rose-500" />
                   <span>Minha Lista ({favoritesCount})</span>
                 </button>
+
                 <div className="border-t border-slate-100 pt-2">
                   <button
                     onClick={() => {
@@ -349,20 +429,34 @@ export const Navbar: React.FC<NavbarProps> = ({
                     className="w-full text-left p-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-xs font-black text-indigo-700 flex items-center gap-2"
                   >
                     <Shield className="w-4 h-4" />
-                    <span>Área dos Pais (PIN)</span>
+                    <span>Área dos Pais (PIN 1234)</span>
                   </button>
                 </div>
-                <div className="border-t border-slate-100 pt-2">
-                  <button
-                    onClick={() => {
-                      onSelectTab('landing');
-                      setIsProfileMenuOpen(false);
-                    }}
-                    className="w-full text-left p-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-xs font-black text-emerald-700 flex items-center gap-2"
-                  >
-                    <Rocket className="w-4 h-4" />
-                    <span>Página de Vendas (Ofertas)</span>
-                  </button>
+
+                <div className="border-t border-slate-100 pt-2 flex items-center justify-between gap-1">
+                  {currentUser ? (
+                    <button
+                      onClick={() => {
+                        onLogout();
+                        setIsProfileMenuOpen(false);
+                      }}
+                      className="w-full text-left p-2 rounded-xl hover:bg-rose-50 text-xs font-bold text-rose-600 flex items-center gap-2"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Sair da Conta</span>
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        onOpenAuth('login');
+                        setIsProfileMenuOpen(false);
+                      }}
+                      className="w-full text-left p-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-xs font-black text-amber-900 flex items-center gap-2"
+                    >
+                      <LogIn className="w-4 h-4 text-amber-700" />
+                      <span>Fazer Login</span>
+                    </button>
+                  )}
                 </div>
               </div>
             )}
