@@ -108,10 +108,10 @@ const EPISODE_REGISTRY: Record<string, EpisodeData> = {
 };
 
 export default function App() {
-  // Navigation: Default to Sales Landing Page on initial arrival
-  const [activeTab, setActiveTab] = useState<NavTab>('landing');
+  // Navigation: Default directly to Platform Dashboard for kids & members
+  const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
 
-  // URL route detection for /obrigado or Hotmart redirect
+  // URL route detection for /obrigado or /vendas
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname.toLowerCase();
@@ -126,6 +126,8 @@ export default function App() {
         hash.includes('obrigado')
       ) {
         setActiveTab('thankyou');
+      } else if (path.includes('vendas') || hash.includes('vendas') || hash.includes('planos')) {
+        setActiveTab('landing');
       }
     }
   }, []);

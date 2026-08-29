@@ -46,7 +46,6 @@ import {
   X,
   Globe,
   Languages,
-  Sparkle,
   Gift,
   Download,
   FileText,
