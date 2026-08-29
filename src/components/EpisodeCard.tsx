@@ -42,7 +42,7 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
       >
         <ToonTalesArtwork
           type="episode"
-          name={episode.characterId || 'david'}
+          name={episode.characterId || episode.cardImageTheme}
           theme={episode.cardImageTheme}
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />

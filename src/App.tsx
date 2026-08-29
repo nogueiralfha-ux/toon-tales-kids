@@ -132,13 +132,13 @@ export default function App() {
     }
   }, []);
 
-  // Currently loaded audio episode
-  const [currentEpisodeId, setCurrentEpisodeId] = useState<string>('t2e5');
-  const selectedEpisodeData = EPISODE_REGISTRY[currentEpisodeId] || EPISODE_REGISTRY['t2e5'];
+  // Currently loaded audio episode (Default: Episódio 1 - A Criação)
+  const [currentEpisodeId, setCurrentEpisodeId] = useState<string>('t1e1');
+  const selectedEpisodeData = EPISODE_REGISTRY[currentEpisodeId] || EPISODE_REGISTRY['t1e1'];
   const currentScenes = selectedEpisodeData.scenes;
   const currentMeta = selectedEpisodeData.meta;
   const currentQuiz = selectedEpisodeData.quiz;
-  const currentEpisode = getEpisodeById(currentEpisodeId) || ALL_EPISODES[9];
+  const currentEpisode = getEpisodeById(currentEpisodeId) || ALL_EPISODES[0];
 
   // Playback state
   const [currentSceneIndex, setCurrentSceneIndex] = useState<number>(0);
@@ -223,12 +223,13 @@ export default function App() {
   };
 
   // Playback start
-  const startPlayback = (sceneIdx = currentSceneIndex, lineIdx = 0) => {
-    audioEngine.startEpisode(currentScenes, sceneIdx, lineIdx, {
+  const startPlayback = (scenesToPlay?: Scene[], sceneIdx = currentSceneIndex, lineIdx = 0) => {
+    const activeScenes = scenesToPlay || currentScenes;
+    audioEngine.startEpisode(activeScenes, sceneIdx, lineIdx, {
       onLineStart: (lineId, sceneId) => {
         setIsPauseActive(false);
         setActiveLineId(lineId);
-        const scene = currentScenes.find((s) => s.id === sceneId);
+        const scene = activeScenes.find((s) => s.id === sceneId);
         if (scene) {
           const line = scene.lines.find((l) => l.id === lineId);
           if (line) setCurrentLine(line);
@@ -244,18 +245,18 @@ export default function App() {
         setIsPauseActive(false);
       },
       onSceneChange: (sceneId) => {
-        const idx = currentScenes.findIndex((s) => s.id === sceneId);
+        const idx = activeScenes.findIndex((s) => s.id === sceneId);
         if (idx !== -1) {
           setCurrentSceneIndex(idx);
           // Update progress
-          const pct = Math.min(100, Math.round(((idx + 1) / currentScenes.length) * 100));
+          const pct = Math.min(100, Math.round(((idx + 1) / activeScenes.length) * 100));
           setListeningProgress((prev) => {
             const filtered = prev.filter((p) => p.episodeId !== currentEpisodeId);
             return [
               {
                 episodeId: currentEpisodeId,
                 progressPercent: pct,
-                timeRemainingLabel: `${Math.max(1, Math.round((currentScenes.length - idx) * 1.5))} min`,
+                timeRemainingLabel: `${Math.max(1, Math.round((activeScenes.length - idx) * 1.5))} min`,
                 lastPlayedAt: 'Agora',
               },
               ...filtered,
@@ -341,10 +342,13 @@ export default function App() {
   };
 
   const handlePlayEpisodeDirectly = (ep: Episode) => {
-    if (EPISODE_REGISTRY[ep.id]) {
+    const targetData = EPISODE_REGISTRY[ep.id];
+    if (targetData) {
       setIsLoadingTransition(true);
       setCurrentEpisodeId(ep.id);
       setCurrentSceneIndex(0);
+      setActiveLineId(null);
+      setCurrentLine(null);
       audioEngine.initContext();
       audioEngine.stopEpisode();
       setIsPlaying(false);
@@ -354,9 +358,9 @@ export default function App() {
         setActiveTab('player');
         // Start playback with slight delay for audio context
         setTimeout(() => {
-          startPlayback(0, 0);
-        }, 400);
-      }, 700);
+          startPlayback(targetData.scenes, 0, 0);
+        }, 300);
+      }, 500);
     }
   };
 

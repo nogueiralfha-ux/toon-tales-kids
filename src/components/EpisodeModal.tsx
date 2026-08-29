@@ -54,7 +54,7 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
           <div className="relative aspect-[16/9] sm:aspect-[21/9] w-full overflow-hidden bg-slate-950 flex items-end p-6 sm:p-8 select-none">
             <ToonTalesArtwork
               type="episode"
-              name={episode.characterId || 'david'}
+              name={episode.characterId || episode.cardImageTheme}
               theme={episode.cardImageTheme}
               className="absolute inset-0 w-full h-full object-cover"
             />
