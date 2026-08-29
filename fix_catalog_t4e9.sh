@@ -1,0 +1,1 @@
+sed -i "s/        id: 't4e9',/        id: 't4e9',\n        title: 'Malta',\n        description: 'A ilha onde Deus continuou agindo.',\n        durationLabel: '18 min',\n        isAvailable: true,\n      },\n      {\n        id: 't4e9_TEMP',/g" src/data/catalog.ts

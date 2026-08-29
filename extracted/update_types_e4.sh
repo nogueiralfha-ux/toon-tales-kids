@@ -1,0 +1,4 @@
+sed -i 's/| '\''noe'\'';/| '\''noe'\'' | '\''leader'\'' | '\''builder'\'' | '\''person'\'';/g' src/types.ts
+sed -i 's/'\''nature_sounds'\'';/'\''nature_sounds'\'' | '\''ancient_city'\'' | '\''construction_site'\'' | '\''confusion_babel'\'' | '\''desert_wind'\'';/g' src/types.ts
+sed -i 's/'\''gentle_teaching'\'';/'\''gentle_teaching'\'' | '\''adventure_discovery'\'' | '\''construction_progress'\'' | '\''grand_pride'\'' | '\''tense_chords'\'' | '\''comic_confusion'\'' | '\''soft_piano_strings'\'';/g' src/types.ts
+sed -i 's/'\''s1e3_15_jingle'\'';/'\''s1e3_15_jingle'\'' | '\''s1e4_01_city'\'' | '\''s1e4_02_idea'\'' | '\''s1e4_03_build'\'' | '\''s1e4_04_higher'\'' | '\''s1e4_05_pride'\'' | '\''s1e4_06_god'\'' | '\''s1e4_07_confusion'\'' | '\''s1e4_08_abandon'\'' | '\''s1e4_09_babel'\'' | '\''s1e4_10_lesson'\'' | '\''s1e4_11_abraham'\'' | '\''s1e4_12_outro'\'';/g' src/types.ts

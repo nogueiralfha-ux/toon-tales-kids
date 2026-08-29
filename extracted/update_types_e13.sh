@@ -1,0 +1,4 @@
+sed -i 's/| '\''mestre'\''/| '\''mestre'\'' | '\''jesus'\'' | '\''joao_batista'\''/g' src/types.ts
+sed -i 's/'\''empty_road'\''/'\''empty_road'\'' | '\''jordan_river_baptism'\'' | '\''crowd_river'\'' | '\''heaven_open'\''/g' src/types.ts
+sed -i 's/'\''anxious_search'\''/'\''anxious_search'\'' | '\''john_calling'\'' | '\''heaven_theme'\'' | '\''identity_peace'\''/g' src/types.ts
+sed -i 's/'\''s3e2_21_outro'\''/'\''s3e2_21_outro'\'' | '\''s3e3_01_intro'\'' | '\''s3e3_02_crowd'\'' | '\''s3e3_03_baptism'\'' | '\''s3e3_04_news'\'' | '\''s3e3_05_arrival'\'' | '\''s3e3_06_recognition'\'' | '\''s3e3_07_water'\'' | '\''s3e3_08_heaven'\'' | '\''s3e3_09_spirit'\'' | '\''s3e3_10_voice'\'' | '\''s3e3_11_amazement'\'' | '\''s3e3_12_john'\'' | '\''s3e3_13_meaning'\'' | '\''s3e3_14_lesson'\'' | '\''s3e3_15_identity'\'' | '\''s3e3_16_courage'\'' | '\''s3e3_17_hook'\'' | '\''s3e3_18_next'\'' | '\''s3e3_19_outro'\''/g' src/types.ts

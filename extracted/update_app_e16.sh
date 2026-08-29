@@ -1,0 +1,9 @@
+sed -i 's/import { OS_MILAGRES_SCENES, EPISODE_META_T3E5, OS_MILAGRES_QUIZ } from '\''\.\/data\/osMilagresScript'\'';/import { OS_MILAGRES_SCENES, EPISODE_META_T3E5, OS_MILAGRES_QUIZ } from '\''\.\/data\/osMilagresScript'\'';\nimport { AS_PARABOLAS_SCENES, EPISODE_META_T3E6, AS_PARABOLAS_QUIZ } from '\''\.\/data\/asParabolasScript'\'';/g' src/App.tsx
+
+sed -i 's/const currentScenes = currentEpisodeId === '\''t3e5'\'' ? OS_MILAGRES_SCENES : /const currentScenes = currentEpisodeId === '\''t3e6'\'' ? AS_PARABOLAS_SCENES : currentEpisodeId === '\''t3e5'\'' ? OS_MILAGRES_SCENES : /g' src/App.tsx
+
+sed -i 's/const currentMeta = currentEpisodeId === '\''t3e5'\'' ? EPISODE_META_T3E5 : /const currentMeta = currentEpisodeId === '\''t3e6'\'' ? EPISODE_META_T3E6 : currentEpisodeId === '\''t3e5'\'' ? EPISODE_META_T3E5 : /g' src/App.tsx
+
+sed -i 's/const currentQuiz = currentEpisodeId === '\''t3e5'\'' ? OS_MILAGRES_QUIZ : /const currentQuiz = currentEpisodeId === '\''t3e6'\'' ? AS_PARABOLAS_QUIZ : currentEpisodeId === '\''t3e5'\'' ? OS_MILAGRES_QUIZ : /g' src/App.tsx
+
+sed -i 's/if (ep.id === '\''t1e1'\'' || ep.id === '\''t1e2'\'' || ep.id === '\''t1e3'\'' || ep.id === '\''t1e4'\'' || ep.id === '\''t1e5'\'' || ep.id === '\''t2e1'\'' || ep.id === '\''t2e2'\'' || ep.id === '\''t2e3'\'' || ep.id === '\''t2e4'\'' || ep.id === '\''t2e5'\'' || ep.id === '\''t3e1'\'' || ep.id === '\''t3e2'\'' || ep.id === '\''t3e3'\'' || ep.id === '\''t3e4'\'' || ep.id === '\''t3e5'\'') {/if (ep.id === '\''t1e1'\'' || ep.id === '\''t1e2'\'' || ep.id === '\''t1e3'\'' || ep.id === '\''t1e4'\'' || ep.id === '\''t1e5'\'' || ep.id === '\''t2e1'\'' || ep.id === '\''t2e2'\'' || ep.id === '\''t2e3'\'' || ep.id === '\''t2e4'\'' || ep.id === '\''t2e5'\'' || ep.id === '\''t3e1'\'' || ep.id === '\''t3e2'\'' || ep.id === '\''t3e3'\'' || ep.id === '\''t3e4'\'' || ep.id === '\''t3e5'\'' || ep.id === '\''t3e6'\'') {/g' src/App.tsx

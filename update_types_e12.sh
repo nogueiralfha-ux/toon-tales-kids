@@ -1,0 +1,4 @@
+sed -i 's/| '\''sabio'\''/| '\''sabio'\'' | '\''jesus_boy'\'' | '\''mestre'\''/g' src/types.ts
+sed -i 's/'\''star_sky'\''/'\''star_sky'\'' | '\''jerusalem_city'\'' | '\''temple_interior'\'' | '\''caravan_road'\'' | '\''empty_road'\''/g' src/types.ts
+sed -i 's/'\''temple_hook'\''/'\''temple_hook'\'' | '\''wisdom_discovery'\'' | '\''anxious_search'\''/g' src/types.ts
+sed -i 's/'\''s3e1_25_outro'\''/'\''s3e1_25_outro'\'' | '\''s3e2_01_intro'\'' | '\''s3e2_02_jerusalem'\'' | '\''s3e2_03_temple'\'' | '\''s3e2_04_masters'\'' | '\''s3e2_05_amazement'\'' | '\''s3e2_06_return'\'' | '\''s3e2_07_discovery'\'' | '\''s3e2_08_worry'\'' | '\''s3e2_09_day1'\'' | '\''s3e2_10_day2'\'' | '\''s3e2_11_day3'\'' | '\''s3e2_12_found'\'' | '\''s3e2_13_talk'\'' | '\''s3e2_14_meaning'\'' | '\''s3e2_15_nazareth'\'' | '\''s3e2_16_lesson'\'' | '\''s3e2_17_children'\'' | '\''s3e2_18_phrase'\'' | '\''s3e2_19_hook'\'' | '\''s3e2_20_next'\'' | '\''s3e2_21_outro'\''/g' src/types.ts

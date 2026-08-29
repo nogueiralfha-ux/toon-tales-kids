@@ -1,0 +1,47 @@
+  ,
+  {
+    id: 12,
+    sceneNumber: 12,
+    title: 'Assinatura',
+    subtitle: 'Toon Tales Kids',
+    biblicalRef: '',
+    durationLabel: '20 segundos',
+    estimatedDurationSec: 20,
+    ambientType: 'toon_tales_jingle',
+    musicTheme: 'signature_jingle',
+    visualKey: 'scene_12_outro',
+    environmentSummary: 'Logotipo sonoro',
+    musicDescription: 'Música alegre, memorável e fantástica (orquestra infantil e coros).',
+    soundEffects: ['Magia brand'],
+    directorLesson: 'Energético e feliz.',
+    lines: [
+      {
+        id: 's12_l1',
+        character: 'narrator',
+        characterLabel: 'Narrador',
+        text: 'E essa foi mais uma aventura da Bíblia em Áudio. Mas a história ainda não terminou... Uma nova aventura está esperando por você.',
+        pauseType: 'PAUSA',
+        pauseSeconds: 1.5,
+        emotionGuide: 'Dinâmico, animado'
+      },
+      {
+        id: 's12_l2',
+        character: 'child',
+        characterLabel: 'Crianças',
+        text: 'Toon Tales Kids!',
+        emotionGuide: 'Grito em coro'
+      },
+      {
+        id: 's12_l3',
+        character: 'narrator',
+        characterLabel: 'Narrador',
+        text: 'Histórias que ensinam...',
+      },
+      {
+        id: 's12_l4',
+        character: 'child',
+        characterLabel: 'Crianças',
+        text: '...e aventuras que transformam!',
+      }
+    ]
+  }

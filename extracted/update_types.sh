@@ -1,0 +1,4 @@
+sed -i 's/| '\''child'\'' | '\''adam'\'' | '\''eve'\'' | '\''snake'\'';/| '\''child'\'' | '\''adam'\'' | '\''eve'\'' | '\''snake'\'' | '\''noe'\'';/g' src/types.ts
+sed -i 's/'\''melancholy_breeze'\'';/'\''melancholy_breeze'\'' | '\''rain_storm'\'' | '\''ark_interior'\'' | '\''rainbow_peace'\'';/g' src/types.ts
+sed -i 's/'\''hopeful_melody'\'';/'\''hopeful_melody'\'' | '\''storm_build'\'' | '\''heavy_rain'\'' | '\''ark_safety'\'' | '\''rainbow_covenant'\'';/g' src/types.ts
+sed -i 's/'\''s1e2_15_jingle'\'';/'\''s1e2_15_jingle'\'' | '\''s1e3_01_world'\'' | '\''s1e3_02_call'\'' | '\''s1e3_03_build'\'' | '\''s1e3_04_animals'\'' | '\''s1e3_05_door'\'' | '\''s1e3_06_storm'\'' | '\''s1e3_07_inside'\'' | '\''s1e3_08_silence'\'' | '\''s1e3_09_dove'\'' | '\''s1e3_10_leaf'\'' | '\''s1e3_11_dry'\'' | '\''s1e3_12_rainbow'\'' | '\''s1e3_13_lesson'\'' | '\''s1e3_14_outro'\'' | '\''s1e3_15_jingle'\'';/g' src/types.ts

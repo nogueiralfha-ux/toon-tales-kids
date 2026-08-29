@@ -1,0 +1,6 @@
+{
+  "name": "Toon Tales Kids - A Criação",
+  "description": "Audiolivro infantil cinematográfico: Série Bíblia em Áudio com Temporadas 1 a 5 (Heróis da Fé), contos bíblicos imersivos para crianças de 6 a 12 anos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

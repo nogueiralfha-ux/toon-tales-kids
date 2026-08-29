@@ -1,0 +1,4 @@
+sed -i 's/| '\''person'\'';/| '\''person'\'' | '\''abraao'\'' | '\''sara'\'' | '\''isaque'\'';/g' src/types.ts
+sed -i 's/'\''desert_wind'\'';/'\''desert_wind'\'' | '\''desert_night'\'' | '\''desert_camp'\'' | '\''desert_journey'\'' | '\''desert_day'\'';/g' src/types.ts
+sed -i 's/'\''soft_piano_strings'\'';/'\''soft_piano_strings'\'' | '\''mysterious_journey'\'' | '\''majestic_promise'\'' | '\''intimate_tent'\'' | '\''joyful_birth'\'' | '\''hopeful_future'\'';/g' src/types.ts
+sed -i 's/'\''s1e4_12_outro'\'';/'\''s1e4_12_outro'\'' | '\''s1e5_01_silence'\'' | '\''s1e5_02_call'\'' | '\''s1e5_03_decision'\'' | '\''s1e5_04_journey'\'' | '\''s1e5_05_promise'\'' | '\''s1e5_06_stars'\'' | '\''s1e5_07_name'\'' | '\''s1e5_08_tent'\'' | '\''s1e5_09_visit'\'' | '\''s1e5_10_isaac'\'' | '\''s1e5_11_faith'\'' | '\''s1e5_12_lesson'\'' | '\''s1e5_13_hook'\'' | '\''s1e5_14_outro'\'';/g' src/types.ts

@@ -1,0 +1,1 @@
+sed -i 's/import { ESTEVAO_SCENES, EPISODE_META_T4E3, ESTEVAO_QUIZ } from '\''\.\/data\/estevaoScript'\'';/import { ESTEVAO_SCENES, EPISODE_META_T4E3, ESTEVAO_QUIZ } from '\''\.\/data\/estevaoScript'\'';\nimport { PAULO_SCENES, EPISODE_META_T4E4, PAULO_QUIZ } from '\''\.\/data\/pauloScript'\'';/g' src/App.tsx

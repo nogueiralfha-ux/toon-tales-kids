@@ -1,0 +1,2 @@
+sed -i 's/'\''heavy_rain'\'' | '\''ark_safety'\'' | '\''rainbow_covenant'\'';/'\''heavy_rain'\'' | '\''ark_safety'\'' | '\''rainbow_covenant'\'' | '\''melancholy_underscore'\'' | '\''playful_wonder'\'' | '\''peaceful_morning'\'' | '\''curious_discovery'\'' | '\''epic_orchestral'\'' | '\''gentle_teaching'\'';/' src/types.ts
+sed -i 's/'\''rain_storm'\'' | '\''ark_interior'\'' | '\''rainbow_peace'\'';/'\''rain_storm'\'' | '\''ark_interior'\'' | '\''rainbow_peace'\'' | '\''nature_sounds'\'';/' src/types.ts

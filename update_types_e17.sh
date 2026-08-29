@@ -1,0 +1,5 @@
+sed -i 's/| '\''crowd_teaching'\''/| '\''crowd_teaching'\'' | '\''calm_sea_boat'\'' | '\''growing_storm'\'' | '\''heavy_storm_sea'\'' | '\''miracle_silence'\'' | '\''feeding_multitude_hook'\''/g' src/types.ts
+
+sed -i 's/| '\''rock_house_theme'\''/| '\''rock_house_theme'\'' | '\''storm_theme'\'' | '\''miracle_silence_theme'\'' | '\''teaching_courage'\'' | '\''loaves_fishes_hook'\''/g' src/types.ts
+
+sed -i 's/'\''s3e6_28_outro'\''/'\''s3e6_28_outro'\'' | '\''s3e7_01_boarding'\'' | '\''s3e7_02_jesus_sleeps'\'' | '\''s3e7_03_wind_changes'\'' | '\''s3e7_04_storm_starts'\'' | '\''s3e7_05_fear'\'' | '\''s3e7_06_wake_jesus'\'' | '\''s3e7_07_stands_up'\'' | '\''s3e7_08_order'\'' | '\''s3e7_09_miracle'\'' | '\''s3e7_10_silence'\'' | '\''s3e7_11_admiration'\'' | '\''s3e7_12_faith_lesson'\'' | '\''s3e7_13_children'\'' | '\''s3e7_14_courage'\'' | '\''s3e7_15_boat_peace'\'' | '\''s3e7_16_phrase'\'' | '\''s3e7_17_transition'\'' | '\''s3e7_18_hook'\'' | '\''s3e7_19_next'\'' | '\''s3e7_20_outro'\''/g' src/types.ts
