@@ -31,6 +31,7 @@ import { authService, UserAccount, PlanType } from '../services/authService';
 import { hotmartApiService, WebhookLogItem } from '../services/hotmartApiService';
 import { getCapturedLeads, CapturedLead } from '../config/checkoutConfig';
 import { ALL_EPISODES, BIBLE_SEASONS } from '../data/catalog';
+import { aiProductionService, ApiKeysConfig, CHARACTER_VOICE_MAP } from '../services/aiProductionService';
 
 interface AdminDashboardModalProps {
   isOpen: boolean;
@@ -62,6 +63,27 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const [simPhone, setSimPhone] = useState<string>('5511999887766');
   const [simPlan, setSimPlan] = useState<PlanType>('vitalicio');
   const [simFeedback, setSimFeedback] = useState<string | null>(null);
+
+  // API Keys state
+  const [apiKeys, setApiKeys] = useState<ApiKeysConfig>(() => aiProductionService.getKeys());
+  const [apiKeyFeedback, setApiKeyFeedback] = useState<string | null>(null);
+
+  // Live Speech Synthesis Test
+  const [testSpeechText, setTestSpeechText] = useState<string>(
+    'Bem-vindos ao Toon Tales Kids! Histórias bíblicas em áudio 3D que ensinam valores eternos!'
+  );
+  const [testSpeechVoice, setTestSpeechVoice] = useState<'nova' | 'onyx' | 'echo' | 'fable' | 'shimmer'>('nova');
+  const [isGeneratingVoice, setIsGeneratingVoice] = useState<boolean>(false);
+  const [voiceAudioUrl, setVoiceAudioUrl] = useState<string | null>(null);
+  const [voiceError, setVoiceError] = useState<string | null>(null);
+
+  // Live Story Script Generation Test
+  const [storyTheme, setStoryTheme] = useState<string>('Davi e a Coragem contra o Gigante');
+  const [storyChildName, setStoryChildName] = useState<string>('Clara');
+  const [storyMoral, setStoryMoral] = useState<string>('Confiar em Deus diante de qualquer desafio');
+  const [isGeneratingStory, setIsGeneratingStory] = useState<boolean>(false);
+  const [storyResult, setStoryResult] = useState<any | null>(null);
+  const [storyError, setStoryError] = useState<string | null>(null);
 
   const loadData = () => {
     setUsers(authService.getUsers());
@@ -100,6 +122,47 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const handleClearLogs = () => {
     hotmartApiService.clearLogs();
     loadData();
+  };
+
+  const handleSaveApiKeys = (e: React.FormEvent) => {
+    e.preventDefault();
+    aiProductionService.saveKeys(apiKeys);
+    setApiKeyFeedback('Chaves de API salvas com sucesso! 🔑');
+    setTimeout(() => setApiKeyFeedback(null), 3500);
+  };
+
+  const handleTestSpeech = async () => {
+    setIsGeneratingVoice(true);
+    setVoiceError(null);
+    setVoiceAudioUrl(null);
+    try {
+      const url = await aiProductionService.synthesizeSpeechOpenAi(testSpeechText, testSpeechVoice);
+      setVoiceAudioUrl(url);
+      const audio = new Audio(url);
+      audio.play();
+    } catch (err: any) {
+      setVoiceError(err.message || 'Erro ao gerar voz');
+    } finally {
+      setIsGeneratingVoice(false);
+    }
+  };
+
+  const handleTestStory = async () => {
+    setIsGeneratingStory(true);
+    setStoryError(null);
+    setStoryResult(null);
+    try {
+      const result = await aiProductionService.generateBibleStoryScript({
+        theme: storyTheme,
+        childName: storyChildName,
+        moralLesson: storyMoral,
+      });
+      setStoryResult(result);
+    } catch (err: any) {
+      setStoryError(err.message || 'Erro ao gerar história');
+    } finally {
+      setIsGeneratingStory(false);
+    }
   };
 
   const totalRevenueEst = users.reduce((acc, u) => {
@@ -824,6 +887,181 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       Para as 34 histórias do catálogo atual, o motor Web Audio já carrega os episódios instantaneamente em memória no navegador da criança, com custo de servidor igual a zero.
                     </p>
                   </div>
+                </div>
+              </div>
+
+              {/* 3. CONFIGURAÇÃO DE CHAVES DE API EM TEMPO REAL */}
+              <div className="p-5 sm:p-6 rounded-3xl bg-slate-900 border-2 border-amber-400/40 space-y-5">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-1">
+                    <span className="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-black uppercase font-brand border border-amber-400/30">
+                      Conexão de Produção
+                    </span>
+                    <h4 className="text-base sm:text-lg font-black font-brand text-white flex items-center gap-2">
+                      <Zap className="w-5 h-5 text-amber-400" />
+                      Chaves de API das Inteligências Artificiais
+                    </h4>
+                  </div>
+                  {apiKeyFeedback && (
+                    <span className="px-3 py-1 rounded-xl bg-emerald-500 text-slate-950 text-xs font-black font-brand animate-bounce">
+                      {apiKeyFeedback}
+                    </span>
+                  )}
+                </div>
+
+                <form onSubmit={handleSaveApiKeys} className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                  <div className="space-y-1.5">
+                    <label className="text-slate-300 font-bold flex items-center justify-between">
+                      <span>OpenAI API Key (Áudio TTS + GPT-4o-mini):</span>
+                      <span className="text-[10px] text-emerald-400 font-normal">Recomendado ($0.015/1k)</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="sk-proj-..."
+                      value={apiKeys.openaiApiKey || ''}
+                      onChange={(e) => setApiKeys({ ...apiKeys, openaiApiKey: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white font-mono focus:outline-none focus:border-amber-400"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-slate-300 font-bold flex items-center justify-between">
+                      <span>ElevenLabs API Key (Vozes Emocionais):</span>
+                      <span className="text-[10px] text-purple-400 font-normal">Opcional</span>
+                    </label>
+                    <input
+                      type="password"
+                      placeholder="xi-..."
+                      value={apiKeys.elevenlabsApiKey || ''}
+                      onChange={(e) => setApiKeys({ ...apiKeys, elevenlabsApiKey: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white font-mono focus:outline-none focus:border-purple-400"
+                    />
+                  </div>
+
+                  <div className="md:col-span-2 flex justify-end">
+                    <button
+                      type="submit"
+                      className="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black font-brand uppercase text-xs tracking-wider transition-all shadow-md active:scale-95"
+                    >
+                      Salvar Chaves de API
+                    </button>
+                  </div>
+                </form>
+
+                {/* Live Audio Synthesis Test Lab */}
+                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h5 className="font-brand font-black text-xs text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
+                      <Headphones className="w-4 h-4" />
+                      Laboratório de Teste de Áudio OpenAI TTS (Custo: $0,015 / 1k)
+                    </h5>
+                    <span className="text-[10px] text-slate-400">Qualidade de Estúdio 24kHz</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="sm:col-span-2">
+                      <input
+                        type="text"
+                        value={testSpeechText}
+                        onChange={(e) => setTestSpeechText(e.target.value)}
+                        placeholder="Digite um texto bíblico para testar a voz..."
+                        className="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                      />
+                    </div>
+
+                    <div className="flex gap-2">
+                      <select
+                        value={testSpeechVoice}
+                        onChange={(e: any) => setTestSpeechVoice(e.target.value)}
+                        className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs font-bold focus:outline-none focus:border-amber-400"
+                      >
+                        <option value="nova">Nova (Narradora Infantil)</option>
+                        <option value="onyx">Onyx (Voz de Deus / Solene)</option>
+                        <option value="echo">Echo (Davi / Menino Valente)</option>
+                        <option value="shimmer">Shimmer (Rainha Ester)</option>
+                        <option value="fable">Fable (Noé / Patriarca)</option>
+                      </select>
+
+                      <button
+                        type="button"
+                        onClick={handleTestSpeech}
+                        disabled={isGeneratingVoice}
+                        className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-slate-950 font-black font-brand text-xs uppercase tracking-wider transition-all shrink-0 flex items-center gap-1.5 shadow-md"
+                      >
+                        {isGeneratingVoice ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Play className="w-3.5 h-3.5 fill-current" />}
+                        <span>Ouvir</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {voiceError && (
+                    <p className="text-xs text-rose-400 font-bold bg-rose-950/50 p-2.5 rounded-xl border border-rose-800">
+                      ⚠️ {voiceError}
+                    </p>
+                  )}
+
+                  {voiceAudioUrl && (
+                    <div className="flex items-center gap-3 p-2 bg-slate-900 rounded-xl border border-emerald-500/40">
+                      <span className="text-[11px] text-emerald-400 font-bold">Áudio Gerado com Sucesso:</span>
+                      <audio controls src={voiceAudioUrl} className="h-8 flex-1" autoPlay />
+                    </div>
+                  )}
+                </div>
+
+                {/* Live Story Script Generation Lab */}
+                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <h5 className="font-brand font-black text-xs text-sky-300 uppercase tracking-wider flex items-center gap-1.5">
+                      <Sparkles className="w-4 h-4 text-sky-400" />
+                      Laboratório de Roteiros Bíblicos com GPT-4o-mini (Custo: $0,001 / livro)
+                    </h5>
+                    <span className="text-[10px] text-slate-400">Geração de Roteiro + Quiz</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <input
+                      type="text"
+                      value={storyTheme}
+                      onChange={(e) => setStoryTheme(e.target.value)}
+                      placeholder="Tema bíblico (Ex: Jonas e o Peixe)"
+                      className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-sky-400"
+                    />
+                    <input
+                      type="text"
+                      value={storyChildName}
+                      onChange={(e) => setStoryChildName(e.target.value)}
+                      placeholder="Nome da Criança (Ex: Clara)"
+                      className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-sky-400"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleTestStory}
+                      disabled={isGeneratingStory}
+                      className="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 disabled:opacity-50 text-slate-950 font-black font-brand text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
+                    >
+                      {isGeneratingStory ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
+                      <span>Gerar Roteiro IA</span>
+                    </button>
+                  </div>
+
+                  {storyError && (
+                    <p className="text-xs text-rose-400 font-bold bg-rose-950/50 p-2.5 rounded-xl border border-rose-800">
+                      ⚠️ {storyError}
+                    </p>
+                  )}
+
+                  {storyResult && (
+                    <div className="p-3 bg-slate-900 rounded-xl border border-sky-500/40 space-y-2 text-xs">
+                      <div className="flex items-center justify-between text-sky-300 font-bold">
+                        <span>{storyResult.title} — {storyResult.subtitle}</span>
+                        <span className="text-[10px] text-amber-400 font-mono">{storyResult.biblicalVerse}</span>
+                      </div>
+                      <p className="text-slate-300 text-[11px] italic">"{storyResult.moralLesson}"</p>
+                      <pre className="p-2 bg-slate-950 rounded-lg text-[10px] text-emerald-400 font-mono overflow-x-auto max-h-36">
+                        {JSON.stringify(storyResult, null, 2)}
+                      </pre>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
