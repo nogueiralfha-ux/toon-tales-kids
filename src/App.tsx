@@ -108,15 +108,13 @@ const EPISODE_REGISTRY: Record<string, EpisodeData> = {
 };
 
 export default function App() {
-  // Navigation: Default directly to Platform Dashboard for kids & members
-  const [activeTab, setActiveTab] = useState<NavTab>('dashboard');
-
-  // URL route detection for /obrigado or /vendas
-  useEffect(() => {
+  // Navigation: Default directly to Sales Landing Page for all public visitors & Meta/Facebook ads traffic
+  const [activeTab, setActiveTab] = useState<NavTab>(() => {
     if (typeof window !== 'undefined') {
       const path = window.location.pathname.toLowerCase();
       const search = window.location.search.toLowerCase();
       const hash = window.location.hash.toLowerCase();
+
       if (
         path.includes('obrigado') ||
         path.includes('thank-you') ||
@@ -125,11 +123,70 @@ export default function App() {
         search.includes('sucesso') ||
         hash.includes('obrigado')
       ) {
-        setActiveTab('thankyou');
-      } else if (path.includes('vendas') || hash.includes('vendas') || hash.includes('planos')) {
-        setActiveTab('landing');
+        return 'thankyou';
+      }
+
+      if (
+        path.includes('app') ||
+        path.includes('dashboard') ||
+        path.includes('plataforma') ||
+        hash.includes('app') ||
+        hash.includes('dashboard') ||
+        hash.includes('plataforma') ||
+        search.includes('app=true')
+      ) {
+        return 'dashboard';
       }
     }
+    // Default is always Sales Landing Page for Facebook Ads and new visitors!
+    return 'landing';
+  });
+
+  // URL route detection for hash / navigation changes
+  useEffect(() => {
+    const handleLocationChange = () => {
+      if (typeof window !== 'undefined') {
+        const path = window.location.pathname.toLowerCase();
+        const search = window.location.search.toLowerCase();
+        const hash = window.location.hash.toLowerCase();
+
+        if (
+          path.includes('obrigado') ||
+          path.includes('thank-you') ||
+          search.includes('status=approved') ||
+          search.includes('obrigado') ||
+          search.includes('sucesso') ||
+          hash.includes('obrigado')
+        ) {
+          setActiveTab('thankyou');
+        } else if (
+          path.includes('app') ||
+          path.includes('dashboard') ||
+          path.includes('plataforma') ||
+          hash.includes('app') ||
+          hash.includes('dashboard') ||
+          hash.includes('plataforma') ||
+          search.includes('app=true')
+        ) {
+          setActiveTab('dashboard');
+        } else if (
+          path.includes('vendas') ||
+          hash.includes('vendas') ||
+          hash.includes('planos') ||
+          path === '/' ||
+          hash === ''
+        ) {
+          setActiveTab('landing');
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
   // Currently loaded audio episode (Default: Episódio 1 - A Criação)
