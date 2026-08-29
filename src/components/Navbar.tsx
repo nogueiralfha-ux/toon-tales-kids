@@ -304,15 +304,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Admin</span>
             </button>
           )}
-
-          <button
-            onClick={() => onSelectTab('landing')}
-            className="px-3 py-1.5 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 text-emerald-700 hover:bg-emerald-50 border border-emerald-200"
-            title="Ver Página de Vendas e Ofertas"
-          >
-            <Rocket className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Vendas</span>
-          </button>
         </nav>
 
         {/* Right Actions Toolbar */}
