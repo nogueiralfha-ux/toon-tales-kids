@@ -492,26 +492,30 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
           <div className="p-8 rounded-3xl bg-white border-2 border-purple-300 shadow-xl flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-800 text-xs font-black uppercase tracking-wider">
-                🔬 Solo Lab Kids Channel
+                🔬 Lab Kids Channel
               </div>
               
-              <h3 className="text-2xl font-black text-slate-900">Lab Kids Complete</h3>
+              <h3 className="text-2xl font-black text-slate-900">Solo Lab Kids Channel</h3>
               <p className="text-xs text-slate-600">
-                Complete access to all 30 STEM science episodes, 5 tracks, and 90 quizzes.
+                Complete access to all 30 science lessons, 5 tracks, and interactive quizzes.
               </p>
 
               {/* Price Tag */}
               <div className="pt-2">
-                <div className="text-xs text-slate-400 line-through">Regular Price: $37.00</div>
+                <div className="text-xs text-slate-400">
+                  {selectedPlanMode === 'single' ? 'Single Child Plan (1 Profile)' : 'Family Plan (3 Profiles)'}
+                </div>
                 <div className="flex items-baseline gap-1">
                   <span className="text-sm font-bold text-slate-700">$</span>
                   <span className="text-4xl sm:text-5xl font-black text-purple-700">
-                    {selectedPlanMode === 'single' ? '14.00' : '24.00'}
+                    {selectedPlanMode === 'single' ? '37.00' : '79.00'}
                   </span>
-                  <span className="text-xs text-slate-500 font-bold">one-time payment</span>
+                  <span className="text-xs text-slate-500 font-bold">/ month</span>
                 </div>
-                <div className="text-[11px] text-emerald-600 font-bold mt-1">
-                  🔥 70% OFF • Instant Delivery & Lifetime Access
+                <div className="text-[11px] text-purple-600 font-bold mt-1">
+                  {selectedPlanMode === 'single'
+                    ? 'Or Family Plan (3 Profiles) for $ 79.00 / month'
+                    : 'Unlimited access across all your family devices'}
                 </div>
               </div>
 
@@ -523,19 +527,19 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>5 STEM Science Tracks (Space, Body, Planet, Physics, Tech)</span>
+                  <span>5 STEM Science Tracks (Body, Space, Earth, Weather, Tech)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>90 Interactive Science Quizzes with Badges & XP</span>
+                  <span>90 Interactive Quizzes with Badges and XP Points</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>Stream on Mobile, Tablet, PC and Smart TV</span>
+                  <span>Access on Mobile, Tablet, Computer, and Smart TV</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>30-Day 100% Money-Back Guarantee</span>
+                  <span>7-Day 100% Risk-Free Guarantee</span>
                 </div>
               </div>
             </div>
@@ -546,14 +550,14 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
               rel="noopener noreferrer"
               className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black text-center text-sm uppercase tracking-wider shadow-lg shadow-purple-400/30 hover:scale-105 active:scale-95 transition-all block"
             >
-              Get Lab Kids Now ({selectedPlanMode === 'single' ? '$14.00' : '$24.00'})
+              Subscribe to Solo Lab Kids ({selectedPlanMode === 'single' ? '$37.00/mo' : '$79.00/mo'})
             </a>
           </div>
 
           {/* PLAN 2: SUPER VIP ALL-ACCESS */}
           <div className="relative p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 text-white border-4 border-amber-400 shadow-2xl flex flex-col justify-between space-y-6">
             <div className="absolute -top-4 right-6 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-lg">
-              ⭐ BEST VALUE • FULL BUNDLE
+              ⭐ BEST SELLER • MONTHLY CHAMPION
             </div>
 
             <div className="space-y-4">
@@ -561,23 +565,27 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
                 👑 Super VIP All-in-One
               </div>
               
-              <h3 className="text-2xl sm:text-3xl font-black text-white">Toon Tales VIP Universe</h3>
+              <h3 className="text-2xl sm:text-3xl font-black text-white">COMPLETE VIP COMBO</h3>
               <p className="text-xs text-slate-300">
-                Unlimited access to EVERYTHING: 3D Audio Stories + Lab Kids + 100 Activity Books!
+                Unlimited access to EVERYTHING: 3D Audio Stories + Lab Kids + 100 Activity Books + 3D Studio!
               </p>
 
               {/* Price Tag */}
               <div className="pt-2">
-                <div className="text-xs text-slate-400 line-through">Regular Price: $97.00</div>
+                <div className="text-xs text-slate-400">
+                  {selectedPlanMode === 'single' ? 'Single Child Plan (1 Profile)' : 'Family Plan (3 Profiles)'}
+                </div>
                 <div className="flex items-baseline gap-1">
                   <span className="text-sm font-bold text-amber-400">$</span>
                   <span className="text-4xl sm:text-5xl font-black text-amber-400">
-                    {selectedPlanMode === 'single' ? '29.90' : '49.90'}
+                    {selectedPlanMode === 'single' ? '97.90' : '147.90'}
                   </span>
-                  <span className="text-xs text-slate-300 font-bold">one-time payment</span>
+                  <span className="text-xs text-slate-300 font-bold">/ month</span>
                 </div>
                 <div className="text-[11px] text-emerald-400 font-bold mt-1">
-                  🔥 All 3 Products Included • Lifetime Access
+                  {selectedPlanMode === 'single'
+                    ? 'Or Annual Plan for $ 970.90 / year'
+                    : 'Or Annual Family Plan for $ 1,670.00 / year'}
                 </div>
               </div>
 
@@ -585,23 +593,23 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
               <div className="space-y-2.5 pt-4 border-t border-white/10 text-xs font-semibold text-slate-200">
                 <div className="flex items-center gap-2 text-amber-300 font-bold">
                   <Sparkles className="w-4 h-4 shrink-0 fill-current" />
-                  <span>30 Lab Kids Science Episodes (Full HD)</span>
+                  <span>30 Lab Kids Science Lessons (All Included)</span>
                 </div>
                 <div className="flex items-center gap-2 text-amber-300 font-bold">
                   <Sparkles className="w-4 h-4 shrink-0 fill-current" />
-                  <span>34 3D Audio Adventures (Seasons 1 to 5)</span>
+                  <span>34 3D Audio Stories (Seasons 1 to 5)</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>100 Printable Activity Books (A4 PDF) + 3D Coloring Studio</span>
+                  <span>100 Activity Books (Printable A4 PDF) + 3D Coloring Studio</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Parental Dashboard with PIN Lock & Progress Tracker</span>
+                  <span>Parental Portal with Progress Reports</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>30-Day 100% Satisfaction Guarantee</span>
+                  <span>7-Day 100% Risk-Free Guarantee</span>
                 </div>
               </div>
             </div>
@@ -612,7 +620,7 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
               rel="noopener noreferrer"
               className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-center text-sm uppercase tracking-wider shadow-xl shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all block ring-2 ring-amber-300"
             >
-              Get VIP All-Access ({selectedPlanMode === 'single' ? '$29.90' : '$49.90'})
+              Get Complete VIP Combo ({selectedPlanMode === 'single' ? '$97.90/mo' : '$147.90/mo'})
             </a>
           </div>
         </div>

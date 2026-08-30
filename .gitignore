@@ -8,6 +8,6 @@ coverage/
 !.env.example
 *.mp4
 !public/labkids-en/vsl.mp4
+!public/labkids/vsl.mp4
 *.psd
 *.paint
-public/labkids/*.mp4
