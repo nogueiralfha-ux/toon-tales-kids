@@ -402,11 +402,11 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
       <div className="text-center space-y-4 max-w-5xl mx-auto pt-2">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-100 via-orange-100 to-amber-100 border-2 border-amber-300 text-orange-800 text-xs sm:text-sm font-black uppercase font-brand tracking-wider shadow-xs">
           <Globe className="w-4 h-4 text-orange-600 shrink-0" />
-          <span>A 1ª Plataforma Bíblica Infantil Trilíngue em Áudio 3D do Brasil</span>
+          <span>A 1ª Superprodução Bíblica Infantil Trilíngue em Áudio 3D do Brasil</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-brand tracking-tight text-slate-900 leading-[1.15] drop-shadow-xs">
-          A Única Plataforma de Aventuras Bíblicas que{' '}
+          O Maior Universo de Aventuras Bíblicas que{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-500 to-orange-500">
             Ensina, Protege e Transforma
           </span>{' '}
