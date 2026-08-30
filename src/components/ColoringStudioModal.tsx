@@ -23,6 +23,7 @@ import {
 import { motion } from 'motion/react';
 import { audioEngine } from '../services/audioEngine';
 import { PRINTABLE_ACTIVITIES_100, PrintableActivity } from '../data/printableActivitiesData';
+import { BiblicalSceneDrawing } from './BiblicalSceneDrawing';
 
 interface ColoringStudioModalProps {
   isOpen: boolean;
@@ -146,6 +147,7 @@ export const ColoringStudioModal: React.FC<ColoringStudioModalProps> = ({ isOpen
   const [isSavedToast, setIsSavedToast] = useState<string | null>(null);
   const [printableFilter, setPrintableFilter] = useState<'all' | 'coloring' | 'maze_wordsearch' | 'quiz_challenge' | 'handwriting'>('all');
   const [selectedActivityIndex, setSelectedActivityIndex] = useState<number>(0);
+  const [isStorybookMode, setIsStorybookMode] = useState<boolean>(false);
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   if (!isOpen) return null;
@@ -427,65 +429,93 @@ export const ColoringStudioModal: React.FC<ColoringStudioModalProps> = ({ isOpen
 
             <div className="lg:col-span-7 space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-500">
-                  Folha A4 (Página {currentActivity.pageNumber} de 100)
-                </span>
-                <div className="flex items-center gap-1.5">
-                  <button
-                    disabled={selectedActivityIndex === 0}
-                    onClick={() => setSelectedActivityIndex((p) => Math.max(0, p - 1))}
-                    className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-30 text-slate-700"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                  </button>
-                  <button
-                    disabled={selectedActivityIndex === filteredActivities.length - 1}
-                    onClick={() => setSelectedActivityIndex((p) => Math.min(filteredActivities.length - 1, p + 1))}
-                    className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-30 text-slate-700"
-                  >
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="bg-white border-2 border-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5 text-slate-900 font-sans print:border-none print:shadow-none min-h-[500px] flex flex-col justify-between">
-                <div className="border-b-2 border-slate-900 pb-3 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-black font-brand uppercase tracking-wider text-slate-900">
-                      TOON TALES KIDS • CADERNO DE ATIVIDADES BÍBLICAS
-                    </span>
-                  </div>
-                  <span className="text-xs font-black font-brand px-2 py-0.5 rounded-md bg-slate-100 border border-slate-300">
-                    PÁGINA {currentActivity.pageNumber}
+                <div className="flex items-center justify-between gap-2 flex-wrap">
+                  <span className="text-xs font-bold text-slate-500">
+                    Folha A4 (Página {currentActivity.pageNumber} de 100)
                   </span>
-                </div>
 
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-black uppercase text-slate-600 tracking-wider">
-                      {currentActivity.categoryLabel}
-                    </span>
-                    <span className="text-xs font-black text-slate-800">{currentActivity.verseRef}</span>
-                  </div>
-                  <h2 className="text-xl sm:text-2xl font-black font-brand text-slate-950">
-                    {currentActivity.title}
-                  </h2>
-                  <p className="text-xs text-slate-700 italic">
-                    {currentActivity.instruction}
-                  </p>
-                </div>
-
-                <div className="border-2 border-dashed border-slate-400 rounded-2xl p-4 flex-1 flex flex-col items-center justify-center min-h-[260px] bg-slate-50/50">
                   {currentActivity.type === 'coloring' && (
-                    <div className="text-center space-y-3">
-                      <div className="w-48 h-48 sm:w-56 sm:h-56 mx-auto border-2 border-slate-900 rounded-2xl flex items-center justify-center bg-white p-4">
-                        <Palette className="w-20 h-20 text-slate-800 stroke-[1.5]" />
-                      </div>
-                      <p className="text-xs font-bold text-slate-600 font-brand">
-                        [Área de Desenho em Contorno Preto e Branco para Colorir]
-                      </p>
+                    <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
+                      <button
+                        type="button"
+                        onClick={() => setIsStorybookMode(false)}
+                        className={`px-3 py-1 rounded-lg text-xs font-brand font-black transition-all ${
+                          !isStorybookMode
+                            ? 'bg-white text-slate-950 shadow-xs border border-slate-300'
+                            : 'text-slate-600 hover:text-slate-900'
+                        }`}
+                      >
+                        🎨 P&B para Colorir
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setIsStorybookMode(true)}
+                        className={`px-3 py-1 rounded-lg text-xs font-brand font-black transition-all ${
+                          isStorybookMode
+                            ? 'bg-amber-400 text-slate-950 shadow-xs font-black'
+                            : 'text-slate-600 hover:text-slate-900'
+                        }`}
+                      >
+                        🌟 3D Colorido
+                      </button>
                     </div>
                   )}
+
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      disabled={selectedActivityIndex === 0}
+                      onClick={() => setSelectedActivityIndex((p) => Math.max(0, p - 1))}
+                      className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-30 text-slate-700"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      disabled={selectedActivityIndex === filteredActivities.length - 1}
+                      onClick={() => setSelectedActivityIndex((p) => Math.min(filteredActivities.length - 1, p + 1))}
+                      className="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-30 text-slate-700"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-white border-2 border-slate-900 rounded-2xl p-6 sm:p-8 shadow-xl space-y-5 text-slate-900 font-sans print:border-none print:shadow-none min-h-[500px] flex flex-col justify-between">
+                  <div className="border-b-2 border-slate-900 pb-3 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-black font-brand uppercase tracking-wider text-slate-900">
+                        TOON TALES KIDS • CADERNO DE ATIVIDADES BÍBLICAS
+                      </span>
+                    </div>
+                    <span className="text-xs font-black font-brand px-2 py-0.5 rounded-md bg-slate-100 border border-slate-300">
+                      PÁGINA {currentActivity.pageNumber}
+                    </span>
+                  </div>
+
+                  <div className="space-y-1">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-black uppercase text-slate-600 tracking-wider">
+                        {currentActivity.categoryLabel}
+                      </span>
+                      <span className="text-xs font-black text-slate-800">{currentActivity.verseRef}</span>
+                    </div>
+                    <h2 className="text-xl sm:text-2xl font-black font-brand text-slate-950">
+                      {currentActivity.title}
+                    </h2>
+                    <p className="text-xs text-slate-700 italic">
+                      {currentActivity.instruction}
+                    </p>
+                  </div>
+
+                  <div className="border-2 border-dashed border-slate-400 rounded-2xl p-4 flex-1 flex flex-col items-center justify-center min-h-[260px] bg-slate-50/50">
+                    {currentActivity.type === 'coloring' && (
+                      <div className="w-full flex-1 flex flex-col items-center justify-center max-h-[300px]">
+                        <BiblicalSceneDrawing
+                          pageNumber={currentActivity.pageNumber}
+                          colored={isStorybookMode}
+                          className="w-full max-h-[280px]"
+                        />
+                      </div>
+                    )}
 
                   {currentActivity.type === 'maze_wordsearch' && currentActivity.content.wordsToFind && (
                     <div className="space-y-3 w-full max-w-sm">

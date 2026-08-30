@@ -37,6 +37,7 @@ import { hotmartApiService, WebhookLogItem } from '../services/hotmartApiService
 import { getCapturedLeads, CapturedLead } from '../config/checkoutConfig';
 import { ALL_EPISODES, BIBLE_SEASONS } from '../data/catalog';
 import { aiProductionService, ApiKeysConfig, CHARACTER_VOICE_MAP } from '../services/aiProductionService';
+import { BiblicalSceneDrawing } from './BiblicalSceneDrawing';
 
 interface AdminDashboardModalProps {
   isOpen: boolean;
@@ -1462,52 +1463,20 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       </p>
                     </div>
 
-                    {/* Image Area with Robust Loading & Fallback */}
+                    {/* Image Area with Instant Vector Drawing & Zero-API Dependency */}
                     <div className="relative flex-1 min-h-[280px] max-h-[360px] flex items-center justify-center p-3 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50/60 overflow-hidden">
-                      {isPdfImageLoading && (
-                        <div className="absolute inset-0 bg-white/95 backdrop-blur-xs flex flex-col items-center justify-center gap-2 z-10">
-                          <RefreshCw className="w-8 h-8 text-orange-500 animate-spin" />
-                          <span className="text-xs font-black text-slate-800 font-brand">Desenhando traços com IA...</span>
-                          <span className="text-[10px] text-slate-500">Isso leva apenas alguns segundos</span>
-                        </div>
-                      )}
-
-                      {hasPdfImageError ? (
-                        <div className="text-center p-4 space-y-3">
-                          <div className="w-32 h-32 mx-auto border-2 border-slate-900 rounded-2xl bg-white flex items-center justify-center shadow-inner">
-                            <Palette className="w-16 h-16 text-slate-800" />
-                          </div>
-                          <div>
-                            <p className="text-xs font-black text-slate-900 font-brand">
-                              {pdfTitle} (Line Art Oficial)
-                            </p>
-                            <p className="text-[11px] text-slate-500">
-                              Clique para tentar recarregar ou escolha outro modelo
-                            </p>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={handleGeneratePdfArt}
-                            className="px-4 py-2 bg-gradient-to-r from-amber-400 to-orange-400 text-slate-950 text-xs font-black font-brand uppercase rounded-xl shadow-md active:scale-95 transition-all"
-                          >
-                            🔄 Recarregar Desenho
-                          </button>
-                        </div>
-                      ) : (
-                        <img
-                          src={pdfArtUrl}
-                          alt={pdfTitle}
-                          onLoad={() => {
-                            setIsPdfImageLoading(false);
-                            setHasPdfImageError(false);
-                          }}
-                          onError={() => {
-                            setIsPdfImageLoading(false);
-                            setHasPdfImageError(true);
-                          }}
-                          className="max-h-[340px] w-auto object-contain mx-auto transition-all duration-300"
-                        />
-                      )}
+                      <BiblicalSceneDrawing
+                        pageNumber={
+                          selectedPresetId === 'samson' ? 14 :
+                          selectedPresetId === 'david' ? 17 :
+                          selectedPresetId === 'noah' ? 3 :
+                          selectedPresetId === 'daniel' ? 23 :
+                          selectedPresetId === 'esther' ? 21 :
+                          selectedPresetId === 'moses' ? 10 : pdfPageNum
+                        }
+                        colored={pdfType === '3d_pixar'}
+                        className="w-full max-h-[320px]"
+                      />
                     </div>
 
                     {/* Verse Box */}
