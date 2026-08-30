@@ -186,6 +186,9 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
       setStoryError(err.message || 'Erro ao gerar história');
     } finally {
       setIsGeneratingStory(false);
+    }
+  };
+
   const handleGeneratePdfArt = () => {
     setIsGeneratingPdfArt(true);
     try {
