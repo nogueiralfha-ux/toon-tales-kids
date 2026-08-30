@@ -30,11 +30,15 @@ import { motion, AnimatePresence } from 'motion/react';
 import { LAB_KIDS_EPISODES, SCIENCE_TRACKS } from '../data/labKidsData';
 
 interface LabKidsSalesPageProps {
-  onEnterPlatform: () => void;
+  onOpenAuth: (mode?: 'login' | 'register') => void;
+  onSelectPlan?: (planId: string) => void;
+  onEnterPlatform?: () => void;
   onOpenBiblicalSales?: () => void;
 }
 
 export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
+  onOpenAuth,
+  onSelectPlan,
   onEnterPlatform,
   onOpenBiblicalSales,
 }) => {
@@ -137,10 +141,10 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
 
         <div className="flex items-center gap-3">
           <button
-            onClick={() => onEnterPlatform()}
-            className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-purple-50 text-slate-700 hover:text-purple-700 text-xs font-bold transition-all"
+            onClick={() => onOpenAuth('login')}
+            className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-purple-50 text-slate-700 hover:text-purple-700 text-xs font-bold transition-all flex items-center gap-1.5 border border-slate-200"
           >
-            🔐 Entrar (Já sou Aluno)
+            <span>🔐 Entrar (Já sou Aluno)</span>
           </button>
 
           <a

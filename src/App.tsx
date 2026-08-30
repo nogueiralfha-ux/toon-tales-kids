@@ -679,7 +679,14 @@ export default function App() {
         {/* 9.0 PÁGINA DE VENDAS DEDICADA LAB KIDS (30 AULAS DE CIÊNCIA & VSL) */}
         {activeTab === 'labkids-sales' && (
           <LabKidsSalesPage
-            onEnterPlatform={() => setActiveTab('labkids')}
+            onOpenAuth={(mode = 'login') => {
+              setAuthModalMode(mode);
+              setIsAuthModalOpen(true);
+            }}
+            onEnterPlatform={() => {
+              setAuthModalMode('login');
+              setIsAuthModalOpen(true);
+            }}
             onOpenBiblicalSales={() => setActiveTab('landing')}
           />
         )}
