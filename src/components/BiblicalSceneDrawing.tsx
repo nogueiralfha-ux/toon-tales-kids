@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 interface BiblicalSceneDrawingProps {
   pageNumber: number;
@@ -45,9 +45,9 @@ export const BiblicalSceneDrawing: React.FC<BiblicalSceneDrawingProps> = ({
 
   return (
     <svg
-      viewBox='0 0 400 320'
-      className={w-full h-full max-h-[300px] object-contain select-none }
-      xmlns='http://www.w3.org/2000/svg'
+      viewBox="0 0 400 320"
+      className={`w-full h-full max-h-[300px] object-contain select-none ${className}`}
+      xmlns="http://www.w3.org/2000/svg"
     >
       <rect width='400' height='320' fill={colored ? c.sky : '#FFFFFF'} rx='16' />
 
