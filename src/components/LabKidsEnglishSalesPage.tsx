@@ -193,24 +193,17 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
           Replace endless scrolling with engaging, high-impact STEM videos where your child learns physics, astronomy, nature, human anatomy, and coding in a 100% wholesome, safe environment.
         </p>
 
-        {/* 🎬 Video Banner Showcase */}
+        {/* 🎬 VSL Video Player Container (English Intro Video) */}
         <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-purple-400 bg-slate-950 aspect-video group">
-          <img
-            src="/labkids-en/branding/Arte 1 labkids ingles.webp"
-            alt="Lab Kids English Video Showcase"
-            className="w-full h-full object-cover opacity-90 group-hover:scale-102 transition-transform duration-700"
-          />
-          <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px] flex flex-col items-center justify-center gap-3">
-            <a
-              href="#offer"
-              className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-tr from-amber-400 to-orange-500 text-slate-950 flex items-center justify-center shadow-2xl shadow-orange-500/50 hover:scale-110 active:scale-95 transition-all ring-4 ring-white/80 group-hover:ring-amber-300"
-            >
-              <Play className="w-10 h-10 fill-current ml-1" />
-            </a>
-            <span className="px-4 py-1 rounded-full bg-black/60 text-white text-xs font-bold tracking-wider backdrop-blur-md">
-              Full 30 STEM Lessons Included
-            </span>
-          </div>
+          <video
+            src="/labkids-en/vsl.mp4"
+            poster="/labkids-en/branding/Arte 1 labkids ingles.webp"
+            controls
+            playsInline
+            className="w-full h-full object-contain"
+          >
+            Your browser does not support the video tag.
+          </video>
         </div>
 
         {/* Primary CTA Button */}
