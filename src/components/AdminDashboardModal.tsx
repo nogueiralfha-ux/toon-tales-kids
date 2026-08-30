@@ -117,6 +117,46 @@ export const BIBLICAL_PRESETS: BiblicalPreset[] = [
     verseText: 'O Senhor afastou o mar com um forte vento oriental e transformou o mar em terra seca.',
     defaultPrompt: 'Coloring book page for kids, black and white line art, clear thick outlines, white background, no shading, Moses parting the Red Sea with wooden staff',
   },
+  {
+    id: 'creation',
+    name: '☀️ Criação do Mundo',
+    theme: 'A Criação do Mundo com sol radiante, rio cristalino, flores e cervo',
+    title: 'A Criação do Mundo: Haja Luz!',
+    subtitle: 'Pinte a linda Terra e a natureza criada com amor por Deus!',
+    verseRef: 'Gênesis 1:1',
+    verseText: 'No princípio, criou Deus os céus e a terra.',
+    defaultPrompt: 'Kids biblical coloring book page, creation of the world with sun, river, trees, deer and birds',
+  },
+  {
+    id: 'jonah',
+    name: '🐳 Jonas e o Peixe',
+    theme: 'Jonas orando dentro do grande peixe no fundo do mar com peixinhos coloridos',
+    title: 'Jonas e o Grande Peixe',
+    subtitle: 'Pinte Jonas orando e aprendendo a obedecer ao Senhor!',
+    verseRef: 'Jonas 2:1',
+    verseText: 'Lá de dentro do peixe, Jonas orou ao Senhor, o seu Deus.',
+    defaultPrompt: 'Kids biblical coloring book page, Jonah praying inside friendly big whale with fish',
+  },
+  {
+    id: 'nativity',
+    name: '⭐ O Nascimento de Jesus',
+    theme: 'O nascimento de Jesus na manjedoura com Maria, José e a Estrela de Belém',
+    title: 'O Nascimento de Jesus: O Salvador Chegou!',
+    subtitle: 'Pinte a Sagrada Família e o lindo bebê Jesus na manjedoura!',
+    verseRef: 'Lucas 2:11',
+    verseText: 'Hoje, na cidade de Davi, nasceu o Salvador de vocês, que é Cristo, o Senhor!',
+    defaultPrompt: 'Kids biblical coloring book page, Nativity of Baby Jesus with Mary, Joseph and Bethlehem star',
+  },
+  {
+    id: 'shepherd',
+    name: '🐑 O Bom Pastor',
+    theme: 'Jesus o Bom Pastor carregando a ovelhinha nos ombros no campo florido',
+    title: 'Jesus: O Bom Pastor',
+    subtitle: 'Pinte o Bom Pastor que cuida com todo carinho de cada ovelhinha!',
+    verseRef: 'João 10:11',
+    verseText: 'Eu sou o bom pastor. O bom pastor dá a sua vida pelas ovelhas.',
+    defaultPrompt: 'Kids biblical coloring book page, Jesus the Good Shepherd carrying a cute lamb on his shoulders',
+  },
 ];
 
 export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
@@ -1466,14 +1506,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                     {/* Image Area with Instant Vector Drawing & Zero-API Dependency */}
                     <div className="relative flex-1 min-h-[280px] max-h-[360px] flex items-center justify-center p-3 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50/60 overflow-hidden">
                       <BiblicalSceneDrawing
-                        pageNumber={
-                          selectedPresetId === 'samson' ? 14 :
-                          selectedPresetId === 'david' ? 17 :
-                          selectedPresetId === 'noah' ? 3 :
-                          selectedPresetId === 'daniel' ? 23 :
-                          selectedPresetId === 'esther' ? 21 :
-                          selectedPresetId === 'moses' ? 10 : pdfPageNum
-                        }
+                        characterKey={selectedPresetId}
+                        pageNumber={pdfPageNum}
                         colored={pdfType === '3d_pixar'}
                         className="w-full max-h-[320px]"
                       />
