@@ -473,21 +473,21 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
           <div className="p-8 rounded-3xl bg-white border-2 border-purple-300 shadow-xl flex flex-col justify-between space-y-6">
             <div className="space-y-4">
               <div className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-800 text-xs font-black uppercase tracking-wider">
-                🔬 Coleção Lab Kids
+                🔬 Canal Lab Kids
               </div>
               
-              <h3 className="text-2xl font-black text-slate-900">Lab Kids Completo</h3>
-              <p className="text-xs text-slate-600">Acesso vitalício às 30 aulas de ciências e aos quizzes pedagógicos.</p>
+              <h3 className="text-2xl font-black text-slate-900">Só Canal Lab Kids</h3>
+              <p className="text-xs text-slate-600">Acesso completo às 30 aulas de ciências, 5 trilhas e aos quizzes pedagógicos.</p>
 
               {/* Price Tag */}
               <div className="pt-2">
-                <div className="text-xs text-slate-400 line-through">De R$ 97,00 por apenas</div>
+                <div className="text-xs text-slate-400">Plano Pessoal (1 Filho)</div>
                 <div className="flex items-baseline gap-1">
                   <span className="text-sm font-bold text-slate-700">R$</span>
-                  <span className="text-4xl sm:text-5xl font-black text-purple-700">29,90</span>
-                  <span className="text-xs text-slate-500 font-bold">pagamento único</span>
+                  <span className="text-4xl sm:text-5xl font-black text-purple-700">37,00</span>
+                  <span className="text-xs text-slate-500 font-bold">/ mês</span>
                 </div>
-                <div className="text-[11px] text-emerald-600 font-bold mt-1">Ou 3x de R$ 10,60 no cartão</div>
+                <div className="text-[11px] text-purple-600 font-bold mt-1">Ou Plano Familiar (3 Filhos) por R$ 79,00 / mês</div>
               </div>
 
               {/* Feature List */}
@@ -515,16 +515,12 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
               </div>
             </div>
 
-            <a
-              href="https://pay.hotmart.com/YOUR_HOTMART_CODE?checkoutMode=10"
-              onClick={(e) => {
-                e.preventDefault();
-                alert('Redirecionando para o Checkout Oficial do Lab Kids...');
-              }}
+            <button
+              onClick={() => onEnterPlatform()}
               className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black text-center text-sm uppercase tracking-wider shadow-lg shadow-purple-400/30 hover:scale-105 active:scale-95 transition-all block"
             >
-              Comprar Apenas o Lab Kids (R$ 29,90)
-            </a>
+              Assinar Só Lab Kids (R$ 37,00/mês)
+            </button>
           </div>
 
           {/* PLANO 2: SUPER COMBO VIP (TUDO EM 1) */}
@@ -532,26 +528,26 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
             
             {/* Best Value Ribbon */}
             <div className="absolute -top-4 right-6 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-lg">
-              ⭐ MAIS VENDIDO • MELHOR CUSTO-BENEFÍCIO
+              ⭐ MAIS VENDIDO • CAMPEÃO MENSAL
             </div>
 
             <div className="space-y-4">
               <div className="inline-block px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-black uppercase tracking-wider">
-                👑 Super Combo Tudo em 1
+                👑 Super Combo VIP Tudo
               </div>
               
-              <h3 className="text-2xl sm:text-3xl font-black text-white">Toon Tales VIP Vitalício</h3>
-              <p className="text-xs text-slate-300">Acesso ilimitado a TUDO: Histórias Bíblicas + Lab Kids + Estúdio 3D!</p>
+              <h3 className="text-2xl sm:text-3xl font-black text-white">COMBO VIP TUDO</h3>
+              <p className="text-xs text-slate-300">Acesso ilimitado a TUDO: Histórias Bíblicas + Lab Kids + Kit 100 Atividades + Estúdio 3D!</p>
 
               {/* Price Tag */}
               <div className="pt-2">
-                <div className="text-xs text-slate-400 line-through">De R$ 197,00 por apenas</div>
+                <div className="text-xs text-slate-400">Plano Pessoal (1 Filho)</div>
                 <div className="flex items-baseline gap-1">
                   <span className="text-sm font-bold text-amber-400">R$</span>
-                  <span className="text-4xl sm:text-5xl font-black text-amber-400">49,90</span>
-                  <span className="text-xs text-slate-300 font-bold">pagamento único</span>
+                  <span className="text-4xl sm:text-5xl font-black text-amber-400">97,90</span>
+                  <span className="text-xs text-slate-300 font-bold">/ mês</span>
                 </div>
-                <div className="text-[11px] text-emerald-400 font-bold mt-1">Ou 5x de R$ 10,80 no cartão</div>
+                <div className="text-[11px] text-emerald-400 font-bold mt-1">Ou Plano Anual por R$ 970,90 / ano</div>
               </div>
 
               {/* Feature List */}
@@ -566,11 +562,11 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Estúdio de Pintura 3D e Livros de Atividades para Imprimir</span>
+                  <span>Kit 100 Atividades em PDF A4 + Estúdio de Pintura 3D</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Módulo Trilíngue (Português, Inglês e Espanhol)</span>
+                  <span>Acesso Ilimitado em Português Nativo</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -579,16 +575,12 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
               </div>
             </div>
 
-            <a
-              href="https://pay.hotmart.com/YOUR_HOTMART_CODE_VIP?checkoutMode=10"
-              onClick={(e) => {
-                e.preventDefault();
-                alert('Redirecionando para o Checkout do Super Combo VIP...');
-              }}
+            <button
+              onClick={() => onEnterPlatform()}
               className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-center text-sm uppercase tracking-wider shadow-xl shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all block ring-2 ring-amber-300"
             >
-              Garantir Combo VIP Completo (R$ 49,90)
-            </a>
+              Garantir Combo VIP Completo (R$ 97,90/mês)
+            </button>
           </div>
         </div>
       </section>

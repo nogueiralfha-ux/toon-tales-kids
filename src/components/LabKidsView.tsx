@@ -641,10 +641,10 @@ export const LabKidsView: React.FC<LabKidsViewProps> = ({
 
               <div className="space-y-2">
                 <h3 className="text-2xl font-black text-slate-900 dark:text-white">
-                  Desbloqueie o Lab Kids Completo!
+                  Desbloqueie o Lab Kids!
                 </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Tenha acesso vitalício a todos os 30 episódios de ciências, quizzes do pequeno cientista, trilhas educativas e atualizações.
+                  Tenha acesso a todos os 30 episódios de ciências, 5 trilhas educativas e 90 quizzes com medalhas e XP por apenas <strong className="text-purple-600 dark:text-purple-400">R$ 37,00/mês</strong> ou no Super Combo VIP!
                 </p>
               </div>
 
@@ -659,21 +659,20 @@ export const LabKidsView: React.FC<LabKidsViewProps> = ({
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                  <span>Acesso em Celular, Tablet e Computador</span>
+                  <span>Acesso em Celular, Tablet, Smart TV e Computador</span>
                 </div>
               </div>
 
               <div className="space-y-3">
                 <a
-                  href="#comprar-labkids"
+                  href="#planos"
                   onClick={() => {
-                    alert('Redirecionando para o Checkout Oficial do Lab Kids...');
                     setShowUnlockModal(false);
                   }}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-black text-base shadow-lg shadow-emerald-500/30 transition-all"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black text-base shadow-lg shadow-purple-500/30 transition-all"
                 >
                   <Sparkles className="w-5 h-5" />
-                  Garantir Acesso Imediato
+                  Ver Planos de Assinatura (a partir de R$ 37,00/mês)
                 </a>
 
                 <button
