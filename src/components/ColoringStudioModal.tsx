@@ -428,11 +428,10 @@ export const ColoringStudioModal: React.FC<ColoringStudioModalProps> = ({ isOpen
             </div>
 
             <div className="lg:col-span-7 space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center justify-between gap-2 flex-wrap">
-                  <span className="text-xs font-bold text-slate-500">
-                    Folha A4 (Página {currentActivity.pageNumber} de 100)
-                  </span>
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <span className="text-xs font-bold text-slate-500">
+                  Folha A4 (Página {currentActivity.pageNumber} de 100)
+                </span>
 
                   {currentActivity.type === 'coloring' && (
                     <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
