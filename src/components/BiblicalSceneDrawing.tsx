@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 interface BiblicalSceneDrawingProps {
   pageNumber?: number;
@@ -33,22 +33,21 @@ export const BiblicalSceneDrawing: React.FC<BiblicalSceneDrawingProps> = ({
   }
 
   const modeSuffix = colored ? '_color.jpg' : '_bw.jpg';
-  const imageSrc = /activities/;
+  const imageSrc = '/activities/' + sceneKey + modeSuffix;
 
   return (
-    <div className={elative flex items-center justify-center w-full h-full p-2 select-none }>
+    <div className={`relative flex items-center justify-center w-full h-full p-2 select-none ${className}`}>
       <img
         src={imageSrc}
-        alt={Cena Bíblica Oficial - }
-        className=" max-h-[300px] w-auto object-contain mx-auto rounded-xl shadow-xs transition-all duration-300 print:shadow-none print:max-h-[420px]\
- onError={(e) => {
- // Fallback to characters directory if activity image fails
- const target = e.currentTarget;
- if (!target.src.includes('/characters/')) {
- target.src = /characters/.jpg;
- }
- }}
- />
- </div>
- );
+        alt={`Cena Bíblica Oficial - ${sceneKey}`}
+        className="max-h-[300px] w-auto object-contain mx-auto rounded-xl shadow-xs transition-all duration-300 print:shadow-none print:max-h-[420px]"
+        onError={(e) => {
+          const target = e.currentTarget;
+          if (!target.src.includes('/characters/')) {
+            target.src = `/characters/${sceneKey}.jpg`;
+          }
+        }}
+      />
+    </div>
+  );
 };
