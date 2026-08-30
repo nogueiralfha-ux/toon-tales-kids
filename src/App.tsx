@@ -41,6 +41,8 @@ import { HeroesOfFaithSection } from './components/HeroesOfFaithSection';
 import { FavoritesView } from './components/FavoritesView';
 import { ProfileView } from './components/ProfileView';
 import { ParentsPortal } from './components/ParentsPortal';
+import { LabKidsView } from './components/LabKidsView';
+import { LabKidsSalesPage } from './components/LabKidsSalesPage';
 import { SalesLandingPage } from './components/SalesLandingPage';
 import { ThankYouPageView } from './components/ThankYouPageView';
 import { ColoringStudioModal } from './components/ColoringStudioModal';
@@ -160,6 +162,19 @@ export default function App() {
         ) {
           setActiveTab('thankyou');
         } else if (
+          path.includes('labkids-vendas') ||
+          path.includes('labkids-sales') ||
+          hash.includes('labkids-vendas') ||
+          hash.includes('labkids-sales') ||
+          hash.includes('oferta-labkids')
+        ) {
+          setActiveTab('labkids-sales');
+        } else if (
+          path.includes('labkids') ||
+          hash.includes('labkids')
+        ) {
+          setActiveTab('labkids');
+        } else if (
           path.includes('app') ||
           path.includes('dashboard') ||
           path.includes('plataforma') ||
@@ -217,6 +232,7 @@ export default function App() {
   const [selectedCharacterModal, setSelectedCharacterModal] = useState<BiblicalCharacter | null>(null);
   const [selectedSeasonModal, setSelectedSeasonModal] = useState<Season | null>(null);
   const [isLoadingTransition, setIsLoadingTransition] = useState<boolean>(false);
+  const [bonusXp, setBonusXp] = useState<number>(0);
 
   // Bedtime
   const [bedtimeMinutesLeft, setBedtimeMinutesLeft] = useState<number | null>(null);
@@ -476,7 +492,7 @@ export default function App() {
         currentUser={currentUser}
         bedtimeActive={bedtimeMinutesLeft !== null}
         favoritesCount={favorites.length}
-        userXp={850 + favorites.length * 40}
+        userXp={850 + favorites.length * 40 + bonusXp}
       />
 
       {/* Main Content Viewport */}
@@ -605,6 +621,22 @@ export default function App() {
           </div>
         )}
 
+        {/* 5.1 NOVO CANAL LAB KIDS (CIÊNCIAS & DESCOBERTAS - 30 EPISÓDIOS) */}
+        {activeTab === 'labkids' && (
+          <div className="animate-fade-in">
+            <LabKidsView
+              currentUser={currentUser}
+              onOpenAuth={(mode = 'login') => {
+                setAuthModalMode(mode);
+                setIsAuthModalOpen(true);
+              }}
+              onAddXp={(amount) => {
+                setBonusXp((prev) => prev + amount);
+              }}
+            />
+          </div>
+        )}
+
         {/* 6. MINHA LISTA / FAVORITOS */}
         {activeTab === 'favorites' && (
           <FavoritesView
@@ -637,10 +669,18 @@ export default function App() {
           />
         )}
 
-        {/* 9. PÁGINA DE VENDAS & OFERTAS (LANDING PAGE DE ALTA CONVERSÃO) */}
+        {/* 9. PÁGINA DE VENDAS & OFERTAS (LANDING PAGE BÍBLICA) */}
         {activeTab === 'landing' && (
           <SalesLandingPage
             onEnterPlatform={() => setActiveTab('dashboard')}
+          />
+        )}
+
+        {/* 9.0 PÁGINA DE VENDAS DEDICADA LAB KIDS (30 AULAS DE CIÊNCIA & VSL) */}
+        {activeTab === 'labkids-sales' && (
+          <LabKidsSalesPage
+            onEnterPlatform={() => setActiveTab('labkids')}
+            onOpenBiblicalSales={() => setActiveTab('landing')}
           />
         )}
 

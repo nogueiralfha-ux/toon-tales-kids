@@ -29,7 +29,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { UserAccount } from '../services/authService';
 
-export type NavTab = 'dashboard' | 'catalog' | 'seasons' | 'characters' | 'heroes' | 'favorites' | 'profile' | 'parents' | 'landing' | 'player' | 'script' | 'soundboard' | 'quiz' | 'thankyou';
+export type NavTab = 'dashboard' | 'catalog' | 'seasons' | 'characters' | 'heroes' | 'labkids' | 'labkids-sales' | 'favorites' | 'profile' | 'parents' | 'landing' | 'player' | 'script' | 'soundboard' | 'quiz' | 'thankyou';
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -124,8 +124,24 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           </nav>
 
-          {/* Sales Action (Login & Assinar) */}
+          {/* Sales Action (LabKids, Plataforma, Login & Assinar) */}
           <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={() => onSelectTab('labkids-sales')}
+              className="px-3.5 py-2.5 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-brand font-black text-xs uppercase tracking-wider shadow-md shadow-purple-300 flex items-center gap-1.5 active:scale-95 transition-all ring-2 ring-purple-300"
+            >
+              <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
+              <span>🔬 Oferta LabKids</span>
+            </button>
+
+            <button
+              onClick={() => onSelectTab('dashboard')}
+              className="px-3.5 py-2.5 rounded-2xl bg-amber-100 hover:bg-orange-100 text-orange-700 font-brand font-black text-xs uppercase tracking-wider border border-orange-300 flex items-center gap-1.5 active:scale-95 transition-all"
+            >
+              <BookOpen className="w-4 h-4 text-orange-500" />
+              <span>Plataforma</span>
+            </button>
+
             {isAdmin ? (
               <button
                 onClick={onOpenAdmin}
@@ -254,6 +270,22 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Shield className="w-4 h-4 fill-current text-amber-300" />
             <span>Heróis da Fé</span>
+          </button>
+
+          <button
+            onClick={() => onSelectTab('labkids')}
+            className={`px-3 py-1.5 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 relative ${
+              activeTab === 'labkids'
+                ? 'bg-purple-600 text-white shadow-md shadow-purple-200 scale-105 ring-2 ring-purple-300'
+                : 'text-purple-700 hover:text-purple-950 hover:bg-purple-50'
+            }`}
+            title="LabKids: Laboratório de Ciências e Descobertas"
+          >
+            <Sparkles className="w-4 h-4 text-purple-500 animate-pulse" />
+            <span>🔬 LabKids</span>
+            <span className="px-1.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[9px] font-black uppercase shadow-sm">
+              30 Aulas
+            </span>
           </button>
 
           <button
@@ -495,6 +527,16 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           <Users className="w-5 h-5" />
           <span>Personagens</span>
+        </button>
+
+        <button
+          onClick={() => onSelectTab('labkids')}
+          className={`flex flex-col items-center gap-0.5 text-[10px] font-black font-brand ${
+            activeTab === 'labkids' ? 'text-purple-600 font-extrabold' : 'text-slate-500'
+          }`}
+        >
+          <Sparkles className="w-5 h-5 text-purple-500" />
+          <span>LabKids</span>
         </button>
 
         <button

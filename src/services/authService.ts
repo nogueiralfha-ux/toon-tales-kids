@@ -10,6 +10,7 @@ export interface KidProfile {
 }
 
 export type PlanType = 'vitalicio' | 'familiar' | 'pessoal' | 'degustacao';
+export type AppModule = 'biblical' | 'labkids' | 'school';
 
 export interface UserAccount {
   id: string;
@@ -20,6 +21,7 @@ export interface UserAccount {
   role: 'admin' | 'parent' | 'ambassador';
   plan: PlanType;
   planStatus: 'active' | 'pending' | 'expired';
+  unlockedModules?: AppModule[];
   createdAt: string;
   expiresAt?: string;
   kids: KidProfile[];
@@ -40,6 +42,7 @@ const MASTER_ADMIN: UserAccount = {
   role: 'admin',
   plan: 'vitalicio',
   planStatus: 'active',
+  unlockedModules: ['biblical', 'labkids', 'school'],
   createdAt: '2026-08-29T00:00:00.000Z',
   kids: [
     {
@@ -64,7 +67,7 @@ const MASTER_ADMIN: UserAccount = {
     },
   ],
   activeKidId: 'kid-default',
-  notes: 'Conta Mestre Principal Toon Tales Kids',
+  notes: 'Conta Mestre Principal Toon Tales Kids (Acesso Total a Todos os Módulos)',
 };
 
 // Initial demo users
@@ -78,6 +81,7 @@ const INITIAL_DEMO_USERS: UserAccount[] = [
     role: 'parent',
     plan: 'vitalicio',
     planStatus: 'active',
+    unlockedModules: ['biblical', 'labkids', 'school'],
     createdAt: '2026-08-28T14:30:00.000Z',
     kids: [
       {
@@ -101,6 +105,7 @@ const INITIAL_DEMO_USERS: UserAccount[] = [
     role: 'parent',
     plan: 'familiar',
     planStatus: 'active',
+    unlockedModules: ['biblical', 'labkids'],
     createdAt: '2026-08-29T10:15:00.000Z',
     kids: [
       {
@@ -127,10 +132,14 @@ export const authService = {
         return INITIAL_DEMO_USERS;
       }
       const users: UserAccount[] = JSON.parse(stored);
-      // Ensure admin exists
-      if (!users.some((u) => u.email.toLowerCase() === 'nogueiralfha@gmail.com')) {
+      // Ensure admin exists with all modules
+      const adminIdx = users.findIndex((u) => u.email.toLowerCase() === 'nogueiralfha@gmail.com');
+      if (adminIdx === -1) {
         users.push(MASTER_ADMIN);
         localStorage.setItem(STORAGE_USERS_KEY, JSON.stringify(users));
+      } else {
+        // Guarantee admin has all modules
+        users[adminIdx].unlockedModules = ['biblical', 'labkids', 'school'];
       }
       return users;
     } catch {
@@ -148,10 +157,13 @@ export const authService = {
     try {
       const stored = localStorage.getItem(STORAGE_CURRENT_USER_KEY);
       if (!stored) {
-        // Return default guest parent profile if not logged in
         return null;
       }
-      return JSON.parse(stored);
+      const user: UserAccount = JSON.parse(stored);
+      if (user.role === 'admin' || user.email.toLowerCase() === 'nogueiralfha@gmail.com') {
+        user.unlockedModules = ['biblical', 'labkids', 'school'];
+      }
+      return user;
     } catch {
       return null;
     }
@@ -160,11 +172,50 @@ export const authService = {
   setCurrentUser(user: UserAccount | null) {
     try {
       if (user) {
+        if (user.role === 'admin' || user.email.toLowerCase() === 'nogueiralfha@gmail.com') {
+          user.unlockedModules = ['biblical', 'labkids', 'school'];
+        }
         localStorage.setItem(STORAGE_CURRENT_USER_KEY, JSON.stringify(user));
       } else {
         localStorage.removeItem(STORAGE_CURRENT_USER_KEY);
       }
     } catch {}
+  },
+
+  hasModuleAccess(user: UserAccount | null, module: AppModule): boolean {
+    if (!user) return false;
+    if (user.role === 'admin' || user.email.toLowerCase() === 'nogueiralfha@gmail.com') return true;
+    if (user.plan === 'vitalicio') return true;
+    if (user.unlockedModules && user.unlockedModules.includes(module)) return true;
+    // Default fallback: If unlockedModules is undefined, default parent plan grants biblical
+    if (!user.unlockedModules && module === 'biblical') return true;
+    return false;
+  },
+
+  toggleUserModule(userId: string, module: AppModule) {
+    const users = this.getUsers();
+    const updated = users.map((u) => {
+      if (u.id === userId) {
+        const currentModules = u.unlockedModules || ['biblical'];
+        const hasMod = currentModules.includes(module);
+        const newMods = hasMod
+          ? currentModules.filter((m) => m !== module)
+          : [...currentModules, module];
+        return { ...u, unlockedModules: newMods };
+      }
+      return u;
+    });
+    this.saveUsers(updated);
+
+    const current = this.getCurrentUser();
+    if (current && current.id === userId) {
+      const currentModules = current.unlockedModules || ['biblical'];
+      const hasMod = currentModules.includes(module);
+      const newMods = hasMod
+        ? currentModules.filter((m) => m !== module)
+        : [...currentModules, module];
+      this.setCurrentUser({ ...current, unlockedModules: newMods });
+    }
   },
 
   login(email: string, password?: string): { success: boolean; user?: UserAccount; message?: string } {
@@ -204,6 +255,7 @@ export const authService = {
     kidName?: string;
     kidAge?: number;
     plan?: PlanType;
+    modules?: AppModule[];
   }): { success: boolean; user?: UserAccount; message?: string } {
     const cleanEmail = data.email.trim().toLowerCase();
     const users = this.getUsers();
@@ -233,6 +285,7 @@ export const authService = {
       role: 'parent',
       plan: data.plan || 'vitalicio',
       planStatus: 'active',
+      unlockedModules: data.modules || ['biblical', 'labkids'],
       createdAt: new Date().toISOString(),
       kids: [newKid],
       activeKidId: newKidId,

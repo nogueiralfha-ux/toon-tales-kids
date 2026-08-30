@@ -599,6 +599,51 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       <p className="text-[11px] text-slate-400">
                         Perfis infantis: {u.kids?.map((k) => `${k.name} (${k.age}a)`).join(', ') || 'Nenhum'}
                       </p>
+
+                      {/* Módulos Liberados (Toggles de Acesso) */}
+                      <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                        <button
+                          onClick={() => {
+                            authService.toggleUserModule(u.id, 'biblical');
+                            setUsers(authService.getUsers());
+                          }}
+                          className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase flex items-center gap-1 border transition-all ${
+                            u.unlockedModules?.includes('biblical') || u.plan === 'vitalicio' || u.role === 'admin'
+                              ? 'bg-amber-500/20 text-amber-300 border-amber-400/40'
+                              : 'bg-slate-900 text-slate-500 border-slate-700'
+                          }`}
+                        >
+                          📖 Bíblico {u.unlockedModules?.includes('biblical') || u.plan === 'vitalicio' || u.role === 'admin' ? '✓' : '🔒'}
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            authService.toggleUserModule(u.id, 'labkids');
+                            setUsers(authService.getUsers());
+                          }}
+                          className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase flex items-center gap-1 border transition-all ${
+                            u.unlockedModules?.includes('labkids') || u.plan === 'vitalicio' || u.role === 'admin'
+                              ? 'bg-purple-500/20 text-purple-300 border-purple-400/40'
+                              : 'bg-slate-900 text-slate-500 border-slate-700'
+                          }`}
+                        >
+                          🔬 LabKids {u.unlockedModules?.includes('labkids') || u.plan === 'vitalicio' || u.role === 'admin' ? '✓' : '🔒'}
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            authService.toggleUserModule(u.id, 'school');
+                            setUsers(authService.getUsers());
+                          }}
+                          className={`px-2.5 py-1 rounded-lg text-[10px] font-black uppercase flex items-center gap-1 border transition-all ${
+                            u.unlockedModules?.includes('school') || u.plan === 'vitalicio' || u.role === 'admin'
+                              ? 'bg-sky-500/20 text-sky-300 border-sky-400/40'
+                              : 'bg-slate-900 text-slate-500 border-slate-700'
+                          }`}
+                        >
+                          🎨 School {u.unlockedModules?.includes('school') || u.plan === 'vitalicio' || u.role === 'admin' ? '✓' : '🔒'}
+                        </button>
+                      </div>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2 shrink-0">

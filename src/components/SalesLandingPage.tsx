@@ -68,6 +68,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
   const [billingCycle, setBillingCycle] = useState<'annual' | 'monthly'>('annual');
   const [selectedCurrency, setSelectedCurrency] = useState<SupportedCurrency>('BRL');
   const [selectedPlan, setSelectedPlan] = useState<PlanType>('vitalicio');
+  const [modularPlanMode, setModularPlanMode] = useState<'pessoal' | 'familiar'>('pessoal');
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState<boolean>(false);
   const [checkoutSuccess, setCheckoutSuccess] = useState<boolean>(false);
   const [isVideoModalOpen, setIsVideoModalOpen] = useState<boolean>(false);
@@ -416,22 +417,64 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
           Troque os vídeos vazios da internet por superproduções cinematográficas em áudio 3D, personagens marcantes, histórias bíblicas inesquecíveis e valores eternos de fé e coragem.
         </p>
 
+        {/* 3 Hub Pillars Selector */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 max-w-4xl mx-auto pt-2">
+          <a
+            href="#personagens"
+            className="p-4 rounded-3xl bg-amber-500/10 hover:bg-amber-500/20 border-2 border-amber-400/50 text-left flex items-center gap-3.5 transition-all group shadow-xs"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center font-black text-2xl shadow-md group-hover:scale-110 transition-transform">
+              📖
+            </div>
+            <div>
+              <div className="font-brand font-black text-sm text-slate-900">1. Áudio Bíblico 3D</div>
+              <div className="text-xs text-amber-800 font-bold">34 Superproduções de Fé</div>
+            </div>
+          </a>
+
+          <a
+            href="#labkids"
+            className="p-4 rounded-3xl bg-purple-500/10 hover:bg-purple-500/20 border-2 border-purple-400/50 text-left flex items-center gap-3.5 transition-all group shadow-xs"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-purple-600 text-white flex items-center justify-center font-black text-2xl shadow-md group-hover:scale-110 transition-transform">
+              🔬
+            </div>
+            <div>
+              <div className="font-brand font-black text-sm text-slate-900">2. Canal Lab Kids</div>
+              <div className="text-xs text-purple-800 font-bold">30 Aulas de Ciências + XP</div>
+            </div>
+          </a>
+
+          <a
+            href="#atividades"
+            className="p-4 rounded-3xl bg-emerald-500/10 hover:bg-emerald-500/20 border-2 border-emerald-400/50 text-left flex items-center gap-3.5 transition-all group shadow-xs"
+          >
+            <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-black text-2xl shadow-md group-hover:scale-110 transition-transform">
+              🎨
+            </div>
+            <div>
+              <div className="font-brand font-black text-sm text-slate-900">3. Kit 100 Atividades</div>
+              <div className="text-xs text-emerald-800 font-bold">Estúdio 3D + PDFs A4</div>
+            </div>
+          </a>
+        </div>
+
         {/* Trust Highlights */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 pt-1 text-xs font-bold text-slate-700">
           <span className="px-3.5 py-1.5 rounded-2xl bg-white border border-amber-200 shadow-2xs flex items-center gap-1.5">
             🌎 <strong>Trilíngue no Vitalício (PT • EN • ES)</strong>
           </span>
           <span className="px-3.5 py-1.5 rounded-2xl bg-white border border-amber-200 shadow-2xs flex items-center gap-1.5">
-            ⭐ <strong>34 Episódios Prontos</strong>
+            ⭐ <strong>34 Episódios Bíblicos</strong>
+          </span>
+          <span className="px-3.5 py-1.5 rounded-2xl bg-white border border-purple-200 shadow-2xs flex items-center gap-1.5">
+            🔬 <strong>30 Vídeos Lab Kids</strong>
+          </span>
+          <span className="px-3.5 py-1.5 rounded-2xl bg-white border border-emerald-200 shadow-2xs flex items-center gap-1.5">
+            🎨 <strong>100 Atividades A4</strong>
           </span>
           <span className="px-3.5 py-1.5 rounded-2xl bg-white border border-amber-200 shadow-2xs flex items-center gap-1.5">
             🛡️ <strong>100% Sem Anúncios</strong>
-          </span>
-          <span className="px-3.5 py-1.5 rounded-2xl bg-white border border-amber-200 shadow-2xs flex items-center gap-1.5">
-            💤 <strong>Modo Hora de Dormir</strong>
-          </span>
-          <span className="px-3.5 py-1.5 rounded-2xl bg-white border border-amber-200 shadow-2xs flex items-center gap-1.5">
-            🎨 <strong>Pintura Online + PDF (Todos os Planos)</strong>
           </span>
         </div>
       </div>
@@ -1221,7 +1264,131 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
         </div>
       </section>
 
-      {/* 11. PRICING & PLANS TABLE */}
+      {/* ------------------------------------------------------------- */}
+      {/* 10.1 VITRINE 2: 🔬 CANAL LAB KIDS (O LABORATÓRIO DE CIÊNCIAS) */}
+      {/* ------------------------------------------------------------- */}
+      <section id="labkids" className="bg-gradient-to-br from-purple-950 via-indigo-950 to-slate-950 text-white rounded-[36px] p-8 sm:p-12 lg:p-14 border-4 border-purple-400/50 shadow-2xl space-y-8 relative overflow-hidden scroll-mt-20">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 space-y-5">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/30 text-purple-300 border border-purple-400/40 text-xs font-black uppercase tracking-wider font-brand">
+              <Sparkles className="w-4 h-4 text-purple-300 animate-spin" />
+              Universo 2 • Canal de Ciência & Descobertas
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-brand tracking-tight text-white leading-tight">
+              🔬 Lab Kids: Aprender Ciência Nunca Foi Tão Divertido!
+            </h2>
+
+            <p className="text-sm sm:text-base text-purple-100 leading-relaxed">
+              <strong>30 Episódios Animados em Full HD</strong> com dublagem profissional que ensinam os segredos da natureza, o corpo humano, vulcões, espaço sideral, tecnologia e o universo de forma segura e fascinante para as crianças.
+            </p>
+
+            {/* 4 Feature Tags */}
+            <div className="grid grid-cols-2 gap-3 text-xs font-bold text-slate-200">
+              <div className="p-3 rounded-2xl bg-white/10 border border-white/15 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>30 Vídeos em Full HD</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-white/10 border border-white/15 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>5 Trilhas Científicas</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-white/10 border border-white/15 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>90 Quizzes do Cientista</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-white/10 border border-white/15 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Zero Anúncios e Distrações</span>
+              </div>
+            </div>
+
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <a
+                href="#planos"
+                className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-400 hover:to-indigo-400 text-white font-black text-xs sm:text-sm font-brand uppercase tracking-wider shadow-lg shadow-purple-500/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
+              >
+                <Sparkles className="w-4 h-4" />
+                <span>Garantir o Lab Kids no Combo VIP</span>
+              </a>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 flex items-center justify-center">
+            <div className="w-full max-w-sm rounded-3xl overflow-hidden border-4 border-purple-400 shadow-2xl bg-slate-900 group">
+              <img
+                src="/labkids/branding/Labkids mockup portugues.webp"
+                alt="Lab Kids Mockup"
+                className="w-full h-auto object-contain group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 10.2 VITRINE 3: 🎨 KIT 100 ATIVIDADES & ESTÚDIO DE PINTURA   */}
+      {/* ------------------------------------------------------------- */}
+      <section id="atividades" className="bg-gradient-to-br from-emerald-950 via-teal-950 to-slate-950 text-white rounded-[36px] p-8 sm:p-12 lg:p-14 border-4 border-emerald-400/50 shadow-2xl space-y-8 relative overflow-hidden scroll-mt-20">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-5 flex items-center justify-center order-2 lg:order-1">
+            <div className="w-full max-w-sm rounded-3xl overflow-hidden border-4 border-emerald-400 shadow-2xl bg-slate-900 group">
+              <img
+                src="/activities-kit-mockup.jpg"
+                alt="Kit 100 Atividades Mockup"
+                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 space-y-5 order-1 lg:order-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 text-xs font-black uppercase tracking-wider font-brand">
+              <Sparkles className="w-4 h-4 text-emerald-300 animate-spin" />
+              Universo 3 • Criatividade Fora da Tela
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-brand tracking-tight text-white leading-tight">
+              🎨 Kit 100 Atividades & Estúdio de Pintura 3D
+            </h2>
+
+            <p className="text-sm sm:text-base text-emerald-100 leading-relaxed">
+              Tire seu filho do excesso de telas com <strong>cadernos pedagógicos completos prontos para imprimir em folha A4</strong> com caça-palavras, labirintos, desenhos dos heróis da fé, animais da arca e experimentos científicos para colorir com lápis de cor!
+            </p>
+
+            {/* 4 Feature Tags */}
+            <div className="grid grid-cols-2 gap-3 text-xs font-bold text-slate-200">
+              <div className="p-3 rounded-2xl bg-white/10 border border-white/15 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>100 Folhas em PDF A4 Prontas</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-white/10 border border-white/15 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Estúdio de Pintura Online no App</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-white/10 border border-white/15 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Labirintos e Caça-Palavras</span>
+              </div>
+              <div className="p-3 rounded-2xl bg-white/10 border border-white/15 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Desenvolvimento Motor e Lógico</span>
+              </div>
+            </div>
+
+            <div className="pt-2 flex flex-wrap items-center gap-3">
+              <button
+                onClick={() => setIsColoringModalOpen(true)}
+                className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-black text-xs sm:text-sm font-brand uppercase tracking-wider shadow-lg shadow-emerald-500/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-2"
+              >
+                <Palette className="w-4 h-4" />
+                <span>Experimentar Estúdio de Pintura</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 11. PRICING & PLANS TABLE (HUB 3 EM 1) */}
       <section id="planos" className="space-y-8 scroll-mt-20">
         <div className="text-center space-y-3 max-w-3xl mx-auto">
           <span className="px-3.5 py-1 rounded-full bg-orange-100 text-orange-700 text-xs font-black uppercase tracking-wider font-brand">
@@ -1494,8 +1661,11 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 <li className="flex items-center gap-2 text-indigo-300 font-bold">
                   <Sparkles className="w-4 h-4 text-indigo-400 shrink-0" /> <strong>Criação de Histórias com IA sem Expiração</strong>
                 </li>
+                <li className="flex items-center gap-2 text-purple-300 font-bold">
+                  <Sparkles className="w-4 h-4 text-purple-400 shrink-0" /> <strong>Canal Lab Kids Incluso (30 Aulas de Ciências + 90 Quizzes)</strong>
+                </li>
                 <li className="flex items-center gap-2 text-emerald-300 font-bold">
-                  <Palette className="w-4 h-4 text-emerald-400 shrink-0" /> <strong>Estúdio de Pintura 3D + Cadernos P&B para Imprimir</strong>
+                  <Palette className="w-4 h-4 text-emerald-400 shrink-0" /> <strong>Estúdio de Pintura 3D + Kit 100 Atividades em PDF A4</strong>
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-amber-400" /> Perfis Familiares Ilimitados para a Casa
@@ -1514,6 +1684,147 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
             </button>
           </div>
 
+        </div>
+
+        {/* 11.1 MATRIZ DE PRODUTOS AVULSOS VS COMBO VIP (ESTILO NETFLIX HUB) */}
+        <div className="mt-10 bg-slate-950 border-4 border-amber-400 rounded-[32px] p-6 sm:p-8 text-white max-w-5xl mx-auto space-y-6 shadow-2xl">
+          <div className="text-center space-y-2">
+            <span className="px-3.5 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-black uppercase font-brand border border-amber-400/30">
+              ⚡ Opções Modulares • Estilo Netflix
+            </span>
+            <h3 className="text-xl sm:text-2xl font-black font-brand text-white">
+              Tabela de Planos Mensais & Combos VIP
+            </h3>
+            <p className="text-xs text-slate-300 max-w-2xl mx-auto">
+              Escolha a quantidade de perfis infantis e compare os módulos avulsos com os Super Combos VIP Tudo Campeão:
+            </p>
+
+            {/* Selector: Pessoal (1 Filho) vs Familiar (3 Filhos) */}
+            <div className="inline-flex items-center p-1.5 rounded-2xl bg-slate-900 border-2 border-amber-400/60 shadow-inner mt-2">
+              <button
+                onClick={() => setModularPlanMode('pessoal')}
+                className={`px-5 py-2 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 ${
+                  modularPlanMode === 'pessoal'
+                    ? 'bg-amber-400 text-slate-950 shadow-md scale-105'
+                    : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                <User className="w-3.5 h-3.5" />
+                <span>Plano Pessoal (1 Filho)</span>
+              </button>
+
+              <button
+                onClick={() => setModularPlanMode('familiar')}
+                className={`px-5 py-2 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 ${
+                  modularPlanMode === 'familiar'
+                    ? 'bg-amber-400 text-slate-950 shadow-md scale-105'
+                    : 'text-slate-300 hover:text-white'
+                }`}
+              >
+                <Users className="w-3.5 h-3.5" />
+                <span>Plano Familiar (3 Filhos)</span>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+            {/* Produto 1: Só Bíblico */}
+            <div className="p-5 rounded-2xl bg-slate-900 border border-slate-700 flex flex-col justify-between space-y-4">
+              <div className="space-y-2">
+                <span className="text-3xl">📖</span>
+                <h4 className="font-brand font-black text-sm text-white">
+                  Só Áudio Bíblico 3D ({modularPlanMode === 'pessoal' ? '1 Filho' : '3 Filhos'})
+                </h4>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  34 histórias bíblicas em áudio 3D, 5 temporadas, quizzes e galeria 3D dos Heróis da Fé.
+                </p>
+                <div className="text-xl font-black text-amber-400 font-brand">
+                  {modularPlanMode === 'pessoal' ? 'R$ 49,90' : 'R$ 97,90'}{' '}
+                  <span className="text-[10px] text-slate-400 font-normal">/ mês</span>
+                </div>
+              </div>
+              <button
+                onClick={() => handleCheckout(modularPlanMode === 'pessoal' ? 'pessoal_mensal' : 'familiar_mensal')}
+                className="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs uppercase font-brand transition-all"
+              >
+                Assinar Só Bíblico
+              </button>
+            </div>
+
+            {/* Produto 2: Só Lab Kids */}
+            <div className="p-5 rounded-2xl bg-slate-900 border border-purple-500/40 flex flex-col justify-between space-y-4">
+              <div className="space-y-2">
+                <span className="text-3xl">🔬</span>
+                <h4 className="font-brand font-black text-sm text-white">
+                  Só Canal Lab Kids ({modularPlanMode === 'pessoal' ? '1 Filho' : '3 Filhos'})
+                </h4>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  30 episódios de ciências, 5 trilhas vivas e 90 quizzes com ganho de XP.
+                </p>
+                <div className="text-xl font-black text-purple-400 font-brand">
+                  {modularPlanMode === 'pessoal' ? 'R$ 37,00' : 'R$ 79,00'}{' '}
+                  <span className="text-[10px] text-slate-400 font-normal">/ mês</span>
+                </div>
+              </div>
+              <button
+                onClick={() => handleCheckout(modularPlanMode === 'pessoal' ? 'pessoal_mensal' : 'familiar_mensal')}
+                className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase font-brand transition-all"
+              >
+                Assinar Só Lab Kids
+              </button>
+            </div>
+
+            {/* Produto 3: Só 100 Atividades */}
+            <div className="p-5 rounded-2xl bg-slate-900 border border-emerald-500/40 flex flex-col justify-between space-y-4">
+              <div className="space-y-2">
+                <span className="text-3xl">🎨</span>
+                <h4 className="font-brand font-black text-sm text-white">Kit 100 Atividades</h4>
+                <p className="text-[11px] text-slate-300 leading-relaxed">
+                  Cadernos em PDF A4 para imprimir + Estúdio de Pintura 3D no App.
+                </p>
+                <div className="text-xl font-black text-emerald-400 font-brand">
+                  R$ 27,90 <span className="text-[10px] text-slate-400 font-normal">taxa única</span>
+                </div>
+              </div>
+              <button
+                onClick={() => handleCheckout('vitalicio')}
+                className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase font-brand transition-all"
+              >
+                Comprar Atividades (R$ 27,90)
+              </button>
+            </div>
+
+            {/* Produto 4: COMBO VIP TUDO CAMPEÃO */}
+            <div className="p-5 rounded-2xl bg-gradient-to-b from-amber-500/20 to-purple-500/20 border-2 border-amber-400 flex flex-col justify-between space-y-4 relative">
+              <div className="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-brand font-black text-[9px] uppercase shadow-sm">
+                ⭐ CAMPEÃO MENSAL
+              </div>
+              <div className="space-y-2">
+                <span className="text-3xl">👑</span>
+                <h4 className="font-brand font-black text-sm text-amber-300">
+                  COMBO VIP TUDO ({modularPlanMode === 'pessoal' ? '1 Filho' : '3 Filhos'})
+                </h4>
+                <p className="text-[11px] text-slate-200 leading-relaxed">
+                  Bíblico + Lab Kids + Kit 100 Atividades + Estúdio 3D + Bônus!
+                </p>
+                <div className="text-2xl font-black text-amber-400 font-brand">
+                  {modularPlanMode === 'pessoal' ? 'R$ 97,90' : 'R$ 147,90'}{' '}
+                  <span className="text-[10px] text-slate-400 font-normal">/ mês</span>
+                </div>
+                <div className="text-[10px] text-emerald-400 font-bold">
+                  {modularPlanMode === 'pessoal'
+                    ? 'Ou Anual por R$ 970,90 / ano'
+                    : 'Ou Anual por R$ 1.670,00 / ano'}
+                </div>
+              </div>
+              <button
+                onClick={() => handleCheckout(modularPlanMode === 'pessoal' ? 'pessoal_anual' : 'familiar_anual')}
+                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs uppercase shadow-md transition-all font-brand"
+              >
+                Garantir Combo VIP
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* SPECIAL ORDER BUMP / STANDALONE OFFER: KIT 100 ATIVIDADES BÍBLICAS */}
