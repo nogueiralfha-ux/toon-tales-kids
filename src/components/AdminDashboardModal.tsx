@@ -1137,6 +1137,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       </pre>
                     </div>
                   )}
+                </div>
+              </div>
             </div>
           )}
 
