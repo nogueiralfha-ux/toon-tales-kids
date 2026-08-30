@@ -44,6 +44,80 @@ interface AdminDashboardModalProps {
   onLogoutAdmin: () => void;
 }
 
+export interface BiblicalPreset {
+  id: string;
+  name: string;
+  theme: string;
+  title: string;
+  subtitle: string;
+  verseRef: string;
+  verseText: string;
+  defaultPrompt: string;
+}
+
+export const BIBLICAL_PRESETS: BiblicalPreset[] = [
+  {
+    id: 'samson',
+    name: '💪 Sansão',
+    theme: 'Sansão com cabelos longos empurrando as colunas de pedra do templo dos filisteus, herói bíblico de fé e coragem',
+    title: 'Sansão: A Força que Vem do Senhor',
+    subtitle: 'Pinte o herói bíblico e lembre-se que Deus é a nossa verdadeira força!',
+    verseRef: 'Juízes 16:28',
+    verseText: 'Ó Soberano Senhor, lembra-te de mim! Dá-me forças uma vez mais!',
+    defaultPrompt: 'Coloring book page for kids, black and white line art, clear thick outlines, white background, no shading, Samson pushing temple stone pillars',
+  },
+  {
+    id: 'david',
+    name: '🛡️ Davi e Golias',
+    theme: 'Davi pequeno com uma funda e cajado enfrentando o gigante Golias de armadura, vitória da fé sobre o medo',
+    title: 'Davi e o Gigante Golias',
+    subtitle: 'Pinte o pequeno pastor de ovelhas que confiou no Senhor!',
+    verseRef: '1 Samuel 17:45',
+    verseText: 'Tu vens a mim com espada e lança, mas eu vou a ti em nome do Senhor dos Exércitos!',
+    defaultPrompt: 'Coloring book page for kids, black and white line art, clear thick outlines, white background, no shading, little David with sling and giant Goliath',
+  },
+  {
+    id: 'noah',
+    name: '🚢 Arca de Noé',
+    theme: 'A grande Arca de Noé flutuando sobre as águas com arco-íris no céu e animais como leões, girafas e pombinha branca',
+    title: 'Noé e a Arca da Aliança',
+    subtitle: 'Pinte a arca de madeira e os animais salvos pelo amor de Deus!',
+    verseRef: 'Gênesis 9:13',
+    verseText: 'Pus o meu arco nas nuvens como sinal da aliança entre mim e a terra.',
+    defaultPrompt: 'Coloring book page for kids, black and white line art, clear thick outlines, white background, no shading, Noah ark with animals and rainbow in the sky',
+  },
+  {
+    id: 'daniel',
+    name: '🦁 Daniel na Cova',
+    theme: 'Daniel orando tranquilamente na cova cercado por leões mansos que estão dormindo sob a luz dos anjos de Deus',
+    title: 'Daniel na Cova dos Leões',
+    subtitle: 'Pinte Daniel orando em paz junto aos leões guardados por Deus!',
+    verseRef: 'Daniel 6:22',
+    verseText: 'O meu Deus enviou o seu anjo e fechou a boca dos leões para que não me fizessem mal.',
+    defaultPrompt: 'Coloring book page for kids, black and white line art, clear thick outlines, white background, no shading, Daniel praying in lions den with friendly sleeping lions',
+  },
+  {
+    id: 'esther',
+    name: '👑 Rainha Ester',
+    theme: 'A Rainha Ester no palácio dourado com coroa e pergaminho intercedendo com graça pelo seu povo',
+    title: 'Rainha Ester: Coragem e Sabedoria',
+    subtitle: 'Pinte a nobre rainha que salvou o povo de Deus!',
+    verseRef: 'Ester 4:14',
+    verseText: 'Quem sabe se não foi para um momento como este que você chegou à posição de rainha?',
+    defaultPrompt: 'Coloring book page for kids, black and white line art, clear thick outlines, white background, no shading, Queen Esther with crown and royal dress',
+  },
+  {
+    id: 'moses',
+    name: '🌊 Mar Vermelho',
+    theme: 'Moisés estendendo o cajado no Mar Vermelho que se abre em duas grandes muralhas de água para o povo passar',
+    title: 'Moisés e o Milagre do Mar Vermelho',
+    subtitle: 'Pinte as águas se abrindo e o povo caminhando em terra seca!',
+    verseRef: 'Êxodo 14:21',
+    verseText: 'O Senhor afastou o mar com um forte vento oriental e transformou o mar em terra seca.',
+    defaultPrompt: 'Coloring book page for kids, black and white line art, clear thick outlines, white background, no shading, Moses parting the Red Sea with wooden staff',
+  },
+];
+
 export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   isOpen,
   onClose,
@@ -92,16 +166,19 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const [storyError, setStoryError] = useState<string | null>(null);
 
   // PDF & Coloring Factory State
-  const [pdfTheme, setPdfTheme] = useState<string>('Sansão com cabelos longos empurrando as colunas de pedra do templo, herói bíblico vitorioso');
+  const [selectedPresetId, setSelectedPresetId] = useState<string>('samson');
+  const [pdfTheme, setPdfTheme] = useState<string>(BIBLICAL_PRESETS[0].theme);
   const [pdfType, setPdfType] = useState<'line_art' | '3d_pixar'>('line_art');
-  const [pdfTitle, setPdfTitle] = useState<string>('Sansão: A Força que Vem do Senhor');
-  const [pdfSubtitle, setPdfSubtitle] = useState<string>('Pinte o herói bíblico e lembre-se que Deus é a nossa verdadeira força!');
-  const [pdfVerseRef, setPdfVerseRef] = useState<string>('Juízes 16:28');
-  const [pdfVerseText, setPdfVerseText] = useState<string>('Ó Soberano Senhor, lembra-te de mim! Dá-me forças uma vez mais!');
+  const [pdfTitle, setPdfTitle] = useState<string>(BIBLICAL_PRESETS[0].title);
+  const [pdfSubtitle, setPdfSubtitle] = useState<string>(BIBLICAL_PRESETS[0].subtitle);
+  const [pdfVerseRef, setPdfVerseRef] = useState<string>(BIBLICAL_PRESETS[0].verseRef);
+  const [pdfVerseText, setPdfVerseText] = useState<string>(BIBLICAL_PRESETS[0].verseText);
   const [pdfPageNum, setPdfPageNum] = useState<number>(101);
   const [isGeneratingPdfArt, setIsGeneratingPdfArt] = useState<boolean>(false);
+  const [isPdfImageLoading, setIsPdfImageLoading] = useState<boolean>(false);
+  const [hasPdfImageError, setHasPdfImageError] = useState<boolean>(false);
   const [pdfArtUrl, setPdfArtUrl] = useState<string>(() =>
-    aiProductionService.getGeneratedImageUrl('Samson with long hair pushing temple stone pillars, biblical hero', 'line_art')
+    aiProductionService.getGeneratedImageUrl(BIBLICAL_PRESETS[0].theme, 'line_art')
   );
 
   const loadData = () => {
@@ -189,13 +266,28 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
     }
   };
 
+  const handleSelectPreset = (preset: BiblicalPreset) => {
+    setSelectedPresetId(preset.id);
+    setPdfTheme(preset.theme);
+    setPdfTitle(preset.title);
+    setPdfSubtitle(preset.subtitle);
+    setPdfVerseRef(preset.verseRef);
+    setPdfVerseText(preset.verseText);
+    setIsPdfImageLoading(true);
+    setHasPdfImageError(false);
+    const url = aiProductionService.getGeneratedImageUrl(preset.theme, pdfType);
+    setPdfArtUrl(url);
+  };
+
   const handleGeneratePdfArt = () => {
     setIsGeneratingPdfArt(true);
+    setIsPdfImageLoading(true);
+    setHasPdfImageError(false);
     try {
       const url = aiProductionService.getGeneratedImageUrl(pdfTheme, pdfType);
       setPdfArtUrl(url);
     } finally {
-      setTimeout(() => setIsGeneratingPdfArt(false), 600);
+      setTimeout(() => setIsGeneratingPdfArt(false), 500);
     }
   };
 
@@ -1176,21 +1268,47 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                 {/* Left Controls Column */}
                 <div className="lg:col-span-5 space-y-4 bg-slate-950/80 p-5 rounded-3xl border border-slate-800">
-                  <h4 className="font-brand font-black text-xs text-amber-300 uppercase tracking-wider flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                    1. Configurar Nova Página
-                  </h4>
+                  <div className="flex items-center justify-between">
+                    <h4 className="font-brand font-black text-xs text-amber-300 uppercase tracking-wider flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      1. Escolher Modelo ou Criar Novo
+                    </h4>
+                    <span className="text-[10px] text-emerald-400 font-bold">100% Grátis</span>
+                  </div>
 
-                  <div className="space-y-3 text-xs">
+                  {/* 1-Click Preset Buttons */}
+                  <div className="space-y-1.5">
+                    <label className="block text-slate-300 font-bold text-xs">
+                      Modelos Bíblicos Prontos (1 Clique):
+                    </label>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+                      {BIBLICAL_PRESETS.map((p) => (
+                        <button
+                          key={p.id}
+                          type="button"
+                          onClick={() => handleSelectPreset(p)}
+                          className={`px-2.5 py-2 rounded-xl text-left border text-xs font-brand transition-all flex items-center gap-1.5 ${
+                            selectedPresetId === p.id
+                              ? 'bg-amber-400 text-slate-950 font-black shadow-md border-amber-300 scale-102'
+                              : 'bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700'
+                          }`}
+                        >
+                          <span className="truncate">{p.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 text-xs pt-1 border-t border-slate-800">
                     <div>
                       <label className="block text-slate-300 font-bold mb-1">
-                        Tema da Cena Bíblica (Comando para IA):
+                        Comando Personalizado para a IA:
                       </label>
                       <textarea
-                        rows={3}
+                        rows={2}
                         value={pdfTheme}
                         onChange={(e) => setPdfTheme(e.target.value)}
-                        placeholder="Ex: Moisés estendendo o cajado e abrindo o Mar Vermelho, peixes e paredes de água"
+                        placeholder="Ex: Sansão derrubando os pilares do templo, herói bíblico corajoso"
                         className="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400 resize-none"
                       />
                     </div>
@@ -1202,7 +1320,11 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       <div className="grid grid-cols-2 gap-2">
                         <button
                           type="button"
-                          onClick={() => setPdfType('line_art')}
+                          onClick={() => {
+                            setPdfType('line_art');
+                            setIsPdfImageLoading(true);
+                            setPdfArtUrl(aiProductionService.getGeneratedImageUrl(pdfTheme, 'line_art'));
+                          }}
                           className={`p-2.5 rounded-xl text-left border transition-all ${
                             pdfType === 'line_art'
                               ? 'bg-amber-400/20 border-amber-400 text-amber-300 font-black'
@@ -1210,12 +1332,16 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                           }`}
                         >
                           <span className="block font-brand text-xs">🎨 Line Art P&B</span>
-                          <span className="text-[10px] opacity-80">Desenho para colorir</span>
+                          <span className="text-[10px] opacity-80">Contorno para colorir</span>
                         </button>
 
                         <button
                           type="button"
-                          onClick={() => setPdfType('3d_pixar')}
+                          onClick={() => {
+                            setPdfType('3d_pixar');
+                            setIsPdfImageLoading(true);
+                            setPdfArtUrl(aiProductionService.getGeneratedImageUrl(pdfTheme, '3d_pixar'));
+                          }}
                           className={`p-2.5 rounded-xl text-left border transition-all ${
                             pdfType === '3d_pixar'
                               ? 'bg-amber-400/20 border-amber-400 text-amber-300 font-black'
@@ -1283,15 +1409,15 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                     <button
                       type="button"
                       onClick={handleGeneratePdfArt}
-                      disabled={isGeneratingPdfArt}
+                      disabled={isGeneratingPdfArt || isPdfImageLoading}
                       className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 disabled:opacity-50 text-slate-950 font-black font-brand text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all mt-2"
                     >
-                      {isGeneratingPdfArt ? (
+                      {isGeneratingPdfArt || isPdfImageLoading ? (
                         <RefreshCw className="w-4 h-4 animate-spin" />
                       ) : (
                         <Sparkles className="w-4 h-4" />
                       )}
-                      <span>{isGeneratingPdfArt ? 'Gerando Desenho com IA...' : '✨ Gerar Nova Arte com IA (Custo $0)'}</span>
+                      <span>{isGeneratingPdfArt || isPdfImageLoading ? 'Gerando Desenho com IA...' : '✨ Gerar Nova Arte com IA (Custo $0)'}</span>
                     </button>
                   </div>
                 </div>
@@ -1310,12 +1436,12 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       className="text-xs text-sky-400 hover:underline flex items-center gap-1 font-bold"
                     >
                       <Download className="w-3.5 h-3.5" />
-                      <span>Abrir Imagem Original</span>
+                      <span>Abrir Imagem em Nova Aba</span>
                     </a>
                   </div>
 
                   {/* The A4 Printable Paper */}
-                  <div className="bg-white border-4 border-slate-900 rounded-2xl p-6 sm:p-8 shadow-2xl text-slate-900 font-sans space-y-4 min-h-[560px] flex flex-col justify-between">
+                  <div className="bg-white border-4 border-slate-900 rounded-2xl p-6 sm:p-8 shadow-2xl text-slate-900 font-sans space-y-4 min-h-[560px] flex flex-col justify-between relative">
                     {/* Header */}
                     <div className="border-b-2 border-slate-900 pb-2.5 flex items-center justify-between">
                       <span className="text-xs font-black font-brand tracking-wider text-slate-900">
@@ -1336,13 +1462,52 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       </p>
                     </div>
 
-                    {/* Image Area */}
-                    <div className="flex-1 min-h-[280px] max-h-[360px] flex items-center justify-center p-2 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50/60 overflow-hidden">
-                      <img
-                        src={pdfArtUrl}
-                        alt={pdfTitle}
-                        className="max-h-[340px] w-auto object-contain mx-auto transition-all"
-                      />
+                    {/* Image Area with Robust Loading & Fallback */}
+                    <div className="relative flex-1 min-h-[280px] max-h-[360px] flex items-center justify-center p-3 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50/60 overflow-hidden">
+                      {isPdfImageLoading && (
+                        <div className="absolute inset-0 bg-white/95 backdrop-blur-xs flex flex-col items-center justify-center gap-2 z-10">
+                          <RefreshCw className="w-8 h-8 text-orange-500 animate-spin" />
+                          <span className="text-xs font-black text-slate-800 font-brand">Desenhando traços com IA...</span>
+                          <span className="text-[10px] text-slate-500">Isso leva apenas alguns segundos</span>
+                        </div>
+                      )}
+
+                      {hasPdfImageError ? (
+                        <div className="text-center p-4 space-y-3">
+                          <div className="w-32 h-32 mx-auto border-2 border-slate-900 rounded-2xl bg-white flex items-center justify-center shadow-inner">
+                            <Palette className="w-16 h-16 text-slate-800" />
+                          </div>
+                          <div>
+                            <p className="text-xs font-black text-slate-900 font-brand">
+                              {pdfTitle} (Line Art Oficial)
+                            </p>
+                            <p className="text-[11px] text-slate-500">
+                              Clique para tentar recarregar ou escolha outro modelo
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={handleGeneratePdfArt}
+                            className="px-4 py-2 bg-gradient-to-r from-amber-400 to-orange-400 text-slate-950 text-xs font-black font-brand uppercase rounded-xl shadow-md active:scale-95 transition-all"
+                          >
+                            🔄 Recarregar Desenho
+                          </button>
+                        </div>
+                      ) : (
+                        <img
+                          src={pdfArtUrl}
+                          alt={pdfTitle}
+                          onLoad={() => {
+                            setIsPdfImageLoading(false);
+                            setHasPdfImageError(false);
+                          }}
+                          onError={() => {
+                            setIsPdfImageLoading(false);
+                            setHasPdfImageError(true);
+                          }}
+                          className="max-h-[340px] w-auto object-contain mx-auto transition-all duration-300"
+                        />
+                      )}
                     </div>
 
                     {/* Verse Box */}
