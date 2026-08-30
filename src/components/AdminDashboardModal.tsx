@@ -72,6 +72,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const [testSpeechText, setTestSpeechText] = useState<string>(
     'Bem-vindos ao Toon Tales Kids! Histórias bíblicas em áudio 3D que ensinam valores eternos!'
   );
+  const [testTtsProvider, setTestTtsProvider] = useState<'openai' | 'elevenlabs'>('openai');
   const [testSpeechVoice, setTestSpeechVoice] = useState<'nova' | 'onyx' | 'echo' | 'fable' | 'shimmer'>('nova');
   const [isGeneratingVoice, setIsGeneratingVoice] = useState<boolean>(false);
   const [voiceAudioUrl, setVoiceAudioUrl] = useState<string | null>(null);
@@ -136,7 +137,12 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
     setVoiceError(null);
     setVoiceAudioUrl(null);
     try {
-      const url = await aiProductionService.synthesizeSpeechOpenAi(testSpeechText, testSpeechVoice);
+      let url = '';
+      if (testTtsProvider === 'elevenlabs') {
+        url = await aiProductionService.synthesizeSpeechElevenLabs(testSpeechText);
+      } else {
+        url = await aiProductionService.synthesizeSpeechOpenAi(testSpeechText, testSpeechVoice);
+      }
       setVoiceAudioUrl(url);
       const audio = new Audio(url);
       audio.play();
@@ -950,12 +956,35 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
 
                 {/* Live Audio Synthesis Test Lab */}
                 <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <h5 className="font-brand font-black text-xs text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
                       <Headphones className="w-4 h-4" />
-                      Laboratório de Teste de Áudio OpenAI TTS (Custo: $0,015 / 1k)
+                      Laboratório de Teste de Áudio ({testTtsProvider === 'openai' ? 'OpenAI TTS - $0,015/1k' : 'ElevenLabs'})
                     </h5>
-                    <span className="text-[10px] text-slate-400">Qualidade de Estúdio 24kHz</span>
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => setTestTtsProvider('openai')}
+                        className={`px-2.5 py-1 rounded-lg text-[10px] font-bold font-brand transition-all ${
+                          testTtsProvider === 'openai'
+                            ? 'bg-amber-400 text-slate-950 shadow-sm'
+                            : 'bg-slate-800 text-slate-400 hover:text-white'
+                        }`}
+                      >
+                        OpenAI TTS (Recomendado)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setTestTtsProvider('elevenlabs')}
+                        className={`px-2.5 py-1 rounded-lg text-[10px] font-bold font-brand transition-all ${
+                          testTtsProvider === 'elevenlabs'
+                            ? 'bg-purple-500 text-white shadow-sm'
+                            : 'bg-slate-800 text-slate-400 hover:text-white'
+                        }`}
+                      >
+                        ElevenLabs
+                      </button>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -970,23 +999,29 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                     </div>
 
                     <div className="flex gap-2">
-                      <select
-                        value={testSpeechVoice}
-                        onChange={(e: any) => setTestSpeechVoice(e.target.value)}
-                        className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs font-bold focus:outline-none focus:border-amber-400"
-                      >
-                        <option value="nova">Nova (Narradora Infantil)</option>
-                        <option value="onyx">Onyx (Voz de Deus / Solene)</option>
-                        <option value="echo">Echo (Davi / Menino Valente)</option>
-                        <option value="shimmer">Shimmer (Rainha Ester)</option>
-                        <option value="fable">Fable (Noé / Patriarca)</option>
-                      </select>
+                      {testTtsProvider === 'openai' ? (
+                        <select
+                          value={testSpeechVoice}
+                          onChange={(e: any) => setTestSpeechVoice(e.target.value)}
+                          className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs font-bold focus:outline-none focus:border-amber-400 flex-1 min-w-0"
+                        >
+                          <option value="nova">Nova (Narradora Infantil)</option>
+                          <option value="onyx">Onyx (Voz de Deus / Solene)</option>
+                          <option value="echo">Echo (Davi / Menino Valente)</option>
+                          <option value="shimmer">Shimmer (Rainha Ester)</option>
+                          <option value="fable">Fable (Noé / Patriarca)</option>
+                        </select>
+                      ) : (
+                        <div className="px-3 py-2 rounded-xl bg-slate-800 border border-purple-500/40 text-purple-300 text-xs font-bold flex-1 flex items-center justify-center">
+                          Voz Multilingual v2
+                        </div>
+                      )}
 
                       <button
                         type="button"
                         onClick={handleTestSpeech}
                         disabled={isGeneratingVoice}
-                        className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-slate-950 font-black font-brand text-xs uppercase tracking-wider transition-all shrink-0 flex items-center gap-1.5 shadow-md"
+                        className="px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 disabled:opacity-50 text-slate-950 font-black font-brand text-xs uppercase tracking-wider transition-all shrink-0 flex items-center gap-1.5 shadow-md active:scale-95"
                       >
                         {isGeneratingVoice ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <Play className="w-3.5 h-3.5 fill-current" />}
                         <span>Ouvir</span>
