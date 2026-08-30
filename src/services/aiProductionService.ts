@@ -24,19 +24,19 @@ export const CHARACTER_VOICE_MAP: Record<string, VoiceMapping> = {
   narrator: {
     characterType: 'narrator',
     openaiVoice: 'nova',
-    elevenlabsVoiceId: '21m00Tcm4TlvDq8ikWAM', // Rachel / Warm Storyteller
+    elevenlabsVoiceId: 'JBFqnCBsd6RMkjVDRZzb', // George / Warm Deep Storyteller
     description: 'Voz calorosa, entusiasmada e envolvente de contadora de histórias',
   },
   god: {
     characterType: 'god',
     openaiVoice: 'onyx',
-    elevenlabsVoiceId: 'pNInz6obpgDQGcFmaJgB', // Adam / Deep Reverent Voice
+    elevenlabsVoiceId: 'JBFqnCBsd6RMkjVDRZzb', // George / Deep Reverent Voice
     description: 'Voz majestosa, profunda, solene e com eco sagrado de autoridade e amor',
   },
   david: {
     characterType: 'david',
     openaiVoice: 'echo',
-    elevenlabsVoiceId: 'AZnzlk1XvdvUeBnXmlld', // Domi / Brave Young Boy
+    elevenlabsVoiceId: 'JBFqnCBsd6RMkjVDRZzb', // George
     description: 'Voz jovem, corajosa, alegre e cheia de fé',
   },
   esther: {
@@ -48,13 +48,13 @@ export const CHARACTER_VOICE_MAP: Record<string, VoiceMapping> = {
   noah: {
     characterType: 'noah',
     openaiVoice: 'fable',
-    elevenlabsVoiceId: 'VR6AewLTigWG4xSOukaG', // Arnold / Wise Patriarch
+    elevenlabsVoiceId: 'JBFqnCBsd6RMkjVDRZzb', // George
     description: 'Voz sábia, paciente e amorosa de um pai obediente a Deus',
   },
   daniel: {
     characterType: 'daniel',
     openaiVoice: 'alloy',
-    elevenlabsVoiceId: 'ErXwobaYiN019PkySvjV', // Antoni / Calm and Faithful
+    elevenlabsVoiceId: 'JBFqnCBsd6RMkjVDRZzb', // George
     description: 'Voz serena, confiante e oradora de paz',
   },
 };

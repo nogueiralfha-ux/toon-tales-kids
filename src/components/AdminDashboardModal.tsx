@@ -25,6 +25,11 @@ import {
   Database,
   Cloud,
   Check,
+  Printer,
+  Download,
+  FileText,
+  Palette,
+  BookOpen,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { authService, UserAccount, PlanType } from '../services/authService';
@@ -44,7 +49,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   onClose,
   onLogoutAdmin,
 }) => {
-  const [activeTab, setActiveTab] = useState<'metrics' | 'users' | 'leads' | 'webhooks' | 'finance' | 'catalog'>('metrics');
+  const [activeTab, setActiveTab] = useState<'metrics' | 'users' | 'leads' | 'webhooks' | 'finance' | 'pdf_factory' | 'catalog'>('metrics');
   const [users, setUsers] = useState<UserAccount[]>([]);
   const [leads, setLeads] = useState<CapturedLead[]>([]);
   const [webhookLogs, setWebhookLogs] = useState<WebhookLogItem[]>([]);
@@ -85,6 +90,19 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const [isGeneratingStory, setIsGeneratingStory] = useState<boolean>(false);
   const [storyResult, setStoryResult] = useState<any | null>(null);
   const [storyError, setStoryError] = useState<string | null>(null);
+
+  // PDF & Coloring Factory State
+  const [pdfTheme, setPdfTheme] = useState<string>('Sansão com cabelos longos empurrando as colunas de pedra do templo, herói bíblico vitorioso');
+  const [pdfType, setPdfType] = useState<'line_art' | '3d_pixar'>('line_art');
+  const [pdfTitle, setPdfTitle] = useState<string>('Sansão: A Força que Vem do Senhor');
+  const [pdfSubtitle, setPdfSubtitle] = useState<string>('Pinte o herói bíblico e lembre-se que Deus é a nossa verdadeira força!');
+  const [pdfVerseRef, setPdfVerseRef] = useState<string>('Juízes 16:28');
+  const [pdfVerseText, setPdfVerseText] = useState<string>('Ó Soberano Senhor, lembra-te de mim! Dá-me forças uma vez mais!');
+  const [pdfPageNum, setPdfPageNum] = useState<number>(101);
+  const [isGeneratingPdfArt, setIsGeneratingPdfArt] = useState<boolean>(false);
+  const [pdfArtUrl, setPdfArtUrl] = useState<string>(() =>
+    aiProductionService.getGeneratedImageUrl('Samson with long hair pushing temple stone pillars, biblical hero', 'line_art')
+  );
 
   const loadData = () => {
     setUsers(authService.getUsers());
@@ -168,7 +186,18 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
       setStoryError(err.message || 'Erro ao gerar história');
     } finally {
       setIsGeneratingStory(false);
+  const handleGeneratePdfArt = () => {
+    setIsGeneratingPdfArt(true);
+    try {
+      const url = aiProductionService.getGeneratedImageUrl(pdfTheme, pdfType);
+      setPdfArtUrl(url);
+    } finally {
+      setTimeout(() => setIsGeneratingPdfArt(false), 600);
     }
+  };
+
+  const handlePrintPdfSheet = () => {
+    window.print();
   };
 
   const totalRevenueEst = users.reduce((acc, u) => {
@@ -279,6 +308,17 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
           >
             <Calculator className="w-3.5 h-3.5" />
             <span>Calculadora & APIs</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('pdf_factory')}
+            className={`px-4 py-2 rounded-xl font-black text-xs font-brand uppercase tracking-wider transition-all flex items-center gap-2 ${
+              activeTab === 'pdf_factory'
+                ? 'bg-gradient-to-r from-orange-400 to-amber-400 text-slate-950 shadow-md scale-105'
+                : 'text-orange-300 hover:text-white hover:bg-slate-800 border border-orange-500/30'
+            }`}
+          >
+            <Printer className="w-3.5 h-3.5" />
+            <span>🎨 Fábrica de PDFs A4</span>
           </button>
           <button
             onClick={() => setActiveTab('catalog')}
@@ -1097,6 +1137,233 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       </pre>
                     </div>
                   )}
+            </div>
+          )}
+
+          {/* TAB 5.5: FÁBRICA DE PDFS & DESENHOS A4 */}
+          {activeTab === 'pdf_factory' && (
+            <div className="space-y-6">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-orange-500/20 via-amber-500/20 to-orange-500/20 p-5 rounded-3xl border border-orange-400/30">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2.5 py-0.5 rounded-full bg-orange-500 text-slate-950 text-[10px] font-black uppercase font-brand">
+                      Produção Digital $0
+                    </span>
+                    <h3 className="font-brand font-black text-lg sm:text-xl text-white flex items-center gap-2">
+                      <Palette className="w-5 h-5 text-orange-400" />
+                      Fábrica de PDFs & Páginas A4 para Colorir
+                    </h3>
+                  </div>
+                  <p className="text-xs text-slate-300 mt-1">
+                    Gere desenhos em <strong>Line Art (contorno preto para colorir)</strong> ou <strong>ilustrações 3D Pixar</strong> de qualquer herói bíblico e exporte em folha A4 oficial para imprimir ou vender como bônus!
+                  </p>
+                </div>
+
+                <button
+                  onClick={handlePrintPdfSheet}
+                  className="px-5 py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black font-brand text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 shrink-0 active:scale-95 transition-all"
+                >
+                  <Printer className="w-4 h-4" />
+                  <span>Imprimir Folha A4 / Salvar PDF</span>
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                {/* Left Controls Column */}
+                <div className="lg:col-span-5 space-y-4 bg-slate-950/80 p-5 rounded-3xl border border-slate-800">
+                  <h4 className="font-brand font-black text-xs text-amber-300 uppercase tracking-wider flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-amber-400" />
+                    1. Configurar Nova Página
+                  </h4>
+
+                  <div className="space-y-3 text-xs">
+                    <div>
+                      <label className="block text-slate-300 font-bold mb-1">
+                        Tema da Cena Bíblica (Comando para IA):
+                      </label>
+                      <textarea
+                        rows={3}
+                        value={pdfTheme}
+                        onChange={(e) => setPdfTheme(e.target.value)}
+                        placeholder="Ex: Moisés estendendo o cajado e abrindo o Mar Vermelho, peixes e paredes de água"
+                        className="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400 resize-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-slate-300 font-bold mb-1">
+                        Estilo Visual da Arte:
+                      </label>
+                      <div className="grid grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setPdfType('line_art')}
+                          className={`p-2.5 rounded-xl text-left border transition-all ${
+                            pdfType === 'line_art'
+                              ? 'bg-amber-400/20 border-amber-400 text-amber-300 font-black'
+                              : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          <span className="block font-brand text-xs">🎨 Line Art P&B</span>
+                          <span className="text-[10px] opacity-80">Desenho para colorir</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => setPdfType('3d_pixar')}
+                          className={`p-2.5 rounded-xl text-left border transition-all ${
+                            pdfType === '3d_pixar'
+                              ? 'bg-amber-400/20 border-amber-400 text-amber-300 font-black'
+                              : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
+                          }`}
+                        >
+                          <span className="block font-brand text-xs">🌟 3D Pixar Colorido</span>
+                          <span className="text-[10px] opacity-80">Capa & Ilustração</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2">
+                      <div className="col-span-2">
+                        <label className="block text-slate-300 font-bold mb-1">Título da Folha:</label>
+                        <input
+                          type="text"
+                          value={pdfTitle}
+                          onChange={(e) => setPdfTitle(e.target.value)}
+                          className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-slate-300 font-bold mb-1">Página #:</label>
+                        <input
+                          type="number"
+                          value={pdfPageNum}
+                          onChange={(e) => setPdfPageNum(Number(e.target.value))}
+                          className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-slate-300 font-bold mb-1">Instrução para a Criança:</label>
+                      <input
+                        type="text"
+                        value={pdfSubtitle}
+                        onChange={(e) => setPdfSubtitle(e.target.value)}
+                        className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2">
+                      <div>
+                        <label className="block text-slate-300 font-bold mb-1">Ref. Bíblica:</label>
+                        <input
+                          type="text"
+                          value={pdfVerseRef}
+                          onChange={(e) => setPdfVerseRef(e.target.value)}
+                          className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                        />
+                      </div>
+                      <div className="col-span-2">
+                        <label className="block text-slate-300 font-bold mb-1">Texto do Versículo:</label>
+                        <input
+                          type="text"
+                          value={pdfVerseText}
+                          onChange={(e) => setPdfVerseText(e.target.value)}
+                          className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleGeneratePdfArt}
+                      disabled={isGeneratingPdfArt}
+                      className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 disabled:opacity-50 text-slate-950 font-black font-brand text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 active:scale-95 transition-all mt-2"
+                    >
+                      {isGeneratingPdfArt ? (
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Sparkles className="w-4 h-4" />
+                      )}
+                      <span>{isGeneratingPdfArt ? 'Gerando Desenho com IA...' : '✨ Gerar Nova Arte com IA (Custo $0)'}</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Right Preview Column: Realistic A4 Printable Sheet */}
+                <div className="lg:col-span-7 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-400 flex items-center gap-1.5">
+                      <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+                      Pré-visualização Oficial em Folha A4
+                    </span>
+                    <a
+                      href={pdfArtUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-sky-400 hover:underline flex items-center gap-1 font-bold"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Abrir Imagem Original</span>
+                    </a>
+                  </div>
+
+                  {/* The A4 Printable Paper */}
+                  <div className="bg-white border-4 border-slate-900 rounded-2xl p-6 sm:p-8 shadow-2xl text-slate-900 font-sans space-y-4 min-h-[560px] flex flex-col justify-between">
+                    {/* Header */}
+                    <div className="border-b-2 border-slate-900 pb-2.5 flex items-center justify-between">
+                      <span className="text-xs font-black font-brand tracking-wider text-slate-900">
+                        TOON TALES KIDS • CADERNO DE ATIVIDADES BÍBLICAS
+                      </span>
+                      <span className="text-xs font-black font-brand px-2.5 py-0.5 rounded-md bg-slate-100 border border-slate-300">
+                        PÁGINA #{pdfPageNum}
+                      </span>
+                    </div>
+
+                    {/* Title & Subtitle */}
+                    <div className="text-center space-y-0.5">
+                      <h4 className="text-lg sm:text-xl font-black font-brand text-slate-950 uppercase tracking-tight">
+                        {pdfTitle}
+                      </h4>
+                      <p className="text-xs font-bold text-slate-600">
+                        {pdfSubtitle}
+                      </p>
+                    </div>
+
+                    {/* Image Area */}
+                    <div className="flex-1 min-h-[280px] max-h-[360px] flex items-center justify-center p-2 border-2 border-dashed border-slate-300 rounded-xl bg-slate-50/60 overflow-hidden">
+                      <img
+                        src={pdfArtUrl}
+                        alt={pdfTitle}
+                        className="max-h-[340px] w-auto object-contain mx-auto transition-all"
+                      />
+                    </div>
+
+                    {/* Verse Box */}
+                    <div className="p-3 rounded-xl bg-amber-50/80 border border-amber-300 text-center space-y-0.5">
+                      <span className="text-[11px] font-black text-amber-900 uppercase font-brand">
+                        📖 Versículo para Memorizar: {pdfVerseRef}
+                      </span>
+                      <p className="text-xs font-serif italic text-amber-950 font-medium">
+                        "{pdfVerseText}"
+                      </p>
+                    </div>
+
+                    {/* Footer */}
+                    <div className="border-t border-slate-300 pt-2 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                      <span>Nome do Pequeno Aluno: ___________________________</span>
+                      <span>Data: ___/___/______</span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={handlePrintPdfSheet}
+                    className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-amber-300 font-brand font-black text-xs uppercase tracking-wider shadow-md flex items-center justify-center gap-2 active:scale-95 transition-all"
+                  >
+                    <Printer className="w-4 h-4 text-amber-400" />
+                    <span>Imprimir Esta Página A4 ou Salvar em PDF</span>
+                  </button>
                 </div>
               </div>
             </div>
