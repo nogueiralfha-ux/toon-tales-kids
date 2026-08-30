@@ -471,7 +471,7 @@ export default function App() {
   const showFloatingPlayer = isPlaying && !['player', 'script', 'quiz', 'soundboard'].includes(activeTab);
 
   return (
-    <div className="min-h-screen bg-[#FFFBEB] text-slate-800 flex flex-col selection:bg-orange-500 selection:text-white font-sans antialiased pb-20 lg:pb-0">
+    <div className={`min-h-screen ${['landing', 'labkids-sales'].includes(activeTab) ? 'bg-white' : 'bg-[#FFFBEB] pb-20 lg:pb-0'} text-slate-800 flex flex-col selection:bg-orange-500 selection:text-white font-sans antialiased`}>
       {/* Top Navbar */}
       <Navbar
         activeTab={activeTab}
@@ -496,7 +496,7 @@ export default function App() {
       />
 
       {/* Main Content Viewport */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <main className={`flex-1 w-full ${['landing', 'labkids-sales'].includes(activeTab) ? 'p-0 max-w-none' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8'}`}>
         
         {/* 1. DASHBOARD PRINCIPAL */}
         {activeTab === 'dashboard' && (

@@ -75,6 +75,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   // -------------------------------------------------------------
   // 1. DEDICATED SALES LANDING NAVBAR (100% CLEAN & FOCUSED)
   // -------------------------------------------------------------
+  if (activeTab === 'labkids-sales') {
+    // Lab Kids Sales Page has its own high-converting header
+    return null;
+  }
+
   if (activeTab === 'landing') {
     return (
       <header className="w-full bg-white/95 backdrop-blur-md border-b-4 border-amber-400 sticky top-0 z-40 shadow-md select-none">
@@ -124,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           </nav>
 
-          {/* Sales Action (LabKids, Plataforma, Login & Assinar) */}
+          {/* Sales Action (LabKids, Login & Assinar) */}
           <div className="flex items-center gap-2 sm:gap-3">
             <button
               onClick={() => onSelectTab('labkids-sales')}
@@ -132,14 +137,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
               <span>🔬 Oferta LabKids</span>
-            </button>
-
-            <button
-              onClick={() => onSelectTab('dashboard')}
-              className="px-3.5 py-2.5 rounded-2xl bg-amber-100 hover:bg-orange-100 text-orange-700 font-brand font-black text-xs uppercase tracking-wider border border-orange-300 flex items-center gap-1.5 active:scale-95 transition-all"
-            >
-              <BookOpen className="w-4 h-4 text-orange-500" />
-              <span>Plataforma</span>
             </button>
 
             {isAdmin ? (
@@ -273,9 +270,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
-            onClick={() => onSelectTab('labkids')}
+            onClick={() => {
+              const hasLabKids = currentUser?.unlockedModules?.includes('labkids') || isAdmin;
+              if (hasLabKids) {
+                onSelectTab('labkids');
+              } else {
+                onSelectTab('labkids-sales');
+              }
+            }}
             className={`px-3 py-1.5 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 relative ${
-              activeTab === 'labkids'
+              activeTab === 'labkids' || activeTab === 'labkids-sales'
                 ? 'bg-purple-600 text-white shadow-md shadow-purple-200 scale-105 ring-2 ring-purple-300'
                 : 'text-purple-700 hover:text-purple-950 hover:bg-purple-50'
             }`}
