@@ -29,7 +29,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { UserAccount } from '../services/authService';
 
-export type NavTab = 'dashboard' | 'catalog' | 'seasons' | 'characters' | 'heroes' | 'labkids' | 'labkids-sales' | 'favorites' | 'profile' | 'parents' | 'landing' | 'player' | 'script' | 'soundboard' | 'quiz' | 'thankyou';
+export type NavTab = 'dashboard' | 'catalog' | 'seasons' | 'characters' | 'heroes' | 'labkids' | 'labkids-sales' | 'labkids-en' | 'favorites' | 'profile' | 'parents' | 'landing' | 'player' | 'script' | 'soundboard' | 'quiz' | 'thankyou';
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -38,13 +38,13 @@ interface NavbarProps {
   onOpenMixer: () => void;
   onOpenBedtime: () => void;
   onOpenAuth: (mode?: 'login' | 'register') => void;
-  onOpenAdmin: () => void;
-  onOpenColoring: () => void;
-  onLogout: () => void;
-  currentUser: UserAccount | null;
-  bedtimeActive: boolean;
-  favoritesCount: number;
-  userXp: number;
+  onOpenAdmin?: () => void;
+  onOpenColoring?: () => void;
+  onLogout?: () => void;
+  currentUser?: UserAccount | null;
+  bedtimeActive?: boolean;
+  favoritesCount?: number;
+  userXp?: number;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -58,14 +58,14 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenColoring,
   onLogout,
   currentUser,
-  bedtimeActive,
-  favoritesCount,
-  userXp,
+  bedtimeActive = false,
+  favoritesCount = 0,
+  userXp = 0,
 }) => {
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState<boolean>(false);
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState<boolean>(false);
-
-  const isAdmin = currentUser?.role === 'admin' || currentUser?.email?.toLowerCase() === 'nogueiralfha@gmail.com';
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isNotifOpen, setIsNotifOpen] = useState(false);
+  const [audioSpeed, setAudioSpeed] = useState<number>(1);
 
   const notifications = [
     { id: '1', title: '⭐ Nova História Disponível!', desc: 'Episódio 31 de Enoque foi liberado na Temporada 5.', time: 'Hoje' },
@@ -75,8 +75,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   // -------------------------------------------------------------
   // 1. DEDICATED SALES LANDING NAVBAR (100% CLEAN & FOCUSED)
   // -------------------------------------------------------------
-  if (activeTab === 'labkids-sales') {
-    // Lab Kids Sales Page has its own high-converting header
+  if (activeTab === 'labkids-sales' || activeTab === 'labkids-en') {
+    // Lab Kids Sales Pages have their own high-converting dedicated headers
     return null;
   }
 

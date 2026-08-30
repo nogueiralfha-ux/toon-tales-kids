@@ -7,4 +7,6 @@ coverage/
 .env*
 !.env.example
 *.mp4
+*.psd
+*.paint
 public/labkids/*.mp4

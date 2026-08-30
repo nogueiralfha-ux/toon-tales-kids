@@ -43,6 +43,7 @@ import { ProfileView } from './components/ProfileView';
 import { ParentsPortal } from './components/ParentsPortal';
 import { LabKidsView } from './components/LabKidsView';
 import { LabKidsSalesPage } from './components/LabKidsSalesPage';
+import { LabKidsEnglishSalesPage } from './components/LabKidsEnglishSalesPage';
 import { SalesLandingPage } from './components/SalesLandingPage';
 import { ThankYouPageView } from './components/ThankYouPageView';
 import { ColoringStudioModal } from './components/ColoringStudioModal';
@@ -129,6 +130,28 @@ export default function App() {
       }
 
       if (
+        path.includes('labkids-en') ||
+        path.includes('labkids-ingles') ||
+        path.includes('labkids-english') ||
+        search.includes('lang=en') ||
+        search.includes('tab=labkids-en') ||
+        hash.includes('labkids-en') ||
+        hash.includes('labkids-ingles')
+      ) {
+        return 'labkids-en';
+      }
+
+      if (
+        path.includes('labkids-vendas') ||
+        path.includes('labkids-sales') ||
+        hash.includes('labkids-vendas') ||
+        hash.includes('labkids-sales') ||
+        hash.includes('oferta-labkids')
+      ) {
+        return 'labkids-sales';
+      }
+
+      if (
         path.includes('app') ||
         path.includes('dashboard') ||
         path.includes('plataforma') ||
@@ -161,6 +184,16 @@ export default function App() {
           hash.includes('obrigado')
         ) {
           setActiveTab('thankyou');
+        } else if (
+          path.includes('labkids-en') ||
+          path.includes('labkids-ingles') ||
+          path.includes('labkids-english') ||
+          search.includes('lang=en') ||
+          search.includes('tab=labkids-en') ||
+          hash.includes('labkids-en') ||
+          hash.includes('labkids-ingles')
+        ) {
+          setActiveTab('labkids-en');
         } else if (
           path.includes('labkids-vendas') ||
           path.includes('labkids-sales') ||
@@ -471,7 +504,7 @@ export default function App() {
   const showFloatingPlayer = isPlaying && !['player', 'script', 'quiz', 'soundboard'].includes(activeTab);
 
   return (
-    <div className={`min-h-screen ${['landing', 'labkids-sales'].includes(activeTab) ? 'bg-white' : 'bg-[#FFFBEB] pb-20 lg:pb-0'} text-slate-800 flex flex-col selection:bg-orange-500 selection:text-white font-sans antialiased`}>
+    <div className={`min-h-screen ${['landing', 'labkids-sales', 'labkids-en'].includes(activeTab) ? 'bg-white' : 'bg-[#FFFBEB] pb-20 lg:pb-0'} text-slate-800 flex flex-col selection:bg-orange-500 selection:text-white font-sans antialiased`}>
       {/* Top Navbar */}
       <Navbar
         activeTab={activeTab}
@@ -496,7 +529,7 @@ export default function App() {
       />
 
       {/* Main Content Viewport */}
-      <main className={`flex-1 w-full ${['landing', 'labkids-sales'].includes(activeTab) ? 'p-0 max-w-none' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8'}`}>
+      <main className={`flex-1 w-full ${['landing', 'labkids-sales', 'labkids-en'].includes(activeTab) ? 'p-0 max-w-none' : 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8'}`}>
         
         {/* 1. DASHBOARD PRINCIPAL */}
         {activeTab === 'dashboard' && (
@@ -688,6 +721,22 @@ export default function App() {
               setIsAuthModalOpen(true);
             }}
             onOpenBiblicalSales={() => setActiveTab('landing')}
+            onOpenEnglishVersion={() => setActiveTab('labkids-en')}
+          />
+        )}
+
+        {/* 9.0.1 PÁGINA DE VENDAS OFICIAL LAB KIDS EM INGLÊS (HOTMART GLOBAL) */}
+        {activeTab === 'labkids-en' && (
+          <LabKidsEnglishSalesPage
+            onOpenAuth={(mode = 'login') => {
+              setAuthModalMode(mode);
+              setIsAuthModalOpen(true);
+            }}
+            onEnterPlatform={() => {
+              setAuthModalMode('login');
+              setIsAuthModalOpen(true);
+            }}
+            onOpenPortugueseVersion={() => setActiveTab('labkids-sales')}
           />
         )}
 
