@@ -545,7 +545,11 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
             </div>
 
             <a
-              href="https://pay.hotmart.com/T107380286O?off=bi2vx944"
+              href={
+                selectedPlanMode === 'single'
+                  ? 'https://pay.hotmart.com/T107380286O?off=h7w8lkur'
+                  : 'https://pay.hotmart.com/T107380286O?off=zfw0lhek'
+              }
               target="_blank"
               rel="noopener noreferrer"
               className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black text-center text-sm uppercase tracking-wider shadow-lg shadow-purple-400/30 hover:scale-105 active:scale-95 transition-all block"
@@ -583,9 +587,18 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
                   <span className="text-xs text-slate-300 font-bold">/ month</span>
                 </div>
                 <div className="text-[11px] text-emerald-400 font-bold mt-1">
-                  {selectedPlanMode === 'single'
-                    ? 'Or Annual Plan for $ 970.90 / year'
-                    : 'Or Annual Family Plan for $ 1,670.00 / year'}
+                  {selectedPlanMode === 'single' ? (
+                    <a
+                      href="https://pay.hotmart.com/T107380286O?off=rjonkcd3"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-amber-300"
+                    >
+                      Or Annual Plan for $ 970.90 / year (Best Deal!)
+                    </a>
+                  ) : (
+                    'Or Annual Family Plan for $ 1,670.00 / year'
+                  )}
                 </div>
               </div>
 
@@ -615,7 +628,11 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
             </div>
 
             <a
-              href="https://pay.hotmart.com/T107380286O?off=bi2vx944"
+              href={
+                selectedPlanMode === 'single'
+                  ? 'https://pay.hotmart.com/T107380286O?off=8sknyius'
+                  : 'https://pay.hotmart.com/T107380286O?off=a45xdqoj'
+              }
               target="_blank"
               rel="noopener noreferrer"
               className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-center text-sm uppercase tracking-wider shadow-xl shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all block ring-2 ring-amber-300"
