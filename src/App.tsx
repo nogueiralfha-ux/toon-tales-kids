@@ -185,6 +185,13 @@ export default function App() {
         ) {
           setActiveTab('thankyou');
         } else if (
+          hash.includes('labkids-sales') ||
+          hash.includes('labkids-vendas') ||
+          path.includes('labkids-vendas') ||
+          path.includes('labkids-sales')
+        ) {
+          setActiveTab('labkids-sales');
+        } else if (
           path.includes('labkids-en') ||
           path.includes('labkids-ingles') ||
           path.includes('labkids-english') ||
@@ -195,13 +202,10 @@ export default function App() {
         ) {
           setActiveTab('labkids-en');
         } else if (
-          path.includes('labkids-vendas') ||
-          path.includes('labkids-sales') ||
-          hash.includes('labkids-vendas') ||
-          hash.includes('labkids-sales') ||
-          hash.includes('oferta-labkids')
+          hash.includes('oferta-labkids') ||
+          hash.includes('oferta')
         ) {
-          setActiveTab('labkids-sales');
+          setActiveTab((prev) => (prev === 'labkids-en' ? 'labkids-en' : 'labkids-sales'));
         } else if (
           path.includes('labkids') ||
           hash.includes('labkids')
@@ -721,7 +725,12 @@ export default function App() {
               setIsAuthModalOpen(true);
             }}
             onOpenBiblicalSales={() => setActiveTab('landing')}
-            onOpenEnglishVersion={() => setActiveTab('labkids-en')}
+            onOpenEnglishVersion={() => {
+              if (typeof window !== 'undefined') {
+                window.history.pushState(null, '', window.location.pathname + '?lang=en#offer');
+              }
+              setActiveTab('labkids-en');
+            }}
           />
         )}
 
@@ -736,7 +745,12 @@ export default function App() {
               setAuthModalMode('login');
               setIsAuthModalOpen(true);
             }}
-            onOpenPortugueseVersion={() => setActiveTab('labkids-sales')}
+            onOpenPortugueseVersion={() => {
+              if (typeof window !== 'undefined') {
+                window.history.pushState(null, '', window.location.pathname + '#labkids-sales');
+              }
+              setActiveTab('labkids-sales');
+            }}
           />
         )}
 

@@ -159,13 +159,16 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
             <span>🔐 Entrar (Já sou Aluno)</span>
           </button>
 
-          <a
-            href="#oferta"
+          <button
+            onClick={() => {
+              const el = document.getElementById('oferta');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white text-xs font-black uppercase tracking-wider shadow-md shadow-emerald-400/30 hover:scale-105 active:scale-95 transition-all flex items-center gap-1"
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>Garantir Vaga</span>
-          </a>
+          </button>
         </div>
       </header>
 
@@ -213,13 +216,16 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
 
         {/* Primary CTA Button */}
         <div className="pt-4 max-w-md mx-auto space-y-3">
-          <a
-            href="#oferta"
+          <button
+            onClick={() => {
+              const el = document.getElementById('oferta');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="w-full py-4 px-8 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 text-white font-black text-lg sm:text-xl uppercase tracking-wider shadow-xl shadow-emerald-500/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 ring-4 ring-emerald-200"
           >
             <Sparkles className="w-6 h-6 fill-current" />
             <span>QUERO ACESSO IMEDIATO AO LAB KIDS</span>
-          </a>
+          </button>
 
           <div className="flex items-center justify-center gap-4 text-xs text-slate-500 font-bold">
             <span className="flex items-center gap-1 text-emerald-600">
@@ -470,7 +476,7 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
             Escolha o Seu Plano de Acesso
           </h2>
           <p className="text-slate-600 text-sm sm:text-base">
-            Pagamento único • Sem mensalidades • Acesso vitalício para toda a família!
+            ⚡ Planos Mensais e Anuais Flexíveis • Cancele quando quiser • Acesso Imediato para toda a Família!
           </p>
         </div>
 
