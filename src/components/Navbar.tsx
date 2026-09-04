@@ -67,6 +67,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [audioSpeed, setAudioSpeed] = useState<number>(1);
 
+  const isAdmin =
+    currentUser?.role === 'admin' ||
+    currentUser?.email?.toLowerCase() === 'nogueiralfha@gmail.com';
+
   const notifications = [
     { id: '1', title: '⭐ Nova História Disponível!', desc: 'Episódio 31 de Enoque foi liberado na Temporada 5.', time: 'Hoje' },
     { id: '2', title: '🏆 Conquista Desbloqueada!', desc: 'Você ganhou o badge "Primeira Aventura".', time: 'Ontem' },
@@ -389,7 +393,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Profile Switcher & Avatar Button */}
           <div className="relative">
             <button
-              onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+              onClick={() => setIsProfileOpen(!isProfileOpen)}
               className="flex items-center gap-2 p-1.5 pl-2.5 rounded-2xl bg-orange-500 hover:bg-orange-600 text-white font-brand font-black text-xs shadow-md shadow-orange-300 transition-all active:scale-95"
             >
               <span>{currentUser?.name?.split(' ')[0] || 'Clara'}</span>
@@ -399,13 +403,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               <ChevronDown className="w-3.5 h-3.5 opacity-80" />
             </button>
 
-            {isProfileMenuOpen && (
+            {isProfileOpen && (
               <div className="absolute right-0 mt-3 w-64 rounded-3xl bg-white border-2 border-orange-200 p-3 shadow-2xl z-50 space-y-2">
                 {isAdmin && (
                   <button
                     onClick={() => {
                       onOpenAdmin();
-                      setIsProfileMenuOpen(false);
+                      setIsProfileOpen(false);
                     }}
                     className="w-full text-left p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-xs font-black text-amber-300 flex items-center gap-2"
                   >
@@ -417,7 +421,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   onClick={() => {
                     onSelectTab('profile');
-                    setIsProfileMenuOpen(false);
+                    setIsProfileOpen(false);
                   }}
                   className="w-full text-left p-2.5 rounded-xl hover:bg-orange-50 text-xs font-bold text-slate-700 flex items-center gap-2"
                 >
@@ -428,7 +432,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   onClick={() => {
                     onOpenColoring();
-                    setIsProfileMenuOpen(false);
+                    setIsProfileOpen(false);
                   }}
                   className="w-full text-left p-2.5 rounded-xl hover:bg-purple-50 text-xs font-bold text-purple-800 flex items-center gap-2"
                 >
@@ -439,7 +443,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   onClick={() => {
                     onSelectTab('favorites');
-                    setIsProfileMenuOpen(false);
+                    setIsProfileOpen(false);
                   }}
                   className="w-full text-left p-2.5 rounded-xl hover:bg-rose-50 text-xs font-bold text-slate-700 flex items-center gap-2"
                 >
@@ -451,7 +455,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <button
                     onClick={() => {
                       onSelectTab('parents');
-                      setIsProfileMenuOpen(false);
+                      setIsProfileOpen(false);
                     }}
                     className="w-full text-left p-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-xs font-black text-indigo-700 flex items-center gap-2"
                   >
@@ -465,7 +469,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <button
                       onClick={() => {
                         onLogout();
-                        setIsProfileMenuOpen(false);
+                        setIsProfileOpen(false);
                       }}
                       className="w-full text-left p-2 rounded-xl hover:bg-rose-50 text-xs font-bold text-rose-600 flex items-center gap-2"
                     >
@@ -476,7 +480,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <button
                       onClick={() => {
                         onOpenAuth('login');
-                        setIsProfileMenuOpen(false);
+                        setIsProfileOpen(false);
                       }}
                       className="w-full text-left p-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-xs font-black text-amber-900 flex items-center gap-2"
                     >
