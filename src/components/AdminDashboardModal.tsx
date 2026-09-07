@@ -35,7 +35,7 @@ import { motion } from 'motion/react';
 import { authService, UserAccount, PlanType } from '../services/authService';
 import { hotmartApiService, WebhookLogItem } from '../services/hotmartApiService';
 import { getCapturedLeads, CapturedLead } from '../config/checkoutConfig';
-import { ALL_EPISODES, BIBLE_SEASONS } from '../data/catalog';
+import { ALL_EPISODES, BIBLE_SEASONS, EPISODE_REGISTRY } from '../data/catalog';
 import { aiProductionService, ApiKeysConfig, CHARACTER_VOICE_MAP } from '../services/aiProductionService';
 import { BiblicalSceneDrawing } from './BiblicalSceneDrawing';
 
@@ -164,7 +164,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   onClose,
   onLogoutAdmin,
 }) => {
-  const [activeTab, setActiveTab] = useState<'metrics' | 'users' | 'leads' | 'webhooks' | 'finance' | 'pdf_factory' | 'catalog'>('metrics');
+  const [activeTab, setActiveTab] = useState<'metrics' | 'users' | 'leads' | 'webhooks' | 'finance' | 'pdf_factory' | 'catalog' | 'dubbing'>('metrics');
   const [users, setUsers] = useState<UserAccount[]>([]);
   const [leads, setLeads] = useState<CapturedLead[]>([]);
   const [webhookLogs, setWebhookLogs] = useState<WebhookLogItem[]>([]);
@@ -221,6 +221,15 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const [pdfArtUrl, setPdfArtUrl] = useState<string>(() =>
     aiProductionService.getGeneratedImageUrl(BIBLICAL_PRESETS[0].theme, 'line_art')
   );
+
+  // Dubbing Studio State
+  const [dubbingEpisodeId, setDubbingEpisodeId] = useState<string>(ALL_EPISODES[0].id);
+  const [dubbingVoiceMap, setDubbingVoiceMap] = useState<Record<string, string>>({
+    narrator: '21m00Tcm4TlvDq8ikWAM', // Rachel
+    god: 'onwK4e9ZLuTAKqWW03F9',    // Daniel
+  });
+  const [dubbingLoadingLineId, setDubbingLoadingLineId] = useState<string | null>(null);
+  const [dubbingAudioUrls, setDubbingAudioUrls] = useState<Record<string, string>>({});
 
   const loadData = () => {
     setUsers(authService.getUsers());
@@ -342,6 +351,19 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
     if (u.plan === 'pessoal') return acc + 299;
     return acc;
   }, 0);
+
+  const handleGenerateLineAudio = async (lineId: string, text: string, character: string) => {
+    setDubbingLoadingLineId(lineId);
+    try {
+      const voiceId = dubbingVoiceMap[character] || '21m00Tcm4TlvDq8ikWAM';
+      const url = await aiProductionService.synthesizeSpeechElevenLabs(text, voiceId);
+      setDubbingAudioUrls((prev) => ({ ...prev, [lineId]: url }));
+    } catch (err: any) {
+      alert(`Erro: ${err.message}`);
+    } finally {
+      setDubbingLoadingLineId(null);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-fade-in">
@@ -466,6 +488,17 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
           >
             <Headphones className="w-3.5 h-3.5" />
             <span>Catálogo (34 Eps)</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('dubbing')}
+            className={`px-4 py-2 rounded-xl font-black text-xs font-brand uppercase tracking-wider transition-all flex items-center gap-2 ${
+              activeTab === 'dubbing'
+                ? 'bg-purple-500 text-white shadow-sm scale-105'
+                : 'text-purple-300 hover:text-white hover:bg-slate-800 border border-purple-500/30'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>🎙️ Estúdio de Dublagem</span>
           </button>
         </div>
 
@@ -1605,6 +1638,89 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                     </div>
                     <h4 className="font-brand font-black text-sm text-white line-clamp-1">{ep.title}</h4>
                     <p className="text-[11px] text-slate-300 line-clamp-2">{ep.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 7: DUBBING STUDIO */}
+          {activeTab === 'dubbing' && (
+            <div className="space-y-4">
+              <h3 className="font-brand font-black text-lg text-slate-100 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-purple-400" />
+                Estúdio de Dublagem ElevenLabs
+              </h3>
+              <p className="text-xs text-slate-400">
+                Selecione um episódio para gerar os áudios das falas automaticamente.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1 space-y-1">
+                  <label className="text-xs font-bold text-slate-300">Episódio:</label>
+                  <select
+                    value={dubbingEpisodeId}
+                    onChange={(e) => setDubbingEpisodeId(e.target.value)}
+                    className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-purple-400"
+                  >
+                    {ALL_EPISODES.map(ep => (
+                      <option key={ep.id} value={ep.id}>
+                        {ep.title} ({ep.id})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-6 mt-4">
+                {EPISODE_REGISTRY[dubbingEpisodeId]?.scenes.map(scene => (
+                  <div key={scene.id} className="p-4 rounded-2xl bg-slate-900 border border-slate-700 space-y-3">
+                    <h4 className="text-sm font-black font-brand text-amber-300 border-b border-slate-800 pb-2">
+                      Cena {scene.sceneNumber}: {scene.title}
+                    </h4>
+                    {scene.lines.map(line => (
+                      <div key={line.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-3 bg-slate-800/50 rounded-xl border border-slate-700">
+                        <div className="flex-1 space-y-1">
+                          <span className="text-[10px] font-bold uppercase text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded-full">
+                            {line.characterLabel}
+                          </span>
+                          <p className="text-xs text-white">"{line.text}"</p>
+                          {line.emotionGuide && <p className="text-[10px] text-slate-400 italic">Emoção: {line.emotionGuide}</p>}
+                        </div>
+                        
+                        <div className="flex flex-col gap-2 min-w-[200px]">
+                          <input 
+                            type="text" 
+                            placeholder="Voice ID (opcional)" 
+                            value={dubbingVoiceMap[line.character] || ''}
+                            onChange={(e) => setDubbingVoiceMap({...dubbingVoiceMap, [line.character]: e.target.value})}
+                            className="w-full px-2 py-1 rounded bg-slate-950 border border-slate-700 text-[10px] text-white"
+                          />
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => handleGenerateLineAudio(line.id, line.text, line.character)}
+                              disabled={dubbingLoadingLineId === line.id}
+                              className="flex-1 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white text-[10px] font-bold flex items-center justify-center gap-1 transition-all"
+                            >
+                              {dubbingLoadingLineId === line.id ? <RefreshCw className="w-3 h-3 animate-spin" /> : <Play className="w-3 h-3" />}
+                              Gerar
+                            </button>
+                            {dubbingAudioUrls[line.id] && (
+                              <a 
+                                href={dubbingAudioUrls[line.id]} 
+                                download={`${dubbingEpisodeId}_${line.id}.mp3`}
+                                className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-bold flex items-center justify-center transition-all"
+                              >
+                                <Download className="w-3 h-3" />
+                              </a>
+                            )}
+                          </div>
+                          {dubbingAudioUrls[line.id] && (
+                            <audio src={dubbingAudioUrls[line.id]} controls className="h-6 w-full" />
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 ))}
               </div>
