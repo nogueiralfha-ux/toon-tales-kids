@@ -249,6 +249,7 @@ export default function App() {
   const currentQuiz = selectedEpisodeData.quiz;
   const currentEpisode = getEpisodeById(currentEpisodeId) || ALL_EPISODES[0];
 
+
   // Playback state
   const [currentSceneIndex, setCurrentSceneIndex] = useState<number>(0);
   const [activeLineId, setActiveLineId] = useState<string | null>(null);
@@ -270,6 +271,23 @@ export default function App() {
   const [selectedSeasonModal, setSelectedSeasonModal] = useState<Season | null>(null);
   const [isLoadingTransition, setIsLoadingTransition] = useState<boolean>(false);
   const [bonusXp, setBonusXp] = useState<number>(0);
+
+  // Route Guard: Block access if not a paid subscriber (except admin)
+  useEffect(() => {
+    const PROTECTED_TABS = ['dashboard', 'catalog', 'seasons', 'characters', 'heroes', 'favorites', 'profile', 'parents', 'player', 'script', 'soundboard', 'quiz', 'labkids'];
+    
+    if (PROTECTED_TABS.includes(activeTab)) {
+      const isMasterAdmin = currentUser?.email.toLowerCase() === 'nogueiralfha@gmail.com';
+      const isActiveSubscriber = currentUser?.planStatus === 'active';
+      
+      if (!isMasterAdmin && !isActiveSubscriber) {
+        setActiveTab('landing');
+        setTimeout(() => {
+          window.location.hash = 'planos';
+        }, 100);
+      }
+    }
+  }, [activeTab, currentUser]);
 
   // Bedtime
   const [bedtimeMinutesLeft, setBedtimeMinutesLeft] = useState<number | null>(null);
