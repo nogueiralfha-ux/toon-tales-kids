@@ -143,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>🔬 Oferta LabKids</span>
             </button>
 
-            {isAdmin ? (
+            {isAdmin && (
               <button
                 onClick={onOpenAdmin}
                 className="px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-brand font-black text-xs uppercase tracking-wider shadow-md border-2 border-amber-400 flex items-center gap-1.5 active:scale-95"
@@ -151,7 +151,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <Crown className="w-4 h-4 text-amber-400" />
                 <span>Painel Admin</span>
               </button>
-            ) : currentUser ? (
+            )}
+            
+            {currentUser ? (
               <button
                 onClick={() => onSelectTab('dashboard')}
                 className="px-4 py-2.5 rounded-2xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 font-brand font-black text-xs uppercase tracking-wider border border-emerald-300 flex items-center gap-1.5 active:scale-95"
