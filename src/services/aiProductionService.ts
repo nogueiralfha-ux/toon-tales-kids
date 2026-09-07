@@ -7,6 +7,7 @@
 export interface ApiKeysConfig {
   geminiApiKey?: string;
   elevenlabsApiKey?: string;
+  openaiApiKey?: string;
   cloudflareR2Endpoint?: string;
 }
 

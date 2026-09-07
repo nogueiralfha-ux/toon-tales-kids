@@ -19,6 +19,8 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { authService, UserAccount, PlanType } from '../services/authService';
 
+import { useAuth } from '../contexts/AuthContext';
+
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -32,6 +34,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
   onSuccessAuth,
   initialMode = 'login',
 }) => {
+  const { signInParent, signUpParent } = useAuth();
   const [mode, setMode] = useState<'login' | 'register'>(initialMode);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -45,15 +48,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
 
-    const result = authService.login(email, password);
-    if (result.success && result.user) {
-      setSuccessMessage(`Bem-vindo de volta, ${result.user.name}!`);
+    const result = await signInParent(email, password);
+    if (result.success) {
+      const user = authService.getCurrentUser();
+      setSuccessMessage(`Bem-vindo de volta${user?.name ? `, ${user.name}` : ''}!`);
       setTimeout(() => {
-        onSuccessAuth(result.user!);
+        if (user) onSuccessAuth(user);
         onClose();
       }, 500);
     } else {
@@ -61,7 +65,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     }
   };
 
-  const handleRegisterSubmit = (e: React.FormEvent) => {
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage(null);
 
@@ -78,7 +82,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       return;
     }
 
-    const result = authService.register({
+    const result = await signUpParent({
       name,
       email,
       password,
@@ -88,10 +92,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       plan: 'vitalicio',
     });
 
-    if (result.success && result.user) {
+    if (result.success) {
+      const user = authService.getCurrentUser();
       setSuccessMessage('Conta de família criada com sucesso!');
       setTimeout(() => {
-        onSuccessAuth(result.user!);
+        if (user) onSuccessAuth(user);
         onClose();
       }, 500);
     } else {

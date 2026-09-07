@@ -19,6 +19,8 @@ import {
   Layers,
   HelpCircle,
   PenTool,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { audioEngine } from '../services/audioEngine';

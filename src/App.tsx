@@ -415,7 +415,7 @@ export default function App() {
       audioEngine.resumeEpisode();
       setIsPlaying(true);
     } else {
-      startPlayback(currentSceneIndex, 0);
+      startPlayback(undefined, currentSceneIndex, 0);
     }
   };
 
@@ -430,7 +430,7 @@ export default function App() {
       window.speechSynthesis.resume();
     }
     setCurrentSceneIndex(0);
-    startPlayback(0, 0);
+    startPlayback(undefined, 0, 0);
   };
 
   const handleNextScene = () => {

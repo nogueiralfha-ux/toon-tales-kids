@@ -35,7 +35,8 @@ import { motion } from 'motion/react';
 import { authService, UserAccount, PlanType } from '../services/authService';
 import { hotmartApiService, WebhookLogItem } from '../services/hotmartApiService';
 import { getCapturedLeads, CapturedLead } from '../config/checkoutConfig';
-import { ALL_EPISODES, BIBLE_SEASONS, EPISODE_REGISTRY } from '../data/catalog';
+import { ALL_EPISODES, BIBLE_SEASONS } from '../data/catalog';
+import { CREATION_SCENES } from '../data/creationScript';
 import { aiProductionService, ApiKeysConfig, CHARACTER_VOICE_MAP } from '../services/aiProductionService';
 import { BiblicalSceneDrawing } from './BiblicalSceneDrawing';
 
@@ -1603,7 +1604,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   >
                     <div className="flex items-center justify-between text-[11px] font-bold">
                       <span className="text-amber-400 uppercase">T{ep.seasonNumber} • Ep {ep.episodeNumber}</span>
-                      <span className="text-slate-400">{ep.duration}</span>
+                      <span className="text-slate-400">{ep.durationLabel}</span>
                     </div>
                     <h4 className="font-brand font-black text-sm text-white line-clamp-1">{ep.title}</h4>
                     <p className="text-[11px] text-slate-300 line-clamp-2">{ep.description}</p>
@@ -1642,7 +1643,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
               </div>
 
               <div className="space-y-6 mt-4">
-                {EPISODE_REGISTRY[dubbingEpisodeId]?.scenes.map(scene => (
+                {(dubbingEpisodeId === 't1e1' ? CREATION_SCENES : []).map(scene => (
                   <div key={scene.id} className="p-4 rounded-2xl bg-slate-900 border border-slate-700 space-y-3">
                     <h4 className="text-sm font-black font-brand text-amber-300 border-b border-slate-800 pb-2">
                       Cena {scene.sceneNumber}: {scene.title}
