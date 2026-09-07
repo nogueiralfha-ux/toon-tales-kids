@@ -194,7 +194,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
     'Bem-vindos ao Toon Tales Kids! Histórias bíblicas em áudio 3D que ensinam valores eternos!'
   );
   const [testTtsProvider, setTestTtsProvider] = useState<'elevenlabs'>('elevenlabs');
-  const [testSpeechVoice, setTestSpeechVoice] = useState<string>('pNInz6obpgDQGcFmaJcg');
+  const [testSpeechVoice, setTestSpeechVoice] = useState<string>('cCYjmrGZaI86GUJ7F2Nn');
   const [isGeneratingVoice, setIsGeneratingVoice] = useState<boolean>(false);
   const [voiceAudioUrl, setVoiceAudioUrl] = useState<string | null>(null);
   const [voiceError, setVoiceError] = useState<string | null>(null);
@@ -226,8 +226,12 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   // Dubbing Studio State
   const [dubbingEpisodeId, setDubbingEpisodeId] = useState<string>(ALL_EPISODES[0].id);
   const [dubbingVoiceMap, setDubbingVoiceMap] = useState<Record<string, string>>({
-    narrator: '21m00Tcm4TlvDq8ikWAM', // Rachel
-    god: 'onwK4e9ZLuTAKqWW03F9',    // Daniel
+    narrator: 'cCYjmrGZaI86GUJ7F2Nn',
+    god: 'qtE0ZCQOqBxEe2RVDnoI',
+    adam: 'SOYHLrjzK2X1ezoPC6cr',
+    eve: 'cCYjmrGZaI86GUJ7F2Nn',
+    david: 'zYI6iMk418t1nxsBmNSm',
+    serpent: 'SOYHLrjzK2X1ezoPC6cr',
   });
   const [dubbingLoadingLineId, setDubbingLoadingLineId] = useState<string | null>(null);
   const [dubbingAudioUrls, setDubbingAudioUrls] = useState<Record<string, string>>({});
