@@ -30,6 +30,9 @@ import {
   FileText,
   Palette,
   BookOpen,
+  CloudLightning,
+  Wind,
+  Waves,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { authService, UserAccount, PlanType } from '../services/authService';
@@ -236,6 +239,13 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const [dubbingLoadingLineId, setDubbingLoadingLineId] = useState<string | null>(null);
   const [dubbingAudioUrls, setDubbingAudioUrls] = useState<Record<string, string>>({});
 
+  // SFX Factory State
+  const [sfxPrompt, setSfxPrompt] = useState<string>('Mar vermelho se abrindo com vento forte e estrondo épico de águas');
+  const [sfxDuration, setSfxDuration] = useState<number>(5);
+  const [isGeneratingSfx, setIsGeneratingSfx] = useState<boolean>(false);
+  const [sfxAudioUrl, setSfxAudioUrl] = useState<string | null>(null);
+  const [sfxError, setSfxError] = useState<string | null>(null);
+
   const loadData = () => {
     setUsers(authService.getUsers());
     setLeads(getCapturedLeads());
@@ -362,6 +372,19 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
       alert(`Erro: ${err.message}`);
     } finally {
       setDubbingLoadingLineId(null);
+    }
+  };
+
+  const handleGenerateSfx = async () => {
+    setIsGeneratingSfx(true);
+    setSfxError(null);
+    try {
+      const url = await aiProductionService.generateSoundEffectElevenLabs(sfxPrompt, sfxDuration);
+      setSfxAudioUrl(url);
+    } catch (err: any) {
+      setSfxError(err.message || 'Erro ao gerar efeito sonoro');
+    } finally {
+      setIsGeneratingSfx(false);
     }
   };
 
@@ -499,6 +522,17 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
           >
             <Sparkles className="w-3.5 h-3.5" />
             <span>🎙️ Estúdio de Dublagem</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('sfx')}
+            className={`px-4 py-2 rounded-xl font-black text-xs font-brand uppercase tracking-wider transition-all flex items-center gap-2 ${
+              activeTab === 'sfx'
+                ? 'bg-sky-500 text-white shadow-sm scale-105'
+                : 'text-sky-300 hover:text-white hover:bg-slate-800 border border-sky-500/30'
+            }`}
+          >
+            <CloudLightning className="w-3.5 h-3.5" />
+            <span>🌪️ SFX Efeitos</span>
           </button>
         </div>
 
@@ -1697,6 +1731,80 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                     ))}
                   </div>
                 ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'sfx' && (
+            <div className="space-y-6 max-w-4xl mx-auto">
+              <div className="bg-sky-500/10 border border-sky-500/30 rounded-2xl p-6 flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-sky-500/20 flex items-center justify-center shrink-0">
+                  <CloudLightning className="w-6 h-6 text-sky-400" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-black font-brand text-sky-400 uppercase">Fábrica de Efeitos Sonoros (SFX)</h3>
+                  <p className="text-sm text-sky-200/70 mt-1">
+                    Gere efeitos sonoros super realistas (ex: Mar Vermelho se abrindo, tempestades, rugidos de leão) usando a IA da ElevenLabs.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 mb-2 uppercase">Descreva o som desejado (Prompt)</label>
+                  <textarea
+                    value={sfxPrompt}
+                    onChange={(e) => setSfxPrompt(e.target.value)}
+                    rows={3}
+                    placeholder="Ex: Cinematic sound of the Red Sea parting, giant waves crashing, strong wind blowing, epic..."
+                    className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-600 focus:outline-none focus:border-sky-500 transition-colors"
+                  />
+                  <p className="text-[10px] text-slate-500 mt-2">Dica: Prompts em inglês costumam gerar resultados com maior precisão na ElevenLabs.</p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 items-end">
+                  <div className="flex-1">
+                    <label className="block text-xs font-bold text-slate-400 mb-2 uppercase">Duração (Segundos): {sfxDuration}s</label>
+                    <input
+                      type="range"
+                      min="1"
+                      max="22"
+                      value={sfxDuration}
+                      onChange={(e) => setSfxDuration(parseInt(e.target.value))}
+                      className="w-full accent-sky-500"
+                    />
+                  </div>
+                  
+                  <button
+                    onClick={handleGenerateSfx}
+                    disabled={isGeneratingSfx || !sfxPrompt.trim()}
+                    className="w-full sm:w-auto px-6 py-3 rounded-xl bg-sky-600 hover:bg-sky-500 disabled:opacity-50 text-white font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-sky-600/20"
+                  >
+                    {isGeneratingSfx ? <RefreshCw className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
+                    Gerar Efeito Sonoro
+                  </button>
+                </div>
+
+                {sfxError && (
+                  <div className="mt-4 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center gap-3">
+                    <AlertCircle className="w-5 h-5 shrink-0" />
+                    <p className="text-sm font-medium">{sfxError}</p>
+                  </div>
+                )}
+
+                {sfxAudioUrl && !isGeneratingSfx && (
+                  <div className="mt-6 p-6 rounded-xl bg-slate-800/50 border border-slate-700 flex flex-col items-center gap-4">
+                    <audio src={sfxAudioUrl} controls autoPlay className="w-full max-w-md" />
+                    <a
+                      href={sfxAudioUrl}
+                      download={`sfx_${sfxPrompt.substring(0, 15).replace(/\s+/g, '_')}.mp3`}
+                      className="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold flex items-center gap-2 transition-all shadow-lg shadow-emerald-600/20"
+                    >
+                      <Download className="w-4 h-4" />
+                      Baixar MP3 Definitivo
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           )}

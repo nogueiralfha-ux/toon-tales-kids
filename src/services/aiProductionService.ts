@@ -187,6 +187,48 @@ class AiProductionService {
   }
 
   // -------------------------------------------------------------
+  // 3. GERAÇÃO DE EFEITOS SONOROS (ELEVENLABS)
+  // -------------------------------------------------------------
+  public async generateSoundEffectElevenLabs(
+    prompt: string,
+    durationSeconds?: number
+  ): Promise<string> {
+    const apiKey = this.apiKeys.elevenlabsApiKey;
+    if (!apiKey) {
+      throw new Error('Chave da ElevenLabs não configurada. Adicione sua chave no Painel Admin.');
+    }
+
+    const cacheKey = `sfx_${prompt}_${durationSeconds || 'auto'}`;
+    if (this.audioCache.has(cacheKey)) {
+      return this.audioCache.get(cacheKey)!;
+    }
+
+    const body: any = { text: prompt };
+    if (durationSeconds) {
+      body.duration_seconds = durationSeconds;
+    }
+
+    const response = await fetch('https://api.elevenlabs.io/v1/sound-generation', {
+      method: 'POST',
+      headers: {
+        'xi-api-key': apiKey,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({ detail: response.statusText }));
+      throw new Error(err.detail?.message || err.detail || 'Erro ao gerar efeito sonoro com ElevenLabs');
+    }
+
+    const blob = await response.blob();
+    const audioUrl = URL.createObjectURL(blob);
+    this.audioCache.set(cacheKey, audioUrl);
+    return audioUrl;
+  }
+
+  // -------------------------------------------------------------
   // 3. GERAÇÃO DE ROTEIROS BÍBLICOS COM IA (GEMINI 1.5 FLASH)
   // -------------------------------------------------------------
   public async generateBibleStoryScript(params: {
