@@ -5,9 +5,8 @@
  */
 
 export interface ApiKeysConfig {
-  openaiApiKey?: string;
-  elevenlabsApiKey?: string;
   geminiApiKey?: string;
+  elevenlabsApiKey?: string;
   cloudflareR2Endpoint?: string;
 }
 
@@ -187,8 +186,7 @@ class AiProductionService {
   }
 
   // -------------------------------------------------------------
-  // 3. GERAÇÃO DE ROTEIROS BÍBLICOS COM IA (GPT-4o-mini)
-  // Custo: $0,15 / 1M tokens in, $0,60 / 1M tokens out (~R$ 0,005 por livro!)
+  // 3. GERAÇÃO DE ROTEIROS BÍBLICOS COM IA (GEMINI 1.5 FLASH)
   // -------------------------------------------------------------
   public async generateBibleStoryScript(params: {
     theme: string;
@@ -208,9 +206,9 @@ class AiProductionService {
     }[];
     quiz: { question: string; options: string[]; answer: number }[];
   }> {
-    const apiKey = this.apiKeys.openaiApiKey;
+    const apiKey = this.apiKeys.geminiApiKey;
     if (!apiKey) {
-      throw new Error('Chave da OpenAI não configurada para geração de histórias.');
+      throw new Error('Chave do Google Gemini não configurada para geração de histórias.');
     }
 
     const prompt = `
@@ -221,7 +219,7 @@ Lição moral: "${params.moralLesson}".
 Idade recomendada: "${params.targetAge || '6 a 12 anos'}".
 Idioma: "${params.language || 'pt'}".
 
-Retorne EXATAMENTE um objeto JSON válido com a estrutura:
+Retorne EXATAMENTE um objeto JSON válido (sem markdown, sem \`\`\`json) com a seguinte estrutura:
 {
   "title": "Título da História",
   "subtitle": "Subtítulo da História",
@@ -247,30 +245,36 @@ Retorne EXATAMENTE um objeto JSON válido com a estrutura:
 }
 `;
 
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
-        messages: [
-          { role: 'system', content: 'Você é o motor criativo oficial do Toon Tales Kids. Gere apenas JSON puro.' },
-          { role: 'user', content: prompt },
+        contents: [
+          {
+            parts: [{ text: prompt }]
+          }
         ],
-        response_format: { type: 'json_object' },
-        temperature: 0.7,
+        generationConfig: {
+          temperature: 0.7,
+          responseMimeType: "application/json"
+        }
       }),
     });
 
     if (!response.ok) {
       const err = await response.json().catch(() => ({ error: { message: response.statusText } }));
-      throw new Error(err.error?.message || 'Erro ao gerar história com GPT-4o-mini');
+      throw new Error(err.error?.message || 'Erro ao gerar história com Gemini');
     }
 
     const data = await response.json();
-    const content = data.choices[0]?.message?.content;
+    const content = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    
+    if (!content) {
+       throw new Error('Erro ao processar resposta do Gemini.');
+    }
+
     return JSON.parse(content);
   }
 

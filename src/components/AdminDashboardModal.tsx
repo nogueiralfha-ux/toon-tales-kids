@@ -192,8 +192,8 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const [testSpeechText, setTestSpeechText] = useState<string>(
     'Bem-vindos ao Toon Tales Kids! Histórias bíblicas em áudio 3D que ensinam valores eternos!'
   );
-  const [testTtsProvider, setTestTtsProvider] = useState<'openai' | 'elevenlabs'>('openai');
-  const [testSpeechVoice, setTestSpeechVoice] = useState<'nova' | 'onyx' | 'echo' | 'fable' | 'shimmer'>('nova');
+  const [testTtsProvider, setTestTtsProvider] = useState<'elevenlabs'>('elevenlabs');
+  const [testSpeechVoice, setTestSpeechVoice] = useState<string>('pNInz6obpgDQGcFmaJcg');
   const [isGeneratingVoice, setIsGeneratingVoice] = useState<boolean>(false);
   const [voiceAudioUrl, setVoiceAudioUrl] = useState<string | null>(null);
   const [voiceError, setVoiceError] = useState<string | null>(null);
@@ -282,12 +282,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
     setVoiceError(null);
     setVoiceAudioUrl(null);
     try {
-      let url = '';
-      if (testTtsProvider === 'elevenlabs') {
-        url = await aiProductionService.synthesizeSpeechElevenLabs(testSpeechText);
-      } else {
-        url = await aiProductionService.synthesizeSpeechOpenAi(testSpeechText, testSpeechVoice);
-      }
+      let url = await aiProductionService.synthesizeSpeechElevenLabs(testSpeechText, testSpeechVoice);
       setVoiceAudioUrl(url);
       const audio = new Audio(url);
       audio.play();
@@ -1172,15 +1167,15 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 <form onSubmit={handleSaveApiKeys} className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                   <div className="space-y-1.5">
                     <label className="text-slate-300 font-bold flex items-center justify-between">
-                      <span>OpenAI API Key (Áudio TTS + GPT-4o-mini):</span>
-                      <span className="text-[10px] text-emerald-400 font-normal">Recomendado ($0.015/1k)</span>
+                      <span>Google Gemini API Key (Gerador de Roteiros):</span>
+                      <span className="text-[10px] text-sky-400 font-normal">Recomendado (Plano Grátis)</span>
                     </label>
                     <input
                       type="password"
-                      placeholder="sk-proj-..."
-                      value={apiKeys.openaiApiKey || ''}
-                      onChange={(e) => setApiKeys({ ...apiKeys, openaiApiKey: e.target.value })}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white font-mono focus:outline-none focus:border-amber-400"
+                      placeholder="AIza..."
+                      value={apiKeys.geminiApiKey || ''}
+                      onChange={(e) => setApiKeys({ ...apiKeys, geminiApiKey: e.target.value })}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white font-mono focus:outline-none focus:border-sky-400"
                     />
                   </div>
 
@@ -1191,7 +1186,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                     </label>
                     <input
                       type="password"
-                      placeholder="xi-..."
+                      placeholder="sk_..."
                       value={apiKeys.elevenlabsApiKey || ''}
                       onChange={(e) => setApiKeys({ ...apiKeys, elevenlabsApiKey: e.target.value })}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white font-mono focus:outline-none focus:border-purple-400"
@@ -1211,30 +1206,14 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 {/* Live Audio Synthesis Test Lab */}
                 <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <h5 className="font-brand font-black text-xs text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
+                    <h5 className="font-brand font-black text-xs text-purple-300 uppercase tracking-wider flex items-center gap-1.5">
                       <Headphones className="w-4 h-4" />
-                      Laboratório de Teste de Áudio ({testTtsProvider === 'openai' ? 'OpenAI TTS - $0,015/1k' : 'ElevenLabs'})
+                      Laboratório de Teste de Áudio
                     </h5>
                     <div className="flex items-center gap-1.5">
                       <button
                         type="button"
-                        onClick={() => setTestTtsProvider('openai')}
-                        className={`px-2.5 py-1 rounded-lg text-[10px] font-bold font-brand transition-all ${
-                          testTtsProvider === 'openai'
-                            ? 'bg-amber-400 text-slate-950 shadow-sm'
-                            : 'bg-slate-800 text-slate-400 hover:text-white'
-                        }`}
-                      >
-                        OpenAI TTS (Recomendado)
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setTestTtsProvider('elevenlabs')}
-                        className={`px-2.5 py-1 rounded-lg text-[10px] font-bold font-brand transition-all ${
-                          testTtsProvider === 'elevenlabs'
-                            ? 'bg-purple-500 text-white shadow-sm'
-                            : 'bg-slate-800 text-slate-400 hover:text-white'
-                        }`}
+                        className="px-2.5 py-1 rounded-lg text-[10px] font-bold font-brand transition-all bg-purple-500 text-white shadow-sm"
                       >
                         ElevenLabs
                       </button>
@@ -1248,28 +1227,18 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         value={testSpeechText}
                         onChange={(e) => setTestSpeechText(e.target.value)}
                         placeholder="Digite um texto bíblico para testar a voz..."
-                        className="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-amber-400"
+                        className="w-full px-3.5 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-purple-400"
                       />
                     </div>
 
                     <div className="flex gap-2">
-                      {testTtsProvider === 'openai' ? (
-                        <select
-                          value={testSpeechVoice}
-                          onChange={(e: any) => setTestSpeechVoice(e.target.value)}
-                          className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-xs font-bold focus:outline-none focus:border-amber-400 flex-1 min-w-0"
-                        >
-                          <option value="nova">Nova (Narradora Infantil)</option>
-                          <option value="onyx">Onyx (Voz de Deus / Solene)</option>
-                          <option value="echo">Echo (Davi / Menino Valente)</option>
-                          <option value="shimmer">Shimmer (Rainha Ester)</option>
-                          <option value="fable">Fable (Noé / Patriarca)</option>
-                        </select>
-                      ) : (
-                        <div className="px-3 py-2 rounded-xl bg-slate-800 border border-purple-500/40 text-purple-300 text-xs font-bold flex-1 flex items-center justify-center">
-                          Voz Multilingual v2
-                        </div>
-                      )}
+                      <input
+                        type="text"
+                        placeholder="Voice ID"
+                        value={testSpeechVoice}
+                        onChange={(e) => setTestSpeechVoice(e.target.value)}
+                        className="w-24 px-2 py-1 rounded-xl bg-slate-800 border border-purple-500/40 text-purple-300 text-xs font-bold focus:outline-none focus:border-purple-400"
+                      />
 
                       <button
                         type="button"
@@ -1302,7 +1271,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   <div className="flex items-center justify-between">
                     <h5 className="font-brand font-black text-xs text-sky-300 uppercase tracking-wider flex items-center gap-1.5">
                       <Sparkles className="w-4 h-4 text-sky-400" />
-                      Laboratório de Roteiros Bíblicos com GPT-4o-mini (Custo: $0,001 / livro)
+                      Laboratório de Roteiros Bíblicos com Gemini 1.5 (Plano Grátis)
                     </h5>
                     <span className="text-[10px] text-slate-400">Geração de Roteiro + Quiz</span>
                   </div>
