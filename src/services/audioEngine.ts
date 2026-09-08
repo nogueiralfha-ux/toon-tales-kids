@@ -1075,9 +1075,12 @@ class CinematicAudioEngine {
     this.duckMusic(false);
   }
 
+  public currentEpisodeId: string | null = null;
+
   // --- Episode Playback Sequencer ---
   public startEpisode(
     scenes: Scene[],
+    episodeId?: string,
     startSceneIndex = 0,
     startLineIndex = 0,
     callbacks?: {
@@ -1092,6 +1095,7 @@ class CinematicAudioEngine {
   ) {
     this.initContext();
     this.scenes = scenes;
+    this.currentEpisodeId = episodeId || null;
     this.currentSceneIndex = startSceneIndex;
     this.currentLineIndex = startLineIndex;
 

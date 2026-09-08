@@ -353,7 +353,7 @@ export default function App() {
   // Playback start
   const startPlayback = (scenesToPlay?: Scene[], sceneIdx = currentSceneIndex, lineIdx = 0) => {
     const activeScenes = scenesToPlay || currentScenes;
-    audioEngine.startEpisode(activeScenes, sceneIdx, lineIdx, {
+    audioEngine.startEpisode(activeScenes, currentEpisodeId || 't1e1', sceneIdx, lineIdx, {
       onLineStart: (lineId, sceneId) => {
         setIsPauseActive(false);
         setActiveLineId(lineId);
@@ -739,7 +739,7 @@ export default function App() {
               setIsAuthModalOpen(true);
             }}
             onEnterPlatform={() => {
-              setAuthModalMode('login');
+              setAuthModalMode('register');
               setIsAuthModalOpen(true);
             }}
             onOpenBiblicalSales={() => setActiveTab('landing')}
@@ -760,7 +760,7 @@ export default function App() {
               setIsAuthModalOpen(true);
             }}
             onEnterPlatform={() => {
-              setAuthModalMode('login');
+              setAuthModalMode('register');
               setIsAuthModalOpen(true);
             }}
             onOpenPortugueseVersion={() => {

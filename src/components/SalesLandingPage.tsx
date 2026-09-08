@@ -302,7 +302,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
         },
       ];
 
-      audioEngine.startEpisode(demoScenes, 0, 0, {
+      audioEngine.startEpisode(demoScenes, undefined, 0, 0, {
         onPlaybackStateChange: (playing) => setIsPlayingDemo(playing),
         onEpisodeComplete: () => setIsPlayingDemo(false),
       });

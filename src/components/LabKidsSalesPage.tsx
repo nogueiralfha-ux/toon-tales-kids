@@ -28,6 +28,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { LAB_KIDS_EPISODES, SCIENCE_TRACKS } from '../data/labKidsData';
+import { CheckoutLeadModal } from './CheckoutLeadModal';
+import { SupportedCurrency } from '../config/checkoutConfig';
 
 interface LabKidsSalesPageProps {
   onOpenAuth: (mode?: 'login' | 'register') => void;
@@ -47,6 +49,13 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [timeLeft, setTimeLeft] = useState({ hours: 3, minutes: 42, seconds: 18 });
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState<boolean>(false);
+  const [selectedPlan, setSelectedPlan] = useState<string>('labkids_unico');
+
+  const handleCheckout = (planId: string) => {
+    setSelectedPlan(planId);
+    setIsCheckoutModalOpen(true);
+  };
 
   // Countdown timer
   useEffect(() => {
@@ -476,11 +485,11 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
             Escolha o Seu Plano de Acesso
           </h2>
           <p className="text-slate-600 text-sm sm:text-base">
-            ⚡ Planos Mensais e Anuais Flexíveis • Cancele quando quiser • Acesso Imediato para toda a Família!
+            ⚡ Pagamento Único • Sem Mensalidades • Acesso Vitalício Imediato para toda a Família!
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="max-w-md mx-auto">
           
           {/* PLANO 1: LAB KIDS INDEPENDENTE */}
           <div className="p-8 rounded-3xl bg-white border-2 border-purple-300 shadow-xl flex flex-col justify-between space-y-6">
@@ -494,13 +503,13 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
 
               {/* Price Tag */}
               <div className="pt-2">
-                <div className="text-xs text-slate-400">Plano Pessoal (1 Filho)</div>
-                <div className="flex items-baseline gap-1">
+                <div className="text-xs text-slate-400">Acesso Vitalício (Sem Mensalidades)</div>
+                <div className="flex items-baseline gap-1 mt-1">
                   <span className="text-sm font-bold text-slate-700">R$</span>
-                  <span className="text-4xl sm:text-5xl font-black text-purple-700">37,00</span>
-                  <span className="text-xs text-slate-500 font-bold">/ mês</span>
+                  <span className="text-4xl sm:text-5xl font-black text-purple-700">57,00</span>
+                  <span className="text-xs text-slate-500 font-bold">/ único</span>
                 </div>
-                <div className="text-[11px] text-purple-600 font-bold mt-1">Ou Plano Familiar (3 Filhos) por R$ 79,00 / mês</div>
+                <div className="text-[11px] text-purple-600 font-bold mt-1">Pagamento Único • Acesso para toda a família</div>
               </div>
 
               {/* Feature List */}
@@ -529,70 +538,10 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
             </div>
 
             <button
-              onClick={() => onEnterPlatform()}
+              onClick={() => handleCheckout('labkids_unico')}
               className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black text-center text-sm uppercase tracking-wider shadow-lg shadow-purple-400/30 hover:scale-105 active:scale-95 transition-all block"
             >
-              Assinar Só Lab Kids (R$ 37,00/mês)
-            </button>
-          </div>
-
-          {/* PLANO 2: SUPER COMBO VIP (TUDO EM 1) */}
-          <div className="relative p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 text-white border-4 border-amber-400 shadow-2xl flex flex-col justify-between space-y-6">
-            
-            {/* Best Value Ribbon */}
-            <div className="absolute -top-4 right-6 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-lg">
-              ⭐ MAIS VENDIDO • CAMPEÃO MENSAL
-            </div>
-
-            <div className="space-y-4">
-              <div className="inline-block px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-black uppercase tracking-wider">
-                👑 Super Combo VIP Tudo
-              </div>
-              
-              <h3 className="text-2xl sm:text-3xl font-black text-white">COMBO VIP TUDO</h3>
-              <p className="text-xs text-slate-300">Acesso ilimitado a TUDO: Histórias Bíblicas + Lab Kids + Kit 100 Atividades + Estúdio 3D!</p>
-
-              {/* Price Tag */}
-              <div className="pt-2">
-                <div className="text-xs text-slate-400">Plano Pessoal (1 Filho)</div>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-sm font-bold text-amber-400">R$</span>
-                  <span className="text-4xl sm:text-5xl font-black text-amber-400">97,90</span>
-                  <span className="text-xs text-slate-300 font-bold">/ mês</span>
-                </div>
-                <div className="text-[11px] text-emerald-400 font-bold mt-1">Ou Plano Anual por R$ 970,90 / ano</div>
-              </div>
-
-              {/* Feature List */}
-              <div className="space-y-2.5 pt-4 border-t border-white/10 text-xs font-semibold text-slate-200">
-                <div className="flex items-center gap-2 text-amber-300 font-bold">
-                  <Sparkles className="w-4 h-4 shrink-0 fill-current" />
-                  <span>30 Aulas Lab Kids de Ciências (Tudo Incluso)</span>
-                </div>
-                <div className="flex items-center gap-2 text-amber-300 font-bold">
-                  <Sparkles className="w-4 h-4 shrink-0 fill-current" />
-                  <span>34 Histórias Bíblicas em Áudio 3D (Temporadas 1 a 5)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Kit 100 Atividades em PDF A4 + Estúdio de Pintura 3D</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Acesso Ilimitado em Português Nativo</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Portal dos Pais com Relatório de Progresso</span>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => onEnterPlatform()}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-center text-sm uppercase tracking-wider shadow-xl shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all block ring-2 ring-amber-300"
-            >
-              Garantir Combo VIP Completo (R$ 97,90/mês)
+              Garantir Lab Kids (R$ 57,00 Único)
             </button>
           </div>
         </div>
@@ -676,6 +625,18 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
           Dúvidas? Fale no WhatsApp
         </span>
       </a>
+
+      {/* MODAL DE CHECKOUT / LEAD CAPTURE */}
+      <CheckoutLeadModal
+        isOpen={isCheckoutModalOpen}
+        onClose={() => setIsCheckoutModalOpen(false)}
+        planId={selectedPlan}
+        currency="BRL"
+        onSuccessAccess={() => {
+          setIsCheckoutModalOpen(false);
+          if (onEnterPlatform) onEnterPlatform();
+        }}
+      />
 
     </div>
   );

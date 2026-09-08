@@ -644,7 +644,7 @@ export const LabKidsView: React.FC<LabKidsViewProps> = ({
                   Desbloqueie o Lab Kids!
                 </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-300">
-                  Tenha acesso a todos os 30 episódios de ciências, 5 trilhas educativas e 90 quizzes com medalhas e XP por apenas <strong className="text-purple-600 dark:text-purple-400">R$ 37,00/mês</strong> ou no Super Combo VIP!
+                  Tenha acesso a todos os 30 episódios de ciências, 5 trilhas educativas e 90 quizzes com medalhas e XP por apenas <strong className="text-purple-600 dark:text-purple-400">R$ 57,00 (Preço Único)</strong> ou no Super Combo VIP!
                 </p>
               </div>
 
@@ -672,7 +672,7 @@ export const LabKidsView: React.FC<LabKidsViewProps> = ({
                   className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-black text-base shadow-lg shadow-purple-500/30 transition-all"
                 >
                   <Sparkles className="w-5 h-5" />
-                  Ver Planos de Assinatura (a partir de R$ 37,00/mês)
+                  Garantir Acesso (Pagamento Único)
                 </a>
 
                 <button

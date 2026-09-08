@@ -267,6 +267,82 @@ export const CHECKOUT_PLANS_CONFIG: Record<string, PlanConfig> = {
       'Acesso Imediato ao Arquivo Digital em Alta Resolução (PDF)',
     ],
   },
+  labkids_unico: {
+    id: 'labkids_unico',
+    name: 'Lab Kids (Pagamento Único)',
+    badge: '🔥 ACESSO VITALÍCIO LAB KIDS',
+    billingType: 'vitalicio_taxa_unica',
+    prices: {
+      BRL: {
+        currency: 'BRL',
+        symbol: 'R$',
+        priceDisplay: 'R$ 57,00 (Taxa Única)',
+        cashPrice: 57.0,
+        installmentPrice: 'R$ 57,00',
+      },
+      USD: {
+        currency: 'USD',
+        symbol: '$',
+        priceDisplay: '$ 12.90 (One-time)',
+        cashPrice: 12.9,
+        installmentPrice: '$ 12.90',
+      },
+      EUR: {
+        currency: 'EUR',
+        symbol: '€',
+        priceDisplay: '€ 11.90',
+        cashPrice: 11.9,
+        installmentPrice: '€ 11.90',
+      },
+    },
+    hotmartCheckoutUrl: '',
+    stripeCheckoutUrl: '',
+    asaasPaymentLink: '',
+    features: [
+      'Acesso Vitalício às 30 Aulas Animadas em Full HD',
+      '5 Trilhas Científicas',
+      '90 Quizzes Interativos com XP',
+      'Garantia de 7 Dias',
+    ],
+  },
+  combo_labkids_unico: {
+    id: 'combo_labkids_unico',
+    name: 'Combo VIP Tudo (Lab Kids + Histórias)',
+    badge: '👑 COMBO VIP TUDO',
+    billingType: 'vitalicio_taxa_unica',
+    prices: {
+      BRL: {
+        currency: 'BRL',
+        symbol: 'R$',
+        priceDisplay: 'R$ 97,90 (Taxa Única)',
+        cashPrice: 97.9,
+        installmentPrice: 'R$ 97,90',
+      },
+      USD: {
+        currency: 'USD',
+        symbol: '$',
+        priceDisplay: '$ 19.90 (One-time)',
+        cashPrice: 19.9,
+        installmentPrice: '$ 19.90',
+      },
+      EUR: {
+        currency: 'EUR',
+        symbol: '€',
+        priceDisplay: '€ 17.90',
+        cashPrice: 17.9,
+        installmentPrice: '€ 17.90',
+      },
+    },
+    hotmartCheckoutUrl: '',
+    stripeCheckoutUrl: '',
+    asaasPaymentLink: '',
+    features: [
+      '30 Aulas Lab Kids de Ciências',
+      '34 Histórias Bíblicas em Áudio 3D',
+      'Kit 100 Atividades em PDF A4 + Estúdio de Pintura 3D',
+      'Acesso Ilimitado em Português Nativo',
+    ],
+  },
 };
 
 export interface CapturedLead {

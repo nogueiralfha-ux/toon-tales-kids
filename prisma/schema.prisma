@@ -56,6 +56,22 @@ enum XpSource {
   MANUAL_ADJUSTMENT
 }
 
+enum VideoType {
+  PERSONALIZADO
+  HOMENAGEM
+}
+
+enum VideoStatus {
+  DRAFT
+  PROCESSING
+  GENERATING_IMAGES
+  GENERATING_AUDIO
+  GENERATING_VIDEO
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
 model User {
   id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   authUserId         String             @unique @db.Uuid
@@ -75,10 +91,48 @@ model User {
   achievements       UserAchievement[]
   xpTransactions     XpTransaction[]
   subscriptions      Subscription[]
+  videoProjects      VideoProject[]
+  personalizedEpisodes PersonalizedEpisode[]
+  listeningStats       ListeningStats[]
 
   @@index([parentId])
   @@index([role])
   @@map("users")
+}
+
+model VideoProject {
+  id                    String      @id @default(cuid())
+  userId                String      @db.Uuid
+  type                  VideoType
+  title                 String
+  description           String
+  duration              Int
+  status                VideoStatus @default(DRAFT)
+  protagonistName       String
+  protagonistAge        Int?
+  protagonistGender     String?
+  protagonistPhotoUrl   String?
+  tributeType           String?
+  tributeTarget         String?
+  tributeRelation       String?
+  customMessage         String?
+  imageRightsConsent    Boolean     @default(false)
+  consentDate           DateTime?
+  audioScript           String?
+  audioUrl              String?
+  videoUrl              String?
+  thumbnailUrl          String?
+  videoDuration         Int?
+  isPaid                Boolean     @default(false)
+  paymentId             String?
+  paymentAmount         Float?
+  prompt                String?
+  style                 String      @default("infantil_colorido")
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+  user                  User        @relation(fields: [userId], references: [id])
+
+  @@index([userId, status])
 }
 
 model Season {
@@ -111,7 +165,7 @@ model SeasonTranslation {
 
 model Episode {
   id                 String              @id @default(cuid())
-  seasonId           String
+  seasonId           String?
   episodeNumber      Int
   status             EpisodeStatus       @default(DRAFT)
   durationSeconds    Int?
@@ -119,15 +173,36 @@ model Episode {
   publishedAt        DateTime?
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
-  season             Season              @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  seasonObj          Season?             @relation(fields: [seasonId], references: [id], onDelete: Cascade)
   translations       EpisodeTranslation[]
   audioAssets        AudioAsset[]
   progress           LearningProgress[]
   quiz               Quiz?
   characters         EpisodeCharacter[]
 
-  @@unique([seasonId, episodeNumber])
+  // Novos campos para catálogo
+  title           String?
+  description     String?
+  audioUrl        String?
+  duration        Int?
+  ageRange        String?
+  character       String?
+  season          String?
+  coverColor      String?
+  isReady         Boolean  @default(false)
+  isPremium       Boolean  @default(false)
+  playCount       Int      @default(0)
+  totalListenTime Int      @default(0) // em segundos
+  averageRating   Float?
+  tags            String[] // ["aventura", "coragem", "fé"]
+  thumbnailUrl    String?
+
+  personalizedEpisodes PersonalizedEpisode[]
+  listeningStats       ListeningStats[]
+
   @@index([status])
+  @@index([character, ageRange])
+  @@index([isReady, season])
   @@map("episodes")
 }
 
@@ -396,4 +471,38 @@ model QuizAnswer {
 
   @@unique([attemptId, questionId])
   @@map("quiz_answers")
+}
+
+// Adicionar model para personalizações
+model PersonalizedEpisode {
+  id              String   @id @default(cuid())
+  userId          String   @db.Uuid
+  episodeId       String
+  childName       String
+  childAge        Int?
+  customAudioUrl  String
+  baseEpisodeId   String   // referência ao episódio original
+  status          String   @default("processing") // processing, ready, failed
+  createdAt       DateTime @default(now())
+  
+  user            User     @relation(fields: [userId], references: [id])
+  baseEpisode     Episode  @relation(fields: [baseEpisodeId], references: [id])
+  
+  @@index([userId, createdAt])
+}
+
+// Adicionar model para métricas
+model ListeningStats {
+  id              String   @id @default(cuid())
+  userId          String   @db.Uuid
+  episodeId       String
+  listenDate      DateTime @default(now())
+  listenDuration  Int      // segundos ouvidos
+  completed       Boolean  @default(false)
+  device          String?  // mobile, desktop, tablet
+  
+  user            User     @relation(fields: [userId], references: [id])
+  episode         Episode  @relation(fields: [episodeId], references: [id])
+
+  @@index([userId, listenDate])
 }
