@@ -1414,7 +1414,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Planos Anuais (50% OFF)</span>
+                <span>Planos Anuais (+ Bônus)</span>
               </button>
 
               <button
@@ -1478,8 +1478,8 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                   <User className="w-3.5 h-3.5 text-slate-500" /> 1 Filho (Individual)
                 </span>
                 {billingCycle === 'annual' && (
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase font-brand">
-                    50% OFF
+                  <span className="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10px] font-black uppercase font-brand">
+                    + BÔNUS LAB KIDS
                   </span>
                 )}
               </div>
@@ -1489,7 +1489,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 {billingCycle === 'annual' ? (
                   <div className="mt-2 space-y-0.5">
                     <span className="text-xs text-slate-400 font-medium">
-                      {selectedCurrency === 'BRL' ? 'De R$ 238,80 por apenas' : '50% OFF Annual Promo'}
+                      {selectedCurrency === 'BRL' ? 'Valor Anual' : 'Annual Plan'}
                     </span>
                     <div className="flex items-baseline gap-1">
                       <span className="text-3xl sm:text-4xl font-black text-slate-900 font-brand">
@@ -1521,6 +1521,11 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-500" /> 4 Temporadas em Áudio 3D (34 Histórias Ilimitadas)
                 </li>
+                {billingCycle === 'annual' && (
+                  <li className="flex items-center gap-2 text-purple-700 font-bold">
+                    <Sparkles className="w-4 h-4 text-purple-600 shrink-0" /> BÔNUS: 30 Aulas Lab Kids em PT
+                  </li>
+                )}
                 <li className="flex items-center gap-2 text-indigo-700 font-bold">
                   <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" /> Histórias Personalizadas por IA (Créditos de Criação)
                 </li>
@@ -1540,7 +1545,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
               onClick={() => handleCheckout(billingCycle === 'annual' ? 'pessoal_anual' : 'pessoal_mensal')}
               className="w-full py-3.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-black text-xs font-brand uppercase tracking-wider transition-colors shadow-2xs"
             >
-              {billingCycle === 'annual' ? 'Assinar Pessoal Anual (R$ 299)' : 'Assinar Pessoal Mensal (R$ 49)'}
+              {billingCycle === 'annual' ? 'Assinar Pessoal Anual (R$ 598,80)' : 'Assinar Pessoal Mensal (R$ 49,90)'}
             </button>
           </div>
 
@@ -1552,8 +1557,8 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                   <Users className="w-3.5 h-3.5 text-amber-600" /> Até 3 Filhos (Família)
                 </span>
                 {billingCycle === 'annual' && (
-                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase font-brand">
-                    ⭐ MAIS POPULAR
+                  <span className="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-800 text-[10px] font-black uppercase font-brand">
+                    + BÔNUS LAB KIDS
                   </span>
                 )}
               </div>
@@ -1563,7 +1568,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 {billingCycle === 'annual' ? (
                   <div className="mt-2 space-y-0.5">
                     <span className="text-xs text-slate-400 font-medium">
-                      {selectedCurrency === 'BRL' ? 'De R$ 1.164,00 por apenas' : 'Annual Family Discount'}
+                      {selectedCurrency === 'BRL' ? 'Valor Anual' : 'Annual Plan'}
                     </span>
                     <div className="flex items-baseline gap-1">
                       <span className="text-3xl sm:text-4xl font-black text-slate-900 font-brand">
@@ -1595,6 +1600,11 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-emerald-500" /> 4 Temporadas em Áudio 3D (34 Histórias Ilimitadas)
                 </li>
+                {billingCycle === 'annual' && (
+                  <li className="flex items-center gap-2 text-purple-700 font-bold">
+                    <Sparkles className="w-4 h-4 text-purple-600 shrink-0" /> BÔNUS: 30 Aulas Lab Kids em PT
+                  </li>
+                )}
                 <li className="flex items-center gap-2 text-indigo-700 font-bold">
                   <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" /> Criação Ampliada de Histórias com IA
                 </li>
@@ -1614,7 +1624,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
               onClick={() => handleCheckout(billingCycle === 'annual' ? 'familiar_anual' : 'familiar_mensal')}
               className="w-full py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-black text-xs font-brand uppercase tracking-wider transition-colors shadow-md shadow-amber-200"
             >
-              {billingCycle === 'annual' ? 'Assinar Familiar Anual (R$ 997)' : 'Assinar Familiar Mensal (R$ 97)'}
+              {billingCycle === 'annual' ? 'Assinar Familiar Anual (R$ 1.164)' : 'Assinar Familiar Mensal (R$ 97)'}
             </button>
           </div>
 
@@ -1727,7 +1737,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
             {/* Produto 1: Só Bíblico */}
             <div className="p-5 rounded-2xl bg-slate-900 border border-slate-700 flex flex-col justify-between space-y-4">
               <div className="space-y-2">
@@ -1739,7 +1749,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                   34 histórias bíblicas em áudio 3D, 5 temporadas, quizzes e galeria 3D dos Heróis da Fé.
                 </p>
                 <div className="text-xl font-black text-amber-400 font-brand">
-                  {modularPlanMode === 'pessoal' ? 'R$ 49,90' : 'R$ 97,90'}{' '}
+                  {modularPlanMode === 'pessoal' ? 'R$ 49,90' : 'R$ 97,00'}{' '}
                   <span className="text-[10px] text-slate-400 font-normal">/ mês</span>
                 </div>
               </div>
@@ -1756,18 +1766,18 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
               <div className="space-y-2">
                 <span className="text-3xl">🔬</span>
                 <h4 className="font-brand font-black text-sm text-white">
-                  Só Canal Lab Kids ({modularPlanMode === 'pessoal' ? '1 Filho' : '3 Filhos'})
+                  Só Canal Lab Kids
                 </h4>
                 <p className="text-[11px] text-slate-300 leading-relaxed">
                   30 episódios de ciências, 5 trilhas vivas e 90 quizzes com ganho de XP.
                 </p>
                 <div className="text-xl font-black text-purple-400 font-brand">
-                  {modularPlanMode === 'pessoal' ? 'R$ 37,00' : 'R$ 79,00'}{' '}
-                  <span className="text-[10px] text-slate-400 font-normal">/ mês</span>
+                  R$ 57,00{' '}
+                  <span className="text-[10px] text-slate-400 font-normal">taxa única</span>
                 </div>
               </div>
               <button
-                onClick={() => handleCheckout(modularPlanMode === 'pessoal' ? 'pessoal_mensal' : 'familiar_mensal')}
+                onClick={() => handleCheckout('labkids_unico')}
                 className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase font-brand transition-all"
               >
                 Assinar Só Lab Kids
@@ -1787,41 +1797,10 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 </div>
               </div>
               <button
-                onClick={() => handleCheckout('vitalicio')}
+                onClick={() => handleCheckout('kit_atividades_100')}
                 className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase font-brand transition-all"
               >
                 Comprar Atividades (R$ 27,90)
-              </button>
-            </div>
-
-            {/* Produto 4: COMBO VIP TUDO CAMPEÃO */}
-            <div className="p-5 rounded-2xl bg-gradient-to-b from-amber-500/20 to-purple-500/20 border-2 border-amber-400 flex flex-col justify-between space-y-4 relative">
-              <div className="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-brand font-black text-[9px] uppercase shadow-sm">
-                ⭐ CAMPEÃO MENSAL
-              </div>
-              <div className="space-y-2">
-                <span className="text-3xl">👑</span>
-                <h4 className="font-brand font-black text-sm text-amber-300">
-                  COMBO VIP TUDO ({modularPlanMode === 'pessoal' ? '1 Filho' : '3 Filhos'})
-                </h4>
-                <p className="text-[11px] text-slate-200 leading-relaxed">
-                  Bíblico + Lab Kids + Kit 100 Atividades + Estúdio 3D + Bônus!
-                </p>
-                <div className="text-2xl font-black text-amber-400 font-brand">
-                  {modularPlanMode === 'pessoal' ? 'R$ 97,90' : 'R$ 147,90'}{' '}
-                  <span className="text-[10px] text-slate-400 font-normal">/ mês</span>
-                </div>
-                <div className="text-[10px] text-emerald-400 font-bold">
-                  {modularPlanMode === 'pessoal'
-                    ? 'Ou Anual por R$ 970,90 / ano'
-                    : 'Ou Anual por R$ 1.670,00 / ano'}
-                </div>
-              </div>
-              <button
-                onClick={() => handleCheckout(modularPlanMode === 'pessoal' ? 'pessoal_anual' : 'familiar_anual')}
-                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs uppercase shadow-md transition-all font-brand"
-              >
-                Garantir Combo VIP
               </button>
             </div>
           </div>
