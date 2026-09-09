@@ -463,32 +463,8 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
             Get Your Access to <span className="text-purple-600">LabKids</span> Now!
           </h2>
           <p className="text-slate-600 text-sm sm:text-base">
-            ⚡ Flexible Monthly & Annual Plans • Cancel Anytime • Instant Family Access!
+            ⚡ Complete Access • One-time Payment!
           </p>
-
-          <div className="inline-flex items-center p-1.5 rounded-2xl bg-slate-100 border border-slate-300 shadow-inner mt-2">
-            <button
-              onClick={() => setSelectedPlanMode('single')}
-              className={`px-5 py-2 rounded-xl text-xs font-black font-brand transition-all ${
-                selectedPlanMode === 'single'
-                  ? 'bg-purple-600 text-white shadow-md scale-105'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              👤 Single Child Pass
-            </button>
-
-            <button
-              onClick={() => setSelectedPlanMode('family')}
-              className={`px-5 py-2 rounded-xl text-xs font-black font-brand transition-all ${
-                selectedPlanMode === 'family'
-                  ? 'bg-purple-600 text-white shadow-md scale-105'
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              👨‍👩‍👧‍👦 Family Pass (3 Kids)
-            </button>
-          </div>
         </div>
 
         <div className="max-w-md mx-auto">
@@ -507,7 +483,7 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
 
               {/* Price Tag */}
               <div className="pt-2">
-                <div className="text-xs text-slate-400">Acesso Vitalício (Sem Mensalidades)</div>
+                <div className="text-xs text-slate-400">Acesso Completo (Sem Mensalidades)</div>
                 <div className="flex flex-col mt-1">
                   <span className="text-sm font-bold text-slate-400 line-through">De R$ 97,00</span>
                   <div className="flex items-baseline gap-1">
@@ -544,9 +520,6 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
               </div>
             </div>
 
-            <a
-              href={
-                selectedPlanMode === 'single'
             <button
               onClick={() => handleCheckout('labkids_unico')}
               className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black text-center text-sm uppercase tracking-wider shadow-lg shadow-purple-400/30 hover:scale-105 active:scale-95 transition-all block"
