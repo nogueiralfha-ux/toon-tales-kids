@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { LAB_KIDS_EPISODES, SCIENCE_TRACKS } from '../data/labKidsData';
+import { SocialProofNotification } from './SocialProofNotification';
 
 interface LabKidsEnglishSalesPageProps {
   onOpenAuth: (mode?: 'login' | 'register') => void;
@@ -608,7 +609,7 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
           Need Help? Chat with Us
         </span>
       </a>
-
+      <SocialProofNotification language="en" />
     </div>
   );
 };

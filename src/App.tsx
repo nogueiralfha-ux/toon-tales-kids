@@ -1024,6 +1024,15 @@ export default function App() {
             <span>•</span>
             <button onClick={() => setActiveTab('landing')} className="hover:text-orange-600">Vitrine</button>
           </div>
+
+          <div className="pt-6 mt-6 border-t border-slate-200/60 max-w-3xl mx-auto space-y-3">
+            <p className="text-[10px] text-slate-400 leading-relaxed text-center">
+              Este site não é afiliado ao Facebook ou a qualquer entidade do Facebook. Depois que você sair do Facebook, a responsabilidade não é deles e sim do nosso site.
+            </p>
+            <p className="text-[11px] text-slate-500 font-medium">
+              Suporte: <a href="mailto:alssolucoesltda@gmail.com" className="text-amber-600 hover:underline">alssolucoesltda@gmail.com</a>
+            </p>
+          </div>
         </div>
       </footer>
 

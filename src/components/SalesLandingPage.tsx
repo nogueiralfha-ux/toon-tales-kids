@@ -54,6 +54,7 @@ import {
   Palette,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { SocialProofNotification } from './SocialProofNotification';
 
 interface SalesLandingPageProps {
   onEnterPlatform?: () => void;
@@ -2251,6 +2252,8 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
         isOpen={isAmbassadorModalOpen}
         onClose={() => setIsAmbassadorModalOpen(false)}
       />
+
+      <SocialProofNotification language="pt" />
     </div>
   );
 };

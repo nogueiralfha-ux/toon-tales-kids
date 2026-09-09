@@ -30,6 +30,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { LAB_KIDS_EPISODES, SCIENCE_TRACKS } from '../data/labKidsData';
 import { CheckoutLeadModal } from './CheckoutLeadModal';
 import { SupportedCurrency } from '../config/checkoutConfig';
+import { SocialProofNotification } from './SocialProofNotification';
 
 interface LabKidsSalesPageProps {
   onOpenAuth: (mode?: 'login' | 'register') => void;
@@ -641,6 +642,7 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
         }}
       />
 
+      <SocialProofNotification language="pt" />
     </div>
   );
 };
