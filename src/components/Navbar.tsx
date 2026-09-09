@@ -275,28 +275,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>Heróis da Fé</span>
           </button>
 
-          <button
-            onClick={() => {
-              const hasLabKids = currentUser?.unlockedModules?.includes('labkids') || isAdmin;
-              if (hasLabKids) {
-                onSelectTab('labkids');
-              } else {
-                onSelectTab('labkids-sales');
-              }
-            }}
-            className={`px-3 py-1.5 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 relative ${
-              activeTab === 'labkids' || activeTab === 'labkids-sales'
-                ? 'bg-purple-600 text-white shadow-md shadow-purple-200 scale-105 ring-2 ring-purple-300'
-                : 'text-purple-700 hover:text-purple-950 hover:bg-purple-50'
-            }`}
-            title="LabKids: Laboratório de Ciências e Descobertas"
-          >
-            <Sparkles className="w-4 h-4 text-purple-500 animate-pulse" />
-            <span>🔬 LabKids</span>
-            <span className="px-1.5 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[9px] font-black uppercase shadow-sm">
-              30 Aulas
-            </span>
-          </button>
 
           <button
             onClick={() => onSelectTab('favorites')}
@@ -539,15 +517,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span>Personagens</span>
         </button>
 
-        <button
-          onClick={() => onSelectTab('labkids')}
-          className={`flex flex-col items-center gap-0.5 text-[10px] font-black font-brand ${
-            activeTab === 'labkids' ? 'text-purple-600 font-extrabold' : 'text-slate-500'
-          }`}
-        >
-          <Sparkles className="w-5 h-5 text-purple-500" />
-          <span>LabKids</span>
-        </button>
 
         <button
           onClick={() => onSelectTab('profile')}
