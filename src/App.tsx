@@ -163,8 +163,8 @@ export default function App() {
         return 'dashboard';
       }
     }
-    // Default is always Sales Landing Page for Facebook Ads and new visitors!
-    return 'landing';
+    // Default is always the app for free access
+    return 'dashboard';
   });
 
   // URL route detection for hash / navigation changes
@@ -224,11 +224,14 @@ export default function App() {
         } else if (
           path.includes('vendas') ||
           hash.includes('vendas') ||
-          hash.includes('planos') ||
+          hash.includes('planos')
+        ) {
+          setActiveTab('landing');
+        } else if (
           path === '/' ||
           hash === ''
         ) {
-          setActiveTab('landing');
+          setActiveTab('dashboard');
         }
       }
     };
@@ -273,20 +276,9 @@ export default function App() {
   const [bonusXp, setBonusXp] = useState<number>(0);
 
   // Route Guard: Block access if not a paid subscriber (except admin)
+  // [REMOVED] - Access is now free for all users
   useEffect(() => {
-    const PROTECTED_TABS = ['dashboard', 'catalog', 'seasons', 'characters', 'heroes', 'favorites', 'profile', 'parents', 'player', 'script', 'soundboard', 'quiz', 'labkids'];
-    
-    if (PROTECTED_TABS.includes(activeTab)) {
-      const isMasterAdmin = currentUser?.email.toLowerCase() === 'nogueiralfha@gmail.com';
-      const isActiveSubscriber = currentUser?.planStatus === 'active';
-      
-      if (!isMasterAdmin && !isActiveSubscriber) {
-        setActiveTab('landing');
-        setTimeout(() => {
-          window.location.hash = 'planos';
-        }, 100);
-      }
-    }
+    // Free access enabled
   }, [activeTab, currentUser]);
 
   // Bedtime
