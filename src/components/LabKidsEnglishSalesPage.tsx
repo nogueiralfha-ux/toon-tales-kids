@@ -491,7 +491,7 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="max-w-md mx-auto">
           
           {/* PLAN 1: SOLO LAB KIDS */}
           <div className="p-8 rounded-3xl bg-white border-2 border-purple-300 shadow-xl flex flex-col justify-between space-y-6">
@@ -507,21 +507,16 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
 
               {/* Price Tag */}
               <div className="pt-2">
-                <div className="text-xs text-slate-400">
-                  {selectedPlanMode === 'single' ? 'Single Child Plan (1 Profile)' : 'Family Plan (3 Profiles)'}
+                <div className="text-xs text-slate-400">Acesso Vitalício (Sem Mensalidades)</div>
+                <div className="flex flex-col mt-1">
+                  <span className="text-sm font-bold text-slate-400 line-through">De R$ 97,00</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-sm font-bold text-slate-700">Por R$</span>
+                    <span className="text-4xl sm:text-5xl font-black text-purple-700">57,00</span>
+                    <span className="text-xs text-slate-500 font-bold">/ único</span>
+                  </div>
                 </div>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-sm font-bold text-slate-700">$</span>
-                  <span className="text-4xl sm:text-5xl font-black text-purple-700">
-                    {selectedPlanMode === 'single' ? '37.00' : '79.00'}
-                  </span>
-                  <span className="text-xs text-slate-500 font-bold">/ month</span>
-                </div>
-                <div className="text-[11px] text-purple-600 font-bold mt-1">
-                  {selectedPlanMode === 'single'
-                    ? 'Or Family Plan (3 Profiles) for $ 79.00 / month'
-                    : 'Unlimited access across all your family devices'}
-                </div>
+                <div className="text-[11px] text-purple-600 font-bold mt-1">Pagamento Único • Acesso para toda a família</div>
               </div>
 
               {/* Feature List */}
@@ -552,98 +547,12 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
             <a
               href={
                 selectedPlanMode === 'single'
-                  ? 'https://pay.hotmart.com/T107380286O?off=h7w8lkur'
-                  : 'https://pay.hotmart.com/T107380286O?off=zfw0lhek'
-              }
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => handleCheckout('labkids_unico')}
               className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black text-center text-sm uppercase tracking-wider shadow-lg shadow-purple-400/30 hover:scale-105 active:scale-95 transition-all block"
             >
-              Subscribe to Solo Lab Kids ({selectedPlanMode === 'single' ? '$37.00/mo' : '$79.00/mo'})
-            </a>
-          </div>
-
-          {/* PLAN 2: SUPER VIP ALL-ACCESS */}
-          <div className="relative p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-purple-950 text-white border-4 border-amber-400 shadow-2xl flex flex-col justify-between space-y-6">
-            <div className="absolute -top-4 right-6 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 text-xs font-black uppercase tracking-wider shadow-lg">
-              ⭐ BEST SELLER • MONTHLY CHAMPION
-            </div>
-
-            <div className="space-y-4">
-              <div className="inline-block px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-black uppercase tracking-wider">
-                👑 Super VIP All-in-One
-              </div>
-              
-              <h3 className="text-2xl sm:text-3xl font-black text-white">COMPLETE VIP COMBO</h3>
-              <p className="text-xs text-slate-300">
-                Unlimited access to EVERYTHING: 3D Audio Stories + Lab Kids + 100 Activity Books + 3D Studio!
-              </p>
-
-              {/* Price Tag */}
-              <div className="pt-2">
-                <div className="text-xs text-slate-400">
-                  {selectedPlanMode === 'single' ? 'Single Child Plan (1 Profile)' : 'Family Plan (3 Profiles)'}
-                </div>
-                <div className="flex items-baseline gap-1">
-                  <span className="text-sm font-bold text-amber-400">$</span>
-                  <span className="text-4xl sm:text-5xl font-black text-amber-400">
-                    {selectedPlanMode === 'single' ? '97.90' : '147.90'}
-                  </span>
-                  <span className="text-xs text-slate-300 font-bold">/ month</span>
-                </div>
-                <div className="text-[11px] text-emerald-400 font-bold mt-1">
-                  {selectedPlanMode === 'single' ? (
-                    <a
-                      href="https://pay.hotmart.com/T107380286O?off=rjonkcd3"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline hover:text-amber-300"
-                    >
-                      Or Annual Plan for $ 970.90 / year (Best Deal!)
-                    </a>
-                  ) : (
-                    'Or Annual Family Plan for $ 1,670.00 / year'
-                  )}
-                </div>
-              </div>
-
-              {/* Feature List */}
-              <div className="space-y-2.5 pt-4 border-t border-white/10 text-xs font-semibold text-slate-200">
-                <div className="flex items-center gap-2 text-amber-300 font-bold">
-                  <Sparkles className="w-4 h-4 shrink-0 fill-current" />
-                  <span>30 Lab Kids Science Lessons (All Included)</span>
-                </div>
-                <div className="flex items-center gap-2 text-amber-300 font-bold">
-                  <Sparkles className="w-4 h-4 shrink-0 fill-current" />
-                  <span>34 3D Audio Stories (Seasons 1 to 5)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>100 Activity Books (Printable A4 PDF) + 3D Coloring Studio</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Parental Portal with Progress Reports</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>7-Day 100% Risk-Free Guarantee</span>
-                </div>
-              </div>
-            </div>
-
-            <a
-              href={
-                selectedPlanMode === 'single'
-                  ? 'https://pay.hotmart.com/T107380286O?off=8sknyius'
-                  : 'https://pay.hotmart.com/T107380286O?off=a45xdqoj'
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-center text-sm uppercase tracking-wider shadow-xl shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all block ring-2 ring-amber-300"
-            >
-              Get Complete VIP Combo ({selectedPlanMode === 'single' ? '$97.90/mo' : '$147.90/mo'})
-            </a>
+              Get Lab Kids (R$ 57,00 Unique)
+            </button>
           </div>
         </div>
       </section>

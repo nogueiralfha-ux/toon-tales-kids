@@ -504,10 +504,13 @@ export const LabKidsSalesPage: React.FC<LabKidsSalesPageProps> = ({
               {/* Price Tag */}
               <div className="pt-2">
                 <div className="text-xs text-slate-400">Acesso Vitalício (Sem Mensalidades)</div>
-                <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-sm font-bold text-slate-700">R$</span>
-                  <span className="text-4xl sm:text-5xl font-black text-purple-700">57,00</span>
-                  <span className="text-xs text-slate-500 font-bold">/ único</span>
+                <div className="flex flex-col mt-1">
+                  <span className="text-sm font-bold text-slate-400 line-through">De R$ 97,00</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-sm font-bold text-slate-700">Por R$</span>
+                    <span className="text-4xl sm:text-5xl font-black text-purple-700">57,00</span>
+                    <span className="text-xs text-slate-500 font-bold">/ único</span>
+                  </div>
                 </div>
                 <div className="text-[11px] text-purple-600 font-bold mt-1">Pagamento Único • Acesso para toda a família</div>
               </div>
