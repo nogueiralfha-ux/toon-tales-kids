@@ -483,16 +483,16 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
 
               {/* Price Tag */}
               <div className="pt-2">
-                <div className="text-xs text-slate-400">Acesso Completo (Sem Mensalidades)</div>
+                <div className="text-xs text-slate-400">Full Access (No Monthly Fees)</div>
                 <div className="flex flex-col mt-1">
-                  <span className="text-sm font-bold text-slate-400 line-through">De R$ 97,00</span>
+                  <span className="text-sm font-bold text-slate-400 line-through">Regular $ 24.90</span>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-sm font-bold text-slate-700">Por R$</span>
-                    <span className="text-4xl sm:text-5xl font-black text-purple-700">57,00</span>
-                    <span className="text-xs text-slate-500 font-bold">/ único</span>
+                    <span className="text-sm font-bold text-slate-700">Only $</span>
+                    <span className="text-4xl sm:text-5xl font-black text-purple-700">12.90</span>
+                    <span className="text-xs text-slate-500 font-bold">/ once</span>
                   </div>
                 </div>
-                <div className="text-[11px] text-purple-600 font-bold mt-1">Pagamento Único • Acesso para toda a família</div>
+                <div className="text-[11px] text-purple-600 font-bold mt-1">One-time Payment • Access for the whole family</div>
               </div>
 
               {/* Feature List */}
@@ -524,7 +524,7 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
               onClick={() => handleCheckout('labkids_unico')}
               className="w-full py-4 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-black text-center text-sm uppercase tracking-wider shadow-lg shadow-purple-400/30 hover:scale-105 active:scale-95 transition-all block"
             >
-              Get Lab Kids (R$ 57,00 Unique)
+              Get Lab Kids ($ 12.90 Unique)
             </button>
           </div>
         </div>
