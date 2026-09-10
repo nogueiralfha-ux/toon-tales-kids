@@ -29,6 +29,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { LAB_KIDS_EPISODES, SCIENCE_TRACKS } from '../data/labKidsData';
 import { SocialProofNotification } from './SocialProofNotification';
+import { CheckoutLeadModal } from './CheckoutLeadModal';
 
 interface LabKidsEnglishSalesPageProps {
   onOpenAuth: (mode?: 'login' | 'register') => void;
@@ -45,6 +46,13 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
   const [timeLeft, setTimeLeft] = useState({ hours: 3, minutes: 42, seconds: 18 });
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
   const [selectedPlanMode, setSelectedPlanMode] = useState<'single' | 'family'>('single');
+  const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState<boolean>(false);
+  const [selectedPlan, setSelectedPlan] = useState<string>('labkids_unico');
+
+  const handleCheckout = (planId: string) => {
+    setSelectedPlan(planId);
+    setIsCheckoutModalOpen(true);
+  };
 
   // Countdown timer
   useEffect(() => {
@@ -610,6 +618,17 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
         </span>
       </a>
       <SocialProofNotification language="en" />
+      
+      <CheckoutLeadModal
+        isOpen={isCheckoutModalOpen}
+        onClose={() => setIsCheckoutModalOpen(false)}
+        planId={selectedPlan}
+        currency="USD"
+        onSuccessAccess={() => {
+          setIsCheckoutModalOpen(false);
+          if (onEnterPlatform) onEnterPlatform();
+        }}
+      />
     </div>
   );
 };

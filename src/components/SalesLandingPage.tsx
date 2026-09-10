@@ -1203,6 +1203,15 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 <span className="text-emerald-600 font-bold">â€¢</span>
                 Ambiente 100% blindado com controle parental protegido por PIN.
               </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 10.1 VITRINE 2: ?? CANAL LAB KIDS (O LABORATÓRIO DE CIÊNCIAS) */}
+      {/* ------------------------------------------------------------- */}
+      <section id="labkids" className="bg-gradient-to-br from-purple-950 via-indigo-950 to-slate-950 text-white rounded-[36px] p-8 sm:p-12 lg:p-14 border-4 border-purple-400/50 shadow-2xl space-y-8 relative overflow-hidden scroll-mt-20">
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-5">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/30 text-purple-300 border border-purple-400/40 text-xs font-black uppercase tracking-wider font-brand">

@@ -10,12 +10,12 @@ interface Purchase {
 }
 
 const purchasesPT: Purchase[] = [
-  { name: 'Maria F.', product: 'Lab Kids', timeAgo: 'há 3 minutos', location: 'São Paulo, SP' },
-  { name: 'João P.', product: 'Combo VIP Anual', timeAgo: 'há 7 minutos', location: 'Rio de Janeiro, RJ' },
-  { name: 'Ana C.', product: 'Toon Tales (Vitalício)', timeAgo: 'há 12 minutos', location: 'Curitiba, PR' },
-  { name: 'Roberto S.', product: 'Lab Kids', timeAgo: 'há 15 minutos', location: 'Belo Horizonte, MG' },
-  { name: 'Juliana R.', product: 'Kit 100 Atividades', timeAgo: 'há 22 minutos', location: 'Brasília, DF' },
-  { name: 'Fernanda M.', product: 'Lab Kids', timeAgo: 'há 28 minutos', location: 'Campinas, SP' },
+  { name: 'Maria F.', product: 'Plano Mensal', timeAgo: 'há 3 minutos', location: 'São Paulo, SP' },
+  { name: 'João P.', product: 'Plano Fundadores Pioneiros', timeAgo: 'há 7 minutos', location: 'Rio de Janeiro, RJ' },
+  { name: 'Ana C.', product: 'Plano Anual', timeAgo: 'há 12 minutos', location: 'Curitiba, PR' },
+  { name: 'Roberto S.', product: 'Plano Fundadores Pioneiros', timeAgo: 'há 15 minutos', location: 'Belo Horizonte, MG' },
+  { name: 'Juliana R.', product: 'Plano Mensal', timeAgo: 'há 22 minutos', location: 'Brasília, DF' },
+  { name: 'Fernanda M.', product: 'Plano Fundadores Pioneiros', timeAgo: 'há 28 minutos', location: 'Campinas, SP' },
 ];
 
 const purchasesEN: Purchase[] = [
