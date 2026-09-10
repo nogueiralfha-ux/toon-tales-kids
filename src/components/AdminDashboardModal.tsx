@@ -604,7 +604,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                     <ExternalLink className="w-4 h-4 text-amber-400" />
                   </a>
                   <a
-                    href="https://wa.me/5516997325572"
+                    href="https://wa.me/5516997327255"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-4 rounded-2xl bg-slate-800 hover:bg-slate-700 border border-slate-600 flex items-center justify-between text-xs font-bold transition-all"

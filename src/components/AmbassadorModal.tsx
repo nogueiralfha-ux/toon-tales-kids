@@ -222,7 +222,7 @@ export const AmbassadorModal: React.FC<AmbassadorModalProps> = ({ isOpen, onClos
             </a>
 
             <a
-              href="https://wa.me/5516997325572?text=Ol%C3%A1!%20Gostaria%20de%20me%20tornar%20um%20Embaixador%20do%20Toon%20Tales%20Kids!"
+              href="https://wa.me/5516997327255?text=Ol%C3%A1!%20Gostaria%20de%20me%20tornar%20um%20Embaixador%20do%20Toon%20Tales%20Kids!"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full py-3 rounded-2xl bg-emerald-600/90 hover:bg-emerald-600 text-white font-bold text-xs font-brand uppercase tracking-wider flex items-center justify-center gap-2 transition-colors border border-emerald-400/40"

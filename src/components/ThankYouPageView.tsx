@@ -176,12 +176,12 @@ export const ThankYouPageView: React.FC<ThankYouPageViewProps> = ({
             Ficou com alguma dúvida ou precisa de ajuda?
           </h3>
           <p className="text-xs text-slate-300 max-w-lg">
-            Nossa equipe oficial está pronta para te atender no WhatsApp: <strong>(16) 99732-5572</strong>.
+            Nossa equipe oficial está pronta para te atender no WhatsApp: <strong>(16) 99732-7255</strong>.
           </p>
         </div>
 
         <a
-          href="https://wa.me/5516997325572?text=Ol%C3%A1!%20Acabei%20de%20adquirir%20o%20Toon%20Tales%20Kids%20e%20gostaria%20de%20suporte!"
+          href="https://wa.me/5516997327255?text=Ol%C3%A1!%20Acabei%20de%20adquirir%20o%20Toon%20Tales%20Kids%20e%20gostaria%20de%20suporte!"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs sm:text-sm font-brand uppercase tracking-wider shadow-lg flex items-center gap-2 hover:scale-105 active:scale-95 transition-all shrink-0"

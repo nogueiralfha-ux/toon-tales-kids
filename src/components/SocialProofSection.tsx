@@ -296,7 +296,7 @@ export const SocialProofSection: React.FC = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
-                  href="https://wa.me/5516997325572"
+                  href="https://wa.me/5516997327255"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-xl transition-all hover:scale-105"

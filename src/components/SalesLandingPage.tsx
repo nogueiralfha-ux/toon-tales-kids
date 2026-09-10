@@ -1528,11 +1528,11 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
               {/* Meio: Botão do WhatsApp (Exatamente onde apontou a seta do mouse) */}
               <div className="flex items-center justify-center">
                 <a
-                  href="https://wa.me/5516997325572?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20o%20Toon%20Tales%20Kids!"
+                  href="https://wa.me/5516997327255?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20o%20Toon%20Tales%20Kids!"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs font-brand uppercase tracking-wider shadow-lg flex items-center gap-2 hover:scale-105 active:scale-95 transition-all border-2 border-white ring-2 ring-emerald-500/30 shrink-0"
-                  title="Fale com nosso suporte no WhatsApp (16) 99732-5572"
+                  title="Fale com nosso suporte no WhatsApp (16) 99732-7255"
                 >
                   <MessageCircle className="w-4 h-4 fill-current animate-bounce" />
                   <span>Dúvidas? Fale no WhatsApp</span>
@@ -1562,11 +1562,11 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            href="https://wa.me/5516997325572?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20o%20Toon%20Tales%20Kids!"
+            href="https://wa.me/5516997327255?text=Ol%C3%A1!%20Gostaria%20de%20tirar%20d%C3%BAvidas%20sobre%20o%20Toon%20Tales%20Kids!"
             target="_blank"
             rel="noopener noreferrer"
             className="fixed bottom-6 right-6 z-50 px-4 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs font-brand uppercase tracking-wider shadow-2xl flex items-center gap-2 hover:scale-105 active:scale-95 transition-all border-2 border-white ring-4 ring-emerald-500/20"
-            title="Fale com nosso suporte no WhatsApp (16) 99732-5572"
+            title="Fale com nosso suporte no WhatsApp (16) 99732-7255"
           >
             <MessageCircle className="w-5 h-5 fill-current animate-bounce" />
             <span className="hidden sm:inline">Dúvidas? Fale no WhatsApp</span>

@@ -606,7 +606,7 @@ export const LabKidsEnglishSalesPage: React.FC<LabKidsEnglishSalesPageProps> = (
       {/* 11. FLOATING WHATSAPP / CONTACT BUTTON                         */}
       {/* ------------------------------------------------------------- */}
       <a
-        href="https://wa.me/5516997325572?text=Hello!%20I%20have%20a%20question%20about%20Lab%20Kids!"
+        href="https://wa.me/5516997327255?text=Hello!%20I%20have%20a%20question%20about%20Lab%20Kids!"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 p-4 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center gap-2 group ring-4 ring-emerald-200"

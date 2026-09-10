@@ -290,7 +290,7 @@ export const CheckoutLeadModal: React.FC<CheckoutLeadModalProps> = ({
                     </label>
                     <input
                       type="tel"
-                      placeholder="+55 (16) 99732-5572"
+                      placeholder="+55 (16) 99732-7255"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 font-medium focus:ring-2 focus:ring-orange-400 focus:bg-white transition-all text-slate-900"
@@ -420,7 +420,7 @@ export const CheckoutLeadModal: React.FC<CheckoutLeadModalProps> = ({
 
               <div className="space-y-3 pt-4">
                 <a
-                  href={`https://wa.me/5516997325572?text=${whatsappRecoveryMsg}`}
+                  href={`https://wa.me/5516997327255?text=${whatsappRecoveryMsg}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs sm:text-sm font-brand uppercase tracking-wider shadow-xl flex items-center justify-center gap-2 hover:scale-105 active:scale-95 transition-all border-2 border-white"

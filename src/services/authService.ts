@@ -38,7 +38,7 @@ const MASTER_ADMIN: UserAccount = {
   name: 'Administrador Master',
   email: 'nogueiralfha@gmail.com',
   password: 'missionario405',
-  phone: '5516997325572',
+  phone: '5516997327255',
   role: 'admin',
   plan: 'vitalicio',
   planStatus: 'active',
