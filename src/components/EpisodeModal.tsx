@@ -2,7 +2,7 @@ import React from 'react';
 import { Episode, getSeasonById } from '../data/catalog';
 import { CHARACTERS_DATA } from '../data/charactersData';
 import { ToonTalesArtwork } from './ToonTalesArtwork';
-import { X, Play, Heart, Star, Sparkles, BookOpen, Clock, ShieldCheck, Check, Plus } from 'lucide-react';
+import { X, Play, Heart, Star, Sparkles, BookOpen, Clock, ShieldCheck, Check, Plus, Palette } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface EpisodeModalProps {
@@ -157,6 +157,18 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
                 <Star className="w-4 h-4 fill-current" />
                 <span>Quiz</span>
               </button>
+
+              {episode.coloringBookUrl && (
+                <a
+                  href={episode.coloringBookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs font-brand uppercase tracking-wider shadow-sm transition-colors flex items-center gap-1.5 ml-2"
+                >
+                  <Palette className="w-4 h-4 fill-current" />
+                  <span>Colorir</span>
+                </a>
+              )}
             </div>
           </div>
 
