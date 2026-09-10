@@ -1,4 +1,4 @@
-export interface Episode {
+﻿export interface Episode {
   id: string;
   episodeNumber: number;
   seasonId: string;
@@ -128,6 +128,7 @@ export const BIBLE_SEASONS: Season[] = [
         isAvailable: true,
         category: 'aventuras',
         categoryLabel: '🔥 Aventuras Épicas',
+          fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season1/episode04/episode04-completo.mp3',
         characterId: 'abraham',
         characterName: 'Babel',
         moralLesson: 'A verdadeira grandeza está em honrar a Deus com humildade de coração.',
@@ -964,3 +965,4 @@ export const getEpisodeById = (id: string): Episode | undefined => {
 export const getSeasonById = (id: string): Season | undefined => {
   return BIBLE_SEASONS.find((s) => s.id === id);
 };
+
