@@ -59,7 +59,8 @@ const CHARACTER_IMAGE_MAP: Record<string, string> = {
 };
 
 const THEME_IMAGE_MAP: Record<string, string> = {
-  creation: '/capa-oficial-hotmart.jpg',
+  creation: '/creation_bg.jpg',
+  deep_space: '/creation_bg.jpg',
   garden_eden: '/capa-oficial-hotmart.jpg',
   noah_ark: '/characters/noah.jpg',
   noah: '/characters/noah.jpg',

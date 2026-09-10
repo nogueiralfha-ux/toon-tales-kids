@@ -96,9 +96,9 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="space-y-2.5 max-w-2xl"
+          className="space-y-3 max-w-2xl"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight font-brand drop-shadow-lg leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black bg-gradient-to-br from-white via-amber-100 to-amber-400 text-transparent bg-clip-text tracking-tight font-brand drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] leading-tight pb-1">
             {currentItem.title}
           </h1>
 
@@ -128,11 +128,23 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           {/* Main Big Play CTA */}
           <button
             onClick={() => episode && onPlayEpisode(episode)}
-            className="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-white font-black text-sm sm:text-base font-brand uppercase tracking-wider shadow-lg shadow-orange-500/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-2.5 ring-4 ring-white/30"
+            className="px-8 py-4 rounded-3xl bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 hover:from-amber-400 hover:to-orange-400 text-white font-black text-base sm:text-lg font-brand uppercase tracking-wider shadow-xl shadow-orange-500/50 hover:scale-105 active:scale-95 transition-all flex items-center gap-3 ring-4 ring-white/40 animate-[bounce_2s_infinite]"
           >
-            <Play className="w-5 h-5 fill-current ml-0.5" />
-            <span>Ouvir Agora</span>
+            <Play className="w-6 h-6 fill-current ml-0.5" />
+            <span>Ver História Interativa</span>
           </button>
+
+          {/* New: Play Full MP3 Inline */}
+          {episode?.fullAudioUrl && (
+            <div className="flex flex-col gap-2 w-full sm:w-auto">
+              <span className="text-xs font-bold text-sky-200 uppercase tracking-widest pl-2">🎧 Ouvir Superprodução Completa</span>
+              <audio 
+                controls 
+                src={episode.fullAudioUrl} 
+                className="h-12 w-full max-w-[300px] rounded-full shadow-lg shadow-sky-900/30 ring-2 ring-white/20"
+              />
+            </div>
+          )}
 
           {/* Add to My List / Favorite Toggle */}
           <button

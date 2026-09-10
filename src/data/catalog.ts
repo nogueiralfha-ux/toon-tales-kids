@@ -18,6 +18,7 @@ export interface Episode {
   colorTheme: string;
   recommendedNextIds?: string[];
   tags: string[];
+  fullAudioUrl?: string; // URL do MP3 completo no R2
 }
 
 export interface Season {
@@ -69,6 +70,7 @@ export const BIBLE_SEASONS: Season[] = [
         colorTheme: 'from-emerald-500 to-teal-700',
         recommendedNextIds: ['t1e2', 't1e3', 't5e1'],
         tags: ['Criação', 'Luz', 'Natureza', 'Animais'],
+        fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season1/episode01/episode01-completo.mp3',
       },
       {
         id: 't1e2',
@@ -90,13 +92,14 @@ export const BIBLE_SEASONS: Season[] = [
         colorTheme: 'from-green-600 to-emerald-800',
         recommendedNextIds: ['t1e3', 't1e4'],
         tags: ['Éden', 'Escolhas', 'Obediência', 'Amor'],
+        fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season1/episode02/episode02-completo.mp3',
       },
       {
         id: 't1e3',
         episodeNumber: 3,
         seasonId: 's1',
         seasonNumber: 1,
-        title: 'Noé e a Grande Arca',
+        title: 'A Arca de Noé',
         subtitle: 'Um homem fiel e a promessa no arco-íris',
         description: 'O chamado para construir uma arca imensa, a chegada dos casais de animais e a aliança selada com o arco-íris.',
         durationLabel: '12 min',
@@ -108,9 +111,10 @@ export const BIBLE_SEASONS: Season[] = [
         moralLesson: 'Mesmo quando ninguém ao redor fizer o certo, seja fiel e confie na promessa de Deus.',
         biblicalRef: 'Gênesis 6-9',
         cardImageTheme: 'noah_ark',
-        colorTheme: 'from-cyan-600 to-blue-800',
-        recommendedNextIds: ['t1e4', 't2e3', 't4e7'],
-        tags: ['Arca', 'Animais', 'Chuva', 'Arco-íris'],
+        colorTheme: 'from-blue-600 to-indigo-800',
+        recommendedNextIds: ['t1e4', 't2e3'],
+        tags: ['Noé', 'Arca', 'Obediência', 'Animais'],
+        fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season1/episode03/episode03-completo.mp3',
       },
       {
         id: 't1e4',

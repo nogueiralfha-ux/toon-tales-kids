@@ -4,12 +4,12 @@ export const EPISODE_META = {
   brand: 'TOON TALES KIDS',
   series: 'A Bíblia em Áudio Infantil',
   episodeNumber: 1,
-  title: 'A CRIAÇÃO',
+  title: 'A CRIA�ÇÃOO',
   subtitle: 'Quando Deus Fez o Mundo',
   targetAge: '6 a 12 anos',
   durationTarget: '8 a 10 minutos',
   language: 'Português Brasileiro (PT-BR)',
-  biblicalText: 'Gênesis 1:1–31 e 2:1–3',
+  biblicalText: 'Gênesis 1:1�–31 e 2:1�–3',
   moralLesson: 'Você não está aqui por acaso. Deus criou todas as coisas com amor e nos ensinou a cuidar de sua criação.',
 };
 
@@ -20,7 +20,7 @@ export const CREATION_SCENES: Scene[] = [
     title: 'Antes de Tudo',
     subtitle: 'O Início de Uma Obra Maravilhosa',
     biblicalRef: 'Gênesis 1:1-2',
-    durationLabel: '45–60 segundos',
+    durationLabel: '45�–60 segundos',
     estimatedDurationSec: 50,
     ambientType: 'deep_space',
     musicTheme: 'mysterious_drone',
@@ -100,10 +100,10 @@ export const CREATION_SCENES: Scene[] = [
     id: 2,
     sceneNumber: 2,
     title: 'Haja Luz!',
-    subtitle: 'Dia 1 — A Luz e a Noite',
+    subtitle: 'Dia 1 � A Luz e a Noite',
     biblicalDay: 'Dia 1',
     biblicalRef: 'Gênesis 1:3-5',
-    durationLabel: '50–60 segundos',
+    durationLabel: '50�–60 segundos',
     estimatedDurationSec: 52,
     ambientType: 'ocean_waters',
     musicTheme: 'radiant_burst',
@@ -111,7 +111,7 @@ export const CREATION_SCENES: Scene[] = [
     environmentSummary: 'Escuridão profunda sobre as águas cósmicas suaves, rompida por uma explosão celestial de luz dourada.',
     musicDescription: 'A música cresce majestosa em uníssono com o comando divino, abrindo um tema harmônico brilhante.',
     soundEffects: ['Águas profundas', 'Comando divino com ressonância calorosa', 'Expansão radiante de luz', 'Sinos de cristal'],
-    directorLesson: 'A voz de Deus deve soar serena, sábia, poderosa e acolhedora — nunca assustadora.',
+    directorLesson: 'A voz de Deus deve soar serena, sábia, poderosa e acolhedora � nunca assustadora.',
     lines: [
       {
         id: 's2_l1',
@@ -165,10 +165,10 @@ export const CREATION_SCENES: Scene[] = [
     id: 3,
     sceneNumber: 3,
     title: 'O Céu e o Firmamento',
-    subtitle: 'Dia 2 — As Águas e o Espaço',
+    subtitle: 'Dia 2 � As Águas e o Espaço',
     biblicalDay: 'Dia 2',
     biblicalRef: 'Gênesis 1:6-8',
-    durationLabel: '45–55 segundos',
+    durationLabel: '45�–55 segundos',
     estimatedDurationSec: 48,
     ambientType: 'wind_sky',
     musicTheme: 'airy_freedom',
@@ -221,10 +221,10 @@ export const CREATION_SCENES: Scene[] = [
     id: 4,
     sceneNumber: 4,
     title: 'A Terra Fica Verde',
-    subtitle: 'Dia 3 — Mares, Terra e Plantas',
+    subtitle: 'Dia 3 � Mares, Terra e Plantas',
     biblicalDay: 'Dia 3',
     biblicalRef: 'Gênesis 1:9-13',
-    durationLabel: '55–65 segundos',
+    durationLabel: '55�–65 segundos',
     estimatedDurationSec: 58,
     ambientType: 'blooming_forest',
     musicTheme: 'pastoral_growth',
@@ -284,7 +284,7 @@ export const CREATION_SCENES: Scene[] = [
         pauseSeconds: 4.0,
         isInteractivePrompt: true,
         interactiveQuestion: 'Qual fruta docinha ou flor colorida você mais gosta?',
-        interactiveOptions: ['🍓 Morango Docinho', '🍎 Maçã Crocante', '🌻 Girassol Dourado', '🍉 Melancia Fresquinha'],
+        interactiveOptions: ['�x�– Morango Docinho', '�x�} Maçã Crocante', '�xR� Girassol Dourado', '�x�0 Melancia Fresquinha'],
         childAnswerHint: 'A voz da criança vai responder com o dela!',
       },
       {
@@ -312,10 +312,10 @@ export const CREATION_SCENES: Scene[] = [
     id: 5,
     sceneNumber: 5,
     title: 'Sol, Lua e Estrelas',
-    subtitle: 'Dia 4 — Os Grandes Luminares',
+    subtitle: 'Dia 4 � Os Grandes Luminares',
     biblicalDay: 'Dia 4',
     biblicalRef: 'Gênesis 1:14-19',
-    durationLabel: '50–60 segundos',
+    durationLabel: '50�–60 segundos',
     estimatedDurationSec: 55,
     ambientType: 'celestial_stars',
     musicTheme: 'majestic_stars',
@@ -355,7 +355,7 @@ export const CREATION_SCENES: Scene[] = [
         pauseSeconds: 4.0,
         isInteractivePrompt: true,
         interactiveQuestion: 'Você prefere o calor do Sol ou as estrelas à noite?',
-        interactiveOptions: ['☀️ O Sol Dourado', '🌙 A Lua Prateada', '✨ As Estrelas Brilhantes'],
+        interactiveOptions: ['�ܬ️ O Sol Dourado', '�xR" A Lua Prateada', '�S� As Estrelas Brilhantes'],
         childAnswerHint: 'A voz da criança vai responder!',
       },
       {
@@ -384,10 +384,10 @@ export const CREATION_SCENES: Scene[] = [
     id: 6,
     sceneNumber: 6,
     title: 'Os Mares e os Céus',
-    subtitle: 'Dia 5 — Peixes e Pássaros',
+    subtitle: 'Dia 5 � Peixes e Pássaros',
     biblicalDay: 'Dia 5',
     biblicalRef: 'Gênesis 1:20-23',
-    durationLabel: '50–60 segundos',
+    durationLabel: '50�–60 segundos',
     estimatedDurationSec: 54,
     ambientType: 'ocean_waves',
     musicTheme: 'aquatic_play',
@@ -442,10 +442,10 @@ export const CREATION_SCENES: Scene[] = [
     id: 7,
     sceneNumber: 7,
     title: 'Os Animais da Terra',
-    subtitle: 'Dia 6 — A Criação dos Animais',
+    subtitle: 'Dia 6 � A Criação dos Animais',
     biblicalDay: 'Dia 6 (Parte 1)',
     biblicalRef: 'Gênesis 1:24-25',
-    durationLabel: '50–60 segundos',
+    durationLabel: '50�–60 segundos',
     estimatedDurationSec: 54,
     ambientType: 'wildlife_forest',
     musicTheme: 'playful_adventure',
@@ -504,7 +504,7 @@ export const CREATION_SCENES: Scene[] = [
         pauseSeconds: 4.5,
         isInteractivePrompt: true,
         interactiveQuestion: 'Qual é o seu animal favorito que Deus criou?',
-        interactiveOptions: ['🦁 Leão Corajoso', '🐘 Elefante Gentil', '🐬 Golfinho Alegre', '🐶 Cachorrinho Fiel', '🦒 Girafa Alta', '🐰 Coelhinho'],
+        interactiveOptions: ['�x�� Leão Corajoso', '�x�� Elefante Gentil', '�x�� Golfinho Alegre', '�x�� Cachorrinho Fiel', '�x� Girafa Alta', '�x�� Coelhinho'],
         childAnswerHint: 'A voz da criança vai responder em seguida!',
       },
       {
@@ -532,10 +532,10 @@ export const CREATION_SCENES: Scene[] = [
     id: 8,
     sceneNumber: 8,
     title: 'O Ser Humano',
-    subtitle: 'Dia 6 — À Imagem e Semelhança de Deus',
+    subtitle: 'Dia 6 � ì Imagem e Semelhança de Deus',
     biblicalDay: 'Dia 6 (Parte 2)',
     biblicalRef: 'Gênesis 1:26-30',
-    durationLabel: '55–65 segundos',
+    durationLabel: '55�–65 segundos',
     estimatedDurationSec: 58,
     ambientType: 'peaceful_garden',
     musicTheme: 'sacred_piano_strings',
@@ -591,7 +591,7 @@ export const CREATION_SCENES: Scene[] = [
     subtitle: 'A Harmonia Completa da Criação',
     biblicalDay: 'Dia 6 (Conclusão)',
     biblicalRef: 'Gênesis 1:31',
-    durationLabel: '50–60 segundos',
+    durationLabel: '50�–60 segundos',
     estimatedDurationSec: 54,
     ambientType: 'triumphant_nature',
     musicTheme: 'emotional_climax',
@@ -636,10 +636,10 @@ export const CREATION_SCENES: Scene[] = [
     id: 10,
     sceneNumber: 10,
     title: 'O Sétimo Dia',
-    subtitle: 'Dia 7 — O Descanso e a Obra Completa',
+    subtitle: 'Dia 7 � O Descanso e a Obra Completa',
     biblicalDay: 'Dia 7',
     biblicalRef: 'Gênesis 2:1-3',
-    durationLabel: '45–55 segundos',
+    durationLabel: '45�–55 segundos',
     estimatedDurationSec: 48,
     ambientType: 'sabbath_peace',
     musicTheme: 'pure_serenity',
@@ -684,7 +684,7 @@ export const CREATION_SCENES: Scene[] = [
     title: 'A Lição e Nossa Missão',
     subtitle: 'Cuidando do Mundo de Deus',
     biblicalRef: 'Salmo 19:1 / Gênesis 1',
-    durationLabel: '60–75 segundos',
+    durationLabel: '60�–75 segundos',
     estimatedDurationSec: 68,
     ambientType: 'warm_acoustic',
     musicTheme: 'warm_discovery',
@@ -740,7 +740,7 @@ export const CREATION_SCENES: Scene[] = [
         pauseSeconds: 4.0,
         isInteractivePrompt: true,
         interactiveQuestion: 'Como você vai cuidar do mundo de Deus hoje?',
-        interactiveOptions: ['🌱 Regar as plantinhas', '🐾 Cuidar dos bichinhos', '💧 Não gastar água', '❤️ Ajudar e amar as pessoas'],
+        interactiveOptions: ['�xR� Regar as plantinhas', '�x�� Cuidar dos bichinhos', '�x� Não gastar água', '❤️ Ajudar e amar as pessoas'],
         childAnswerHint: 'A voz da criança vai dar uma ideia em seguida!',
       },
       {
@@ -789,7 +789,7 @@ export const CREATION_SCENES: Scene[] = [
     title: 'Encerramento Toon Tales Kids',
     subtitle: 'Assinatura Sonora Oficial',
     biblicalRef: 'Toon Tales Kids Oficial',
-    durationLabel: '15–20 segundos',
+    durationLabel: '15�–20 segundos',
     estimatedDurationSec: 18,
     ambientType: 'toon_tales_jingle',
     musicTheme: 'signature_jingle',
@@ -871,8 +871,7 @@ export const SOUND_EFFECTS_CATALOG: SoundEffectDefinition[] = [
   { id: 'lion_roar', name: 'Rugido Suave do Leão', category: 'animals', description: 'Presença nobre e tranquila na savana', iconName: 'Crown' },
   { id: 'horse_gallop', name: 'Cavalos Correndo', category: 'animals', description: 'Galopes rítmicos pelos campos verdes', iconName: 'Zap' },
   { id: 'celestial_harmony', name: 'Harmonia Divina', category: 'celestial', description: 'Acorde celestial de reverência e paz', iconName: 'Music' },
-  { id: 'toon_tales_jingle', name: 'Jingle Toon Tales', category: 'brand', description: 'Assinatura oficial de encerramento', iconName: 'Sparkle' },
-];
+  { id: 'toon_tales_jingle', name: 'Jingle Toon Tales', category: 'brand', description: 'Assinatura oficial de encerramento', iconName: 'Sparkle' }];
 
 export const CREATION_QUIZ: QuizQuestion[] = [
   {
@@ -938,5 +937,5 @@ export const CREATION_QUIZ: QuizQuestion[] = [
     explanation: 'Deus não se cansa! Ele descansou para abençoar o sétimo dia e celebrar que toda a Sua criação estava concluída e perfeita.',
     biblicalVerse: 'Gênesis 2:1-3',
   },
-  ,
-];
+  ];
+

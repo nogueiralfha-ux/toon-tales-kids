@@ -342,111 +342,34 @@ export default function App() {
     });
   };
 
-  // Playback start
-  const startPlayback = (scenesToPlay?: Scene[], sceneIdx = currentSceneIndex, lineIdx = 0) => {
-    const activeScenes = scenesToPlay || currentScenes;
-    audioEngine.startEpisode(activeScenes, currentEpisodeId || 't1e1', sceneIdx, lineIdx, {
-      onLineStart: (lineId, sceneId) => {
-        setIsPauseActive(false);
-        setActiveLineId(lineId);
-        const scene = activeScenes.find((s) => s.id === sceneId);
-        if (scene) {
-          const line = scene.lines.find((l) => l.id === lineId);
-          if (line) setCurrentLine(line);
-        }
-      },
-      onLineEnd: () => {
-        setIsPauseActive(false);
-      },
-      onPauseStart: () => {
-        setIsPauseActive(true);
-      },
-      onPauseEnd: () => {
-        setIsPauseActive(false);
-      },
-      onSceneChange: (sceneId) => {
-        const idx = activeScenes.findIndex((s) => s.id === sceneId);
-        if (idx !== -1) {
-          setCurrentSceneIndex(idx);
-          // Update progress
-          const pct = Math.min(100, Math.round(((idx + 1) / activeScenes.length) * 100));
-          setListeningProgress((prev) => {
-            const filtered = prev.filter((p) => p.episodeId !== currentEpisodeId);
-            return [
-              {
-                episodeId: currentEpisodeId,
-                progressPercent: pct,
-                timeRemainingLabel: `${Math.max(1, Math.round((activeScenes.length - idx) * 1.5))} min`,
-                lastPlayedAt: 'Agora',
-              },
-              ...filtered,
-            ];
-          });
-        }
-      },
-      onPlaybackStateChange: (playing) => {
-        setIsPlaying(playing);
-        if (!playing) setIsPauseActive(false);
-      },
-      onEpisodeComplete: () => {
-        setIsPlaying(false);
-        setIsPauseActive(false);
-        setActiveLineId(null);
-        setCurrentLine(null);
-      },
-    });
-  };
+
 
   const handlePlay = () => {
-    audioEngine.initContext();
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.resume();
-    }
-
-    if (audioEngine.getPlaybackStatus().isPaused) {
-      audioEngine.resumeEpisode();
-      setIsPlaying(true);
-    } else {
-      startPlayback(undefined, currentSceneIndex, 0);
-    }
+    setIsPlaying(true);
   };
 
   const handlePause = () => {
-    audioEngine.pauseEpisode();
     setIsPlaying(false);
   };
 
   const handleRestart = () => {
-    audioEngine.initContext();
-    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-      window.speechSynthesis.resume();
-    }
-    setCurrentSceneIndex(0);
-    startPlayback(undefined, 0, 0);
+    setIsPlaying(true);
   };
 
   const handleNextScene = () => {
-    audioEngine.initContext();
     if (currentSceneIndex < currentScenes.length - 1) {
-      const nextIdx = currentSceneIndex + 1;
-      setCurrentSceneIndex(nextIdx);
-      audioEngine.jumpToScene(nextIdx);
+      setCurrentSceneIndex(currentSceneIndex + 1);
     }
   };
 
   const handlePrevScene = () => {
-    audioEngine.initContext();
     if (currentSceneIndex > 0) {
-      const prevIdx = currentSceneIndex - 1;
-      setCurrentSceneIndex(prevIdx);
-      audioEngine.jumpToScene(prevIdx);
+      setCurrentSceneIndex(currentSceneIndex - 1);
     }
   };
 
   const handleSelectScene = (index: number) => {
-    audioEngine.initContext();
     setCurrentSceneIndex(index);
-    audioEngine.jumpToScene(index);
   };
 
   const handleChangeSpeed = (rate: number) => {
@@ -839,17 +762,18 @@ export default function App() {
 
             {/* Audio Player Controls */}
             <AudioPlayerControls
+              audioUrl={ALL_EPISODES.find(e => e.id === currentEpisodeId)?.fullAudioUrl}
               isPlaying={isPlaying}
               currentScene={currentScene}
               allScenes={currentScenes}
               currentSceneIndex={currentSceneIndex}
               speechRate={mixSettings.speechRate}
-              onPlay={handlePlay}
-              onPause={handlePause}
-              onRestart={handleRestart}
-              onNextScene={handleNextScene}
-              onPrevScene={handlePrevScene}
-              onSelectScene={handleSelectScene}
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onRestart={() => setIsPlaying(true)}
+              onNextScene={() => {}}
+              onPrevScene={() => {}}
+              onSelectScene={() => {}}
               onOpenMixer={() => setIsMixerOpen(true)}
               onOpenBedtime={() => setIsBedtimeOpen(true)}
               onChangeSpeed={handleChangeSpeed}
