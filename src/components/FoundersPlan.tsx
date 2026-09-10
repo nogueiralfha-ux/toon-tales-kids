@@ -25,13 +25,13 @@ export const FoundersPlan: React.FC<FoundersPlanProps> = ({ onCheckout }) => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-yellow-400 text-yellow-900 px-4 py-2 rounded-full font-bold mb-4">
             <Crown className="w-5 h-5" />
-            <span>PLANO EXCLUSIVO FUNDADORES</span>
+            <span>PLANO EXCLUSIVO FUNDADORES PIONEIROS</span>
           </div>
           <h2 className="text-5xl font-extrabold text-gray-900 mb-4 font-brand tracking-tight">
             Seja Um dos 100 Primeiros
           </h2>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Acesso <strong>vitalício</strong> a TUDO que estamos construindo. 
+            Acesso <strong>por 3 anos</strong> a TUDO que a plataforma já gerou e gerar durante este compromisso. 
             Quando as 100 vagas se esgotarem, esse plano será <strong>descontinuado para sempre</strong>.
           </p>
         </div>
@@ -41,8 +41,8 @@ export const FoundersPlan: React.FC<FoundersPlanProps> = ({ onCheckout }) => {
           
           {/* Header do Card */}
           <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 p-8 text-white text-center">
-            <h3 className="text-3xl font-bold mb-2 font-brand">🏆 PLANO FUNDADORES VITALÍCIO</h3>
-            <p className="text-lg opacity-90">Acesso eterno a todas as novidades futuras</p>
+            <h3 className="text-3xl font-bold mb-2 font-brand">🏆 PLANO FUNDADORES PIONEIROS</h3>
+            <p className="text-lg opacity-90">Acesso completo a todas as novidades durante 3 anos</p>
           </div>
 
           <div className="p-8 lg:p-12">
@@ -135,10 +135,10 @@ export const FoundersPlan: React.FC<FoundersPlanProps> = ({ onCheckout }) => {
                 <h4 className="font-bold text-gray-900 mb-4 text-lg">🎁 BÔNUS EXCLUSIVOS:</h4>
                 <div className="bg-yellow-50 border-2 border-yellow-300 rounded-xl p-4 space-y-3">
                   {[
-                    { icon: '📚', text: 'Biblioteca Digital Vitalícia' },
+                    { icon: '📚', text: 'Biblioteca Digital (Acesso 3 Anos)' },
                     { icon: '🎨', text: 'Studio de Colorir 3D' },
                     { icon: '📖', text: 'Guia dos Pais "Conectando Fé"' },
-                    { icon: '🏆', text: 'Certificado Fundador Original' },
+                    { icon: '🏆', text: 'Certificado Fundador Pioneiro' },
                     { icon: '🛡️', text: 'Garantia de 30 Dias' },
                   ].map((bonus, i) => (
                     <div key={i} className="flex items-center gap-3 bg-white p-3 rounded-lg shadow-sm">

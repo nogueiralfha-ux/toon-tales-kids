@@ -56,6 +56,7 @@ import {
 import { motion, AnimatePresence } from 'motion/react';
 import { SocialProofNotification } from './SocialProofNotification';
 import { FoundersPlan } from './FoundersPlan';
+import { SocialProofSection } from './SocialProofSection';
 
 interface SalesLandingPageProps {
   onEnterPlatform?: () => void;
@@ -1202,74 +1203,6 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 <span className="text-emerald-600 font-bold">•</span>
                 Ambiente 100% blindado com controle parental protegido por PIN.
               </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* 10. TESTIMONIALS */}
-      <section id="depoimentos" className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 rounded-[36px] p-8 sm:p-12 shadow-sm space-y-8 scroll-mt-20">
-        <div className="text-center space-y-2 max-w-xl mx-auto">
-          <span className="px-3.5 py-1 rounded-full bg-amber-200 text-amber-900 text-xs font-black uppercase tracking-wider font-brand">
-            Depoimentos Reais
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-brand">
-            O que as Famílias estão Dizendo
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white border border-amber-200 rounded-3xl p-6 shadow-sm space-y-3">
-            <div className="flex items-center gap-1 text-amber-400">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-current" />
-              ))}
-            </div>
-            <p className="text-xs sm:text-sm text-slate-600 italic leading-relaxed">
-              "Meus filhos de 7 e 9 anos agora pedem para ouvir a história de Davi e Golias antes de dormir. A paz na hora do sono mudou totalmente!"
-            </p>
-            <div className="pt-2 border-t border-slate-100">
-              <p className="text-xs font-black text-slate-900 font-brand">Mariana S. Silva</p>
-              <p className="text-[11px] text-slate-400">Mãe do Pedro e da Alice • São Paulo/SP</p>
-            </div>
-          </div>
-
-          <div className="bg-white border border-amber-200 rounded-3xl p-6 shadow-sm space-y-3">
-            <div className="flex items-center gap-1 text-amber-400">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-current" />
-              ))}
-            </div>
-            <p className="text-xs sm:text-sm text-slate-600 italic leading-relaxed">
-              "A qualidade do áudio é impressionante! A voz de Deus com reverberação e os sons da tempestade no Mar Vermelho parecem filme de cinema. Vale cada centavo."
-            </p>
-            <div className="pt-2 border-t border-slate-100">
-              <p className="text-xs font-black text-slate-900 font-brand">Pastor Rodrigo M.</p>
-              <p className="text-[11px] text-slate-400">Pai e Educador Cristão • Curitiba/PR</p>
-            </div>
-          </div>
-
-          <div className="bg-white border border-amber-200 rounded-3xl p-6 shadow-sm space-y-3">
-            <div className="flex items-center gap-1 text-amber-400">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-current" />
-              ))}
-            </div>
-            <p className="text-xs sm:text-sm text-slate-600 italic leading-relaxed">
-              "O Painel dos Pais me dá total tranquilidade. Saber que meu filho está aprendendo sobre perdão e coragem bíblica não tem preço nos dias de hoje."
-            </p>
-            <div className="pt-2 border-t border-slate-100">
-              <p className="text-xs font-black text-slate-900 font-brand">Camila & Daniel Rocha</p>
-              <p className="text-[11px] text-slate-400">Pais do Lucas • Belo Horizonte/MG</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------------- */}
-      {/* 10.1 VITRINE 2: 🔬 CANAL LAB KIDS (O LABORATÓRIO DE CIÊNCIAS) */}
-      {/* ------------------------------------------------------------- */}
-      <section id="labkids" className="bg-gradient-to-br from-purple-950 via-indigo-950 to-slate-950 text-white rounded-[36px] p-8 sm:p-12 lg:p-14 border-4 border-purple-400/50 shadow-2xl space-y-8 relative overflow-hidden scroll-mt-20">
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 space-y-5">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/30 text-purple-300 border border-purple-400/40 text-xs font-black uppercase tracking-wider font-brand">
@@ -1502,42 +1435,8 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
         </div>
       </section>
 
-      {/* 14. FAQ ACCORDION */}
-      <section id="faq" className="bg-white border-2 border-slate-200 rounded-[36px] p-8 sm:p-12 shadow-sm space-y-8 max-w-4xl mx-auto scroll-mt-20">
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-brand">
-            Perguntas Frequentes dos Pais
-          </h2>
-          <p className="text-xs text-slate-500">Tire suas dúvidas sobre os planos, idiomas e as temporadas.</p>
-        </div>
-
-        <div className="space-y-3">
-          {faqs.map((faq, idx) => (
-            <div
-              key={idx}
-              className="border-2 border-slate-100 rounded-2xl overflow-hidden transition-all"
-            >
-              <button
-                onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
-                className="w-full p-4 sm:p-5 text-left font-black text-xs sm:text-sm text-slate-900 font-brand flex items-center justify-between gap-4 hover:bg-slate-50"
-              >
-                <span>{faq.q}</span>
-                <ChevronRight
-                  className={`w-4 h-4 text-orange-500 transition-transform ${
-                    activeFaq === idx ? 'rotate-90' : ''
-                  }`}
-                />
-              </button>
-
-              {activeFaq === idx && (
-                <div className="p-4 sm:p-5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50/50">
-                  {faq.a}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* 14. DEPOIMENTOS E FAQ (SOCIAL PROOF) */}
+      <SocialProofSection />
 
       {/* 15. FINAL CLOSING CTA */}
       <section className="rounded-[36px] bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 p-8 sm:p-12 text-center text-white space-y-6 shadow-2xl border-4 border-amber-300">
@@ -1605,14 +1504,14 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 <div>
                   <div className="flex items-center gap-2 justify-center md:justify-start">
                     <span className="font-brand font-black text-xs sm:text-sm text-amber-400">
-                      Plano Vitalício Toon Tales (50% OFF)
+                      Plano Fundadores Pioneiros
                     </span>
                     <span className="px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[10px] font-black uppercase">
-                      Taxa Única
+                      Exclusivo
                     </span>
                   </div>
                   <p className="text-[11px] text-slate-300">
-                    4 Temporadas + Temporada 5 + Módulo Trilíngue + Estúdio de Pintura + Bônus
+                    Acesso completo a todas as novidades por 3 anos
                   </p>
                 </div>
               </div>
@@ -1638,7 +1537,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                   onClick={() => setSelectedPlan('vitalicio')}
                   className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm font-brand uppercase tracking-wider text-center shadow-xl hover:scale-105 active:scale-95 transition-all shrink-0"
                 >
-                  Garantir por {CHECKOUT_PLANS_CONFIG.vitalicio.prices[selectedCurrency].installmentPrice}
+                  Garantir por 12x R$ 149,70
                 </a>
               </div>
 
