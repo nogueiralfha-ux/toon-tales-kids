@@ -766,7 +766,10 @@ export default function App() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => setPlayerMode('audio')}
+                      onClick={() => {
+                        setPlayerMode('audio');
+                        setIsPlaying(true);
+                      }}
                       className={`px-3 py-1.5 rounded-lg text-xs font-black font-brand uppercase tracking-wider transition-all flex items-center gap-1.5 ${
                         playerMode === 'audio'
                           ? 'bg-orange-500 text-white shadow-xs'
@@ -901,14 +904,28 @@ export default function App() {
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <button
                       type="button"
-                      onClick={() => setPlayerMode('audio')}
-                      className="px-3.5 py-1.5 rounded-xl bg-orange-100 hover:bg-orange-200 text-orange-800 text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5"
+                      onClick={() => setActiveTab('script')}
+                      className="px-3.5 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-xs"
+                      title="Abrir Teleprompter com todo o Roteiro Teatral"
                     >
-                      <Headphones className="w-3.5 h-3.5" />
-                      <span>Ouvir com Teleprompter / Audiolivro</span>
+                      <BookOpen className="w-3.5 h-3.5 text-sky-600" />
+                      <span>Teleprompter / Roteiro</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPlayerMode('audio');
+                        setIsPlaying(true);
+                      }}
+                      className="px-3.5 py-1.5 rounded-xl bg-orange-100 hover:bg-orange-200 text-orange-800 text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-xs"
+                      title="Alternar para Audiolivro com Vozes e Efeitos"
+                    >
+                      <Headphones className="w-3.5 h-3.5 text-orange-600" />
+                      <span>Ouvir Audiolivro Teatral</span>
                     </button>
                   </div>
                 </div>

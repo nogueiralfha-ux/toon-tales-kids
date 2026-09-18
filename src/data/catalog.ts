@@ -74,6 +74,7 @@ export const BIBLE_SEASONS: Season[] = [
         recommendedNextIds: ['t1e2', 't1e3', 't5e1'],
         tags: ['Criação', 'Luz', 'Natureza', 'Animais'],
         videoUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/videos/Filme_A_Criacao_Completo.mp4',
+        fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season1/episode01/episode01-completo.mp3',
         coloringBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Colorir_Criacao_Completo.pdf',
       },
       {
