@@ -905,14 +905,40 @@ export default function App() {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2">
+                    {currentEpisode?.illustratedBookUrl && (
+                      <a
+                        href={currentEpisode.illustratedBookUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3.5 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-xs"
+                        title="Baixar ou Ler o Livro Ilustrado em Cores (PDF A4)"
+                      >
+                        <BookOpen className="w-3.5 h-3.5 fill-current" />
+                        <span>Livro Ilustrado</span>
+                      </a>
+                    )}
+
+                    {currentEpisode?.coloringBookUrl && (
+                      <a
+                        href={currentEpisode.coloringBookUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-xs"
+                        title="Baixar o Livro de Colorir em PDF"
+                      >
+                        <Palette className="w-3.5 h-3.5 fill-current" />
+                        <span>Para Colorir</span>
+                      </a>
+                    )}
+
                     <button
                       type="button"
                       onClick={() => setActiveTab('script')}
-                      className="px-3.5 py-1.5 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-xs"
+                      className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-xs"
                       title="Abrir Teleprompter com todo o Roteiro Teatral"
                     >
-                      <BookOpen className="w-3.5 h-3.5 text-sky-600" />
-                      <span>Teleprompter / Roteiro</span>
+                      <BookOpen className="w-3.5 h-3.5 text-orange-600" />
+                      <span>Roteiro</span>
                     </button>
 
                     <button
@@ -925,7 +951,7 @@ export default function App() {
                       title="Alternar para Audiolivro com Vozes e Efeitos"
                     >
                       <Headphones className="w-3.5 h-3.5 text-orange-600" />
-                      <span>Ouvir Audiolivro Teatral</span>
+                      <span>Ouvir Audiolivro</span>
                     </button>
                   </div>
                 </div>
