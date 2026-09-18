@@ -1,0 +1,465 @@
+﻿episodio,cena,modelo,prompt
+01,01,dev,book cover composition, golden light burst over dark cosmos, empty space at top for title
+01,02,dev,primordial void, dark swirling waters in space, faint ethereal glow
+01,03,dev,explosion of golden divine light breaking through total darkness, stardust particles
+01,04,dev,split sky, bright day with sun on left, starry night with moon on right
+01,05,dev,firmament forming, sky separating waters above and waters below, soft clouds
+01,06,dev,dry land emerging from receding ocean, mountains rising, mist
+01,07,dev,flowers and trees blooming rapidly, lush green fields, magical sprouting
+01,08,dev,sun moon and countless stars shining in deep blue night sky
+01,09,dev,underwater world, colorful fish schools and friendly whale, light rays
+01,10,dev,sky filled with flocks of birds, eagles hummingbirds doves flying
+01,11,dev,savanna full of animals, lions elephants giraffes rabbits playing together
+01,12,dev,man and woman in leaf clothing standing in perfect garden, gentle light
+01,13,dev,panoramic view of whole creation in harmony, mountains seas forests stars
+01,14,dev,peaceful sunset over finished creation, calm resting landscape, warm tones
+01,15,dev,close-up of hands gently holding a small green sprout, sunlight
+01,16,dev,back cover, soft magical sparkles and light rays, empty center for logo
+02,01,dev,book cover, Adam and Eve in lush Eden garden, space at top for title
+02,02,dev,panorama of Garden of Eden, crystal river fruit trees colorful flowers
+02,03,dev,Adam naming animals, lion deer birds gathered peacefully around him
+02,04,dev,warm gentle divine light presence walking through the garden trees
+02,05,dev,Eve walking among blooming flowers, long wavy hair, leaf dress
+02,06,dev,Adam and Eve meeting for the first time, joyful expressions
+02,07,dev,couple caring for garden, watering plants feeding small animals
+02,08,dev,single tree with glowing forbidden fruit, subtle mysterious light
+02,09,dev,serpent coiled on tree branch whispering to Eve, soft shadows
+02,10,dev,close-up of Eve hand holding red fruit, hesitant moment
+02,11,dev,fallen fruit on ground, sad atmosphere, dim light
+02,12,dev,Adam and Eve hiding behind trees, ashamed faces, leaves in hands
+02,13,dev,warm firm divine light calling the couple in the dusk garden
+02,14,dev,couple walking out of garden gate at sad dusk, looking back
+02,15,dev,distant bright star of hope shining over dark horizon, promise
+02,16,dev,back cover activity page, leaf and flower outlines maze for kids
+03,01,dev,book cover, wooden ark on green hill under rainbow, space for title
+03,02,dev,dark rain clouds gathering over ancient town, distant thunder
+03,03,dev,Noah at doorway listening to warm divine light, faithful face
+03,04,dev,Noah building giant wooden ark, planks tools scaffolds, sunny day
+03,05,dev,pairs of animals walking two by two toward the ark
+03,06,dev,Noah family loading sacks of food into the ark
+03,07,dev,great wooden door closing as first rain drops fall
+03,08,dev,flood waters rising, ark floating safely above submerged fields
+03,09,dev,stormy night waves around ark, warm glow from its windows
+03,10,dev,rain stopping, sun breaking through clouds over calm water
+03,11,dev,white dove returning with green olive leaf in beak
+03,12,dev,ark resting on mountain top, mist clearing, birds flying
+03,13,dev,family stepping out of ark under huge bright rainbow
+03,14,dev,animals dispersing happily into green renewed world
+03,15,dev,Noah building stone altar in gratitude, soft golden light
+03,16,dev,back cover, rainbow arcs and animal outlines for coloring
+04,01,dev,book cover, tall brick tower reaching clouds, space for title
+04,02,dev,plain of Shinar, families settling camp by river
+04,03,dev,workers mixing clay and baking bricks, kilns smoking
+04,04,dev,busy growing city with market stalls and streets
+04,05,dev,leaders drawing plans of tower reaching the clouds
+04,06,dev,tower rising high with wooden scaffolds around it
+04,07,dev,workers carrying bricks up long ramps, aerial view
+04,08,dev,proud leaders pointing at sky from tower top
+04,09,dev,clouds swirling above unfinished tower top, wind
+04,10,dev,gentle divine light descending over the tower
+04,11,dev,workers talking with confused faces, garbled speech bubbles
+04,12,dev,groups arguing unable to understand each other
+04,13,dev,families packing and leaving in different directions
+04,14,dev,abandoned half-built tower, wind blowing sand over bricks
+04,15,dev,bird view of peoples spreading across mountains valleys coasts
+04,16,dev,back cover activity, empty speech bubbles matching game for kids
+05,01,dev,book cover, Abram silhouette under countless stars, space for title
+05,02,dev,ancient Ur city with ziggurats and busy streets
+05,03,dev,warm divine light calling Abram at his doorway at night
+05,04,dev,Abram family packing tents and camels for journey
+05,05,dev,caravan crossing golden desert dunes at sunrise
+05,06,dev,arrival in Canaan, green hills and oak trees
+05,07,dev,Abram building stone altar under great tree
+05,08,dev,night sky promise, Abram looking up from tent door
+05,09,dev,countless stars over desert tent, milky way glow
+05,10,dev,Abram smiling in faith under starry sky
+05,11,dev,Abraham older and wise, surrounded by many descendants silhouettes
+05,12,dev,three mysterious visitors at tent door under oak tree
+05,13,dev,Sarah laughing joyfully behind tent flap
+05,14,dev,baby Isaac born, family celebrating in warm light
+05,15,dev,mountain top altar with ram provided, angel light from sky
+05,16,dev,back cover activity, connect the stars dot to dot for kids
+06,01,dev,book cover, Joseph wearing colorful coat of many colors, title space
+06,02,dev,Joseph dreaming of sheaves of wheat bowing to his sheaf
+06,03,dev,brothers glaring jealously at Joseph colorful coat
+06,04,dev,empty pit in field, brothers standing above looking down
+06,05,dev,Ishmaelite caravan with camels crossing desert, Joseph walking
+06,06,dev,Joseph serving faithfully in Potiphar house in Egypt
+06,07,dev,Joseph led away wrongly accused, head held high
+06,08,dev,Joseph in prison helping other inmates kindly, soft light
+06,09,dev,Pharaoh dreaming of seven fat and seven thin cows
+06,10,dev,Joseph interpreting dreams before Pharaoh on throne
+06,11,dev,storehouses full of grain during years of plenty
+06,12,dev,famine dry empty fields, people looking hungry
+06,13,dev,brothers arriving in Egypt bowing before Joseph governor
+06,14,dev,Joseph revealing identity embracing his brothers, tears of joy
+06,15,dev,family reunited in Goshen, Jacob hugging Joseph tightly
+06,16,dev,back cover, coat of many colors pattern for coloring
+07,01,dev,book cover, baby in basket among Nile reeds, space for title
+07,02,dev,sad Hebrew families under Egyptian taskmasters, distant pyramids
+07,03,dev,mother weaving waterproof basket among river reeds
+07,04,dev,basket floating on Nile, sister Miriam watching from reeds
+07,05,dev,Pharaoh daughter finding basket by river bank, gentle smile
+07,06,dev,Moses growing up in Egyptian palace learning scrolls
+07,07,dev,Moses fleeing to Midian desert after defending a slave
+07,08,dev,Moses as humble shepherd with flock in desert years
+07,09,dev,burning bush aflame but not consumed, desert mountain
+07,10,dev,Moses removing sandals on holy ground, awe face
+07,11,dev,warm divine voice light glowing from the bush
+07,12,dev,Moses with wooden staff returning to Egypt at dawn
+07,13,dev,Moses before Pharaoh throne demanding let my people go
+07,14,dev,darkness over Egypt, only Hebrew homes with lamp light
+07,15,dev,doorposts marked with lamb blood, passing over light
+07,16,dev,back cover maze, basket through reeds to palace for kids
+08,01,dev,book cover, parted sea with walls of water and dry path, title space
+08,02,dev,columns of Israelites leaving Egypt with flocks and carts
+08,03,dev,pillar of cloud leading people through desert by day
+08,04,dev,pillar of fire glowing over camp at night
+08,05,dev,people trapped at sea shore, Pharaoh chariots dust behind
+08,06,dev,Moses raising staff over sea, people afraid behind him
+08,07,dev,strong wind splitting sea surface, water beginning to part
+08,08,dev,towering walls of water both sides, dry path between
+08,09,dev,families and animals walking through sea corridor safely
+08,10,dev,pillar of fire blocking Egyptian chariots in dark cloud
+08,11,dev,distant view of sea closing over chariots at morning
+08,12,dev,Miriam dancing with tambourine, women celebrating
+08,13,dev,people singing praise on far shore, joyful faces
+08,14,dev,water gushing from rock struck by staff in desert
+08,15,dev,white manna covering ground at dawn, children collecting
+08,16,dev,back cover, wave and fish outlines for coloring
+09,01,dev,book cover, Jericho walls cracking with trumpet blast, title space
+09,02,dev,Joshua commissioned as leader, warm light upon him
+09,03,dev,two spies hidden in Rahab house by window rope
+09,04,dev,scarlet cord hanging from city wall window
+09,05,dev,priests carrying ark into Jordan, riverbed drying
+09,06,dev,twelve memorial stones stacked by river bank
+09,07,dev,silent march around Jericho walls, day after day
+09,08,dev,seven priests blowing trumpets before the ark
+09,09,dev,people marching quietly under towering city walls
+09,10,dev,seventh day seven rounds, tension in the air
+09,11,dev,trumpet blast and great shout, people raising arms
+09,12,dev,massive walls crumbling into dust clouds
+09,13,dev,people entering city victorious through fallen gates
+09,14,dev,Rahab and family saved under scarlet cord, hugging
+09,15,dev,Joshua before stone memorial, choose this day moment
+09,16,dev,back cover, count the trumpets activity for kids
+10,01,dev,book cover, young David with sling facing giant silhouette, title space
+10,02,dev,David shepherding sheep in Bethlehem green fields, harp nearby
+10,03,dev,David playing harp softly, sheep listening, golden hour
+10,04,dev,Samuel anointing David with oil horn, family watching
+10,05,dev,Israel war camp afraid, soldiers hiding behind shields
+10,06,dev,giant Goliath shouting challenge, huge shadow over valley
+10,07,dev,David arriving at camp with bread for his brothers
+10,08,dev,David volunteering before King Saul tent
+10,09,dev,Saul armor too big on David, funny moment declining
+10,10,dev,David picking five smooth stones from brook
+10,11,dev,David walking toward giant with staff and sling only
+10,12,dev,Goliath mocking, David standing confident and unafraid
+10,13,dev,stone flying from whirling sling, motion blur
+10,14,dev,Goliath falling face down into dust
+10,15,dev,Israel army cheering victory, David lifted on shoulders
+10,16,dev,back cover, five smooth stones counting and coloring
+11,01,dev,book cover, glowing star over humble stable in Bethlehem, title space
+11,02,dev,angel Gabriel appearing to Mary with warm golden light
+11,03,dev,Mary and Joseph traveling to Bethlehem with donkey at sunset
+11,04,dev,crowded inn doorway closed, no room, lantern light
+11,05,dev,humble stable interior with ox and donkey, soft lantern glow
+11,06,dev,baby Jesus in wooden manger glowing softly, straw and light
+11,07,dev,shepherds watching flocks at night under starry sky
+11,08,dev,angel host shining over shepherds, sky filled with light
+11,09,dev,shepherds running joyfully toward Bethlehem at night
+11,10,dev,wise men on camels following bright star across desert
+11,11,dev,star stopping over house, wise men kneeling at door
+11,12,dev,opened gifts of gold frankincense and myrrh before baby
+11,13,dev,Mary and Joseph adoring baby Jesus, ox and donkey nearby
+11,14,dev,heavenly host singing, sky glowing with angelic light
+11,15,dev,peaceful night over Bethlehem village, great star above
+11,16,dev,back cover, star and manger outlines for coloring
+12,01,dev,book cover, boy Jesus among temple teachers, title space
+12,02,dev,Nazareth home, boy Jesus helping Joseph with carpentry
+12,03,dev,family joining pilgrimage caravan toward Jerusalem
+12,04,dev,caravan road with families walking and singing together
+12,05,dev,Jerusalem gates and shining temple mount in distance
+12,06,dev,busy temple courts with people and doves
+12,07,dev,boy Jesus sitting among teachers listening and asking
+12,08,dev,teachers amazed at his wisdom, hands on chests
+12,09,dev,caravan leaving city, parents searching anxiously
+12,10,dev,Mary and Joseph returning to temple worried
+12,11,dev,finding Jesus among teachers, relief and hug
+12,12,dev,Jesus explaining my Father's house, gentle gesture
+12,13,dev,family walking back to Nazareth together at dusk
+12,14,dev,Jesus growing taller helping at home, warm sunset
+12,15,dev,scroll and carpentry tools symbolic still life, soft light
+12,16,dev,back cover maze, temple columns path for kids
+13,01,dev,book cover, Jesus baptized in Jordan with dove descending, title space
+13,02,dev,John the Baptist preaching in wilderness, camel hair robe
+13,03,dev,people confessing and entering Jordan river
+13,04,dev,John pointing to the coming Messiah, desert light
+13,05,dev,Jesus walking to Jordan joining the crowd
+13,06,dev,John hesitating, Jesus gently insisting
+13,07,dev,Jesus stepping into Jordan river water
+13,08,dev,baptism moment, water pouring over head
+13,09,dev,heavens opening with beam of light
+13,10,dev,dove descending like Spirit over Jesus
+13,11,dev,voice from heaven, radiant clouds parting
+13,12,dev,people looking up in awe at the light
+13,13,dev,Jesus coming up from water with peaceful smile
+13,14,dev,wilderness journey beginning at sunrise desert
+13,15,dev,angels bringing light and comfort in desert
+13,16,dev,back cover, dove and water drops outlines for coloring
+14,01,dev,book cover, Jesus calling fishermen by Sea of Galilee, title space
+14,02,dev,Sea of Galilee morning with boats and nets
+14,03,dev,Jesus teaching crowd from a boat near shore
+14,04,dev,miraculous catch, nets full of fish breaking
+14,05,dev,Peter kneeling amazed before Jesus in boat
+14,06,dev,Jesus extending hand, fishers of men moment
+14,07,dev,Peter and Andrew leaving boats walking with Jesus
+14,08,dev,James and John leaving father Zebedee in boat
+14,09,dev,Matthew leaving tax booth to follow Jesus
+14,10,dev,twelve disciples gathered on green hillside
+14,11,dev,Sermon on the Mount, crowd listening attentively
+14,12,dev,Jesus teaching beatitudes with gentle gesture
+14,13,dev,disciples sharing bread together laughing
+14,14,dev,Jesus sending disciples out two by two
+14,15,dev,disciples helping and healing in village streets
+14,16,dev,back cover, fish and boat outlines for coloring
+15,01,dev,book cover, Jesus healing with light from hands, title space
+15,02,dev,paralyzed man lowered through roof by four friends
+15,03,dev,healed man standing and walking, crowd amazed
+15,04,dev,wedding at Cana with stone jars of water
+15,05,dev,servants amazed as water becomes wine
+15,06,dev,blind man seeing colors for the first time, joy
+15,07,dev,leper touched and cleansed, skin restored
+15,08,dev,Jairus daughter's room, Jesus taking her hand
+15,09,dev,girl rising from bed, parents crying with joy
+15,10,dev,woman touching Jesus garment in crowd, healed
+15,11,dev,lame man walking at pool of Bethesda
+15,12,dev,deaf man hearing birdsong, eyes wide with wonder
+15,13,dev,crowd bringing sick at sunset to Jesus
+15,14,dev,Jesus compassion close-up touching a forehead
+15,15,dev,healed people praising God, village celebration
+15,16,dev,back cover, hands and heart outlines for coloring
+16,01,dev,book cover, Jesus teaching parables by the sea, title space
+16,02,dev,sower scattering seed, four soils split view
+16,03,dev,seeds on path with little birds eating
+16,04,dev,rocky soil sprouts withering under hot sun
+16,05,dev,thorny plants choking young green stems
+16,06,dev,good soil abundant harvest, joyful farmer
+16,07,dev,shepherd leaving ninety-nine sheep to find one
+16,08,dev,shepherd finding lost sheep in bushes, carrying home
+16,09,dev,village celebration for the found sheep
+16,10,dev,woman sweeping house with lamp seeking lost coin
+16,11,dev,coin found, woman calling neighbors rejoicing
+16,12,dev,prodigal son leaving home with bag, father sad
+16,13,dev,son in far country hungry beside pigs
+16,14,dev,father running to embrace returning son
+16,15,dev,robe and ring given, feast at home, brother outside
+16,16,dev,back cover, count the sheep activity for kids
+17,01,dev,book cover, Jesus calming storm from boat, title space
+17,02,dev,evening boat crossing on calm sea start
+17,03,dev,Jesus sleeping on pillow in stern of boat
+17,04,dev,dark storm clouds gathering suddenly
+17,05,dev,huge waves crashing into small boat
+17,06,dev,disciples bailing water terrified
+17,07,dev,disciples waking Jesus, teacher do you not care
+17,08,dev,Jesus standing in boat raising hand
+17,09,dev,peace be still, wind stopping moment
+17,10,dev,waves flattening like glass, stars appearing
+17,11,dev,disciples amazed faces on quiet sea
+17,12,dev,boat gliding under clearing sky
+17,13,dev,reaching shore at dawn, Gerasenes coast
+17,14,dev,freed man sitting clothed and calm at Jesus feet
+17,15,dev,man telling his story in town, people listening
+17,16,dev,back cover, boat and waves outlines for coloring
+18,01,dev,book cover, boy's basket of loaves and fishes blessed by Jesus, title space
+18,02,dev,huge crowd following Jesus on green hillside
+18,03,dev,disciples worried, send them away moment
+18,04,dev,Andrew bringing boy with small lunch
+18,05,dev,five barley loaves and two fish in hands
+18,06,dev,Jesus giving thanks looking up to sky
+18,07,dev,breaking bread with multiplying glow
+18,08,dev,disciples distributing baskets to seated crowds
+18,09,dev,people eating happily in groups of fifty
+18,10,dev,bread and fish never running out of baskets
+18,11,dev,sunset over satisfied crowd on hillside
+18,12,dev,twelve baskets full of leftovers collected
+18,13,dev,boy smiling receiving his basket back fuller
+18,14,dev,crowd wanting to make him king, Jesus withdrawing
+18,15,dev,Jesus alone on mountain praying at night
+18,16,dev,back cover, loaves and fishes outlines for coloring
+19,01,dev,book cover, empty tomb with rolled stone at sunrise, title space
+19,02,dev,upper room last supper, bread and cup gentle light
+19,03,dev,garden of Gethsemane, Jesus praying, disciples sleeping
+19,04,dev,torch lights approaching garden at night, distant
+19,05,dev,cross silhouette on hill at noon darkness, respectful
+19,06,dev,tomb sealed with great stone, quiet guard
+19,07,dev,sabbath quiet, women preparing spices at home
+19,08,dev,early morning women walking to tomb with spices
+19,09,dev,stone rolled away with shining light
+19,10,dev,angel in white sitting on the stone
+19,11,dev,inside tomb, linen cloths lying empty
+19,12,dev,Mary Magdalene weeping, risen Jesus beside her
+19,13,dev,Mary recognizing Jesus, joy moment
+19,14,dev,road to Emmaus, stranger explaining scriptures
+19,15,dev,breaking bread at table, eyes opened moment
+19,16,dev,back cover, sunrise cross and empty tomb coloring
+20,01,dev,book cover, tongues of fire over disciples in upper room, title space
+20,02,dev,disciples gathered praying together in unity
+20,03,dev,waiting together in one accord, warm room
+20,04,dev,sound like mighty wind filling the house
+20,05,dev,tongues of fire resting on each head
+20,06,dev,filled with Spirit speaking in many languages
+20,07,dev,street crowd amazed each hearing own language
+20,08,dev,Peter standing preaching boldly to crowd
+20,09,dev,crowd cut to heart, hands on chests
+20,10,dev,three thousand baptized that day at water
+20,11,dev,new community sharing meals together joyfully
+20,12,dev,breaking bread in homes with glad hearts
+20,13,dev,believers praising God in temple courts
+20,14,dev,apostles teaching with open scrolls
+20,15,dev,map view with gospel light spreading outward
+20,16,dev,back cover, flame and wind outlines for coloring
+21,01,dev,book cover, Peter preaching at temple gate, title space
+21,02,dev,lame beggar sitting at Beautiful gate
+21,03,dev,Peter and John going to temple at prayer hour
+21,04,dev,silver and gold I have none, Peter open hands
+21,05,dev,Peter lifting lame man by the hand
+21,06,dev,man leaping walking and praising God
+21,07,dev,crowd astonished at Solomon's portico
+21,08,dev,Peter preaching Christ boldly to people
+21,09,dev,leaders arresting Peter and John, mild shadows
+21,10,dev,before council Peter filled with Spirit speaking
+21,11,dev,released, church praying together in room
+21,12,dev,place shaken, boldness renewed, warm light
+21,13,dev,widows showing coats made by Dorcas
+21,14,dev,Tabitha sitting up alive, widows crying with joy
+21,15,dev,Peter's vision of sheet with animals from heaven
+21,16,dev,back cover, keys and fish outlines for coloring
+22,01,dev,book cover, Stephen with face like angel holding scroll, title space
+22,02,dev,seven chosen to serve, hands laid on them
+22,03,dev,Stephen serving widows with food baskets
+22,04,dev,Stephen performing signs among the people
+22,05,dev,Stephen debating in synagogue with shining wisdom
+22,06,dev,false witnesses accusing, mild shadows
+22,07,dev,before council his face like an angel's
+22,08,dev,Stephen recounting Abraham journey, map glow
+22,09,dev,recounting Moses and the burning bush
+22,10,dev,recounting prophets and the temple
+22,11,dev,looking up, heavens opened and Son of Man
+22,12,dev,driven out of city, distant gentle view
+22,13,dev,Stephen kneeling praying receive my spirit
+22,14,dev,do not hold this sin against them, light embrace
+22,15,dev,young Saul watching garments at feet, convicted
+22,16,dev,back cover, crown of life outlines for coloring
+23,01,dev,book cover, Saul on Damascus road under blazing light, title space
+23,02,dev,Saul holding letters breathing threats, mild
+23,03,dev,journey to Damascus with companions walking
+23,04,dev,noon light from heaven flashing around him
+23,05,dev,Saul fallen to ground blinded by light
+23,06,dev,Saul Saul why do you persecute me, voice light
+23,07,dev,companions leading him by hand into city
+23,08,dev,three days praying in dark quiet room
+23,09,dev,Ananias receiving vision of Straight street
+23,10,dev,Ananias laying hands, scales falling from eyes
+23,11,dev,Saul seeing again and being baptized
+23,12,dev,Saul preaching in synagogues, listeners amazed
+23,13,dev,escape in basket over city wall at night
+23,14,dev,Barnabas introducing Saul to the apostles
+23,15,dev,missionary sending, hands laid on Paul and Barnabas
+23,16,dev,back cover, road and light outlines for coloring
+24,01,dev,book cover, Paul and Silas singing in prison, open doors, title space
+24,02,dev,slave girl with spirit of divination following them
+24,03,dev,Paul commanding spirit out, girl set free
+24,04,dev,owners angry dragging them to magistrates
+24,05,dev,beaten with rods, mild shadows only
+24,06,dev,inner prison with feet fastened in stocks
+24,07,dev,midnight praying and singing hymns together
+24,08,dev,prisoners listening in the darkness
+24,09,dev,great earthquake shaking prison foundations
+24,10,dev,all doors flying open, chains loosed
+24,11,dev,jailer stopped by Paul, we are all here
+24,12,dev,jailer washing their wounds tenderly
+24,13,dev,jailer household baptized that night with joy
+24,14,dev,sharing meal together praising God
+24,15,dev,released at morning, magistrates apologizing
+24,16,dev,back cover, open door and broken chains coloring
+25,01,dev,book cover, ship sailing toward horizon, title space
+25,02,dev,Paul in Caesarea appealing to Caesar
+25,03,dev,boarding ship at port with Julius the centurion
+25,04,dev,sailing along coast with fair winds
+25,05,dev,port of Myra transferring to grain ship
+25,06,dev,slow sailing against wind near Cnidus
+25,07,dev,creeping along Crete shore near Salmone
+25,08,dev,Fair Havens harbor with winter approaching
+25,09,dev,Paul warning the voyage will be disaster
+25,10,dev,centurion following pilot, setting sail anyway
+25,11,dev,gentle south wind blowing, anchor weighed
+25,12,dev,dark clouds building on horizon
+25,13,dev,crew worried faces, Paul praying quietly
+25,14,dev,first rain drops and wind shifting
+25,15,dev,map view of route across Mediterranean sea
+25,16,dev,back cover, ship and compass outlines for coloring
+26,01,dev,book cover, ship in giant storm waves at night, title space
+26,02,dev,Euroclydon wind striking the ship suddenly
+26,03,dev,ship driven off course with torn sail
+26,04,dev,crew undergirding hull with ropes
+26,05,dev,jettisoning cargo overboard into sea
+26,06,dev,throwing tackle overboard with own hands
+26,07,dev,many days no sun no stars, deep darkness
+26,08,dev,all hope abandoned, men silent in storm
+26,09,dev,Paul standing among them, take heart
+26,10,dev,angel appearing to Paul at night with light
+26,11,dev,you will stand before Caesar, all saved
+26,12,dev,men eating together encouraged
+26,13,dev,Paul giving thanks breaking bread in storm
+26,14,dev,fourteen nights drifting, sounding the depth
+26,15,dev,fear of rocks, dropping four anchors at stern
+26,16,dev,back cover, waves and anchor outlines for coloring
+27,01,dev,book cover, ship breaking on beach in surf, title space
+27,02,dev,dawn revealing unknown bay with sandy beach
+27,03,dev,cutting anchors and loosening rudder bands
+27,04,dev,hoisting foresail to wind running ashore
+27,05,dev,bow stuck fast, stern breaking by surf
+27,06,dev,soldiers planning in shadows, mild
+27,07,dev,centurion stopping them commanding swim
+27,08,dev,some swimming on planks and boards
+27,09,dev,all reaching shore safely, 276 souls
+27,10,dev,counting heads on beach with gratitude
+27,11,dev,beached wreckage behind them in surf
+27,12,dev,learning the island name is Malta
+27,13,dev,natives showing kindness kindling fire
+27,14,dev,soldiers and prisoners warming together
+27,15,dev,Paul helping gather brush, no distinction
+27,16,dev,back cover, planks and beach outlines for coloring
+28,01,dev,book cover, Paul with viper over fire unharmed, title space
+28,02,dev,rain and cold, natives kindling great fire
+28,03,dev,viper fastening on Paul's hand from heat
+28,04,dev,natives watching expecting swelling, surprised
+28,05,dev,Paul shaking viper into fire unharmed
+28,06,dev,people amazed calling him a god
+28,07,dev,Publius father sick with fever in bed
+28,08,dev,Paul praying laying hands healing him
+28,09,dev,island sick coming one by one healed
+28,10,dev,honors given and supplies loaded for voyage
+28,11,dev,three months later sailing on twin ship figurehead
+28,12,dev,Syracuse stop with brothers welcoming
+28,13,dev,Puteoli brothers found staying seven days
+28,14,dev,Appian Way brothers from Rome meeting him
+28,15,dev,Paul thanking God taking courage
+28,16,dev,back cover, fire and ship outlines for coloring
+29,01,dev,book cover, Paul entering Rome on Appian Way, title space
+29,02,dev,entering Rome city gates with crowds and forums
+29,03,dev,two years in rented house chained to soldier
+29,04,dev,receiving all visitors teaching the kingdom
+29,05,dev,Jewish leaders listening at his table
+29,06,dev,some persuaded some disbelieving, mixed faces
+29,07,dev,this salvation sent to Gentiles, firm gesture
+29,08,dev,writing letters Ephesians Philippians Colossians
+29,09,dev,Timothy and Luke beside him writing
+29,10,dev,Epaphroditus bringing gift from Philippi
+29,11,dev,Onesimus returning with letter to Philemon
+29,12,dev,gospel reaching palace guard and Caesar's household
+29,13,dev,map glow letters radiating to churches
+29,14,dev,Paul aging faithful, I have fought good fight
+29,15,dev,crown of righteousness imagery with heavenly light
+29,16,dev,back cover, scroll and Roman road outlines for coloring

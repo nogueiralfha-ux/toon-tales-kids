@@ -10,11 +10,41 @@ export interface BiblicalCharacter {
   themeColor: string;
   gradient: string;
   avatarSeed: string;
-  svgType: 'david' | 'moses' | 'jesus' | 'paul' | 'noah' | 'joseph' | 'abraham' | 'joshua' | 'peter' | 'stephen' | 'enoch' | 'esther' | 'ruth' | 'mary' | 'daniel' | 'gideon' | 'generic';
+  svgType: 'david' | 'moses' | 'jesus' | 'paul' | 'noah' | 'joseph' | 'abraham' | 'joshua' | 'peter' | 'stephen' | 'enoch' | 'esther' | 'ruth' | 'mary' | 'daniel' | 'gideon' | 'generic' | 'adam' | 'eve';
   relatedEpisodes: string[]; // episode IDs e.g. ['t2e5', 't1e1']
 }
 
 export const CHARACTERS_DATA: BiblicalCharacter[] = [
+  {
+    id: 'adao',
+    name: 'Adão',
+    title: 'O Primeiro Homem no Jardim do Éden',
+    shortBio: 'Criado pelas próprias mãos de Deus com amor para cuidar de toda a criação no Paraíso.',
+    fullBio: 'Criado à imagem e semelhança de Deus, Adão recebeu o sopro de vida e a missão honrosa de dar nome a todos os animais e cuidar com carinho do Jardim do Éden. Um homem forte, bondoso e contemplativo que caminhava em amizade pura com o Criador na viração da tarde.',
+    personality: ['Curioso', 'Bondoso', 'Cuidador', 'Trabalhador'],
+    keyVerse: 'Então o Senhor Deus formou o homem do pó da terra e soprou em suas narinas o fôlego de vida.',
+    verseRef: 'Gênesis 2:7',
+    themeColor: 'from-emerald-500 to-green-700',
+    gradient: 'bg-gradient-to-tr from-emerald-500 to-green-700',
+    avatarSeed: 'adam',
+    svgType: 'adam',
+    relatedEpisodes: ['t1e1', 't1e2'],
+  },
+  {
+    id: 'eva',
+    name: 'Eva',
+    title: 'A Mãe de Todos os Viventes',
+    shortBio: 'Criada para ser companheira de Adão, cheia de graça, encanto e sensibilidade no Éden.',
+    fullBio: 'Criada por Deus com infinita delicadeza a partir da costela de Adão, Eva foi sua companheira perfeita no Éden. Com seus olhos brilhantes e coração receptivo, ela compartilhava a alegria de descobrir a beleza das flores, dos rios e a amizade com os animais criados por Deus.',
+    personality: ['Sensível', 'Amorosa', 'Acolhedora', 'Sociável'],
+    keyVerse: 'Esta sim é osso dos meus ossos e carne da minha carne; será chamada mulher.',
+    verseRef: 'Gênesis 2:23',
+    themeColor: 'from-rose-400 to-pink-600',
+    gradient: 'bg-gradient-to-tr from-rose-400 to-pink-600',
+    avatarSeed: 'eve',
+    svgType: 'eve',
+    relatedEpisodes: ['t1e1', 't1e2'],
+  },
   {
     id: 'davi',
     name: 'Davi',
