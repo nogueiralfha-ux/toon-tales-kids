@@ -20,6 +20,8 @@ export interface Episode {
   tags: string[];
   fullAudioUrl?: string; // URL do MP3 completo no R2
   coloringBookUrl?: string; // URL do PDF do livro de colorir
+  illustratedBookUrl?: string; // URL do PDF do livro ilustrado em cores
+  videoUrl?: string; // URL do Filme MP4 Cinematográfico no R2
 }
 
 export interface Season {
@@ -94,6 +96,8 @@ export const BIBLE_SEASONS: Season[] = [
         recommendedNextIds: ['t1e3', 't1e4'],
         tags: ['Éden', 'Escolhas', 'Obediência', 'Amor'],
         fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season1/episode02/episode02-completo.mp3',
+        coloringBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Colorir_Adao_Eva_Completo.pdf',
+        illustratedBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Ilustrado_Adao_Eva_Completo.pdf',
       },
       {
         id: 't1e3',

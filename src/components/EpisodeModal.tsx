@@ -158,6 +158,18 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
                 <span>Quiz</span>
               </button>
 
+              {episode.illustratedBookUrl && (
+                <a
+                  href={episode.illustratedBookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-3 rounded-2xl bg-sky-500 hover:bg-sky-600 text-white font-black text-xs font-brand uppercase tracking-wider shadow-sm transition-colors flex items-center gap-1.5 ml-2"
+                >
+                  <BookOpen className="w-4 h-4 fill-current" />
+                  <span>Livro</span>
+                </a>
+              )}
+
               {episode.coloringBookUrl && (
                 <a
                   href={episode.coloringBookUrl}
