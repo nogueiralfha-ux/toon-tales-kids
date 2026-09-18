@@ -67,7 +67,7 @@ import { BIBLE_SEASONS, ALL_EPISODES, Episode, Season, getEpisodeById } from './
 import { CHARACTERS_DATA, BiblicalCharacter } from './data/charactersData';
 import { CATEGORIES_DATA } from './data/categoriesData';
 import { ListeningProgressItem } from './components/ContinueListening';
-import { Sparkles, Heart, BookOpen, Volume2, ShieldCheck, Sun, Star, ArrowLeft, Layers, Users, Shield, Headphones, Palette } from 'lucide-react';
+import { Sparkles, Heart, BookOpen, Volume2, ShieldCheck, Sun, Star, ArrowLeft, Layers, Users, Shield, Headphones, Palette, Film } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 
 interface EpisodeData {
@@ -246,6 +246,7 @@ export default function App() {
 
   // Currently loaded audio episode (Default: Episódio 1 - A Criação)
   const [currentEpisodeId, setCurrentEpisodeId] = useState<string>('t1e1');
+  const [playerMode, setPlayerMode] = useState<'video' | 'audio'>('video');
   const selectedEpisodeData = EPISODE_REGISTRY[currentEpisodeId] || EPISODE_REGISTRY['t1e1'];
   const currentScenes = selectedEpisodeData.scenes;
   const currentMeta = selectedEpisodeData.meta;
@@ -396,13 +397,21 @@ export default function App() {
       audioEngine.stopEpisode();
       setIsPlaying(false);
 
+      if (ep.videoUrl) {
+        setPlayerMode('video');
+      } else {
+        setPlayerMode('audio');
+      }
+
       setTimeout(() => {
         setIsLoadingTransition(false);
         setActiveTab('player');
-        // Start playback with slight delay for audio context
-        setTimeout(() => {
-          startPlayback(targetData.scenes, 0, 0);
-        }, 300);
+        // Start playback with slight delay for audio context if not video
+        if (!ep.videoUrl) {
+          setTimeout(() => {
+            startPlayback(targetData.scenes, 0, 0);
+          }, 300);
+        }
       }, 500);
     }
   };
@@ -719,17 +728,56 @@ export default function App() {
                       audioEngine.stopAll();
                       setIsPlaying(false);
                       setCurrentSceneIndex(0);
+                      if (ep.videoUrl) {
+                        setPlayerMode('video');
+                      } else {
+                        setPlayerMode('audio');
+                      }
                     }
                   }}
                   className="px-3 py-2 rounded-xl bg-white text-slate-800 font-black text-xs font-brand border border-slate-200 shadow-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-400"
                 >
-                  <option value="t1e1">📖 Ep. 1: A Criação</option>
+                  <option value="t1e1">🎬 Ep. 1: A Criação (Filme em Vídeo HD)</option>
                   <option value="t1e2">🍎 Ep. 2: Adão e Eva</option>
                   <option value="t1e3">🌈 Ep. 3: A Arca de Noé</option>
                   <option value="t1e4">🧱 Ep. 4: A Torre de Babel</option>
                   <option value="t1e5">⭐ Ep. 5: Abraão</option>
                   <option value="t2e5">⚔️ Ep. 10: Davi e Golias</option>
                 </select>
+
+                {/* Seletor de Modo quando o episódio possui vídeo */}
+                {currentEpisode?.videoUrl && (
+                  <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 shadow-xs">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPlayerMode('video');
+                        audioEngine.stopAll();
+                        setIsPlaying(false);
+                      }}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-black font-brand uppercase tracking-wider transition-all flex items-center gap-1.5 ${
+                        playerMode === 'video'
+                          ? 'bg-orange-500 text-white shadow-xs'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <Film className="w-3.5 h-3.5" />
+                      <span>Vídeo HD</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setPlayerMode('audio')}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-black font-brand uppercase tracking-wider transition-all flex items-center gap-1.5 ${
+                        playerMode === 'audio'
+                          ? 'bg-orange-500 text-white shadow-xs'
+                          : 'text-slate-600 hover:text-slate-900'
+                      }`}
+                    >
+                      <Headphones className="w-3.5 h-3.5" />
+                      <span>Audiolivro</span>
+                    </button>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
@@ -791,8 +839,18 @@ export default function App() {
             <div className="bg-white border-2 border-orange-200 rounded-[28px] p-5 sm:p-6 shadow-md flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="space-y-1.5">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-3.5 py-1 rounded-full bg-orange-500 text-white text-xs font-black font-brand uppercase tracking-wider shadow-sm">
-                    Audiolivro Cinematográfico
+                  <span className="px-3.5 py-1 rounded-full bg-orange-500 text-white text-xs font-black font-brand uppercase tracking-wider shadow-sm flex items-center gap-1.5">
+                    {currentEpisode?.videoUrl && playerMode === 'video' ? (
+                      <>
+                        <Film className="w-3.5 h-3.5" />
+                        <span>Filme em Vídeo HD</span>
+                      </>
+                    ) : (
+                      <>
+                        <Headphones className="w-3.5 h-3.5" />
+                        <span>Audiolivro Cinematográfico</span>
+                      </>
+                    )}
                   </span>
                   <span className="text-xs font-bold text-sky-800 bg-sky-100 px-3 py-1 rounded-full border border-sky-200">
                     Público-Alvo: 6 a 12 anos
@@ -807,38 +865,102 @@ export default function App() {
                 </h2>
 
                 <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
-                  Superprodução de áudio com a voz majestosa de Deus, narrador envolvente, efeitos sonoros imersivos e trilha orquestral original.
+                  {currentEpisode?.videoUrl && playerMode === 'video'
+                    ? 'Assista à animação completa com som cinematográfico, efeitos imersivos e a narrativa sagrada dos sete dias da Criação.'
+                    : 'Superprodução de áudio com a voz majestosa de Deus, narrador envolvente, efeitos sonoros imersivos e trilha orquestral original.'}
                 </p>
               </div>
             </div>
 
-            {/* Visual 3D Stage */}
-            <CinematicSceneView
-              scene={currentScene}
-              currentLine={currentLine}
-              isPlaying={isPlaying}
-              isPauseActive={isPauseActive}
-              onSelectScene={handleSelectScene}
-            />
+            {/* Visual Stage: Video Player or 3D Audio Scene */}
+            {currentEpisode?.videoUrl && playerMode === 'video' ? (
+              <div className="space-y-4">
+                <div className="relative w-full rounded-[32px] sm:rounded-[36px] overflow-hidden bg-black border-4 sm:border-8 border-white shadow-2xl aspect-[16/9] min-h-[380px] flex items-center justify-center">
+                  <video
+                    key={currentEpisode.videoUrl}
+                    src={currentEpisode.videoUrl}
+                    controls
+                    playsInline
+                    className="w-full h-full object-contain bg-black"
+                    onPlay={() => {
+                      audioEngine.stopAll();
+                      setIsPlaying(false);
+                    }}
+                  />
+                </div>
 
-            {/* Audio Player Controls */}
-            <AudioPlayerControls
-              audioUrl={ALL_EPISODES.find(e => e.id === currentEpisodeId)?.fullAudioUrl}
-              isPlaying={isPlaying}
-              currentScene={currentScene}
-              allScenes={currentScenes}
-              currentSceneIndex={currentSceneIndex}
-              speechRate={mixSettings.speechRate}
-              onPlay={() => setIsPlaying(true)}
-              onPause={() => setIsPlaying(false)}
-              onRestart={() => setIsPlaying(true)}
-              onNextScene={() => {}}
-              onPrevScene={() => {}}
-              onSelectScene={() => {}}
-              onOpenMixer={() => setIsMixerOpen(true)}
-              onOpenBedtime={() => setIsBedtimeOpen(true)}
-              onChangeSpeed={handleChangeSpeed}
-            />
+                {/* Video Sub-bar */}
+                <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-orange-100 shadow-sm">
+                  <div className="flex items-center gap-2">
+                    <span className="px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-black font-brand uppercase tracking-wider flex items-center gap-1.5 shadow-xs">
+                      <Film className="w-3.5 h-3.5" />
+                      <span>Filme Oficial Toon Tales Kids</span>
+                    </span>
+                    <span className="text-xs text-slate-500 font-bold hidden sm:inline">
+                      Qualidade Full HD • Áudio Estéreo Masterizado
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setPlayerMode('audio')}
+                      className="px-3.5 py-1.5 rounded-xl bg-orange-100 hover:bg-orange-200 text-orange-800 text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5"
+                    >
+                      <Headphones className="w-3.5 h-3.5" />
+                      <span>Ouvir com Teleprompter / Audiolivro</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                {currentEpisode?.videoUrl && (
+                  <div className="flex justify-end">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPlayerMode('video');
+                        audioEngine.stopAll();
+                        setIsPlaying(false);
+                      }}
+                      className="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white text-xs font-black font-brand uppercase tracking-wider transition-all flex items-center gap-2 shadow-md hover:scale-[1.02] active:scale-95 cursor-pointer"
+                    >
+                      <Film className="w-4 h-4" />
+                      <span>Assistir ao Filme em Vídeo (Full HD)</span>
+                    </button>
+                  </div>
+                )}
+
+                {/* Visual 3D Stage */}
+                <CinematicSceneView
+                  scene={currentScene}
+                  currentLine={currentLine}
+                  isPlaying={isPlaying}
+                  isPauseActive={isPauseActive}
+                  onSelectScene={handleSelectScene}
+                />
+
+                {/* Audio Player Controls */}
+                <AudioPlayerControls
+                  audioUrl={ALL_EPISODES.find(e => e.id === currentEpisodeId)?.fullAudioUrl}
+                  isPlaying={isPlaying}
+                  currentScene={currentScene}
+                  allScenes={currentScenes}
+                  currentSceneIndex={currentSceneIndex}
+                  speechRate={mixSettings.speechRate}
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
+                  onRestart={() => setIsPlaying(true)}
+                  onNextScene={() => {}}
+                  onPrevScene={() => {}}
+                  onSelectScene={() => {}}
+                  onOpenMixer={() => setIsMixerOpen(true)}
+                  onOpenBedtime={() => setIsBedtimeOpen(true)}
+                  onChangeSpeed={handleChangeSpeed}
+                />
+              </>
+            )}
 
             {/* Moral Lesson & Values Card */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

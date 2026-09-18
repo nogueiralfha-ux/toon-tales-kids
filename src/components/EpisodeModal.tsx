@@ -2,7 +2,7 @@ import React from 'react';
 import { Episode, getSeasonById } from '../data/catalog';
 import { CHARACTERS_DATA } from '../data/charactersData';
 import { ToonTalesArtwork } from './ToonTalesArtwork';
-import { X, Play, Heart, Star, Sparkles, BookOpen, Clock, ShieldCheck, Check, Plus, Palette } from 'lucide-react';
+import { X, Play, Heart, Star, Sparkles, BookOpen, Clock, ShieldCheck, Check, Plus, Palette, Film } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface EpisodeModalProps {
@@ -109,8 +109,8 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
                 }}
                 className="px-6 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-black text-sm font-brand uppercase tracking-wider shadow-md shadow-orange-300 transition-all flex items-center gap-2 active:scale-95 ring-2 ring-white"
               >
-                <Play className="w-4 h-4 fill-current ml-0.5" />
-                <span>Ouvir Agora</span>
+                {episode.videoUrl ? <Film className="w-4 h-4 ml-0.5" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
+                <span>{episode.videoUrl ? 'Assistir Filme' : 'Ouvir Agora'}</span>
               </button>
 
               <button

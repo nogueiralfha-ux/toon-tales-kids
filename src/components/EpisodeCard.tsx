@@ -1,7 +1,7 @@
 import React from 'react';
 import { Episode } from '../data/catalog';
 import { ToonTalesArtwork } from './ToonTalesArtwork';
-import { Play, Heart, Lock, Clock, Sparkles, Star } from 'lucide-react';
+import { Play, Heart, Lock, Clock, Sparkles, Star, Film } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface EpisodeCardProps {
@@ -50,11 +50,19 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
         {/* Ambient Dark Gradient on Bottom for text readability */}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
 
-        {/* Top Badges: Episode Number & Favorite Button */}
+        {/* Top Badges: Episode Number, Video Badge & Favorite Button */}
         <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
-          <span className="px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-[10px] font-black text-amber-300 uppercase tracking-wider border border-white/20 shadow-md">
-            EP. {episode.episodeNumber}
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-[10px] font-black text-amber-300 uppercase tracking-wider border border-white/20 shadow-md">
+              EP. {episode.episodeNumber}
+            </span>
+            {episode.videoUrl && (
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/90 backdrop-blur-md text-[9px] font-black text-white uppercase tracking-wider border border-emerald-300/40 shadow-md flex items-center gap-1">
+                <Film className="w-2.5 h-2.5" />
+                <span>Vídeo HD</span>
+              </span>
+            )}
+          </div>
 
           {isAvailable && (
             <button
@@ -84,10 +92,10 @@ export const EpisodeCard: React.FC<EpisodeCardProps> = ({
               }}
               className="w-14 h-14 rounded-full bg-gradient-to-tr from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white flex items-center justify-center shadow-lg shadow-orange-500/50 hover:scale-110 active:scale-95 transition-all ring-4 ring-white/40"
             >
-              <Play className="w-6 h-6 fill-current ml-1" />
+              {episode.videoUrl ? <Film className="w-6 h-6 ml-0.5" /> : <Play className="w-6 h-6 fill-current ml-1" />}
             </button>
             <span className="text-white text-xs font-black font-brand uppercase tracking-wider drop-shadow-md">
-              Ouvir Agora
+              {episode.videoUrl ? 'Assistir Filme' : 'Ouvir Agora'}
             </span>
           </div>
         )}
