@@ -67,7 +67,7 @@ import { BIBLE_SEASONS, ALL_EPISODES, Episode, Season, getEpisodeById } from './
 import { CHARACTERS_DATA, BiblicalCharacter } from './data/charactersData';
 import { CATEGORIES_DATA } from './data/categoriesData';
 import { ListeningProgressItem } from './components/ContinueListening';
-import { Sparkles, Heart, BookOpen, Volume2, ShieldCheck, Sun, Star, ArrowLeft, Layers, Users, Shield, Headphones } from 'lucide-react';
+import { Sparkles, Heart, BookOpen, Volume2, ShieldCheck, Sun, Star, ArrowLeft, Layers, Users, Shield, Headphones, Palette } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 
 interface EpisodeData {
@@ -698,17 +698,78 @@ export default function App() {
         {/* 10. PLAYER CINEMATOGRÁFICO DE ÁUDIO (ESTÚDIO DEDICADO) */}
         {activeTab === 'player' && (
           <div className="space-y-6 animate-fade-in">
-            {/* Top Navigation Back to Dashboard */}
-            <div className="flex items-center justify-between">
-              <button
-                onClick={() => setActiveTab('dashboard')}
-                className="px-4 py-2 rounded-xl bg-white hover:bg-orange-50 text-slate-700 hover:text-orange-600 font-bold text-xs border border-slate-200 transition-colors flex items-center gap-1.5 shadow-xs"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                <span>Voltar ao Dashboard</span>
-              </button>
-
+            {/* Top Navigation Back to Dashboard & Episode Actions */}
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setActiveTab('dashboard')}
+                  className="px-4 py-2 rounded-xl bg-white hover:bg-orange-50 text-slate-700 hover:text-orange-600 font-bold text-xs border border-slate-200 transition-colors flex items-center gap-1.5 shadow-xs"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  <span>Voltar ao Dashboard</span>
+                </button>
+
+                {/* Seletor rápido de episódio */}
+                <select
+                  value={currentEpisodeId}
+                  onChange={(e) => {
+                    const ep = getEpisodeById(e.target.value);
+                    if (ep) {
+                      setCurrentEpisodeId(ep.id);
+                      audioEngine.stopAll();
+                      setIsPlaying(false);
+                      setCurrentSceneIndex(0);
+                    }
+                  }}
+                  className="px-3 py-2 rounded-xl bg-white text-slate-800 font-black text-xs font-brand border border-slate-200 shadow-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-orange-400"
+                >
+                  <option value="t1e1">📖 Ep. 1: A Criação</option>
+                  <option value="t1e2">🍎 Ep. 2: Adão e Eva</option>
+                  <option value="t1e3">🌈 Ep. 3: A Arca de Noé</option>
+                  <option value="t1e4">🧱 Ep. 4: A Torre de Babel</option>
+                  <option value="t1e5">⭐ Ep. 5: Abraão</option>
+                  <option value="t2e5">⚔️ Ep. 10: Davi e Golias</option>
+                </select>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                {/* BOTÃO AZUL: LIVRO ILUSTRADO */}
+                {currentEpisode?.illustratedBookUrl && (
+                  <a
+                    href={currentEpisode.illustratedBookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-sm"
+                    title="Abrir Livro Ilustrado em Cores"
+                  >
+                    <BookOpen className="w-3.5 h-3.5 fill-current" />
+                    <span>Livro Ilustrado</span>
+                  </a>
+                )}
+
+                {/* BOTÃO VERDE: LIVRO PARA COLORIR */}
+                {currentEpisode?.coloringBookUrl ? (
+                  <a
+                    href={currentEpisode.coloringBookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-sm"
+                    title="Baixar Livro de Colorir"
+                  >
+                    <Palette className="w-3.5 h-3.5 fill-current" />
+                    <span>Para Colorir</span>
+                  </a>
+                ) : (
+                  <button
+                    onClick={() => setIsColoringModalOpen(true)}
+                    className="px-3.5 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black font-brand uppercase tracking-wider transition-colors flex items-center gap-1.5 shadow-sm"
+                    title="Abrir Estúdio de Pintura"
+                  >
+                    <Palette className="w-3.5 h-3.5 fill-current" />
+                    <span>Para Colorir</span>
+                  </button>
+                )}
+
                 <button
                   onClick={() => setActiveTab('script')}
                   className="px-3.5 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold border border-slate-200 transition-colors flex items-center gap-1"

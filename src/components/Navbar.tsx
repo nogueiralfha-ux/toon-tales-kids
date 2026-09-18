@@ -307,11 +307,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={onOpenColoring}
-            className="px-3 py-1.5 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 text-purple-700 hover:bg-purple-50 border border-purple-200"
-            title="Estúdio de Pintura 3D e Desenhos P&B"
+            className="px-3.5 py-1.5 rounded-xl text-xs font-black font-brand transition-all flex items-center gap-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-300 shadow-xs"
+            title="Desenhos Bíblicos Para Colorir & Pintura"
           >
-            <Palette className="w-3.5 h-3.5 text-purple-600" />
-            <span>Pintura 3D</span>
+            <Palette className="w-3.5 h-3.5 text-emerald-600 fill-current" />
+            <span>Para Colorir</span>
           </button>
 
           {isAdmin && (
