@@ -409,7 +409,7 @@ export default function App() {
         // Start playback with slight delay for audio context if not video
         if (!ep.videoUrl) {
           setTimeout(() => {
-            startPlayback(targetData.scenes, 0, 0);
+            setIsPlaying(true);
           }, 300);
         }
       }, 500);
@@ -725,7 +725,7 @@ export default function App() {
                     const ep = getEpisodeById(e.target.value);
                     if (ep) {
                       setCurrentEpisodeId(ep.id);
-                      audioEngine.stopAll();
+                      audioEngine.stopEpisode();
                       setIsPlaying(false);
                       setCurrentSceneIndex(0);
                       if (ep.videoUrl) {
@@ -752,7 +752,7 @@ export default function App() {
                       type="button"
                       onClick={() => {
                         setPlayerMode('video');
-                        audioEngine.stopAll();
+                        audioEngine.stopEpisode();
                         setIsPlaying(false);
                       }}
                       className={`px-3 py-1.5 rounded-lg text-xs font-black font-brand uppercase tracking-wider transition-all flex items-center gap-1.5 ${
@@ -883,7 +883,7 @@ export default function App() {
                     playsInline
                     className="w-full h-full object-contain bg-black"
                     onPlay={() => {
-                      audioEngine.stopAll();
+                      audioEngine.stopEpisode();
                       setIsPlaying(false);
                     }}
                   />
@@ -921,7 +921,7 @@ export default function App() {
                       type="button"
                       onClick={() => {
                         setPlayerMode('video');
-                        audioEngine.stopAll();
+                        audioEngine.stopEpisode();
                         setIsPlaying(false);
                       }}
                       className="px-4 py-2 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white text-xs font-black font-brand uppercase tracking-wider transition-all flex items-center gap-2 shadow-md hover:scale-[1.02] active:scale-95 cursor-pointer"
