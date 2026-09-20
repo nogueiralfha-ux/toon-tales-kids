@@ -98,6 +98,7 @@ export const BIBLE_SEASONS: Season[] = [
         colorTheme: 'from-green-600 to-emerald-800',
         recommendedNextIds: ['t1e3', 't1e4'],
         tags: ['Éden', 'Escolhas', 'Obediência', 'Amor'],
+        videoUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/videos/Filme_Adao_e_Eva.mp4',
         fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season1/episode02/episode02-completo.mp3',
         coloringBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Colorir_Adao_Eva_Completo.pdf',
         illustratedBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Ilustrado_Adao_Eva_Completo.pdf',
