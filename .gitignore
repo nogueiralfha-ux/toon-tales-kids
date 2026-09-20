@@ -11,3 +11,6 @@ coverage/
 !public/labkids/vsl.mp4
 *.psd
 *.paint
+*.pdf
+EDITORIAL_LIBRARY/
+.temp*
