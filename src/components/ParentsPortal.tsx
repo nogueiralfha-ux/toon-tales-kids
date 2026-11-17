@@ -494,7 +494,7 @@ export const ParentsPortal: React.FC<ParentsPortalProps> = ({
                         <td className="py-2.5 px-3 text-slate-400">-</td>
                       </tr>
                       <tr>
-                        <td className="py-2.5 px-3 font-bold text-slate-900">Plano Pessoal Anual (50% OFF)</td>
+                        <td className="py-2.5 px-3 font-bold text-slate-900">Plano Pessoal Anual</td>
                         <td className="py-2.5 px-3 text-slate-600">Cobrança Única</td>
                         <td className="py-2.5 px-3 font-bold text-emerald-600">R$ 119,00</td>
                         <td className="py-2.5 px-3 text-slate-700">Até 12x no cartão</td>
@@ -506,7 +506,7 @@ export const ParentsPortal: React.FC<ParentsPortalProps> = ({
                         <td className="py-2.5 px-3 text-slate-400">-</td>
                       </tr>
                       <tr>
-                        <td className="py-2.5 px-3 font-bold text-slate-900">Plano Familiar Anual (50% OFF)</td>
+                        <td className="py-2.5 px-3 font-bold text-slate-900">Plano Familiar Anual</td>
                         <td className="py-2.5 px-3 text-slate-600">Cobrança Única</td>
                         <td className="py-2.5 px-3 font-bold text-emerald-600">R$ 297,00</td>
                         <td className="py-2.5 px-3 text-slate-700">Até 12x no cartão</td>

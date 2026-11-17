@@ -331,14 +331,14 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
       case 'pessoal_mensal':
         return { name: 'Plano Pessoal Mensal (1 Filho)', price: 'R$ 19,90 / mês' };
       case 'pessoal_anual':
-        return { name: 'Plano Pessoal Anual (1 Filho • 50% OFF)', price: '12x R$ 9,90 (ou R$ 119,00/ano)' };
+        return { name: 'Plano Pessoal Anual (1 Filho)', price: '12x R$ 9,90 (ou R$ 119,00/ano)' };
       case 'familiar_mensal':
         return { name: 'Plano Familiar Mensal (3 Filhos)', price: 'R$ 49,90 / mês' };
       case 'familiar_anual':
-        return { name: 'Plano Familiar Anual (3 Filhos • 50% OFF)', price: '12x R$ 24,90 (ou R$ 297,00/ano)' };
+        return { name: 'Plano Familiar Anual (3 Filhos)', price: '12x R$ 24,90 (ou R$ 297,00/ano)' };
       case 'vitalicio':
       default:
-        return { name: '👑 Plano Vitalício Família (Até 3 Filhos • 50% OFF + Temporada 5 + Módulo Trilíngue + 5 Super Bônus)', price: '12x R$ 48,50 (ou R$ 485,00 à vista)' };
+        return { name: '👑 Plano Vitalício Família (Até 3 Filhos + Temporada 5 + Módulo Trilíngue + 5 Super Bônus)', price: '12x R$ 48,50 (ou R$ 485,00 à vista)' };
     }
   };
 
@@ -356,8 +356,8 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
       a: 'O Plano Pessoal foi feito para famílias com 1 filho (1 perfil individual em Português). O Plano Familiar permite criar até 3 perfis simultâneos em Português para que até 3 filhos possam ouvir, salvar favoritos e acompanhar seu próprio progresso de forma independente.',
     },
     {
-      q: 'Como funciona o desconto de 50% nos planos anuais e no vitalício?',
-      a: 'Na nossa promoção especial de lançamento, todos os planos anuais e o vitalício estão com 50% de desconto real aplicado. No Vitalício, de R$ 970,00 você paga apenas 12x de R$ 48,50 (ou R$ 485,00 à vista) uma única vez e garante todas as 4 temporadas prontas + a Temporada 5 (Heróis da Fé) + o Módulo Trilíngue + todos os 5 Super Bônus sem nunca mais pagar mensalidade.',
+      q: 'Como funciona o acesso nos planos anuais e no vitalício?',
+      a: 'No Plano Vitalício, você garante acesso permanente para toda a família a todas as 4 temporadas prontas + a Temporada 5 (Heróis da Fé) + o Módulo Trilíngue + todos os 5 Super Bônus sem nunca mais pagar mensalidade.',
     },
     {
       q: 'Quantas temporadas estão disponíveis imediatamente após a compra?',
@@ -380,7 +380,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
       <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white py-2.5 px-4 text-center text-xs sm:text-sm font-black font-brand uppercase tracking-wider shadow-md flex flex-wrap items-center justify-between gap-3 rounded-2xl">
         <div className="flex items-center gap-1.5 mx-auto sm:mx-0">
           <Sparkles className="w-4 h-4 animate-spin shrink-0" />
-          <span>🎉 LANÇAMENTO TRILÍNGUE • 50% OFF NO PLANO VITALÍCIO</span>
+          <span>🎉 LANÇAMENTO TRILÍNGUE • ACESSO VITALÍCIO EXCLUSIVO</span>
         </div>
         
         <div className="flex items-center gap-3 mx-auto sm:mx-0">
@@ -568,7 +568,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 className="px-6 py-3.5 rounded-2xl bg-white/20 hover:bg-white/30 text-white backdrop-blur-md font-bold text-xs sm:text-sm font-brand uppercase tracking-wider border border-white/30 transition-all flex items-center gap-2"
               >
                 <Sparkles className="w-4 h-4 text-amber-300" />
-                <span>Garantir 50% OFF</span>
+                <span>Garantir Acesso Completo</span>
               </a>
             </div>
 
@@ -875,7 +875,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black text-xs sm:text-sm font-brand uppercase tracking-wider shadow-lg shadow-orange-500/40 hover:scale-105 active:scale-95 transition-all"
               >
                 <Crown className="w-4 h-4 fill-current" />
-                <span>Garantir Acesso Vitalício + Temporada 5 (50% OFF)</span>
+                <span>Garantir Acesso Vitalício + Temporada 5</span>
               </a>
             </div>
           </div>
@@ -1209,7 +1209,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
       </section>
 
       {/* ------------------------------------------------------------- */}
-      {/* 10.1 VITRINE 2: ?? CANAL LAB KIDS (O LABORAT�RIO DE CI�NCIAS) */}
+      {/* 10.1 VITRINE 2: ?? CANAL LAB KIDS (O LABORAT�RIO DE CI�NCIAS) */}
       {/* ------------------------------------------------------------- */}
       <section id="labkids" className="bg-gradient-to-br from-purple-950 via-indigo-950 to-slate-950 text-white rounded-[36px] p-8 sm:p-12 lg:p-14 border-4 border-purple-400/50 shadow-2xl space-y-8 relative overflow-hidden scroll-mt-20">
         <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -1415,15 +1415,6 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
           </table>
         </div>
 
-        <div className="text-center pt-2">
-          <a
-            href="#planos"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs sm:text-sm font-brand uppercase tracking-wider shadow-md transition-all hover:scale-105"
-          >
-            <Crown className="w-4 h-4" />
-            <span>Escolher o Plano Vitalício com 50% de Desconto</span>
-          </a>
-        </div>
       </section>
 
       {/* 13. 7-DAY GUARANTEE BANNER */}
@@ -1463,7 +1454,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
             href="#planos"
             className="w-full sm:w-auto px-10 py-4 rounded-2xl bg-white text-orange-600 hover:bg-amber-50 font-black text-sm sm:text-base font-brand uppercase tracking-wider shadow-xl hover:scale-105 active:scale-95 transition-all text-center"
           >
-            Quero Assinar Agora com 50% de Desconto
+            Quero Assinar Agora
           </a>
         </div>
       </section>

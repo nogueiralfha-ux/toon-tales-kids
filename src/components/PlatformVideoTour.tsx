@@ -292,7 +292,7 @@ export const PlatformVideoTour: React.FC<PlatformVideoTourProps> = ({ onClose, o
               className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-black font-brand uppercase text-xs tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 ring-2 ring-amber-300"
             >
               <Crown className="w-3.5 h-3.5 fill-current" />
-              <span>Quero o Plano Vitalício (50% OFF)</span>
+              <span>Quero o Plano Vitalício</span>
             </a>
           </div>
         </div>

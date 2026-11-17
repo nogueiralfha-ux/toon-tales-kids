@@ -123,7 +123,10 @@ export const BIBLE_SEASONS: Season[] = [
         colorTheme: 'from-blue-600 to-indigo-800',
         recommendedNextIds: ['t1e4', 't2e3'],
         tags: ['Noé', 'Arca', 'Obediência', 'Animais'],
+        videoUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/videos/Filme_A_Arca_de_Noe.mp4',
         fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season1/episode03/episode03-completo.mp3',
+        coloringBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Colorir_Arca_de_Noe_Completo.pdf',
+        illustratedBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Ilustrado_Arca_de_Noe_Completo.pdf',
       },
       {
         id: 't1e4',
@@ -145,7 +148,10 @@ export const BIBLE_SEASONS: Season[] = [
         colorTheme: 'from-amber-600 to-orange-800',
         recommendedNextIds: ['t1e5', 't2e4'],
         tags: ['Babel', 'Línguas', 'Humildade', 'História'],
+        videoUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/videos/Filme_A_Torre_de_Babel.mp4',
         fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season1/episode04/episode04-completo.mp3',
+        coloringBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Colorir_Torre_de_Babel_Completo.pdf',
+        illustratedBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Ilustrado_Torre_de_Babel_Completo.pdf',
       },
       {
         id: 't1e5',
@@ -207,7 +213,10 @@ export const BIBLE_SEASONS: Season[] = [
         colorTheme: 'from-amber-500 to-orange-700',
         recommendedNextIds: ['t2e2', 't2e5'],
         tags: ['Sonhos', 'Egito', 'Perdão', 'Família'],
+        videoUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/videos/Filme_Jose_do_Egito.mp4',
         fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season2/episode06/episode06-completo.mp3',
+        coloringBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Colorir_Jose_do_Egito_Completo.pdf',
+        illustratedBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Ilustrado_Jose_do_Egito_Completo.pdf',
       },
       {
         id: 't2e2',
@@ -229,7 +238,10 @@ export const BIBLE_SEASONS: Season[] = [
         colorTheme: 'from-cyan-600 to-blue-800',
         recommendedNextIds: ['t2e3', 't2e4'],
         tags: ['Moisés', 'Cestinho', 'Nilo', 'Sarça'],
+        videoUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/videos/Filme_Moises_o_Menino_do_Nilo.mp4',
         fullAudioUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/season2/episode07/episode07-completo.mp3',
+        coloringBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Colorir_Moises_Completo.pdf',
+        illustratedBookUrl: 'https://pub-bf22f5d21d6d4607a123c603ac5632d1.r2.dev/ebooks/Livro_Ilustrado_Moises_Completo.pdf',
       },
       {
         id: 't2e3',
