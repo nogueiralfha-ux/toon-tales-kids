@@ -57,6 +57,8 @@ import { motion, AnimatePresence } from 'motion/react';
 import { SocialProofNotification } from './SocialProofNotification';
 import { FoundersPlan } from './FoundersPlan';
 import { SocialProofSection } from './SocialProofSection';
+import { useLanguage } from '../contexts/LanguageContext';
+import { LanguageSelector } from './LanguageSelector';
 
 interface SalesLandingPageProps {
   onEnterPlatform?: () => void;
@@ -66,6 +68,7 @@ export type PlanType = 'pessoal_mensal' | 'pessoal_anual' | 'familiar_mensal' | 
 export type LangType = 'pt' | 'en' | 'es';
 
 export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatform }) => {
+  const { language, setLanguage, t } = useLanguage();
   const [isPlayingDemo, setIsPlayingDemo] = useState<boolean>(false);
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [billingCycle, setBillingCycle] = useState<'annual' | 'monthly'>('annual');
@@ -78,7 +81,12 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
   const [isColoringModalOpen, setIsColoringModalOpen] = useState<boolean>(false);
   const [isAmbassadorModalOpen, setIsAmbassadorModalOpen] = useState<boolean>(false);
   const [videoModalTab, setVideoModalTab] = useState<'video' | 'tour'>('video');
-  const [selectedDemoLang, setSelectedDemoLang] = useState<LangType>('pt');
+  const [selectedDemoLang, setSelectedDemoLang] = useState<LangType>(language);
+
+  // Sincroniza o idioma do demo com a seleção global
+  useEffect(() => {
+    setSelectedDemoLang(language);
+  }, [language]);
   const [showStickyCta, setShowStickyCta] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       return window.scrollY > 500;
@@ -380,7 +388,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
       <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white py-2.5 px-4 text-center text-xs sm:text-sm font-black font-brand uppercase tracking-wider shadow-md flex flex-wrap items-center justify-between gap-3 rounded-2xl">
         <div className="flex items-center gap-1.5 mx-auto sm:mx-0">
           <Sparkles className="w-4 h-4 animate-spin shrink-0" />
-          <span>🎉 LANÇAMENTO TRILÍNGUE • ACESSO VITALÍCIO EXCLUSIVO</span>
+          <span>{t('top_announcement', '🎉 LANÇAMENTO TRILÍNGUE • ACESSO VITALÍCIO EXCLUSIVO')}</span>
         </div>
         
         <div className="flex items-center gap-3 mx-auto sm:mx-0">
@@ -389,7 +397,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
             className="px-3 py-1 rounded-full bg-slate-950/50 hover:bg-slate-950 text-amber-300 text-xs font-black font-brand flex items-center gap-1.5 transition-all border border-amber-300/40 hover:scale-105"
           >
             <Crown className="w-3.5 h-3.5 text-amber-400" />
-            <span>Seja um Embaixador (40% a 50% Comis.)</span>
+            <span>{t('top_ambassador', 'Seja um Embaixador (40% a 50% Comis.)')}</span>
           </button>
 
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-950/40 border border-white/30 text-amber-200 text-xs font-black font-mono">
@@ -405,19 +413,19 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
       <div className="text-center space-y-4 max-w-5xl mx-auto pt-2">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-100 via-orange-100 to-amber-100 border-2 border-amber-300 text-orange-800 text-xs sm:text-sm font-black uppercase font-brand tracking-wider shadow-xs">
           <Globe className="w-4 h-4 text-orange-600 shrink-0" />
-          <span>A 1ª Superprodução Bíblica Infantil Trilíngue em Áudio 3D do Brasil</span>
+          <span>{t('hero_badge', 'A 1ª Superprodução Bíblica Infantil Trilíngue em Áudio 3D do Brasil')}</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-brand tracking-tight text-slate-900 leading-[1.15] drop-shadow-xs">
-          O Maior Universo de Aventuras Bíblicas que{' '}
+          {t('hero_title_1', 'O Maior Universo de Aventuras Bíblicas que ')}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-600 via-amber-500 to-orange-500">
-            Ensina, Protege e Transforma
+            {t('hero_title_highlight', 'Ensina, Protege e Transforma')}
           </span>{' '}
-          a Mente do Seu Filho.
+          {t('hero_title_2', ' a Mente do Seu Filho.')}
         </h1>
 
         <p className="text-sm sm:text-lg text-slate-600 font-medium max-w-3xl mx-auto leading-relaxed">
-          Troque os vídeos vazios da internet por superproduções cinematográficas em áudio 3D, personagens marcantes, histórias bíblicas inesquecíveis e valores eternos de fé e coragem.
+          {t('hero_desc', 'Troque os vídeos vazios da internet por superproduções cinematográficas em áudio 3D, personagens marcantes, histórias bíblicas inesquecíveis e valores eternos de fé e coragem.')}
         </p>
 
         {/* 3 Hub Pillars Selector */}
@@ -624,12 +632,17 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
         {/* 3 Interactive Language Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
           {/* Card PT */}
-          <div className="bg-slate-900/80 border-2 border-amber-400/40 rounded-3xl p-6 space-y-4 flex flex-col justify-between backdrop-blur-md">
+          <div
+            onClick={() => setLanguage('pt')}
+            className={`cursor-pointer bg-slate-900/80 border-2 rounded-3xl p-6 space-y-4 flex flex-col justify-between backdrop-blur-md transition-all hover:scale-[1.02] ${
+              language === 'pt' ? 'border-amber-400 ring-2 ring-amber-400/50 shadow-lg shadow-amber-500/10' : 'border-amber-400/30 opacity-80 hover:opacity-100'
+            }`}
+          >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-2xl">🇧🇷</span>
                 <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-black uppercase font-brand">
-                  Todos os Planos
+                  {language === 'pt' ? 'Ativo Agora' : 'Todos os Planos'}
                 </span>
               </div>
               <h3 className="text-xl font-black font-brand text-amber-300">Português Nativo</h3>
@@ -637,13 +650,19 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 Narração calorosa e imersiva com rica ambientação sonora para que a criança entenda e memorize cada princípio bíblico com facilidade.
               </p>
             </div>
-            <div className="pt-3 border-t border-slate-800 text-[11px] text-slate-400 font-bold">
-              ✔ 34 Episódios Prontos no App
+            <div className="pt-3 border-t border-slate-800 text-[11px] text-slate-400 font-bold flex items-center justify-between">
+              <span>✔ 34 Episódios Prontos</span>
+              <span className="text-[10px] text-amber-400 uppercase font-black">Selecionar 🇧🇷</span>
             </div>
           </div>
 
           {/* Card EN */}
-          <div className="bg-slate-900/80 border-2 border-sky-400/40 rounded-3xl p-6 space-y-4 flex flex-col justify-between backdrop-blur-md relative">
+          <div
+            onClick={() => setLanguage('en')}
+            className={`cursor-pointer bg-slate-900/80 border-2 rounded-3xl p-6 space-y-4 flex flex-col justify-between backdrop-blur-md relative transition-all hover:scale-[1.02] ${
+              language === 'en' ? 'border-sky-400 ring-2 ring-sky-400/50 shadow-lg shadow-sky-500/10' : 'border-sky-400/30 opacity-80 hover:opacity-100'
+            }`}
+          >
             <div className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-sky-500 text-slate-950 text-[10px] font-black uppercase font-brand">
               Exclusivo Vitalício
             </div>
@@ -651,7 +670,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
               <div className="flex items-center justify-between">
                 <span className="text-2xl">🇺🇸</span>
                 <span className="px-2.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 text-[10px] font-black uppercase font-brand">
-                  English Kids
+                  {language === 'en' ? 'Active Now' : 'English Kids'}
                 </span>
               </div>
               <h3 className="text-xl font-black font-brand text-sky-300">Inglês Infantil Imersivo</h3>
@@ -659,13 +678,19 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 Vocabulário claro e adaptado para a idade, permitindo que a criança treine a compreensão auditiva e aprenda inglês de forma natural e divertida.
               </p>
             </div>
-            <div className="pt-3 border-t border-slate-800 text-[11px] text-sky-300 font-bold">
-              ✔ Alfabetização Bilíngue Cristã
+            <div className="pt-3 border-t border-slate-800 text-[11px] text-sky-300 font-bold flex items-center justify-between">
+              <span>✔ Alfabetização Bilíngue</span>
+              <span className="text-[10px] text-sky-400 uppercase font-black">Select 🇺🇸</span>
             </div>
           </div>
 
           {/* Card ES */}
-          <div className="bg-slate-900/80 border-2 border-rose-400/40 rounded-3xl p-6 space-y-4 flex flex-col justify-between backdrop-blur-md relative">
+          <div
+            onClick={() => setLanguage('es')}
+            className={`cursor-pointer bg-slate-900/80 border-2 rounded-3xl p-6 space-y-4 flex flex-col justify-between backdrop-blur-md relative transition-all hover:scale-[1.02] ${
+              language === 'es' ? 'border-rose-400 ring-2 ring-rose-400/50 shadow-lg shadow-rose-500/10' : 'border-rose-400/30 opacity-80 hover:opacity-100'
+            }`}
+          >
             <div className="absolute -top-3 right-4 px-2.5 py-0.5 rounded-full bg-rose-500 text-white text-[10px] font-black uppercase font-brand">
               Exclusivo Vitalício
             </div>
@@ -673,7 +698,7 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
               <div className="flex items-center justify-between">
                 <span className="text-2xl">🇪🇸</span>
                 <span className="px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-[10px] font-black uppercase font-brand">
-                  Español Kids
+                  {language === 'es' ? 'Activo Ahora' : 'Español Kids'}
                 </span>
               </div>
               <h3 className="text-xl font-black font-brand text-rose-300">Espanhol Latino</h3>
@@ -681,8 +706,9 @@ export const SalesLandingPage: React.FC<SalesLandingPageProps> = ({ onEnterPlatf
                 Dublagem clássica em espanhol para conectar seu filho ao segundo idioma mais falado das Américas, com versículos e lições cativantes.
               </p>
             </div>
-            <div className="pt-3 border-t border-slate-800 text-[11px] text-rose-300 font-bold">
-              ✔ Expansão Cultural e Linguística
+            <div className="pt-3 border-t border-slate-800 text-[11px] text-rose-300 font-bold flex items-center justify-between">
+              <span>✔ Expansão Linguística</span>
+              <span className="text-[10px] text-rose-400 uppercase font-black">Seleccionar 🇪🇸</span>
             </div>
           </div>
         </div>

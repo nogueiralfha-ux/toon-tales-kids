@@ -28,6 +28,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { UserAccount } from '../services/authService';
+import { useLanguage } from '../contexts/LanguageContext';
+import { LanguageSelector } from './LanguageSelector';
 
 export type NavTab = 'dashboard' | 'catalog' | 'seasons' | 'characters' | 'heroes' | 'labkids' | 'labkids-sales' | 'labkids-en' | 'favorites' | 'profile' | 'parents' | 'landing' | 'player' | 'script' | 'soundboard' | 'quiz' | 'thankyou';
 
@@ -62,6 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   favoritesCount = 0,
   userXp = 0,
 }) => {
+  const { t } = useLanguage();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotifOpen, setIsNotifOpen] = useState(false);
@@ -102,11 +105,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                   TOON TALES <span className="text-sky-500">KIDS</span>
                 </h1>
                 <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[10px] font-black uppercase font-brand border border-amber-200">
-                  A Bíblia em Áudio
+                  {t('brand_subtitle', 'A Bíblia em Áudio')}
                 </span>
               </div>
               <p className="text-[11px] text-slate-500 font-bold hidden md:block">
-                Histórias que ensinam, aventuras que transformam!
+                {t('brand_tagline', 'Histórias que ensinam, aventuras que transformam!')}
               </p>
             </div>
           </div>
@@ -114,33 +117,36 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Sales Quick Anchor Links */}
           <nav className="hidden lg:flex items-center gap-6 text-xs font-black font-brand text-slate-600">
             <a href="#beneficios" className="hover:text-orange-600 transition-colors">
-              Benefícios
+              {t('nav_benefits', 'Benefícios')}
             </a>
             <a href="#personagens" className="hover:text-orange-600 transition-colors">
-              Personagens 3D
+              {t('nav_characters', 'Personagens 3D')}
             </a>
             <a href="#incluso" className="hover:text-orange-600 transition-colors">
-              O que Inclui
+              {t('nav_includes', 'O que Inclui')}
             </a>
             <a href="#depoimentos" className="hover:text-orange-600 transition-colors">
-              Depoimentos
+              {t('nav_testimonials', 'Depoimentos')}
             </a>
             <a href="#planos" className="hover:text-orange-600 transition-colors text-amber-600 font-black">
-              Planos & Preços
+              {t('nav_pricing', 'Planos & Preços')}
             </a>
             <a href="#faq" className="hover:text-orange-600 transition-colors">
-              Dúvidas
+              {t('nav_faq', 'Dúvidas')}
             </a>
           </nav>
 
-          {/* Sales Action (LabKids, Login & Assinar) */}
+          {/* Sales Action (Language Selector, LabKids, Login & Assinar) */}
           <div className="flex items-center gap-2 sm:gap-3">
+            {/* Seletor Global Trilíngue */}
+            <LanguageSelector variant="pill" />
+
             <button
               onClick={() => onSelectTab('labkids-sales')}
               className="px-3.5 py-2.5 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-brand font-black text-xs uppercase tracking-wider shadow-md shadow-purple-300 flex items-center gap-1.5 active:scale-95 transition-all ring-2 ring-purple-300"
             >
               <Sparkles className="w-4 h-4 text-amber-300 animate-pulse" />
-              <span>🔬 Oferta LabKids</span>
+              <span>{t('nav_labkids', '🔬 Oferta LabKids')}</span>
             </button>
 
             {isAdmin && (
@@ -149,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="px-4 py-2.5 rounded-2xl bg-slate-900 hover:bg-slate-800 text-amber-400 font-brand font-black text-xs uppercase tracking-wider shadow-md border-2 border-amber-400 flex items-center gap-1.5 active:scale-95"
               >
                 <Crown className="w-4 h-4 text-amber-400" />
-                <span>Painel Admin</span>
+                <span>{t('nav_admin', 'Painel Admin')}</span>
               </button>
             )}
             
@@ -159,7 +165,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="px-4 py-2.5 rounded-2xl bg-emerald-100 hover:bg-emerald-200 text-emerald-900 font-brand font-black text-xs uppercase tracking-wider border border-emerald-300 flex items-center gap-1.5 active:scale-95"
               >
                 <UserCheck className="w-4 h-4 text-emerald-700" />
-                <span>Entrar no App</span>
+                <span>{t('nav_enter_app', 'Entrar no App')}</span>
               </button>
             ) : (
               <button
@@ -167,7 +173,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 className="px-4 py-2.5 rounded-2xl bg-slate-100 hover:bg-orange-50 text-slate-800 hover:text-orange-600 font-brand font-black text-xs uppercase tracking-wider border border-slate-200 flex items-center gap-1.5 active:scale-95"
               >
                 <LogIn className="w-4 h-4 text-orange-500" />
-                <span>Entrar (Login)</span>
+                <span>{t('nav_login', 'Entrar (Login)')}</span>
               </button>
             )}
 
@@ -176,7 +182,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="px-6 py-2.5 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-amber-500 hover:from-amber-300 hover:to-orange-400 text-slate-950 font-brand font-black text-xs uppercase tracking-wider shadow-md shadow-orange-300 hover:scale-105 active:scale-95 transition-all flex items-center gap-1.5 ring-2 ring-amber-300"
             >
               <Sparkles className="w-4 h-4 fill-current" />
-              <span>QUERO ASSINAR</span>
+              <span>{t('nav_subscribe', 'QUERO ASSINAR')}</span>
             </a>
           </div>
         </div>
@@ -224,7 +230,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Home className="w-4 h-4" />
-            <span>Início</span>
+            <span>{t('nav_home', 'Início')}</span>
           </button>
 
           <button
@@ -236,7 +242,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <BookOpen className="w-4 h-4" />
-            <span>Histórias</span>
+            <span>{t('nav_catalog', 'Histórias')}</span>
           </button>
 
           <button
@@ -248,7 +254,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Layers className="w-4 h-4" />
-            <span>Temporadas</span>
+            <span>{t('nav_seasons', 'Temporadas')}</span>
           </button>
 
           <button
@@ -260,7 +266,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Users className="w-4 h-4" />
-            <span>Personagens</span>
+            <span>{t('nav_characters', 'Personagens')}</span>
           </button>
 
           <button
@@ -272,9 +278,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Shield className="w-4 h-4 fill-current text-amber-300" />
-            <span>Heróis da Fé</span>
+            <span>{t('nav_heroes', 'Heróis da Fé')}</span>
           </button>
-
 
           <button
             onClick={() => onSelectTab('favorites')}
@@ -285,7 +290,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Heart className={`w-4 h-4 ${favoritesCount > 0 ? 'fill-current text-rose-500' : ''}`} />
-            <span>Favoritos</span>
+            <span>{t('nav_favorites', 'Favoritos')}</span>
             {favoritesCount > 0 && (
               <span className="w-5 h-5 rounded-full bg-rose-500 text-white text-[10px] font-black flex items-center justify-center">
                 {favoritesCount}
@@ -302,7 +307,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Shield className="w-3.5 h-3.5" />
-            <span>Área dos Pais</span>
+            <span>{t('nav_parents', 'Área dos Pais')}</span>
           </button>
 
           <button
@@ -311,7 +316,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="Desenhos Bíblicos Para Colorir & Pintura"
           >
             <Palette className="w-3.5 h-3.5 text-emerald-600 fill-current" />
-            <span>Para Colorir</span>
+            <span>{t('nav_coloring', 'Para Colorir')}</span>
           </button>
 
           {isAdmin && (
@@ -328,6 +333,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right Actions Toolbar */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Seletor Global Trilíngue no Dashboard */}
+          <LanguageSelector variant="pill" />
+
           {/* Search Button */}
           <button
             onClick={onOpenSearch}
