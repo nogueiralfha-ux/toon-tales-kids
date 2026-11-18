@@ -22,6 +22,29 @@ export interface Episode {
   coloringBookUrl?: string; // URL do PDF do livro de colorir
   illustratedBookUrl?: string; // URL do PDF do livro ilustrado em cores
   videoUrl?: string; // URL do Filme MP4 Cinematográfico no R2
+
+  // Suporte Multilíngue (Dublagens e Livros Digitais)
+  audioUrls?: {
+    pt?: string;
+    en?: string;
+    es?: string;
+  };
+  coloringBookUrls?: {
+    pt?: string;
+    en?: string;
+    es?: string;
+  };
+  illustratedBookUrls?: {
+    pt?: string;
+    en?: string;
+    es?: string;
+  };
+  titleEn?: string;
+  titleEs?: string;
+  descriptionEn?: string;
+  descriptionEs?: string;
+  moralLessonEn?: string;
+  moralLessonEs?: string;
 }
 
 export interface Season {

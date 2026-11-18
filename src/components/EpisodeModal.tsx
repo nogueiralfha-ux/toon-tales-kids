@@ -2,8 +2,9 @@ import React from 'react';
 import { Episode, getSeasonById } from '../data/catalog';
 import { CHARACTERS_DATA } from '../data/charactersData';
 import { ToonTalesArtwork } from './ToonTalesArtwork';
-import { X, Play, Heart, Star, Sparkles, BookOpen, Clock, ShieldCheck, Check, Plus, Palette, Film } from 'lucide-react';
+import { X, Play, Heart, Star, Sparkles, BookOpen, Clock, ShieldCheck, Check, Plus, Palette, Film, Globe, Languages } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface EpisodeModalProps {
   episode: Episode | null;
@@ -24,11 +25,20 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
   favorites,
   onToggleFavorite,
 }) => {
+  const { language, t } = useLanguage();
   if (!episode) return null;
 
   const isFavorite = favorites.includes(episode.id);
   const season = getSeasonById(episode.seasonId);
   const character = CHARACTERS_DATA.find((c) => c.id === episode.characterId);
+
+  // Localized strings
+  const displayTitle = (language === 'en' && episode.titleEn) ? episode.titleEn : (language === 'es' && episode.titleEs) ? episode.titleEs : episode.title;
+  const displayDesc = (language === 'en' && episode.descriptionEn) ? episode.descriptionEn : (language === 'es' && episode.descriptionEs) ? episode.descriptionEs : episode.description;
+  const displayMoralLesson = (language === 'en' && episode.moralLessonEn) ? episode.moralLessonEn : (language === 'es' && episode.moralLessonEs) ? episode.moralLessonEs : episode.moralLesson;
+
+  const activeIllustratedBook = episode.illustratedBookUrls?.[language] || episode.illustratedBookUrl;
+  const activeColoringBook = episode.coloringBookUrls?.[language] || episode.coloringBookUrl;
 
   return (
     <AnimatePresence>
@@ -74,7 +84,7 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
             <div className="relative z-20 space-y-1 text-white">
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <span className="px-3 py-1 rounded-full bg-orange-500 text-white text-xs font-black uppercase tracking-wider shadow-sm font-brand">
-                  Temporada {episode.seasonNumber} • EP {episode.episodeNumber}
+                  {language === 'en' ? 'Season' : language === 'es' ? 'Temporada' : 'Temporada'} {episode.seasonNumber} • EP {episode.episodeNumber}
                 </span>
 
                 {episode.durationLabel && (
@@ -90,11 +100,11 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
               </div>
 
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black font-brand tracking-tight">
-                {episode.title}
+                {displayTitle}
               </h2>
 
               <p className="text-amber-300 font-bold text-sm sm:text-base font-brand">
-                {episode.subtitle || episode.description}
+                {displayDesc}
               </p>
             </div>
           </div>
@@ -110,7 +120,11 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
                 className="px-6 py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-black text-sm font-brand uppercase tracking-wider shadow-md shadow-orange-300 transition-all flex items-center gap-2 active:scale-95 ring-2 ring-white"
               >
                 {episode.videoUrl ? <Film className="w-4 h-4 ml-0.5" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
-                <span>{episode.videoUrl ? 'Assistir Filme' : 'Ouvir Agora'}</span>
+                <span>
+                  {episode.videoUrl
+                    ? (language === 'en' ? 'Watch Movie' : language === 'es' ? 'Ver Película' : 'Assistir Filme')
+                    : (language === 'en' ? 'Listen Now' : language === 'es' ? 'Escuchar Ahora' : 'Ouvir Agora')}
+                </span>
               </button>
 
               <button
@@ -124,12 +138,12 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
                 {isFavorite ? (
                   <>
                     <Check className="w-4 h-4" />
-                    <span>Salvo</span>
+                    <span>{language === 'en' ? 'Saved' : language === 'es' ? 'Guardado' : 'Salvo'}</span>
                   </>
                 ) : (
                   <>
                     <Plus className="w-4 h-4" />
-                    <span>Minha Lista</span>
+                    <span>{language === 'en' ? 'My List' : language === 'es' ? 'Mi Lista' : 'Minha Lista'}</span>
                   </>
                 )}
               </button>
@@ -144,7 +158,7 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
                 className="px-4 py-3 rounded-2xl bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs border border-slate-200 transition-colors flex items-center gap-1.5"
               >
                 <BookOpen className="w-4 h-4 text-orange-500" />
-                <span>Roteiro</span>
+                <span>{language === 'en' ? 'Script' : language === 'es' ? 'Guion' : 'Roteiro'}</span>
               </button>
 
               <button
@@ -158,27 +172,27 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
                 <span>Quiz</span>
               </button>
 
-              {episode.illustratedBookUrl && (
+              {activeIllustratedBook && (
                 <a
-                  href={episode.illustratedBookUrl}
+                  href={activeIllustratedBook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-3 rounded-2xl bg-sky-500 hover:bg-sky-600 text-white font-black text-xs font-brand uppercase tracking-wider shadow-sm transition-colors flex items-center gap-1.5 ml-2"
                 >
                   <BookOpen className="w-4 h-4 fill-current" />
-                  <span>Livro</span>
+                  <span>{language === 'en' ? 'Book' : language === 'es' ? 'Libro' : 'Livro'}</span>
                 </a>
               )}
 
-              {episode.coloringBookUrl && (
+              {activeColoringBook && (
                 <a
-                  href={episode.coloringBookUrl}
+                  href={activeColoringBook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-4 py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-xs font-brand uppercase tracking-wider shadow-sm transition-colors flex items-center gap-1.5 ml-2"
                 >
                   <Palette className="w-4 h-4 fill-current" />
-                  <span>Colorir</span>
+                  <span>{language === 'en' ? 'Coloring' : language === 'es' ? 'Colorear' : 'Colorir'}</span>
                 </a>
               )}
             </div>
@@ -189,10 +203,10 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
             {/* Synopsis */}
             <div className="space-y-2">
               <h3 className="text-base font-black text-slate-900 font-brand">
-                Sobre esta Aventura
+                {language === 'en' ? 'About this Adventure' : language === 'es' ? 'Sobre esta Aventura' : 'Sobre esta Aventura'}
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                {episode.description}
+                {displayDesc}
               </p>
             </div>
 
@@ -203,10 +217,10 @@ export const EpisodeModal: React.FC<EpisodeModalProps> = ({
               </div>
               <div className="space-y-1">
                 <h4 className="text-xs font-black text-emerald-900 font-brand uppercase tracking-wider">
-                  Lição que Transforma
+                  {language === 'en' ? 'Transforming Lesson' : language === 'es' ? 'Lección que Transforma' : 'Lição que Transforma'}
                 </h4>
                 <p className="text-slate-700 text-xs sm:text-sm font-semibold leading-relaxed">
-                  {episode.moralLesson}
+                  {displayMoralLesson}
                 </p>
               </div>
             </div>

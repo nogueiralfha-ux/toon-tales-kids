@@ -63,11 +63,13 @@ import { SoundBoardConsole } from './components/SoundBoardConsole';
 import { CreationQuiz } from './components/CreationQuiz';
 import { AudioMixerModal } from './components/AudioMixerModal';
 import { BedtimeModeModal } from './components/BedtimeModeModal';
+import { useLanguage } from './contexts/LanguageContext';
+import { Language } from './i18n/translations';
 import { BIBLE_SEASONS, ALL_EPISODES, Episode, Season, getEpisodeById } from './data/catalog';
 import { CHARACTERS_DATA, BiblicalCharacter } from './data/charactersData';
 import { CATEGORIES_DATA } from './data/categoriesData';
 import { ListeningProgressItem } from './components/ContinueListening';
-import { Sparkles, Heart, BookOpen, Volume2, ShieldCheck, Sun, Star, ArrowLeft, Layers, Users, Shield, Headphones, Palette, Film } from 'lucide-react';
+import { Sparkles, Heart, BookOpen, Volume2, ShieldCheck, Sun, Star, ArrowLeft, Layers, Users, Shield, Headphones, Palette, Film, Languages, Globe } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 
 interface EpisodeData {
@@ -245,8 +247,14 @@ export default function App() {
   }, []);
 
   // Currently loaded audio episode (Default: Episódio 1 - A Criação)
+  const { language, t } = useLanguage();
   const [currentEpisodeId, setCurrentEpisodeId] = useState<string>('t1e1');
   const [playerMode, setPlayerMode] = useState<'video' | 'audio'>('video');
+  const [audioDubLang, setAudioDubLang] = useState<Language>(language);
+
+  useEffect(() => {
+    setAudioDubLang(language);
+  }, [language]);
   const selectedEpisodeData = EPISODE_REGISTRY[currentEpisodeId] || EPISODE_REGISTRY['t1e1'];
   const currentScenes = selectedEpisodeData.scenes;
   const currentMeta = selectedEpisodeData.meta;
@@ -781,6 +789,53 @@ export default function App() {
                     </button>
                   </div>
                 )}
+
+                {/* Seletor de Faixa de Dublagem do Player (PT • EN • ES) */}
+                <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-200 shadow-xs">
+                  <span className="text-[10px] font-black uppercase text-slate-500 font-brand px-1.5 flex items-center gap-1 hidden sm:inline-flex">
+                    <Languages className="w-3.5 h-3.5 text-orange-500" />
+                    Dublagem:
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setAudioDubLang('pt')}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-black font-brand transition-all flex items-center gap-1 ${
+                      audioDubLang === 'pt'
+                        ? 'bg-amber-500 text-white shadow-xs scale-105'
+                        : 'text-slate-600 hover:bg-slate-100'
+                    }`}
+                    title="Dublagem em Português"
+                  >
+                    <span>🇧🇷</span>
+                    <span className="hidden md:inline">PT</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAudioDubLang('en')}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-black font-brand transition-all flex items-center gap-1 ${
+                      audioDubLang === 'en'
+                        ? 'bg-sky-500 text-white shadow-xs scale-105'
+                        : 'text-slate-600 hover:bg-slate-100'
+                    }`}
+                    title="Dublagem em Inglês (English Kids)"
+                  >
+                    <span>🇺🇸</span>
+                    <span className="hidden md:inline">EN</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAudioDubLang('es')}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-black font-brand transition-all flex items-center gap-1 ${
+                      audioDubLang === 'es'
+                        ? 'bg-rose-500 text-white shadow-xs scale-105'
+                        : 'text-slate-600 hover:bg-slate-100'
+                    }`}
+                    title="Dublagem em Espanhol Latino"
+                  >
+                    <span>🇪🇸</span>
+                    <span className="hidden md:inline">ES</span>
+                  </button>
+                </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
@@ -986,7 +1041,10 @@ export default function App() {
 
                 {/* Audio Player Controls */}
                 <AudioPlayerControls
-                  audioUrl={ALL_EPISODES.find(e => e.id === currentEpisodeId)?.fullAudioUrl}
+                  audioUrl={
+                    ALL_EPISODES.find(e => e.id === currentEpisodeId)?.audioUrls?.[audioDubLang] ||
+                    ALL_EPISODES.find(e => e.id === currentEpisodeId)?.fullAudioUrl
+                  }
                   isPlaying={isPlaying}
                   currentScene={currentScene}
                   allScenes={currentScenes}
